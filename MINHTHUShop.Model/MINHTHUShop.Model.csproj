@@ -43,6 +43,9 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.PowerShell.5.ReferenceAssemblies.1.1.0\lib\net4\System.Management.Automation.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,12 +54,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\ISEO.cs" />
+    <Compile Include="Abstract\SEO.cs" />
+    <Compile Include="Models\Tb_About.cs" />
+    <Compile Include="Models\Tb_Banner.cs" />
+    <Compile Include="Models\Tb_Brand.cs" />
+    <Compile Include="Models\Tb_Customer.cs" />
+    <Compile Include="Models\Tb_FAQ.cs" />
+    <Compile Include="Models\Tb_FAQCategory.cs" />
+    <Compile Include="Models\Tb_Feedback.cs" />
+    <Compile Include="Models\Tb_Menu.cs" />
+    <Compile Include="Models\Tb_MenuGroup.cs" />
+    <Compile Include="Models\Tb_News.cs" />
+    <Compile Include="Models\Tb_NewsCategory.cs" />
+    <Compile Include="Models\Tb_Order.cs" />
+    <Compile Include="Models\Tb_OrderDetail.cs" />
+    <Compile Include="Models\Tb_OrderStatus.cs" />
+    <Compile Include="Models\Tb_Payment.cs" />
+    <Compile Include="Models\Tb_PaymentMethod.cs" />
+    <Compile Include="Models\Tb_Product.cs" />
+    <Compile Include="Models\Tb_ProductCategory.cs" />
+    <Compile Include="Models\Tb_ProductComment.cs" />
+    <Compile Include="Models\Tb_Role.cs" />
+    <Compile Include="Models\Tb_Shipping.cs" />
+    <Compile Include="Models\Tb_ShippingMethod.cs" />
+    <Compile Include="Models\Tb_Staff.cs" />
+    <Compile Include="Models\Tb_Tag.cs" />
+    <Compile Include="Models\Tb_TagNews.cs" />
+    <Compile Include="Models\Tb_TagProduct.cs" />
+    <Compile Include="Models\Tb_Target.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tb_Config.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
