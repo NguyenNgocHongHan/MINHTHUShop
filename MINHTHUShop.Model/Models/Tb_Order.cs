@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -22,9 +21,11 @@ namespace MINHTHUShop.Model.Models
         public int OrderStatusID { get; set; }
 
         [Required]
-        public int ShippingMethodID { get; set; }
+        public int ShippingID { get; set; }
 
-        [Column(TypeName = "decimal(12, 0)")]
+        [Required]
+        public int PaymentID { get; set; }
+
         public decimal? Total { get; set; }
 
         public DateTime? CreateDate { get; set; } = DateTime.Now;
@@ -39,8 +40,10 @@ namespace MINHTHUShop.Model.Models
         public virtual Tb_Staff Tb_Staff { get; set; }
         [ForeignKey("OrderStatusID")]
         public virtual Tb_OrderStatus Tb_OrderStatus { get; set; }
-        [ForeignKey("ShippingMethodID")]
-        public virtual Tb_ShippingMethod Tb_ShippingMethod { get; set; }
+        [ForeignKey("ShippingID")]
+        public virtual Tb_Shipping Tb_Shipping { get; set; }
+        [ForeignKey("PaymentID")]
+        public virtual Tb_Payment Tb_Payment { get; set; }
 
         public virtual IEnumerable<Tb_OrderDetail> Tb_OrderDetails { get; set; }
     }

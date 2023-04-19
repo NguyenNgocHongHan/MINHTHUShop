@@ -14,11 +14,13 @@ namespace MINHTHUShop.Model.Models
         public int RoleID { get; set; }
 
         [Required]
-        [Column(TypeName = "varchar(50)")]
+        [MaxLength(50)]
+        [Column(TypeName = "varchar")]
         public string UserName { get; set; }
 
         [Required]
-        [Column(TypeName = "varchar(50)")]
+        [MaxLength(50)]
+        [Column(TypeName = "varchar")]
         public string Password { get; set; }
 
         [Required]
@@ -26,11 +28,13 @@ namespace MINHTHUShop.Model.Models
         public string Name { get; set; }
 
         [Required]
-        [Column(TypeName = "varchar(250)")]
+        [MaxLength(250)]
+        [Column(TypeName = "varchar")]
         public string Email { get; set; }
 
         [Required]
-        [Column(TypeName = "char(10)")]
+        [MaxLength(10)]
+        [Column(TypeName = "char")]
         public string Phone { get; set; }
 
         [Required]

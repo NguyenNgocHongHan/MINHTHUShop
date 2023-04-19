@@ -32,7 +32,6 @@ namespace MINHTHUShop.Model.Models
 
         [ForeignKey("ProductID")]
         public virtual Tb_Product Tb_Product { get; set; }
-
         [ForeignKey("CustomerID")]
         public virtual Tb_Customer Tb_Customer { get; set; }
     }

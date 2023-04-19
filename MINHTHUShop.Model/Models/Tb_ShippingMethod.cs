@@ -17,7 +17,6 @@ namespace MINHTHUShop.Model.Models
         public string Description { get; set; }
 
         [Required]
-        [Column(TypeName = "decimal(12, 0)")]
         public decimal Cost { get; set; }
 
         public bool? Status { get; set; } = true;

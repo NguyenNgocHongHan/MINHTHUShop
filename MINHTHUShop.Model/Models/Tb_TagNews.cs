@@ -17,7 +17,6 @@ namespace MINHTHUShop.Model.Models
 
         [ForeignKey("TagID")]
         public virtual Tb_Tag Tb_Tag { get; set; }
-
         [ForeignKey("NewsID")]
         public virtual Tb_News Tb_News { get; set; }
     }

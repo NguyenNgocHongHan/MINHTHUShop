@@ -28,10 +28,8 @@ namespace MINHTHUShop.Model.Models
         public string ListImg { get; set; }
 
         [Required]
-        [Column(TypeName = "decimal(12, 0)")]
         public decimal Price { get; set; }
 
-        [Column(TypeName = "decimal(12, 0)")]
         public decimal? PromotionPrice { get; set; }
 
         [MaxLength(500)]

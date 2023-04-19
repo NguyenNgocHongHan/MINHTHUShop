@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MINHTHUShop.Model.Abstract
 {
@@ -19,10 +14,12 @@ namespace MINHTHUShop.Model.Abstract
         public string Name { get; set; }
 
         [Required]
-        [Column(TypeName = "char(10)")]
+        [MaxLength(10)]
+        [Column(TypeName = "char")]
         public string Phone { get; set; }
 
-        [Column(TypeName = "varchar(250)")]
+        [MaxLength(250)]
+        [Column(TypeName = "varchar")]
         public string Email { get; set; }
 
         [MaxLength(250)]
