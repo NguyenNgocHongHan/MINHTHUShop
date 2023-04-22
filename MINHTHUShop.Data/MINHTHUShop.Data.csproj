@@ -58,13 +58,42 @@
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\202304190913024_ShopDB.cs" />
-    <Compile Include="Migrations\202304190913024_ShopDB.designer.cs">
-      <DependentUpon>202304190913024_ShopDB.cs</DependentUpon>
+    <Compile Include="Migrations\202304220519264_dbShop.cs" />
+    <Compile Include="Migrations\202304220519264_dbShop.designer.cs">
+      <DependentUpon>202304220519264_dbShop.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Tb_AboutRepository.cs" />
+    <Compile Include="Repositories\Tb_BannerRepository.cs" />
+    <Compile Include="Repositories\Tb_BrandRepository.cs" />
+    <Compile Include="Repositories\Tb_ConfigRepository.cs" />
+    <Compile Include="Repositories\Tb_CustomerRepository.cs" />
+    <Compile Include="Repositories\Tb_FAQCategoryRepository.cs" />
+    <Compile Include="Repositories\Tb_FAQRepository.cs" />
+    <Compile Include="Repositories\Tb_FeedbackRepository.cs" />
+    <Compile Include="Repositories\Tb_MenuGroupRepository.cs" />
+    <Compile Include="Repositories\Tb_MenuRepository.cs" />
+    <Compile Include="Repositories\Tb_NewsCategoryRepository.cs" />
+    <Compile Include="Repositories\Tb_NewsRepository.cs" />
+    <Compile Include="Repositories\Tb_OrderDetailRepository.cs" />
+    <Compile Include="Repositories\Tb_OrderRepository.cs" />
+    <Compile Include="Repositories\Tb_OrderStatusRepository.cs" />
+    <Compile Include="Repositories\Tb_PageRepository.cs" />
+    <Compile Include="Repositories\Tb_PaymentMethodRepository.cs" />
+    <Compile Include="Repositories\Tb_PaymentRepository.cs" />
+    <Compile Include="Repositories\Tb_ProductCategoryRepository.cs" />
+    <Compile Include="Repositories\Tb_ProductCommentRepository.cs" />
+    <Compile Include="Repositories\Tb_ProductRepository.cs" />
+    <Compile Include="Repositories\Tb_RoleRepository.cs" />
+    <Compile Include="Repositories\Tb_ShippingMethodRepository.cs" />
+    <Compile Include="Repositories\Tb_ShippingRepository.cs" />
+    <Compile Include="Repositories\Tb_StaffRepository.cs" />
+    <Compile Include="Repositories\Tb_TagNewsRepository.cs" />
+    <Compile Include="Repositories\Tb_TagProductRepository.cs" />
+    <Compile Include="Repositories\Tb_TagRepository.cs" />
+    <Compile Include="Repositories\Tb_TargetRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -81,11 +110,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202304190913024_ShopDB.resx">
-      <DependentUpon>202304190913024_ShopDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202304220519264_dbShop.resx">
+      <DependentUpon>202304220519264_dbShop.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ShopDB : DbMigration
+    public partial class dbShop : DbMigration
     {
         public override void Up()
         {
@@ -50,6 +50,19 @@
                         BrandOrigin = c.String(nullable: false, maxLength: 50),
                     })
                 .PrimaryKey(t => t.BrandID);
+            
+            CreateTable(
+                "dbo.Tb_Config",
+                c => new
+                    {
+                        ConfigID = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 50),
+                        ValueNum = c.Int(),
+                        ValueString = c.String(maxLength: 50),
+                        Description = c.String(maxLength: 500),
+                        Status = c.Boolean(),
+                    })
+                .PrimaryKey(t => t.ConfigID);
             
             CreateTable(
                 "dbo.Tb_Customer",
@@ -206,8 +219,8 @@
                         CustomerID = c.Int(nullable: false),
                         StaffID = c.Int(nullable: false),
                         OrderStatusID = c.Int(nullable: false),
-                        ShippingID = c.Int(nullable: false),
-                        PaymentID = c.Int(nullable: false),
+                        ShippingMethodID = c.Int(nullable: false),
+                        PaymentMethodID = c.Int(nullable: false),
                         Total = c.Decimal(precision: 18, scale: 2),
                         CreateDate = c.DateTime(),
                         Note = c.String(),
@@ -216,14 +229,14 @@
                 .PrimaryKey(t => t.OrderID)
                 .ForeignKey("dbo.Tb_Customer", t => t.CustomerID, cascadeDelete: true)
                 .ForeignKey("dbo.Tb_OrderStatus", t => t.OrderStatusID, cascadeDelete: true)
-                .ForeignKey("dbo.Tb_Payment", t => t.PaymentID, cascadeDelete: true)
-                .ForeignKey("dbo.Tb_Shipping", t => t.ShippingID, cascadeDelete: true)
+                .ForeignKey("dbo.Tb_PaymentMethod", t => t.PaymentMethodID, cascadeDelete: true)
+                .ForeignKey("dbo.Tb_ShippingMethod", t => t.ShippingMethodID, cascadeDelete: true)
                 .ForeignKey("dbo.Tb_Staff", t => t.StaffID, cascadeDelete: true)
                 .Index(t => t.CustomerID)
                 .Index(t => t.StaffID)
                 .Index(t => t.OrderStatusID)
-                .Index(t => t.ShippingID)
-                .Index(t => t.PaymentID);
+                .Index(t => t.ShippingMethodID)
+                .Index(t => t.PaymentMethodID);
             
             CreateTable(
                 "dbo.Tb_OrderStatus",
@@ -236,20 +249,6 @@
                 .PrimaryKey(t => t.OrderStatusID);
             
             CreateTable(
-                "dbo.Tb_Payment",
-                c => new
-                    {
-                        PaymentID = c.Int(nullable: false, identity: true),
-                        PaymentMethodID = c.Int(nullable: false),
-                        PaymentDate = c.DateTime(),
-                        PaymentAmount = c.Decimal(precision: 18, scale: 2),
-                        IsPaid = c.Boolean(),
-                    })
-                .PrimaryKey(t => t.PaymentID)
-                .ForeignKey("dbo.Tb_PaymentMethod", t => t.PaymentMethodID, cascadeDelete: true)
-                .Index(t => t.PaymentMethodID);
-            
-            CreateTable(
                 "dbo.Tb_PaymentMethod",
                 c => new
                     {
@@ -259,21 +258,6 @@
                         Status = c.Boolean(),
                     })
                 .PrimaryKey(t => t.PaymentMethodID);
-            
-            CreateTable(
-                "dbo.Tb_Shipping",
-                c => new
-                    {
-                        ShippingID = c.Int(nullable: false, identity: true),
-                        ShippingMethodID = c.Int(nullable: false),
-                        ShippingDate = c.DateTime(),
-                        StartDate = c.DateTime(),
-                        EndDate = c.DateTime(),
-                        IsShipping = c.Boolean(),
-                    })
-                .PrimaryKey(t => t.ShippingID)
-                .ForeignKey("dbo.Tb_ShippingMethod", t => t.ShippingMethodID, cascadeDelete: true)
-                .Index(t => t.ShippingMethodID);
             
             CreateTable(
                 "dbo.Tb_ShippingMethod",
@@ -295,8 +279,8 @@
                         RoleID = c.Int(nullable: false),
                         UserName = c.String(nullable: false, maxLength: 50, unicode: false),
                         Password = c.String(nullable: false, maxLength: 50, unicode: false),
-                        Name = c.String(nullable: false, maxLength: 50),
                         Email = c.String(nullable: false, maxLength: 250, unicode: false),
+                        Name = c.String(nullable: false, maxLength: 50),
                         Phone = c.String(nullable: false, maxLength: 10, fixedLength: true, unicode: false),
                         Address = c.String(nullable: false, maxLength: 250),
                         Gender = c.Boolean(),
@@ -358,6 +342,35 @@
                 .PrimaryKey(t => t.CateID);
             
             CreateTable(
+                "dbo.Tb_Page",
+                c => new
+                    {
+                        PageID = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 250),
+                        Description = c.String(),
+                        URL = c.String(nullable: false, maxLength: 250),
+                        CreateDate = c.DateTime(nullable: false),
+                        MetaTitle = c.String(maxLength: 250),
+                        MetaKeywords = c.String(maxLength: 250),
+                        MetaDescriptions = c.String(maxLength: 500),
+                    })
+                .PrimaryKey(t => t.PageID);
+            
+            CreateTable(
+                "dbo.Tb_Payment",
+                c => new
+                    {
+                        PaymentID = c.Int(nullable: false, identity: true),
+                        OrderID = c.Int(nullable: false),
+                        PaymentDate = c.DateTime(),
+                        PaymentAmount = c.Decimal(precision: 18, scale: 2),
+                        IsPaid = c.Boolean(),
+                    })
+                .PrimaryKey(t => t.PaymentID)
+                .ForeignKey("dbo.Tb_Order", t => t.OrderID, cascadeDelete: true)
+                .Index(t => t.OrderID);
+            
+            CreateTable(
                 "dbo.Tb_ProductComment",
                 c => new
                     {
@@ -374,6 +387,21 @@
                 .ForeignKey("dbo.Tb_Product", t => t.ProductID, cascadeDelete: true)
                 .Index(t => t.ProductID)
                 .Index(t => t.CustomerID);
+            
+            CreateTable(
+                "dbo.Tb_Shipping",
+                c => new
+                    {
+                        ShippingID = c.Int(nullable: false, identity: true),
+                        OrderID = c.Int(nullable: false),
+                        ShippingDate = c.DateTime(),
+                        StartDate = c.DateTime(),
+                        EndDate = c.DateTime(),
+                        IsShipping = c.Boolean(),
+                    })
+                .PrimaryKey(t => t.ShippingID)
+                .ForeignKey("dbo.Tb_Order", t => t.OrderID, cascadeDelete: true)
+                .Index(t => t.OrderID);
             
             CreateTable(
                 "dbo.Tb_TagNews",
@@ -420,18 +448,18 @@
             DropForeignKey("dbo.Tb_TagProduct", "ProductID", "dbo.Tb_Product");
             DropForeignKey("dbo.Tb_TagNews", "TagID", "dbo.Tb_Tag");
             DropForeignKey("dbo.Tb_TagNews", "NewsID", "dbo.Tb_News");
+            DropForeignKey("dbo.Tb_Shipping", "OrderID", "dbo.Tb_Order");
             DropForeignKey("dbo.Tb_ProductComment", "ProductID", "dbo.Tb_Product");
             DropForeignKey("dbo.Tb_ProductComment", "CustomerID", "dbo.Tb_Customer");
+            DropForeignKey("dbo.Tb_Payment", "OrderID", "dbo.Tb_Order");
             DropForeignKey("dbo.Tb_OrderDetail", "ProductID", "dbo.Tb_Product");
             DropForeignKey("dbo.Tb_Product", "CateID", "dbo.Tb_ProductCategory");
             DropForeignKey("dbo.Tb_Product", "BrandID", "dbo.Tb_Brand");
             DropForeignKey("dbo.Tb_OrderDetail", "OrderID", "dbo.Tb_Order");
             DropForeignKey("dbo.Tb_Order", "StaffID", "dbo.Tb_Staff");
             DropForeignKey("dbo.Tb_Staff", "RoleID", "dbo.Tb_Role");
-            DropForeignKey("dbo.Tb_Order", "ShippingID", "dbo.Tb_Shipping");
-            DropForeignKey("dbo.Tb_Shipping", "ShippingMethodID", "dbo.Tb_ShippingMethod");
-            DropForeignKey("dbo.Tb_Order", "PaymentID", "dbo.Tb_Payment");
-            DropForeignKey("dbo.Tb_Payment", "PaymentMethodID", "dbo.Tb_PaymentMethod");
+            DropForeignKey("dbo.Tb_Order", "ShippingMethodID", "dbo.Tb_ShippingMethod");
+            DropForeignKey("dbo.Tb_Order", "PaymentMethodID", "dbo.Tb_PaymentMethod");
             DropForeignKey("dbo.Tb_Order", "OrderStatusID", "dbo.Tb_OrderStatus");
             DropForeignKey("dbo.Tb_Order", "CustomerID", "dbo.Tb_Customer");
             DropForeignKey("dbo.Tb_News", "NewsCateID", "dbo.Tb_NewsCategory");
@@ -443,15 +471,15 @@
             DropIndex("dbo.Tb_TagProduct", new[] { "TagID" });
             DropIndex("dbo.Tb_TagNews", new[] { "NewsID" });
             DropIndex("dbo.Tb_TagNews", new[] { "TagID" });
+            DropIndex("dbo.Tb_Shipping", new[] { "OrderID" });
             DropIndex("dbo.Tb_ProductComment", new[] { "CustomerID" });
             DropIndex("dbo.Tb_ProductComment", new[] { "ProductID" });
+            DropIndex("dbo.Tb_Payment", new[] { "OrderID" });
             DropIndex("dbo.Tb_Product", new[] { "BrandID" });
             DropIndex("dbo.Tb_Product", new[] { "CateID" });
             DropIndex("dbo.Tb_Staff", new[] { "RoleID" });
-            DropIndex("dbo.Tb_Shipping", new[] { "ShippingMethodID" });
-            DropIndex("dbo.Tb_Payment", new[] { "PaymentMethodID" });
-            DropIndex("dbo.Tb_Order", new[] { "PaymentID" });
-            DropIndex("dbo.Tb_Order", new[] { "ShippingID" });
+            DropIndex("dbo.Tb_Order", new[] { "PaymentMethodID" });
+            DropIndex("dbo.Tb_Order", new[] { "ShippingMethodID" });
             DropIndex("dbo.Tb_Order", new[] { "OrderStatusID" });
             DropIndex("dbo.Tb_Order", new[] { "StaffID" });
             DropIndex("dbo.Tb_Order", new[] { "CustomerID" });
@@ -465,15 +493,16 @@
             DropTable("dbo.Tb_TagProduct");
             DropTable("dbo.Tb_Tag");
             DropTable("dbo.Tb_TagNews");
+            DropTable("dbo.Tb_Shipping");
             DropTable("dbo.Tb_ProductComment");
+            DropTable("dbo.Tb_Payment");
+            DropTable("dbo.Tb_Page");
             DropTable("dbo.Tb_ProductCategory");
             DropTable("dbo.Tb_Product");
             DropTable("dbo.Tb_Role");
             DropTable("dbo.Tb_Staff");
             DropTable("dbo.Tb_ShippingMethod");
-            DropTable("dbo.Tb_Shipping");
             DropTable("dbo.Tb_PaymentMethod");
-            DropTable("dbo.Tb_Payment");
             DropTable("dbo.Tb_OrderStatus");
             DropTable("dbo.Tb_Order");
             DropTable("dbo.Tb_OrderDetail");
@@ -486,6 +515,7 @@
             DropTable("dbo.Tb_FAQ");
             DropTable("dbo.Tb_FAQCategory");
             DropTable("dbo.Tb_Customer");
+            DropTable("dbo.Tb_Config");
             DropTable("dbo.Tb_Brand");
             DropTable("dbo.Tb_Banner");
             DropTable("dbo.Tb_About");

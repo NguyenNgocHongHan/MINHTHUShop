@@ -14,6 +14,7 @@ namespace MINHTHUShop.Data
         public DbSet<Tb_About> Tb_Abouts { get; set; }
         public DbSet<Tb_Banner> Tb_Banners { get; set; }
         public DbSet<Tb_Brand> Tb_Brands { get; set; }
+        public DbSet<Tb_Config> Tb_Configs { get; set; }
         public DbSet<Tb_Customer> Tb_Customers { get; set; }
         public DbSet<Tb_FAQ> Tb_FAQs { get; set; }
         public DbSet<Tb_FAQCategory> Tb_FAQCategories { get; set; }
@@ -25,6 +26,7 @@ namespace MINHTHUShop.Data
         public DbSet<Tb_Order> Tb_Orders { get; set; }
         public DbSet<Tb_OrderDetail> Tb_OrderDetails { get; set; }
         public DbSet<Tb_OrderStatus> Tb_OrderStatuses { get; set; }
+        public DbSet<Tb_Page> Tb_Pages { get; set; }
         public DbSet<Tb_Payment> Tb_Payments { get; set; }
         public DbSet<Tb_PaymentMethod> Tb_PaymentMethods { get; set; }
         public DbSet<Tb_Product> Tb_Products { get; set; }

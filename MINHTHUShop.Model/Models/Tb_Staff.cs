@@ -24,13 +24,14 @@ namespace MINHTHUShop.Model.Models
         public string Password { get; set; }
 
         [Required]
-        [MaxLength(50)]
-        public string Name { get; set; }
-
-        [Required]
         [MaxLength(250)]
         [Column(TypeName = "varchar")]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Email không hợp lệ")]
         public string Email { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string Name { get; set; }
 
         [Required]
         [MaxLength(10)]
@@ -55,6 +56,14 @@ namespace MINHTHUShop.Model.Models
         public DateTime? LastLogin { get; set; }
 
         public bool? Status { get; set; } = true;
+        /*
+                public async Task<ClaimsIdentity> GenerateCustomerIdentityAsync(UserManager<Tb_ApplicationStaff> manager, string authenticationType)
+                {
+                    // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+                    var staffIdentity = await manager.CreateIdentityAsync(this, authenticationType);
+                    // Add custom user claims here
+                    return staffIdentity;
+                }*/
 
         [ForeignKey("RoleID")]
         public virtual Tb_Role Tb_Role { get; set; }

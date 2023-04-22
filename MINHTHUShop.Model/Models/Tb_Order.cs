@@ -21,10 +21,10 @@ namespace MINHTHUShop.Model.Models
         public int OrderStatusID { get; set; }
 
         [Required]
-        public int ShippingID { get; set; }
+        public int ShippingMethodID { get; set; }
 
         [Required]
-        public int PaymentID { get; set; }
+        public int PaymentMethodID { get; set; }
 
         public decimal? Total { get; set; }
 
@@ -40,10 +40,10 @@ namespace MINHTHUShop.Model.Models
         public virtual Tb_Staff Tb_Staff { get; set; }
         [ForeignKey("OrderStatusID")]
         public virtual Tb_OrderStatus Tb_OrderStatus { get; set; }
-        [ForeignKey("ShippingID")]
-        public virtual Tb_Shipping Tb_Shipping { get; set; }
-        [ForeignKey("PaymentID")]
-        public virtual Tb_Payment Tb_Payment { get; set; }
+        [ForeignKey("ShippingMethodID")]
+        public virtual Tb_ShippingMethod Tb_ShippingMethod { get; set; }
+        [ForeignKey("PaymentMethodID")]
+        public virtual Tb_PaymentMethod Tb_PaymentMethod { get; set; }
 
         public virtual IEnumerable<Tb_OrderDetail> Tb_OrderDetails { get; set; }
     }

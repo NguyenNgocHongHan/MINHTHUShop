@@ -11,7 +11,7 @@ namespace MINHTHUShop.Model.Models
         public int PaymentID { get; set; }
 
         [Required]
-        public int PaymentMethodID { get; set; }
+        public int OrderID { get; set; }
 
         public DateTime? PaymentDate { get; set; }
 
@@ -19,7 +19,7 @@ namespace MINHTHUShop.Model.Models
 
         public bool? IsPaid { get; set; } = false;
 
-        [ForeignKey("PaymentMethodID")]
-        public virtual Tb_PaymentMethod Tb_PaymentMethod { get; set; }
+        [ForeignKey("OrderID")]
+        public virtual Tb_Order Tb_Order { get; set; }
     }
 }

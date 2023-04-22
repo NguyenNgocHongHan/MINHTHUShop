@@ -11,7 +11,7 @@ namespace MINHTHUShop.Model.Models
         public int ShippingID { get; set; }
 
         [Required]
-        public int ShippingMethodID { get; set; }
+        public int OrderID { get; set; }
 
         public DateTime? ShippingDate { get; set; }
 
@@ -21,7 +21,7 @@ namespace MINHTHUShop.Model.Models
 
         public bool? IsShipping { get; set; } = false;
 
-        [ForeignKey("ShippingMethodID")]
-        public virtual Tb_ShippingMethod Tb_ShippingMethod { get; set; }
+        [ForeignKey("OrderID")]
+        public virtual Tb_Order Tb_Order { get; set; }
     }
 }
