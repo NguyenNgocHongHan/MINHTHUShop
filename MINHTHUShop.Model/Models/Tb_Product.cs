@@ -1,4 +1,5 @@
 ﻿using MINHTHUShop.Model.Abstract;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -36,6 +37,8 @@ namespace MINHTHUShop.Model.Models
         public string Description { get; set; }
 
         public string Detail { get; set; }
+
+        public DateTime? CreateDate { get; set; } = DateTime.Now;
 
         [DefaultValue(true)]
         public bool? Status { get; set; }

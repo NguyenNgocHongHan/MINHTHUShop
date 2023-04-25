@@ -63,7 +63,7 @@ namespace MINHTHUShop.Data.Infrastructure
                 dbSet.Remove(obj);
         }
 
-        public virtual T GetSingleById(int id)
+        public virtual T GetById(int id)
         {
             return dbSet.Find(id);
         }

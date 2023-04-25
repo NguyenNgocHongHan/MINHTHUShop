@@ -16,17 +16,19 @@ namespace MINHTHUShop.Data.Repositories
         {
         }
 
-        public IEnumerable<Tb_News> GetAllByTag(int tag, int pageIndex, int pageSize, out int totalRow)
+        public IEnumerable<Tb_News> GetAllByTag(int tagID, int pageIndex, int pageSize, out int totalRow)
         {
             var query = from n in DbContext.Tb_News
                         join tn in DbContext.Tb_TagNews
                         on n.NewsID equals tn.NewsID
-                        where tn.TagID == tag 
+                        where tn.TagID == tagID && n.Status == true
                         orderby n.CreateDate descending
                         select n;
 
+            //đếm kết quả trả về
             totalRow = query.Count();
 
+            //phân trang
             query = query.Skip((pageIndex - 1) * pageSize).Take(pageSize);
 
             return query;

@@ -42,6 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tb_FeedbackService.cs" />
+    <Compile Include="Tb_NewsCategoryService.cs" />
+    <Compile Include="Tb_NewsService.cs" />
+    <Compile Include="Tb_OrderService.cs" />
+    <Compile Include="Tb_ProductCategoryService.cs" />
+    <Compile Include="Tb_ProductService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MINHTHUShop.Common\MINHTHUShop.Common.csproj">

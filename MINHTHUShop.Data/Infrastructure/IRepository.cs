@@ -21,7 +21,7 @@ namespace MINHTHUShop.Data.Infrastructure
         void DeleteMulti(Expression<Func<T, bool>> where);
 
         //lấy 1 entity bằng id
-        T GetSingleById(int id);
+        T GetById(int id);
 
         T GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null);
 
