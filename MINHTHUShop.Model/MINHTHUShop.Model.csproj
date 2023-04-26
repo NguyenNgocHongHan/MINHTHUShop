@@ -66,6 +66,7 @@
     <Compile Include="Models\Tb_Banner.cs" />
     <Compile Include="Models\Tb_Brand.cs" />
     <Compile Include="Models\Tb_Customer.cs" />
+    <Compile Include="Models\Tb_Error.cs" />
     <Compile Include="Models\Tb_FAQ.cs" />
     <Compile Include="Models\Tb_FAQCategory.cs" />
     <Compile Include="Models\Tb_Feedback.cs" />

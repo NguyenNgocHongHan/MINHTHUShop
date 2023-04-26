@@ -41,6 +41,9 @@ namespace MINHTHUShop.Data
         public DbSet<Tb_TagProduct> Tb_TagProducts { get; set; }
         public DbSet<Tb_Target> Tb_Targets { get; set; }
 
+
+        public DbSet<Tb_Error> Tb_Errors { get; set; }
+
         //phương thức ghi đè DbContext
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

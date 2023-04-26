@@ -66,6 +66,10 @@
     <Compile Include="Migrations\202304260938430_addCreateDateForTbProduct.designer.cs">
       <DependentUpon>202304260938430_addCreateDateForTbProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202304261232406_addTableError.cs" />
+    <Compile Include="Migrations\202304261232406_addTableError.designer.cs">
+      <DependentUpon>202304261232406_addTableError.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,6 +78,7 @@
     <Compile Include="Repositories\Tb_BrandRepository.cs" />
     <Compile Include="Repositories\Tb_ConfigRepository.cs" />
     <Compile Include="Repositories\Tb_CustomerRepository.cs" />
+    <Compile Include="Repositories\Tb_ErrorRepository.cs" />
     <Compile Include="Repositories\Tb_FAQCategoryRepository.cs" />
     <Compile Include="Repositories\Tb_FAQRepository.cs" />
     <Compile Include="Repositories\Tb_FeedbackRepository.cs" />
@@ -119,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202304260938430_addCreateDateForTbProduct.resx">
       <DependentUpon>202304260938430_addCreateDateForTbProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202304261232406_addTableError.resx">
+      <DependentUpon>202304261232406_addTableError.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
