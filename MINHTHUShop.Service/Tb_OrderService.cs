@@ -32,7 +32,7 @@ namespace MINHTHUShop.Service
                 }
                 return tb_Order;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

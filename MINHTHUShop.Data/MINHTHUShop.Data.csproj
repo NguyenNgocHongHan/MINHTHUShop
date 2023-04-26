@@ -62,6 +62,10 @@
     <Compile Include="Migrations\202304220519264_dbShop.designer.cs">
       <DependentUpon>202304220519264_dbShop.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202304260938430_addCreateDateForTbProduct.cs" />
+    <Compile Include="Migrations\202304260938430_addCreateDateForTbProduct.designer.cs">
+      <DependentUpon>202304260938430_addCreateDateForTbProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -112,6 +116,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202304220519264_dbShop.resx">
       <DependentUpon>202304220519264_dbShop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202304260938430_addCreateDateForTbProduct.resx">
+      <DependentUpon>202304260938430_addCreateDateForTbProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
