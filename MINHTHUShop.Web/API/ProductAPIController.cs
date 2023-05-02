@@ -196,6 +196,7 @@ namespace MINHTHUShop.Web.API
         [HttpPost]
         public async Task<HttpResponseMessage> Import()
         {
+            //kiểm tra xem request có chứa multipart/form-data không
             if (!Request.Content.IsMimeMultipartContent())
             {
                 Request.CreateErrorResponse(HttpStatusCode.UnsupportedMediaType, "Định dạng không được hỗ trợ");
@@ -206,10 +207,11 @@ namespace MINHTHUShop.Web.API
             {
                 Directory.CreateDirectory(root);
             }
-
+            //đọc dữ liệu từ một form sử dụng định dạng multipart/form-data
             var provider = new MultipartFormDataStreamProvider(root);
+            //đọc dữ liệu từ form data và trả về task Async 
             var result = await Request.Content.ReadAsMultipartAsync(provider);
-            //do stuff with files if you wish
+            //thực hiện thao tác với file theo mong muốn
             if (result.FormData["CateID"] == null)
             {
                 Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bạn chưa chọn danh mục sản phẩm.");
@@ -219,6 +221,7 @@ namespace MINHTHUShop.Web.API
             int addedCount = 0;
             int cateId = 0;
             int.TryParse(result.FormData["CateID"], out cateId);
+            //lấy file name
             foreach (MultipartFileData fileData in result.FileData)
             {
                 if (string.IsNullOrEmpty(fileData.Headers.ContentDisposition.FileName))
