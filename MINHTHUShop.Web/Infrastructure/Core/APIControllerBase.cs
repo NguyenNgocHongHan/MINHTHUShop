@@ -37,7 +37,7 @@ namespace MINHTHUShop.Web.Infrastructure.Core
                     }
                 }
                 LogError(ex);
-                response = requestMessage.CreateResponse(HttpStatusCode.BadRequest, ex.InnerException.Message);
+                response = requestMessage.CreateResponse(HttpStatusCode.BadRequest, ex?.InnerException.Message);
             }
             catch (DbUpdateException dbEx)
             {
