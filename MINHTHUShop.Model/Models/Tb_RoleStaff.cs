@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MINHTHUShop.Model.Models
 {
     //quản lý quyền truy cập
-    public class Tb_Role
+    public class Tb_RoleStaff
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

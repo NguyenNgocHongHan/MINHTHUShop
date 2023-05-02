@@ -5,12 +5,12 @@ using System.Linq;
 
 namespace MINHTHUShop.Data.Repositories
 {
-    public interface ITb_RoleRepository : IRepository<Tb_Role>
+    public interface ITb_RoleRepository : IRepository<Tb_RoleStaff>
     {
         IEnumerable<Tb_Staff> GetListStaffByRoleID(int RoleID); 
     }
 
-    public class Tb_RoleRepository : RepositoryBase<Tb_Role>, ITb_RoleRepository
+    public class Tb_RoleRepository : RepositoryBase<Tb_RoleStaff>, ITb_RoleRepository
     {
         public Tb_RoleRepository(IDbFactory dbFactory) : base(dbFactory)
         {

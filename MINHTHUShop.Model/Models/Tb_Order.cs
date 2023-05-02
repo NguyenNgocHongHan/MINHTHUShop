@@ -12,7 +12,7 @@ namespace MINHTHUShop.Model.Models
         public int OrderID { get; set; }
 
         [Required]
-        public int CustomerID { get; set; }
+        public string CustomerID { get; set; }
 
         [Required]
         public int StaffID { get; set; }

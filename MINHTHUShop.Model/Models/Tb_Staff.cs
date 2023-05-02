@@ -66,6 +66,6 @@ namespace MINHTHUShop.Model.Models
                 }*/
 
         [ForeignKey("RoleID")]
-        public virtual Tb_Role Tb_Role { get; set; }
+        public virtual Tb_RoleStaff Tb_Role { get; set; }
     }
 }

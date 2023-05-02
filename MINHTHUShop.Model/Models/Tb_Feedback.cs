@@ -11,7 +11,7 @@ namespace MINHTHUShop.Model.Models
         public int FeedbackID { get; set; }
 
         [Required]
-        public int CustomerID { get; set; }
+        public string CustomerID { get; set; }
 
         [Required]
         public string Message { get; set; }

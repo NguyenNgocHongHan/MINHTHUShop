@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,31 +9,31 @@ using System.Threading.Tasks;
 
 namespace MINHTHUShop.Model.Models
 {
-    public class Tb_Customer
+    public class Tb_Customer : IdentityUser
     {
-        [Key]
+        /*[Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CustomerID { get; set; }
+        public int CustomerID { get; set; }*/
 
-        [Required]
+        /*[Required]
         [MaxLength(250)]
         [Column(TypeName = "varchar")]
         [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Email không hợp lệ")]
-        public string Email { get; set; }
+        public string Email { get; set; }*/
 
-        [Required]
+        /*[Required]
         [MaxLength(250)]
         [Column(TypeName = "varchar")]
-        public string Password { get; set; }
+        public string Password { get; set; }*/
 
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
-
+/*
         [Required]
         [MaxLength(10)]
         [Column(TypeName = "char")]
-        public string Phone { get; set; }
+        public string Phone { get; set; }*/
 
         [Required]
         [MaxLength(250)]
@@ -52,7 +53,9 @@ namespace MINHTHUShop.Model.Models
         public DateTime? LastLogin { get; set; }
 
         public bool? Status { get; set; } = true;
-/*
+
+        public virtual IEnumerable<Tb_Order> Tb_Orders { get; set; }
+
         public async Task<ClaimsIdentity> GenerateCustomerIdentityAsync(UserManager<Tb_Customer> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -60,7 +63,5 @@ namespace MINHTHUShop.Model.Models
             // Add custom user claims here
             return customerIdentity;
         }
-*/
-        public virtual IEnumerable<Tb_Order> Tb_Orders { get; set; }
     }
 }

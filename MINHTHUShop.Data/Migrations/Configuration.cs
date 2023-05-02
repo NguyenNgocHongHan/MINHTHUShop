@@ -18,6 +18,15 @@
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
+
+            /*CreateProductCategorySample(context);
+            CreateSlide(context);
+            CreatePage(context);
+            CreateContactDetail(context);
+
+            CreateConfigTitle(context);
+            CreateFooter(context);
+            CreateUser(context);*/
         }
     }
 }
