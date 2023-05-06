@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace MINHTHUShop.Web.API
 {
-    [RoutePrefix("api/account")]
+    [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
         private ApplicationSignInManager _signInManager;
