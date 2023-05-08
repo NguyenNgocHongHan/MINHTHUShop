@@ -1,9 +1,9 @@
 ﻿(function (app) {
     app.controller('productCategoryController', productCategoryController);
 
-    productCategoryController.$inject = ['$scope', 'apiService'];
+    productCategoryController.$inject = ['$scope', 'apiService', 'notificationService'];
 
-    function productCategoryController($scope, apiService) {
+    function productCategoryController($scope, apiService, notificationService) {
         $scope.productCategory = [];
         $scope.getProductCategory = getProductCategory;
 
@@ -30,6 +30,12 @@
             }
 
             apiService.get('api/ProductCategory/GetAllByPage', config, function (result) {
+                if (result.data.TotalCount == 0) {
+                    notificationService.displayWarning('Không tìm thấy kết quả!');
+                }
+                else {
+                    notificationService.displaySuccess('Đã tìm thấy ' + result.data.TotalCount + ' kết quả!');
+                }
                 $scope.productCategory = result.data.Item;
                 $scope.page = result.data.Page;
                 $scope.pagesCount = result.data.TotalPage;

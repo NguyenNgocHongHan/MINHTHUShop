@@ -244,6 +244,7 @@
     <Content Include="app\shared\filter\statusFillter.js" />
     <Content Include="app\shared\module\MINHTHUShop.common.js" />
     <Content Include="app\shared\service\apiService.js" />
+    <Content Include="app\shared\service\notificationService.js" />
     <Content Include="Content\Admin\css\adminlte.css" />
     <Content Include="Content\Admin\css\adminlte.min.css" />
     <Content Include="Content\Admin\css\alt\adminlte.components.css" />
@@ -295,6 +296,12 @@
     <Content Include="Content\Admin\js\pages\dashboard.js" />
     <Content Include="Content\Admin\js\pages\dashboard2.js" />
     <Content Include="Content\Admin\js\pages\dashboard3.js" />
+    <Content Include="Content\Admin\lib\angular-toastr\angular-toastr.css" />
+    <Content Include="Content\Admin\lib\angular-toastr\angular-toastr.js" />
+    <Content Include="Content\Admin\lib\angular-toastr\angular-toastr.min.css" />
+    <Content Include="Content\Admin\lib\angular-toastr\angular-toastr.min.js" />
+    <Content Include="Content\Admin\lib\angular-toastr\angular-toastr.tpls.js" />
+    <Content Include="Content\Admin\lib\angular-toastr\angular-toastr.tpls.min.js" />
     <Content Include="Content\Admin\lib\angular-ui-router\angular-ui-router.js" />
     <Content Include="Content\Admin\lib\angular-ui-router\angular-ui-router.min.js" />
     <Content Include="Content\Admin\lib\angular-ui-router\resolveService.js" />
@@ -333,6 +340,9 @@
     <Content Include="Content\Admin\lib\jquery\jquery.min.js" />
     <Content Include="Content\Admin\lib\jquery\jquery.slim.js" />
     <Content Include="Content\Admin\lib\jquery\jquery.slim.min.js" />
+    <Content Include="Content\Admin\lib\toastr.js\toastr.css" />
+    <Content Include="Content\Admin\lib\toastr.js\toastr.min.css" />
+    <Content Include="Content\Admin\lib\toastr.js\toastr.min.js" />
     <Content Include="db.sql" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -501,6 +511,7 @@
     <Content Include="Content\Admin\lib\bootstrap\scss\utilities\_api.scss" />
     <Content Include="Content\Admin\lib\bootstrap\scss\vendor\_rfs.scss" />
     <Content Include="Content\Admin\lib\angular.js\angular.min.js.map" />
+    <Content Include="Content\Admin\lib\toastr.js\toastr.js.map" />
     <Content Include="Content\Admin\lib\angular-ui-router\angular-ui-router.js.map" />
     <Content Include="Content\Admin\lib\angular-ui-router\angular-ui-router.min.js.map" />
     <Content Include="Content\Admin\lib\angular-ui-router\resolveService.js.map" />
