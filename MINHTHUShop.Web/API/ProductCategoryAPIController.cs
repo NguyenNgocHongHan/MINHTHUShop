@@ -63,12 +63,12 @@ namespace MINHTHUShop.Web.API
 
         [Route("GetAllByPage")]
         [HttpGet]
-        public HttpResponseMessage GetAllByPage(HttpRequestMessage request/*, string keyword*/, int page, int pageSize = 20)
+        public HttpResponseMessage GetAllByPage(HttpRequestMessage request, string keyword, int page, int pageSize = 20)
         {
             return CreateHttpResponse(request, () =>
             {
                 int totalRow = 0;
-                var model = _productCategoryService.GetAll(/*keyword*/);
+                var model = _productCategoryService.GetAll(keyword);
 
                 totalRow = model.Count();
 

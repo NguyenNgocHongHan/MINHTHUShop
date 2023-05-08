@@ -9,15 +9,23 @@
 
         $scope.page = 0;
         $scope.pagesCount = 0;
+        $scope.pageSize = 10;
+
+        $scope.keyword = '';
+        $scope.search = search;
+
+        function search() {
+            getProductCategory();
+        }
 
         function getProductCategory(page) {
             page = page || 0;
 
             var config = {
                 params: {
-                    /*keyword: $scope.keyword,*/
+                    keyword: $scope.keyword,
                     page: page,
-                    pageSize: 10
+                    pageSize: $scope.pageSize
                 }
             }
 
