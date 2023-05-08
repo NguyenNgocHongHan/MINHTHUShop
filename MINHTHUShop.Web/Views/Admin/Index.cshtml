@@ -157,7 +157,7 @@
             <!-- Brand Logo -->
             <a href="../../index3.html" class="brand-link">
                 <img src="~/Content/Admin/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                <span class="brand-text font-weight-light">Minh Thư</span>
             </a>
 
             <!-- Sidebar -->
@@ -231,22 +231,22 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
-                                    Layout Options
+                                    Quản lý thông tin
                                     <i class="fas fa-angle-left right"></i>
                                     <span class="badge badge-info right">6</span>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../layout/top-nav.html" class="nav-link">
+                                    <a ui-sref="productCategory" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Top Navigation</p>
+                                        <p>Danh mục sản phẩm</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../layout/top-nav-sidebar.html" class="nav-link">
+                                    <a ui-sref="product" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Top Navigation + Sidebar</p>
+                                        <p>Sản phẩm</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -859,12 +859,20 @@
     <!-- Begin embed angularJS -->
     <script src="~/Content/Admin/lib/angular.js/angular.js"></script>
     <script src="~/Content/Admin/lib/angular-ui-router/angular-ui-router.js"></script>
+
     <script src="~/app/shared/module/MINHTHUShop.common.js"></script>
+    <script src="~/app/shared/filter/statusFillter.js"></script>
+    <script src="~/app/shared/service/apiService.js"></script>
+
     <script src="~/app/components/product/product.module.js"></script>
-    <script src="~/app/app.js"></script>
     <script src="~/app/components/product/productController.js"></script>
     <script src="~/app/components/product/productCreateController.js"></script>
     <script src="~/app/components/product/productEditController.js"></script>
+
+    <script src="~/app/components/productCategory/productCategory.module.js"></script>
+    <script src="~/app/components/productCategory/ProductCategoryController.js"></script>
+
+    <script src="~/app/app.js"></script>
     <script src="~/app/components/home/homeController.js"></script>
 </body>
 </html>

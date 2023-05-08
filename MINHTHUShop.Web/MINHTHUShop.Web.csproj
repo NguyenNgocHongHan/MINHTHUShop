@@ -224,6 +224,13 @@
     <Content Include="app\app.js" />
     <Content Include="app\components\home\homeController.js" />
     <Content Include="app\components\home\homeView.html" />
+    <Content Include="app\components\productCategory\productCategory.module.js" />
+    <Content Include="app\components\productCategory\ProductCategoryCreateView.html" />
+    <Content Include="app\components\productCategory\ProductCategoryCreateController.js" />
+    <Content Include="app\components\productCategory\ProductCategoryEditView.html" />
+    <Content Include="app\components\productCategory\ProductCategoryEditController.js" />
+    <Content Include="app\components\productCategory\ProductCategoryView.html" />
+    <Content Include="app\components\productCategory\ProductCategoryController.js" />
     <Content Include="app\components\product\product.module.js" />
     <Content Include="app\components\product\productController.js" />
     <Content Include="app\components\product\productCreateController.js" />
@@ -231,7 +238,9 @@
     <Content Include="app\components\product\productEditController.js" />
     <Content Include="app\components\product\productEditView.html" />
     <Content Include="app\components\product\productView.html" />
+    <Content Include="app\shared\filter\statusFillter.js" />
     <Content Include="app\shared\module\MINHTHUShop.common.js" />
+    <Content Include="app\shared\service\apiService.js" />
     <Content Include="Content\Admin\css\adminlte.css" />
     <Content Include="Content\Admin\css\adminlte.min.css" />
     <Content Include="Content\Admin\css\alt\adminlte.components.css" />
@@ -321,6 +330,7 @@
     <Content Include="Content\Admin\lib\jquery\jquery.min.js" />
     <Content Include="Content\Admin\lib\jquery\jquery.slim.js" />
     <Content Include="Content\Admin\lib\jquery\jquery.slim.min.js" />
+    <Content Include="db.sql" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\plugins\fontawesome-free\css\all.css" />
@@ -350,11 +360,9 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\components\productCategory\" />
     <Folder Include="app\components\roleCustomer\" />
     <Folder Include="app\components\roleStaff\" />
     <Folder Include="app\shared\directive\" />
-    <Folder Include="app\shared\service\" />
     <Folder Include="Content\Client\" />
   </ItemGroup>
   <ItemGroup>
