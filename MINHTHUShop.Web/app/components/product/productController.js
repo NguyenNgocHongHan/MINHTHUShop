@@ -6,7 +6,7 @@
     function productController(/*$scope, apiService, notificationService, $ngBootbox, $filter*/) {
  /*       $scope.products = [];
         $scope.page = 0;
-        $scope.pagesCount = 0;
+        $scope.totalPage = 0;
         $scope.getProducts = getProducts;
         $scope.keyword = '';
 
@@ -125,7 +125,7 @@
             apiService.get('/api/product/getall', config, function (result) {
                 $scope.products = result.data.Items;
                 $scope.page = result.data.Page;
-                $scope.pagesCount = result.data.TotalPages;
+                $scope.totalPage = result.data.TotalPage;
                 $scope.totalCount = result.data.TotalCount;
             }, function () {
                 console.log('Load product failed.');

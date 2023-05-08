@@ -7,9 +7,25 @@
         $scope.productCategory = [];
         $scope.getProductCategory = getProductCategory;
 
-        function getProductCategory() {
-            apiService.get('api/ProductCategory/GetAllParents', null, function (result) {
-                $scope.productCategory = result.data;
+        $scope.page = 0;
+        $scope.pagesCount = 0;
+
+        function getProductCategory(page) {
+            page = page || 0;
+
+            var config = {
+                params: {
+                    /*keyword: $scope.keyword,*/
+                    page: page,
+                    pageSize: 10
+                }
+            }
+
+            apiService.get('api/ProductCategory/GetAllByPage', config, function (result) {
+                $scope.productCategory = result.data.Item;
+                $scope.page = result.data.Page;
+                $scope.pagesCount = result.data.TotalPage;
+                $scope.totalCount = result.data.TotalCount;
             }, function () {
                 console.log('Tải danh mục sản phẩm thất bại!');
             });
@@ -26,8 +42,8 @@
     function productCategoryListController($scope, apiService, notificationService, $ngBootbox, $filter) {
         $scope.productCategories = [];
         $scope.page = 0;
-        $scope.pagesCount = 0;
-        $scope.getProductCagories = getProductCagories;
+        $scope.totalPage = 0;
+        $scope.getProductCagory = getProductCagory;
         $scope.keyword = '';
 
         $scope.search = search;
@@ -98,10 +114,10 @@
         }
 
         function search() {
-            getProductCagories();
+            getProductCagory();
         }
 
-        function getProductCagories(page) {
+        function getProductCagory(page) {
             page = page || 0;
             var config = {
                 params: {
@@ -117,7 +133,7 @@
                 }
                 $scope.productCategories = result.data.Items;
                 $scope.page = result.data.Page;
-                $scope.pagesCount = result.data.TotalPages;
+                $scope.totalPage = result.data.TotalPage;
                 $scope.totalCount = result.data.TotalCount;
                 $scope.loading = false;
 

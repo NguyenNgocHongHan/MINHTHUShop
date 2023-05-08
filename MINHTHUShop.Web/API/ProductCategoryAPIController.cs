@@ -7,6 +7,7 @@ using MINHTHUShop.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -18,6 +19,7 @@ namespace MINHTHUShop.Web.API
     public class ProductCategoryAPIController : APIControllerBase
     {
         #region Khởi tạo
+
         private ITb_ProductCategoryService _productCategoryService;
 
         public ProductCategoryAPIController(ITb_ErrorService errorService, ITb_ProductCategoryService productCategoryService)
@@ -25,9 +27,10 @@ namespace MINHTHUShop.Web.API
         {
             this._productCategoryService = productCategoryService;
         }
-        #endregion
 
-        [Route("GetAllParents")]
+        #endregion Khởi tạo
+
+        [Route("GetAll")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
         {
@@ -58,31 +61,33 @@ namespace MINHTHUShop.Web.API
             });
         }
 
-        /*[Route("GetAll")]
+        [Route("GetAllByPage")]
         [HttpGet]
-        public HttpResponseMessage GetAll(HttpRequestMessage request, string keyword, int pageIndex, int pageSize = 20)
+        public HttpResponseMessage GetAllByPage(HttpRequestMessage request/*, string keyword*/, int page, int pageSize = 20)
         {
             return CreateHttpResponse(request, () =>
             {
                 int totalRow = 0;
-                var model = _productCategoryService.GetAll(keyword);
+                var model = _productCategoryService.GetAll(/*keyword*/);
 
                 totalRow = model.Count();
-                var query = model.Skip(pageIndex * pageSize).Take(pageSize);
+
+                var query = model.Skip(page * pageSize).Take(pageSize);
 
                 var responseData = Mapper.Map<IEnumerable<Tb_ProductCategory>, IEnumerable<ProductCategoryVM>>(query);
 
-                var paginationSet = new PaginationSet<ProductCategoryVM>()
+                var pagination = new Pagination<ProductCategoryVM>()
                 {
-                    Items = responseData,
-                    Page = pageIndex,
+                    Item = responseData,
+                    Page = page,
                     TotalCount = totalRow,
-                    TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize)
+                    TotalPage = (int)Math.Ceiling((decimal)totalRow / pageSize)
                 };
-                var response = request.CreateResponse(HttpStatusCode.OK, paginationSet);
+                var response = request.CreateResponse(HttpStatusCode.OK, pagination);
+
                 return response;
             });
-        }*/
+        }
 
         [Route("Create")]
         [HttpPost]

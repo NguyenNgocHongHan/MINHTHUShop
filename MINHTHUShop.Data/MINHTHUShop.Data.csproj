@@ -88,6 +88,10 @@
     <Compile Include="Migrations\202305071552221_updateDB.designer.cs">
       <DependentUpon>202305071552221_updateDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305080902459_testDB.cs" />
+    <Compile Include="Migrations\202305080902459_testDB.designer.cs">
+      <DependentUpon>202305080902459_testDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -154,6 +158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305071552221_updateDB.resx">
       <DependentUpon>202305071552221_updateDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305080902459_testDB.resx">
+      <DependentUpon>202305080902459_testDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

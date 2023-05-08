@@ -33,7 +33,7 @@ namespace MINHTHUShop.Web.API
         }
         #endregion
 
-        [Route("GetAllParents")]
+        [Route("GetAll")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
         {
@@ -62,9 +62,9 @@ namespace MINHTHUShop.Web.API
             });
         }
 
-        /*[Route("getall")]
+        /*[Route("GetAllByPage")]
         [HttpGet]
-        public HttpResponseMessage GetAll(HttpRequestMessage request, string keyword, int pageIndex, int pageSize = 20)
+        public HttpResponseMessage GetAllByPage(HttpRequestMessage request, string keyword, int page, int pageSize = 20)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -72,16 +72,16 @@ namespace MINHTHUShop.Web.API
                 var model = _productService.GetAll(keyword);
                 totalRow = model.Count();
 
-                var query = model.OrderByDescending(x => x.CreateDate).Skip(pageIndex * pageSize).Take(pageSize);
+                var query = model.OrderByDescending(x => x.CreateDate).Skip(page * pageSize).Take(pageSize);
 
                 var responseData = Mapper.Map<IEnumerable<Tb_Product>, IEnumerable<ProductVM>>(query.AsEnumerable());
 
                 var paginationSet = new PaginationSet<ProductVM>()
                 {
                     Items = responseData,
-                    Page = pageIndex,
+                    Page = page,
                     TotalCount = totalRow,
-                    TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize)
+                    TotalPage = (int)Math.Ceiling((decimal)totalRow / pageSize)
                 };
 
                 var response = request.CreateResponse(HttpStatusCode.OK, paginationSet);
