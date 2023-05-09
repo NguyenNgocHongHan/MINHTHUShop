@@ -7,6 +7,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
                     <li class="breadcrumb-item"><a href="#">Quản lý thông tin</a></li>
                     <li class="breadcrumb-item active">Danh mục sản phẩm</li>
                 </ol>
@@ -40,58 +41,59 @@
                     <button class="btn btn-navbar" type="submit" ng-click="search()">
                         <i class="fas fa-search"></i>
                     </button>
+                    <button ui-sref="productCategoryCreate" type="button" class="btn btn-success btn-sm" style="margin-bottom:5px; margin-right:10px;">
+                        Thêm mới
+                    </button>
                 </div>
             </form>
-
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body p-0">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th style="width: 5%">ID</th>
-                                    <th>Tên danh mục</th>
-                                    <th style="width: 15%">Thứ tự danh mục</th>
-                                    <th style="width: 15%">Danh mục cha</th>
-                                    <th style="width: 12%"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="item in productCategory">
-                                    <td>{{item.CateID}}</td>
-                                    <td>{{item.Name}}</td>
-                                    <td>{{item.Sort}}</td>
-                                    <td>{{item.ParentID}}</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-primary">
-                                            <i class="fa fa-pencil-alt"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-danger">
-                                            <i class="fa fa-trash-alt"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%">ID</th>
+                                        <th>Tên danh mục</th>
+                                        <th style="width: 15%">Thứ tự danh mục</th>
+                                        <th style="width: 15%">Danh mục cha</th>
+                                        <th style="width: 12%"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in productCategory">
+                                        <td>{{item.CateID}}</td>
+                                        <td>{{item.Name}}</td>
+                                        <td>{{item.Sort}}</td>
+                                        <td>{{item.ParentID}}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-primary">
+                                                <i class="fa fa-pencil-alt"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger">
+                                                <i class="fa fa-trash-alt"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!--        </div>-->
+            <!-- /.card-body -->
+            <div ng-if="totalCount>pageSize" class="card-footer">
+                <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="getProductCategory(page)"></pager-directive>
+            </div>
+            <div ng-if="totalCount==0" style="text-align:center; margin:20px 0">
+                <small><i>Tìm thấy <strong style="color:red">{{totalCount}}</strong> kết quả</i></small>
+            </div>
+            <div ng-if="totalCount!=0" style="text-align: center; margin: 20px 0">
+                <small><i>Tìm thấy <strong style="color:green">{{totalCount}}</strong> kết quả</i></small>
+            </div>
+            <!-- /.card-footer-->
         </div>
-        <!--        </div>-->
-        <!-- /.card-body -->
-        <div ng-if="totalCount>pageSize" class="card-footer">
-            <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="getProductCategory(page)"></pager-directive>
-        </div>
-        <div ng-if="totalCount==0" style="text-align:center; margin:20px 0">
-            <small><i>Tìm thấy <strong style="color:red">{{totalCount}}</strong> kết quả</i></small>
-        </div>
-        <div ng-if="totalCount!=0" style="text-align: center; margin: 20px 0">
-            <small><i>Tìm thấy <strong style="color:green">{{totalCount}}</strong> kết quả</i></small>
-        </div>
-        <!-- /.card-footer-->
-    </div>
     <!-- /.card -->
-
 </section>

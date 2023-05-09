@@ -12,13 +12,13 @@
             /*parent: 'base',*/
             controller: "productCategoryController"
         })
-            /*.$stateProvider.state('createProductCategory', {
-                url: "/createProductCategory",
+            .state('productCategoryCreate', {
+                url: "/productCategoryCreate",
                 templateUrl: "/app/components/productCategory/productCategoryCreateView.html",
-                parent: 'base',
+                /*parent: 'base',*/
                 controller: "productCategoryCreateController"
             })
-            .$stateProvider.state('editProductCategory', {
+            /*.state('editProductCategory', {
                 url: "/editProductCategory",
                 templateUrl: "/app/components/productCategory/productCategoryEditView.html",
                 parent: 'base',

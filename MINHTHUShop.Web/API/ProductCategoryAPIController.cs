@@ -105,6 +105,7 @@ namespace MINHTHUShop.Web.API
                 else
                 {
                     var newProductCategory = new Tb_ProductCategory();
+                    //update
                     newProductCategory.UpdateProductCategory(productCategoryVM);
                     _productCategoryService.Create(newProductCategory);
                     _productCategoryService.SaveChanges();

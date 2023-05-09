@@ -3,10 +3,6 @@
   "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "library": "jquery@3.6.4",
-      "destination": "Content/Admin/lib/jquery/"
-    },
-    {
       "library": "bootstrap@5.2.3",
       "destination": "Content/Admin/lib/bootstrap/"
     },
@@ -21,6 +17,10 @@
     {
       "library": "angular-ui-router@1.1.0",
       "destination": "Content/Admin/lib/angular-ui-router/"
+    },
+    {
+      "library": "jquery@3.6.4",
+      "destination": "Content/Admin/lib/jquery/"
     }
   ]
 }

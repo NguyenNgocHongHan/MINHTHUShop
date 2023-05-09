@@ -1,10 +1,63 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><small>Thêm mới danh mục sản phẩm</small></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="#">Quản lý thông tin</a></li>
+                    <li class="breadcrumb-item"><a ui-sref="productCategory">Danh mục sản phẩm</a></li>
+                    <li class="breadcrumb-item active">Thêm mới</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
 
-</body>
-</html>
+<!-- Main content -->
+<section class="content">
+    <div style="width:60%; margin:auto;">
+        <!-- Horizontal Form -->
+        <div class="card card-success">
+            <div class="card-header">
+                <h3 class="card-title">THÊM MỚI DANH MỤC SẢN PHẨM</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form class="form-horizontal" novalidate name="frmCreateProductCategory" role="form" ng-submit="createProductCategory()">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Tên danh mục</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="name" ng-model="producCategory.Name" placeholder="Tên danh mục sản phẩm">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Thứ tự danh mục</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" name="sort" ng-model="producCategory.Sort" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Danh mục cha</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="parentID" ng-model="producCategory.ParentID" ng-options="option.CateID as option.Name for option in parentCategory">
+                                <option value="">Mã danh mục cha (nếu có)</option>
+                            </select>
+                            <input type="hidden" name="parentID" ng-model="producCategory.ParentID" />
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-success">Thêm</button>
+                    <button ui-sref="productCategory" class="btn btn-danger float-right">Hủy</button>
+                </div>
+                <!-- /.card-footer -->
+            </form>
+        </div>
+    </div>
+</section>

@@ -33,9 +33,6 @@
                 if (result.data.TotalCount == 0) {
                     notificationService.displayWarning('Không tìm thấy kết quả!');
                 }
-                else {
-                    notificationService.displaySuccess('Đã tìm thấy ' + result.data.TotalCount + ' kết quả!');
-                }
                 $scope.productCategory = result.data.Item;
                 $scope.page = result.data.Page;
                 $scope.pagesCount = result.data.TotalPage;

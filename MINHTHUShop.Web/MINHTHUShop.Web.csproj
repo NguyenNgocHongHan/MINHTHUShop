@@ -296,12 +296,6 @@
     <Content Include="Content\Admin\js\pages\dashboard.js" />
     <Content Include="Content\Admin\js\pages\dashboard2.js" />
     <Content Include="Content\Admin\js\pages\dashboard3.js" />
-    <Content Include="Content\Admin\lib\angular-toastr\angular-toastr.css" />
-    <Content Include="Content\Admin\lib\angular-toastr\angular-toastr.js" />
-    <Content Include="Content\Admin\lib\angular-toastr\angular-toastr.min.css" />
-    <Content Include="Content\Admin\lib\angular-toastr\angular-toastr.min.js" />
-    <Content Include="Content\Admin\lib\angular-toastr\angular-toastr.tpls.js" />
-    <Content Include="Content\Admin\lib\angular-toastr\angular-toastr.tpls.min.js" />
     <Content Include="Content\Admin\lib\angular-ui-router\angular-ui-router.js" />
     <Content Include="Content\Admin\lib\angular-ui-router\angular-ui-router.min.js" />
     <Content Include="Content\Admin\lib\angular-ui-router\resolveService.js" />
@@ -398,8 +392,6 @@
     <Content Include="Content\Admin\js\.eslintrc.json" />
     <Content Include="Content\Admin\js\adminlte.js.map" />
     <Content Include="Content\Admin\js\adminlte.min.js.map" />
-    <Content Include="Content\Admin\lib\jquery\jquery.min.map" />
-    <Content Include="Content\Admin\lib\jquery\jquery.slim.min.map" />
     <Content Include="Content\Admin\lib\bootstrap\css\bootstrap-grid.css.map" />
     <Content Include="Content\Admin\lib\bootstrap\css\bootstrap-grid.min.css.map" />
     <Content Include="Content\Admin\lib\bootstrap\css\bootstrap-grid.rtl.css.map" />
@@ -520,6 +512,8 @@
     <Content Include="Content\Admin\lib\angular-ui-router\stateEvents.min.js.map" />
     <Content Include="Content\Admin\lib\angular-ui-router\ui-router-angularjs.js.map" />
     <Content Include="Content\Admin\lib\angular-ui-router\ui-router-angularjs.min.js.map" />
+    <Content Include="Content\Admin\lib\jquery\jquery.min.map" />
+    <Content Include="Content\Admin\lib\jquery\jquery.slim.min.map" />
     <None Include="NWebsecConfig\HttpHeaderSecurityModuleConfig.xsd">
       <SubType>Designer</SubType>
     </None>
