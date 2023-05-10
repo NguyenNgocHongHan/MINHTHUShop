@@ -187,7 +187,7 @@ namespace MINHTHUShop.Web.API
             });
         }
 
-        [Route("deletemulti")]
+        [Route("DeleteMulti")]
         [HttpDelete]
         [AllowAnonymous]
         public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedProductCategories)

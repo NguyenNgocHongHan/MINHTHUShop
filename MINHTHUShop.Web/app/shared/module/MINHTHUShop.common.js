@@ -1,7 +1,7 @@
 ﻿(function () {
     angular.module('MINHTHUShop.common',
-        ['ui.router'/*,
-            'ngBootbox',
+        ['ui.router',
+            'ngBootbox'/*,
             'ngCkeditor',
             'checklist-model',
             'chart.js',

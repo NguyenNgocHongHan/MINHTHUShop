@@ -21,6 +21,10 @@
     {
       "library": "jquery@3.6.4",
       "destination": "Content/Admin/lib/jquery/"
+    },
+    {
+      "library": "bootbox.js@6.0.0",
+      "destination": "Content/Admin/lib/bootbox.js/"
     }
   ]
 }
