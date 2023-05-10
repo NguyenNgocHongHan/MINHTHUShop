@@ -11,6 +11,9 @@ namespace MINHTHUShop.Web.Infrastructure.Extensions
             pc.Name = vm.Name;
             pc.Sort = vm.Sort;
             pc.ParentID = vm.ParentID;
+            pc.MetaTitle = vm.MetaTitle;
+            pc.MetaKeywords = vm.MetaKeywords;
+            pc.MetaDescriptions = vm.MetaDescriptions;
         }
 
         public static void UpdateProduct(this Tb_Product p, ProductVM vm)

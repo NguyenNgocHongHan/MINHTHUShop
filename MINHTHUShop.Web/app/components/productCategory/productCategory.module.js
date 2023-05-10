@@ -18,11 +18,11 @@
                 /*parent: 'base',*/
                 controller: "productCategoryCreateController"
             })
-            /*.state('editProductCategory', {
-                url: "/editProductCategory",
+            .state('productCategoryEdit', {
+                url: "/productCategoryEdit/:id",
                 templateUrl: "/app/components/productCategory/productCategoryEditView.html",
-                parent: 'base',
-                controller: "productCategoryEditControler"
-            })*/
+                /*parent: 'base',*/
+                controller: "productCategoryEditController"
+            })
     }
 })();

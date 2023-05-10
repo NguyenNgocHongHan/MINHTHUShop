@@ -1,15 +1,20 @@
 ﻿(function (app) {
     app.controller('productCategoryCreateController', productCategoryCreateController);
 
-    productCategoryCreateController.$inject = ['$scope', '$state', 'apiService', 'notificationService'/*, 'commonService'*/];
+    productCategoryCreateController.$inject = ['$scope', '$state', 'apiService', 'notificationService', 'commonService'];
 
-    function productCategoryCreateController($scope, $state, apiService, notificationService/*, commonService*/) {
-        $scope.productCategory = [];
+    function productCategoryCreateController($scope, $state, apiService, notificationService, commonService) {
+        $scope.productCategory = {}
         $scope.parentCategory = [];
 
-        $scope.createProductCategory = createProductCategory;
+        $scope.CreateProductCategory = CreateProductCategory;
+        $scope.GetMetaTitle = GetMetaTitle;
 
-        function loadParentCategory() {
+        function GetMetaTitle() {
+            $scope.productCategory.MetaTitle = commonService.getMetaTitle($scope.productCategory.Name);
+        }
+
+        function LoadParentCategory() {
             apiService.get('api/ProductCategory/GetAll', null, function (result) {
                 /*console.log(result);*/
                 $scope.parentCategory = result.data;
@@ -22,22 +27,20 @@
             });
         }
 
-        function createProductCategory() {
-            apiService.post('api/ProductCategory/Create', $scope.productCategory, function (result) {
+        function CreateProductCategory() {
+            apiService.post('api/ProductCategory/Create', $scope.productCategory,
+                function (result) {
                     notificationService.displaySuccess('Đã thêm ' + result.data.Name + ' vào danh mục sản phẩm');
                     //điều hướng đến trang mới
                     $state.go('productCategory');
-            }, function (error) {
-                notificationService.displayError(error);
+                }, function (error) {
+                    notificationService.displayError('Thêm mới không thành công!');
                 });
         }
 
-        loadParentCategory();
+        LoadParentCategory();
  /*        $scope.flatFolders = [];
-        $scope.GetSeoTitle = GetSeoTitle;
-        function GetSeoTitle() {
-            $scope.productCategory.Alias = commonService.getSeoTitle($scope.productCategory.Name);
-        }
+
 
 
         function times(n, str) {

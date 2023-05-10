@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MINHTHUShop.Web.Models
 {
@@ -9,5 +10,10 @@ namespace MINHTHUShop.Web.Models
         public string Name { get; set; }
         public int? Sort { get; set; }
         public int? ParentID { get; set; }
+        [Required]
+        public string MetaTitle { get; set; }
+        public string MetaKeywords { get; set; }
+        public string MetaDescriptions { get; set; }
+        public virtual IEnumerable<ProductVM> ProductVMs { get; set; }
     }
 }

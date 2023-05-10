@@ -5,7 +5,7 @@
 
     function productCategoryController($scope, apiService, notificationService) {
         $scope.productCategory = [];
-        $scope.getProductCategory = getProductCategory;
+        $scope.GetProductCategory = GetProductCategory;
 
         $scope.page = 0;
         $scope.pagesCount = 0;
@@ -15,10 +15,10 @@
         $scope.search = search;
 
         function search() {
-            getProductCategory();
+            GetProductCategory();
         }
 
-        function getProductCategory(page) {
+        function GetProductCategory(page) {
             page = page || 0;
 
             var config = {
@@ -41,7 +41,7 @@
                 console.log('Tải danh mục sản phẩm thất bại!');
             });
         }
-        $scope.getProductCategory();
+        $scope.GetProductCategory();
     }
 })(angular.module('MINHTHUShop.productCategory'));
 

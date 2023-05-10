@@ -10,9 +10,9 @@
     function apiService($http, notificationService/*, authenticationService*/) {
         return {
             get: get,
-            post: post/*,*/
-            /*put: put,
-            del: del*/
+            post: post,
+            put: put,
+            del: del
         }
 
         function get(url, params, success, failure) {
@@ -29,7 +29,7 @@
             $http.post(url, data).then(function (result) {
                 success(result);
             }, function (error) {
-                console.log(error.status)
+                /*console.log(error.status)*/
                 if (error.status === 401) {
                     notificationService.displayError('Bạn cần phải ĐĂNG NHẬP!');
                 }
@@ -39,29 +39,14 @@
             });
         }
 
-/*        function del(url, data, success, failure) {
-            authenticationService.setHeader();
-            $http.delete(url, data).then(function (result) {
-                success(result);
-            }, function (error) {
-                console.log(error.status)
-                if (error.status === 401) {
-                    notificationService.displayError('Authenticate is required.');
-                }
-                else if (failure != null) {
-                    failure(error);
-                }
-
-            });
-        }
         function put(url, data, success, failure) {
-            authenticationService.setHeader();
+            /*authenticationService.setHeader();*/
             $http.put(url, data).then(function (result) {
                 success(result);
             }, function (error) {
                 console.log(error.status)
                 if (error.status === 401) {
-                    notificationService.displayError('Authenticate is required.');
+                    notificationService.displayError('Bạn cần phải ĐĂNG NHẬP!');
                 }
                 else if (failure != null) {
                     failure(error);
@@ -69,6 +54,21 @@
 
             });
         }
-*/        
+
+        function del(url, data, success, failure) {
+            /*authenticationService.setHeader();*/
+            $http.delete(url, data).then(function (result) {
+                success(result);
+            }, function (error) {
+                console.log(error.status)
+                if (error.status === 401) {
+                    notificationService.displayError('Bạn cần phải ĐĂNG NHẬP!');
+                }
+                else if (failure != null) {
+                    failure(error);
+                }
+
+            });
+        }        
     }
 })(angular.module('MINHTHUShop.common'));

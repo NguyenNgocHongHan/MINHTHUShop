@@ -107,6 +107,8 @@ namespace MINHTHUShop.Web.API
                     var newProductCategory = new Tb_ProductCategory();
                     //update
                     newProductCategory.UpdateProductCategory(productCategoryVM);
+                    //lưu createdate = datetime.now (nếu có)
+                    //newProductCategory.CreateDate = DateTime.Now;
                     _productCategoryService.Create(newProductCategory);
                     _productCategoryService.SaveChanges();
 
@@ -133,8 +135,10 @@ namespace MINHTHUShop.Web.API
                 {
                     var dbProductCategory = _productCategoryService.GetById(productCategoryVM.CateID);
                     dbProductCategory.UpdateProductCategory(productCategoryVM);
+                    
                     _productCategoryService.Update(dbProductCategory);
-                    try
+                    _productCategoryService.SaveChanges();
+                    /*try
                     {
                         _productCategoryService.SaveChanges();
                     }
@@ -151,7 +155,7 @@ namespace MINHTHUShop.Web.API
                             }
                         }
                         throw;
-                    }
+                    }*/
                     var responseData = Mapper.Map<Tb_ProductCategory, ProductCategoryVM>(dbProductCategory);
                     response = request.CreateResponse(HttpStatusCode.Created, responseData);
                 }

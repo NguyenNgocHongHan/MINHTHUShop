@@ -18,21 +18,6 @@
 
 <!-- Main content -->
 <section class="content">
-
-    <!-- Default box -->
-<!--    <div class="card">-->
-        <!--<div class="card-header">
-            <h3 class="card-title">Danh mục sản phẩm</h3>
-
-            <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        </div>-->
     <div class="card-body">
         <div class="row justify-content-lg-end">
             <form class="form-inline">
@@ -40,9 +25,6 @@
                     <input class="form-control" type="text" ng-model="keyword" placeholder="Tìm kiếm">
                     <button class="btn btn-navbar" type="submit" ng-click="search()">
                         <i class="fas fa-search"></i>
-                    </button>
-                    <button ui-sref="productCategoryCreate" type="button" class="btn btn-success btn-sm" style="margin-bottom:5px; margin-right:10px;">
-                        Thêm mới
                     </button>
                 </div>
             </form>
@@ -56,9 +38,13 @@
                                     <tr>
                                         <th style="width: 5%">ID</th>
                                         <th>Tên danh mục</th>
-                                        <th style="width: 15%">Thứ tự danh mục</th>
+                                        <th style="width: 16%">Thứ tự danh mục</th>
                                         <th style="width: 15%">Danh mục cha</th>
-                                        <th style="width: 12%"></th>
+                                        <th style="width: 12%; text-align:center">
+                                            <button ui-sref="productCategoryCreate" type="button" class="btn btn-success btn-sm">
+                                                <i class="fa fa-plus"> Thêm</i>
+                                            </button>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,7 +54,7 @@
                                         <td>{{item.Sort}}</td>
                                         <td>{{item.ParentID}}</td>
                                         <td>
-                                            <button class="btn btn-sm btn-primary">
+                                            <button class="btn btn-sm btn-primary" ui-sref="productCategoryEdit({id:item.CateID})">
                                                 <i class="fa fa-pencil-alt"></i>
                                             </button>
                                             <button class="btn btn-sm btn-danger">
@@ -85,7 +71,7 @@
             <!--        </div>-->
             <!-- /.card-body -->
             <div ng-if="totalCount>pageSize" class="card-footer">
-                <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="getProductCategory(page)"></pager-directive>
+                <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="GetProductCategory(page)"></pager-directive>
             </div>
             <div ng-if="totalCount==0" style="text-align:center; margin:20px 0">
                 <small><i>Tìm thấy <strong style="color:red">{{totalCount}}</strong> kết quả</i></small>
