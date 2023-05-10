@@ -92,6 +92,10 @@
     <Compile Include="Migrations\202305080902459_testDB.designer.cs">
       <DependentUpon>202305080902459_testDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305101455309_change_SEO_Atrribute_In_Tables.cs" />
+    <Compile Include="Migrations\202305101455309_change_SEO_Atrribute_In_Tables.designer.cs">
+      <DependentUpon>202305101455309_change_SEO_Atrribute_In_Tables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -161,6 +165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305080902459_testDB.resx">
       <DependentUpon>202305080902459_testDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305101455309_change_SEO_Atrribute_In_Tables.resx">
+      <DependentUpon>202305101455309_change_SEO_Atrribute_In_Tables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
