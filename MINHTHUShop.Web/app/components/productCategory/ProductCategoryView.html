@@ -19,15 +19,29 @@
 <!-- Main content -->
 <section class="content">
     <div class="card-body">
-        <div class="row justify-content-lg-end">
-            <form class="form-inline">
-                <div class="input-group input-group-sm">
-                    <input class="form-control" type="text" ng-model="keyword" placeholder="Tìm kiếm">
-                    <button class="btn btn-navbar" type="submit" ng-click="search()">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </form>
+        <div class="row">
+            <div class="col-sm-6">
+                <form class="form-inline float-sm-left">
+                    <div class="input-group input-group-sm">
+                        <input class="form-control" type="text" ng-model="keyword" placeholder="Tìm kiếm theo tên">
+                        <button class="btn btn-navbar" type="submit" ng-click="search()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <form class="form-inline float-sm-right">
+                    <div class="btn-group btn-group-sm">
+                        <button ui-sref="productCategoryCreate" type="button" class="btn btn-success btn-sm">
+                            <i class="fa fa-plus"> Thêm mới</i>
+                        </button>
+                        <button ng-click="DeleteMultiple()" type="button" class="btn btn-danger btn-sm" style="margin-left:5px;" id="btnCheckboxDelete" disabled>
+                            <i class="fa fa-trash"> Xóa nhiều</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -38,28 +52,32 @@
                                 <tr>
                                     <th style="width: 5%">STT</th>
                                     <th>Tên danh mục</th>
-                                    <th style="width: 16%">Thứ tự danh mục</th>
+                                    <th style="width: 15%">Thứ tự danh mục</th>
                                     <th style="width: 15%">Danh mục cha</th>
-                                    <th style="width: 12%; text-align:center">
-                                        <button ui-sref="productCategoryCreate" type="button" class="btn btn-success btn-sm">
-                                            <i class="fa fa-plus"> Thêm</i>
-                                        </button>
+                                    <th style="width: 10%; text-align:center"></th>
+                                    <th style="width: 1%">
+                                        <label>
+                                            <input name="clickAll" type="checkbox" ng-click="SelectAll()" />
+                                        </label>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="item in productCategory">
-                                    <td>{{$index+1}}</td>
+                                    <td>{{page*10+$index+1}}</td>
                                     <td>{{item.Name}}</td>
                                     <td>{{item.Sort}}</td>
                                     <td>{{item.ParentID}}</td>
-                                    <td>
+                                    <td style="text-align:center;">
                                         <button class="btn btn-sm btn-primary" ui-sref="productCategoryEdit({id:item.CateID})">
                                             <i class="fa fa-pencil-alt"></i>
                                         </button>
                                         <button class="btn btn-sm btn-danger" ng-click="DeleteProductCategory(item.CateID)">
                                             <i class="fa fa-trash-alt"></i>
                                         </button>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" ng-model="item.checked" name="clickAll"/>
                                     </td>
                                 </tr>
                             </tbody>
