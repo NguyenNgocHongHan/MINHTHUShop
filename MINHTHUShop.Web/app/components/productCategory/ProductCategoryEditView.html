@@ -30,6 +30,12 @@
             <form class="form-horizontal" novalidate name="frmUpdateProductCategory" role="form" ng-submit="UpdateProductCategory()">
                 <div class="card-body">
                     <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Mã danh mục</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="cateID" ng-model="productCategory.CateID" placeholder="Mã danh mục sản phẩm" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Tên danh mục</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" name="name" ng-model="productCategory.Name" ng-change="GetMetaTitle()" ng-maxlength="50" placeholder="Tên danh mục sản phẩm" required>
@@ -42,7 +48,7 @@
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Thứ tự danh mục</label>
                         <div class="col-sm-8">
-                            <input type="number" class="form-control" name="sort" ng-model="productCategory.Sort" placeholder="Thứ tự hiển thị danh mục (nếu có)">
+                            <input type="number" min="0" class="form-control" name="sort" ng-model="productCategory.Sort" placeholder="Thứ tự hiển thị danh mục (nếu có)">
                         </div>
                     </div>
                     <div class="form-group row">

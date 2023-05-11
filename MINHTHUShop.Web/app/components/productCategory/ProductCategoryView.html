@@ -29,57 +29,57 @@
                 </div>
             </form>
         </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body p-0">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 5%">ID</th>
-                                        <th>Tên danh mục</th>
-                                        <th style="width: 16%">Thứ tự danh mục</th>
-                                        <th style="width: 15%">Danh mục cha</th>
-                                        <th style="width: 12%; text-align:center">
-                                            <button ui-sref="productCategoryCreate" type="button" class="btn btn-success btn-sm">
-                                                <i class="fa fa-plus"> Thêm</i>
-                                            </button>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="item in productCategory">
-                                        <td>{{item.CateID}}</td>
-                                        <td>{{item.Name}}</td>
-                                        <td>{{item.Sort}}</td>
-                                        <td>{{item.ParentID}}</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-primary" ui-sref="productCategoryEdit({id:item.CateID})">
-                                                <i class="fa fa-pencil-alt"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-danger" ng-click="DeleteProductCategory(item.CateID)">
-                                                <i class="fa fa-trash-alt"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%">STT</th>
+                                    <th>Tên danh mục</th>
+                                    <th style="width: 16%">Thứ tự danh mục</th>
+                                    <th style="width: 15%">Danh mục cha</th>
+                                    <th style="width: 12%; text-align:center">
+                                        <button ui-sref="productCategoryCreate" type="button" class="btn btn-success btn-sm">
+                                            <i class="fa fa-plus"> Thêm</i>
+                                        </button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in productCategory">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{item.Name}}</td>
+                                    <td>{{item.Sort}}</td>
+                                    <td>{{item.ParentID}}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary" ui-sref="productCategoryEdit({id:item.CateID})">
+                                            <i class="fa fa-pencil-alt"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger" ng-click="DeleteProductCategory(item.CateID)">
+                                            <i class="fa fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <!--        </div>-->
-            <!-- /.card-body -->
-            <div ng-if="totalCount>pageSize" class="card-footer">
-                <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="GetProductCategory(page)"></pager-directive>
-            </div>
-            <div ng-if="totalCount==0" style="text-align:center; margin:20px 0">
-                <small><i>Tìm thấy <strong style="color:red">{{totalCount}}</strong> kết quả</i></small>
-            </div>
-            <div ng-if="totalCount!=0" style="text-align: center; margin: 20px 0">
-                <small><i>Tìm thấy <strong style="color:green">{{totalCount}}</strong> kết quả</i></small>
-            </div>
-            <!-- /.card-footer-->
         </div>
+        <!--        </div>-->
+        <!-- /.card-body -->
+        <div ng-if="totalCount>pageSize" class="card-footer">
+            <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="GetProductCategory(page)"></pager-directive>
+        </div>
+        <div ng-if="totalCount==0" style="text-align:center; margin:20px 0">
+            <small><i>Tìm thấy <strong style="color:red">{{totalCount}}</strong> kết quả</i></small>
+        </div>
+        <div ng-if="totalCount!=0" style="text-align: center; margin: 20px 0">
+            <small><i>Tìm thấy <strong style="color:green">{{totalCount}}</strong> kết quả</i></small>
+        </div>
+        <!-- /.card-footer-->
+    </div>
     <!-- /.card -->
 </section>

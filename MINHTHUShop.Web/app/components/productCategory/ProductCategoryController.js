@@ -7,6 +7,8 @@
         $scope.productCategory = [];
         $scope.GetProductCategory = GetProductCategory;
 
+        $scope.index = 0;
+
         $scope.page = 0;
         $scope.pagesCount = 0;
         $scope.pageSize = 10;
