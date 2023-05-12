@@ -5,6 +5,13 @@ namespace MINHTHUShop.Web.Infrastructure.Extensions
 {
     public static class EntityExtensions
     {
+        public static void UpdateBrand(this Tb_Brand b, BrandVM vm)
+        {
+            b.BrandID = vm.BrandID;
+            b.Name = vm.Name;
+            b.BrandOrigin = vm.BrandOrigin;
+        }
+
         public static void UpdateProductCategory(this Tb_ProductCategory pc, ProductCategoryVM vm)
         {
             pc.CateID = vm.CateID;

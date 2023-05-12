@@ -3,6 +3,7 @@
     angular.module('MINHTHUShop',
         ['MINHTHUShop.product', ,
             'MINHTHUShop.productCategory',
+            'MINHTHUShop.brand',
             /*'tedushop.application_groups'
             'tedushop.application_roles',
             'tedushop.application_users',

@@ -38,7 +38,7 @@
                 listId.push(item.CateID);
             });
 
-            $ngBootbox.confirm('Bạn có muốn xóa danh mục sản phẩm này không?').then(function () {
+            $ngBootbox.confirm('Bạn có muốn xóa những danh mục sản phẩm này không?').then(function () {
                 var config = {
                     params: {
                         checkedProductCategory: JSON.stringify(listId)

@@ -4,26 +4,21 @@ using MINHTHUShop.Service;
 using MINHTHUShop.Web.Infrastructure.Core;
 using MINHTHUShop.Web.Infrastructure.Extensions;
 using MINHTHUShop.Web.Models;
-using NWebsec.Helpers;
-using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 using System.Web.Script.Serialization;
 
 namespace MINHTHUShop.Web.API
 {
     [RoutePrefix("api/Product")]
-    //[Authorize]
     public class ProductAPIController : APIControllerBase
     {
         #region Khởi tạo
+
         private ITb_ProductService _productService;
 
         public ProductAPIController(ITb_ErrorService errorService, ITb_ProductService productService)
@@ -31,7 +26,8 @@ namespace MINHTHUShop.Web.API
         {
             this._productService = productService;
         }
-        #endregion
+
+        #endregion Khởi tạo
 
         [Route("GetAll")]
         [HttpGet]
@@ -62,7 +58,7 @@ namespace MINHTHUShop.Web.API
             });
         }
 
-        /*[Route("GetAllByPage")]
+        [Route("GetAllByPage")]
         [HttpGet]
         public HttpResponseMessage GetAllByPage(HttpRequestMessage request, string keyword, int page, int pageSize = 20)
         {
@@ -76,9 +72,9 @@ namespace MINHTHUShop.Web.API
 
                 var responseData = Mapper.Map<IEnumerable<Tb_Product>, IEnumerable<ProductVM>>(query.AsEnumerable());
 
-                var paginationSet = new PaginationSet<ProductVM>()
+                var paginationSet = new Pagination<ProductVM>()
                 {
-                    Items = responseData,
+                    Item = responseData,
                     Page = page,
                     TotalCount = totalRow,
                     TotalPage = (int)Math.Ceiling((decimal)totalRow / pageSize)
@@ -88,12 +84,11 @@ namespace MINHTHUShop.Web.API
 
                 return response;
             });
-        }*/
-
+        }
 
         [Route("Create")]
         [HttpPost]
-        public HttpResponseMessage Create(HttpRequestMessage request, ProductVM productCategoryVM)
+        public HttpResponseMessage Create(HttpRequestMessage request, ProductVM productVM)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -105,7 +100,7 @@ namespace MINHTHUShop.Web.API
                 else
                 {
                     var newProduct = new Tb_Product();
-                    newProduct.UpdateProduct(productCategoryVM);
+                    newProduct.UpdateProduct(productVM);
                     newProduct.CreateDate = DateTime.Now;
                     _productService.Create(newProduct);
                     _productService.SaveChanges();
@@ -178,21 +173,21 @@ namespace MINHTHUShop.Web.API
                 }
                 else
                 {
-                    var listProductCategory = new JavaScriptSerializer().Deserialize<List<int>>(checkedProducts);
-                    foreach (var item in listProductCategory)
+                    var listProduct = new JavaScriptSerializer().Deserialize<List<int>>(checkedProducts);
+                    foreach (var item in listProduct)
                     {
                         _productService.Delete(item);
                     }
 
                     _productService.SaveChanges();
 
-                    response = request.CreateResponse(HttpStatusCode.OK, listProductCategory.Count);
+                    response = request.CreateResponse(HttpStatusCode.OK, listProduct.Count);
                 }
                 return response;
             });
         }
 
-        [Route("import")]
+        /*[Route("import")]
         [HttpPost]
         public async Task<HttpResponseMessage> Import()
         {
@@ -209,7 +204,7 @@ namespace MINHTHUShop.Web.API
             }
             //đọc dữ liệu từ một form sử dụng định dạng multipart/form-data
             var provider = new MultipartFormDataStreamProvider(root);
-            //đọc dữ liệu từ form data và trả về task Async 
+            //đọc dữ liệu từ form data và trả về task Async
             var result = await Request.Content.ReadAsMultipartAsync(provider);
             //thực hiện thao tác với file theo mong muốn
             if (result.FormData["CateID"] == null)
@@ -254,7 +249,7 @@ namespace MINHTHUShop.Web.API
                 }
             }
             return Request.CreateResponse(HttpStatusCode.OK, "Đã nhập thành công " + addedCount + " sản phẩm thành công.");
-        }
+        }*/
 
         /*[HttpGet]
         [Route("ExportXls")]
@@ -280,40 +275,40 @@ namespace MINHTHUShop.Web.API
             }
         }*/
 
-       /* [HttpGet]
-        [Route("ExportPdf")]
-        public async Task<HttpResponseMessage> ExportPdf(HttpRequestMessage request, int id)
-        {
-            string fileName = string.Concat("Product" + DateTime.Now.ToString("yyyyMMddhhmmssfff") + ".pdf");
-            var folderReport = ConfigHelper.GetByKey("ReportFolder");
-            string filePath = HttpContext.Current.Server.MapPath(folderReport);
-            if (!Directory.Exists(filePath))
-            {
-                Directory.CreateDirectory(filePath);
-            }
-            string fullPath = Path.Combine(filePath, fileName);
-            try
-            {
-                var template = File.ReadAllText(HttpContext.Current.Server.MapPath("/Assets/admin/templates/product-detail.html"));
-                var replaces = new Dictionary<string, string>();
-                var product = _productService.GetById(id);
+        /* [HttpGet]
+         [Route("ExportPdf")]
+         public async Task<HttpResponseMessage> ExportPdf(HttpRequestMessage request, int id)
+         {
+             string fileName = string.Concat("Product" + DateTime.Now.ToString("yyyyMMddhhmmssfff") + ".pdf");
+             var folderReport = ConfigHelper.GetByKey("ReportFolder");
+             string filePath = HttpContext.Current.Server.MapPath(folderReport);
+             if (!Directory.Exists(filePath))
+             {
+                 Directory.CreateDirectory(filePath);
+             }
+             string fullPath = Path.Combine(filePath, fileName);
+             try
+             {
+                 var template = File.ReadAllText(HttpContext.Current.Server.MapPath("/Assets/admin/templates/product-detail.html"));
+                 var replaces = new Dictionary<string, string>();
+                 var product = _productService.GetById(id);
 
-                replaces.Add("{{ProductName}}", product.Name);
-                replaces.Add("{{Price}}", product.Price.ToString("N0"));
-                replaces.Add("{{Description}}", product.Description);
+                 replaces.Add("{{ProductName}}", product.Name);
+                 replaces.Add("{{Price}}", product.Price.ToString("N0"));
+                 replaces.Add("{{Description}}", product.Description);
 
-                template = template.Parse(replaces);
+                 template = template.Parse(replaces);
 
-                await ReportHelper.GeneratePdf(template, fullPath);
-                return request.CreateErrorResponse(HttpStatusCode.OK, Path.Combine(folderReport, fileName));
-            }
-            catch (Exception ex)
-            {
-                return request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
-            }
-        }*/
+                 await ReportHelper.GeneratePdf(template, fullPath);
+                 return request.CreateErrorResponse(HttpStatusCode.OK, Path.Combine(folderReport, fileName));
+             }
+             catch (Exception ex)
+             {
+                 return request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+             }
+         }*/
 
-        private List<Tb_Product> ReadProductFromExcel(string fullPath, int categoryId)
+        /*private List<Tb_Product> ReadProductFromExcel(string fullPath, int categoryId)
         {
             using (var package = new ExcelPackage(new FileInfo(fullPath)))
             {
@@ -324,7 +319,6 @@ namespace MINHTHUShop.Web.API
 
                 decimal price = 0;
                 decimal promotionPrice;
-
 
                 bool status = false;
 
@@ -343,7 +337,6 @@ namespace MINHTHUShop.Web.API
                     if (decimal.TryParse(workSheet.Cells[i, 6].Value.ToString(), out promotionPrice))
                     {
                         productViewModel.PromotionPrice = promotionPrice;
-
                     }
 
                     productViewModel.Description = workSheet.Cells[i, 7].Value.ToString();
@@ -360,6 +353,6 @@ namespace MINHTHUShop.Web.API
                 }
                 return listProduct;
             }
-        }
+        }*/
     }
 }

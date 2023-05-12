@@ -15,13 +15,16 @@ namespace MINHTHUShop.Web.Models
         public decimal? PromotionPrice { get; set; }
         public string Description { get; set; }
         public string Detail { get; set; }
-        public DateTime? CreateDate { get; set; } = DateTime.Now;
-        public bool? Status { get; set; }
+        public DateTime CreateDate { get; set; }
+        public bool Status { get; set; }
         public string MetaTitle { get; set; }
         public string MetaKeywords { get; set; }
         public string MetaDescriptions { get; set; }
 
         public virtual ProductCategoryVM ProductCategory { get; set; }
         public virtual BrandVM Brand { get; set; }
+
+        public virtual IEnumerable<TagProductVM> TagProductVMs { get; set; }
+        public virtual IEnumerable<ProductCommentVM> ProductCommentVMs { get; set; }
     }
 }

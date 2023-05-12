@@ -6,7 +6,6 @@ using MINHTHUShop.Web.Infrastructure.Extensions;
 using MINHTHUShop.Web.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -135,7 +134,7 @@ namespace MINHTHUShop.Web.API
                 {
                     var dbProductCategory = _productCategoryService.GetById(productCategoryVM.CateID);
                     dbProductCategory.UpdateProductCategory(productCategoryVM);
-                    
+
                     _productCategoryService.Update(dbProductCategory);
                     _productCategoryService.SaveChanges();
                     /*try

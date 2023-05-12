@@ -38,7 +38,7 @@
                 listId.push(item.BrandID);
             });
 
-            $ngBootbox.confirm('Bạn có muốn xóa những thương hiệu / hãng sản xuất này không?').then(function () {
+            $ngBootbox.confirm('Bạn có muốn xóa những thương hiệu - hãng sản xuất này không?').then(function () {
                 var config = {
                     params: {
                         checkedBrand: JSON.stringify(listId)
@@ -46,7 +46,7 @@
                 }
 
                 apiService.del('api/Brand/DeleteMulti', config, function (result) {
-                    notificationService.displaySuccess('Đã xóa ' + result.data + ' thương hiệu / hãng sản xuất');
+                    notificationService.displaySuccess('Đã xóa ' + result.data + ' thương hiệu - hãng sản xuất');
                     search();
                 }, function (error) {
                     notificationService.displayError('Xóa không thành công!');
@@ -55,7 +55,7 @@
         }
 
         function DeleteBrand(id) {
-            $ngBootbox.confirm('Bạn có muốn xóa thương hiệu / hãng sản xuất này không?').then(function () {
+            $ngBootbox.confirm('Bạn có muốn xóa thương hiệu - hãng sản xuất này không?').then(function () {
                 var config = {
                     params: {
                         id: id

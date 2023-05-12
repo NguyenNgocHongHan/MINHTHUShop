@@ -200,6 +200,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\AccountController.cs" />
+    <Compile Include="API\BrandAPIController.cs" />
     <Compile Include="API\ProductAPIController.cs" />
     <Compile Include="API\ProductCategoryAPIController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -219,12 +220,30 @@
     <Compile Include="Infrastructure\Extensions\EntityExtensions.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Models\BrandVM.cs" />
+    <Compile Include="Models\CustomerVM.cs" />
+    <Compile Include="Models\OrderDetailVM.cs" />
+    <Compile Include="Models\OrderStatusVM.cs" />
+    <Compile Include="Models\OrderVM.cs" />
+    <Compile Include="Models\PaymentMethodVM.cs" />
     <Compile Include="Models\ProductCategoryVM.cs" />
+    <Compile Include="Models\ProductCommentVM.cs" />
     <Compile Include="Models\ProductVM.cs" />
+    <Compile Include="Models\RoleStaffVM.cs" />
+    <Compile Include="Models\ShippingMethodVM.cs" />
+    <Compile Include="Models\StaffVM.cs" />
+    <Compile Include="Models\TagProductVM.cs" />
+    <Compile Include="Models\TagVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\components\brand\brand.module.js" />
+    <Content Include="app\components\brand\brandController.js" />
+    <Content Include="app\components\brand\brandCreateController.js" />
+    <Content Include="app\components\brand\brandCreateView.html" />
+    <Content Include="app\components\brand\brandEditController.js" />
+    <Content Include="app\components\brand\brandEditView.html" />
+    <Content Include="app\components\brand\brandView.html" />
     <Content Include="app\components\home\homeController.js" />
     <Content Include="app\components\home\homeView.html" />
     <Content Include="app\components\productCategory\productCategory.module.js" />
@@ -360,7 +379,6 @@
     <Content Include="Content\Admin\lib\toastr.js\toastr.css" />
     <Content Include="Content\Admin\lib\toastr.js\toastr.min.css" />
     <Content Include="Content\Admin\lib\toastr.js\toastr.min.js" />
-    <Content Include="db.sql" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\plugins\fontawesome-free\css\all.css" />
