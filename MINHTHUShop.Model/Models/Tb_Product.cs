@@ -33,15 +33,16 @@ namespace MINHTHUShop.Model.Models
 
         public decimal? PromotionPrice { get; set; }
 
-        [MaxLength(500)]
         public string Description { get; set; }
 
         public string Detail { get; set; }
 
-        public DateTime? CreateDate { get; set; } = DateTime.Now;
+        [Required]
+        public DateTime CreateDate { get; set; } = DateTime.Now;
 
+        [Required]
         [DefaultValue(true)]
-        public bool? Status { get; set; }
+        public bool Status { get; set; }
 
         [ForeignKey("CateID")]
         public virtual Tb_ProductCategory Tb_ProductCategory { get; set; }

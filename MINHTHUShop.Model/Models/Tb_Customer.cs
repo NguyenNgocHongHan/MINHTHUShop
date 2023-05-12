@@ -46,13 +46,15 @@ namespace MINHTHUShop.Model.Models
         [MaxLength(250)]
         public string Avatar { get; set; }
 
-        public DateTime? CreateDate { get; set; } = DateTime.Now;
+        [Required]
+        public DateTime CreateDate { get; set; } = DateTime.Now;
 
         public bool? IsLoggedIn { get; set; }
 
         public DateTime? LastLogin { get; set; }
 
-        public bool? Status { get; set; } = true;
+        [Required]
+        public bool Status { get; set; } = true;
 
         public virtual IEnumerable<Tb_Order> Tb_Orders { get; set; }
 

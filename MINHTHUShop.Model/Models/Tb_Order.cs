@@ -28,11 +28,15 @@ namespace MINHTHUShop.Model.Models
 
         public decimal? Total { get; set; }
 
-        public DateTime? CreateDate { get; set; } = DateTime.Now;
+        [Required]
+        public DateTime CreateDate { get; set; } = DateTime.Now;
+
+        [MaxLength(500)]
 
         public string Note { get; set; }
 
-        public bool? IsCancel { get; set; } = false;
+        [Required]
+        public bool IsCancel { get; set; } = false;
 
         [ForeignKey("CustomerID")]
         public virtual Tb_Customer Tb_Customer { get; set; }

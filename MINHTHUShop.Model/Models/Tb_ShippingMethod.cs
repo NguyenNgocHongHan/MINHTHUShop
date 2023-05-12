@@ -19,6 +19,7 @@ namespace MINHTHUShop.Model.Models
         [Required]
         public decimal Cost { get; set; }
 
-        public bool? Status { get; set; } = true;
+        [Required]
+        public bool Status { get; set; } = true;
     }
 }

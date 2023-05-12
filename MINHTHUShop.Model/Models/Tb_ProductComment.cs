@@ -24,11 +24,12 @@ namespace MINHTHUShop.Model.Models
         [MaxLength(500)]
         public string Comment { get; set; }
 
-        //[System.ComponentModel.DefaultValue(typeof(DateTime), "")]
-        public DateTime? CreateDate { get; set; } = DateTime.Now;
+        [Required]
+        public DateTime CreateDate { get; set; } = DateTime.Now;
 
+        [Required]
         [DefaultValue(true)]
-        public bool? Status { get; set; }
+        public bool Status { get; set; }
 
         [ForeignKey("ProductID")]
         public virtual Tb_Product Tb_Product { get; set; }

@@ -96,6 +96,14 @@
     <Compile Include="Migrations\202305101455309_change_SEO_Atrribute_In_Tables.designer.cs">
       <DependentUpon>202305101455309_change_SEO_Atrribute_In_Tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305111841211_changeMaxLengthAttributeTb_Product.cs" />
+    <Compile Include="Migrations\202305111841211_changeMaxLengthAttributeTb_Product.designer.cs">
+      <DependentUpon>202305111841211_changeMaxLengthAttributeTb_Product.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305111942573_changeRequiredValidationInTables.cs" />
+    <Compile Include="Migrations\202305111942573_changeRequiredValidationInTables.designer.cs">
+      <DependentUpon>202305111942573_changeRequiredValidationInTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -168,6 +176,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305101455309_change_SEO_Atrribute_In_Tables.resx">
       <DependentUpon>202305101455309_change_SEO_Atrribute_In_Tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305111841211_changeMaxLengthAttributeTb_Product.resx">
+      <DependentUpon>202305111841211_changeMaxLengthAttributeTb_Product.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305111942573_changeRequiredValidationInTables.resx">
+      <DependentUpon>202305111942573_changeRequiredValidationInTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
