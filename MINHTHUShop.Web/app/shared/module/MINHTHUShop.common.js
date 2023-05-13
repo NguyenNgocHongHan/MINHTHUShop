@@ -1,8 +1,8 @@
 ﻿(function () {
     angular.module('MINHTHUShop.common',
         ['ui.router',
-            'ngBootbox'/*,
-            'ngCkeditor',
+            'ngBootbox',
+            'ngCkeditor'/*,
             'checklist-model',
             'chart.js',
             'LocalStorageModule',

@@ -11,6 +11,7 @@ namespace MINHTHUShop.Web.Models
         public string Name { get; set; }
         public string Image { get; set; }
         public string ListImg { get; set; }
+        public decimal OriginalPrice { get; set; }
         public decimal Price { get; set; }
         public decimal? PromotionPrice { get; set; }
         public string Description { get; set; }

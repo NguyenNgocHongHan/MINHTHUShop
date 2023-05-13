@@ -25,6 +25,14 @@
     {
       "library": "bootbox.js@6.0.0",
       "destination": "Content/Admin/lib/bootbox.js/"
+    },
+    {
+      "library": "ckeditor@4.21.0",
+      "destination": "Content/Admin/lib/ckeditor/"
+    },
+    {
+      "library": "ng-ckeditor@0.2.1",
+      "destination": "Content/Admin/lib/ng-ckeditor/"
     }
   ]
 }

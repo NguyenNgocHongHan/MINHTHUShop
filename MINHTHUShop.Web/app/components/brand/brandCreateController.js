@@ -5,23 +5,9 @@
 
     function brandCreateController($scope, $state, apiService, notificationService) {
         $scope.brand = {}
-/*        $scope.parent = [];
-*/
+
         $scope.CreateBrand = CreateBrand;
 
-/*        function LoadParent() {
-            apiService.get('api/Brand/GetAll', null, function (result) {
-                console.log(result);
-                $scope.parent = result.data;
-                *//*$scope.parentCategory = commonService.getTree(result.data, "CateID", "ParentID");
-                $scope.parentCategories.forEach(function (item) {
-                    recur(item, 0, $scope.flatFolders);
-                });*//*
-            }, function () {
-                console.log('Không thể lấy ra danh sách thương hiệu - hãng sản xuất!');
-            });
-        }
-*/
         function CreateBrand() {
             apiService.post('api/Brand/Create', $scope.brand,
                 function (result) {
@@ -33,8 +19,7 @@
                 });
         }
 
-/*        LoadParent();
-*/        /*        $scope.flatFolders = [];
+        /*        $scope.flatFolders = [];
        
        
        

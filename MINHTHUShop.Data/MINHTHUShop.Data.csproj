@@ -104,6 +104,10 @@
     <Compile Include="Migrations\202305111942573_changeRequiredValidationInTables.designer.cs">
       <DependentUpon>202305111942573_changeRequiredValidationInTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305121140040_addOriginalPriceForTbProduct.cs" />
+    <Compile Include="Migrations\202305121140040_addOriginalPriceForTbProduct.designer.cs">
+      <DependentUpon>202305121140040_addOriginalPriceForTbProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -182,6 +186,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305111942573_changeRequiredValidationInTables.resx">
       <DependentUpon>202305111942573_changeRequiredValidationInTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305121140040_addOriginalPriceForTbProduct.resx">
+      <DependentUpon>202305121140040_addOriginalPriceForTbProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

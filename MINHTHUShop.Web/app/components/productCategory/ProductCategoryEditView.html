@@ -19,7 +19,7 @@
 
 <!-- Main content -->
 <section class="content">
-    <div style="width:80%; margin:auto;">
+    <div style="width:90%; margin:auto;">
         <!-- Horizontal Form -->
         <div class="card card-success">
             <div class="card-header">
@@ -30,14 +30,14 @@
             <form class="form-horizontal" novalidate name="frmUpdateProductCategory" role="form" ng-submit="UpdateProductCategory()">
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Mã danh mục</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" name="cateID" ng-model="productCategory.CateID" placeholder="Mã danh mục sản phẩm" readonly>
+                        <label class="col-sm-3 col-form-label">Mã danh mục</label>
+                        <div class="col-sm-9 col-form-label">
+                            <lable>{{productCategory.CateID}}</lable>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Tên danh mục</label>
-                        <div class="col-sm-8">
+                        <label class="col-sm-3 col-form-label">Tên danh mục</label>
+                        <div class="col-sm-9">
                             <input type="text" class="form-control" name="name" ng-model="productCategory.Name" ng-change="GetMetaTitle()" ng-maxlength="50" placeholder="Tên danh mục sản phẩm" required>
                             <div class="has-error" ng-show="frmUpdateProductCategory.name.$invalid">
                                 <span ng-show="frmUpdateProductCategory.name.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên danh mục!</span>
@@ -46,14 +46,14 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Thứ tự danh mục</label>
-                        <div class="col-sm-8">
+                        <label class="col-sm-3 col-form-label">Thứ tự danh mục</label>
+                        <div class="col-sm-9">
                             <input type="number" min="0" class="form-control" name="sort" ng-model="productCategory.Sort" placeholder="Thứ tự hiển thị danh mục (nếu có)">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Danh mục cha</label>
-                        <div class="col-sm-8">
+                        <label class="col-sm-3 col-form-label">Danh mục cha</label>
+                        <div class="col-sm-9">
                             <select class="form-control" name="parentID" ng-model="productCategory.ParentID" ng-options="option.CateID as option.Name for option in parentCategory">
                                 <option value="">Mã danh mục cha (nếu có)</option>
                             </select>
@@ -61,8 +61,8 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Tiêu đề SEO</label>
-                        <div class="col-sm-8">
+                        <label class="col-sm-3 col-form-label">Tiêu đề SEO</label>
+                        <div class="col-sm-9">
                             <input type="text" class="form-control" name="metaTitle" ng-model="productCategory.MetaTitle" ng-maxlength="250" placeholder="Tên tiêu đề SEO (Meta Title - nếu có)" required>
                             <div class="has-error" ng-show="frmUpdateProductCategory.metaTitle.$invalid">
                                 <span ng-show="frmUpdateProductCategory.metaTitle.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên tiêu đề SEO!</span>
@@ -71,15 +71,15 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Từ khóa SEO</label>
-                        <div class="col-sm-8">
+                        <label class="col-sm-3 col-form-label">Từ khóa SEO</label>
+                        <div class="col-sm-9">
                             <input type="text" class="form-control" name="metaKeywords" ng-model="productCategory.MetaKeywords" ng-maxlength="250" placeholder="Từ khóa SEO (Meta Keywords - nếu có)">
                             <span ng-show="frmUpdateProductCategory.metaKeywords.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Mô tả SEO</label>
-                        <div class="col-sm-8">
+                        <label class="col-sm-3 col-form-label">Mô tả SEO</label>
+                        <div class="col-sm-9">
                             <textarea class="form-control" name="metaDescriptions" ng-model="productCategory.MetaDescriptions" ng-maxlength="500" placeholder="Mô tả SEO (Meta Descriptions - nếu có)"></textarea>
                             <span ng-show="frmUpdateProductCategory.metaDescriptions.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 500 ký tự!</span>
                         </div>

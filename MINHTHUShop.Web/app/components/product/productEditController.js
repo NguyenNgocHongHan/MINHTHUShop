@@ -1,48 +1,59 @@
 ﻿(function (app) {
     app.controller('productEditController', productEditController);
-/*
-    productEditController.$inject = ['apiService', '$scope', 'notificationService', '$state', 'commonService', '$stateParams'];
-*/
-    function productEditController(/*apiService, $scope, notificationService, $state, commonService, $stateParams*/) {
-/*        $scope.product = {};
+
+    productEditController.$inject = ['$scope', '$state', '$stateParams', 'apiService', 'notificationService', 'commonService'];
+
+    function productEditController($scope, $state, $stateParams, apiService, notificationService, commonService) {
+        $scope.product = {}
+
         $scope.ckeditorOptions = {
             languague: 'vi',
             height: '200px'
         }
-        $scope.UpdateProduct = UpdateProduct;
-        $scope.moreImages = [];
-        $scope.GetSeoTitle = GetSeoTitle;
 
-        function GetSeoTitle() {
-            $scope.product.Alias = commonService.getSeoTitle($scope.product.Name);
+        $scope.moreImages = [];
+
+        $scope.UpdateProduct = UpdateProduct;
+        $scope.GetMetaTitle = GetMetaTitle;
+
+        function UpdateProduct() {
+            apiService.put('api/Product/Update', $scope.product,
+                function (result) {
+                    notificationService.displaySuccess(result.data.Name + ' đã được cập nhật');
+                    $state.go('product');
+                }, function (error) {
+                    notificationService.displayError('Cập nhật không thành công!');
+                });
         }
 
-        function loadProductDetail() {
-            apiService.get('api/product/getbyid/' + $stateParams.id, null, function (result) {
-                console.log(result.data);
+        function GetMetaTitle() {
+            $scope.product.MetaTitle = commonService.getMetaTitle($scope.product.Name);
+        }
+
+        function LoadProductDetail() {
+            apiService.get('api/Product/GetById/' + $stateParams.id, null, function (result) {
                 $scope.product = result.data;
-                $scope.moreImages = JSON.parse($scope.product.MoreImages);
             }, function (error) {
                 notificationService.displayError(error.data);
             });
         }
-        function UpdateProduct() {
-            $scope.product.MoreImages = JSON.stringify($scope.moreImages)
-            apiService.put('api/product/update', $scope.product,
-                function (result) {
-                    notificationService.displaySuccess(result.data.Name + ' đã được cập nhật.');
-                    $state.go('products');
-                }, function (error) {
-                    notificationService.displayError('Cập nhật không thành công.');
-                });
-        }
-        function loadProductCategory() {
-            apiService.get('api/productcategory/getallparents', null, function (result) {
-                $scope.productCategories = result.data;
+
+        function LoadCate() {
+            apiService.get('api/ProductCategory/GetAll', null, function (result) {
+                $scope.productCategory = result.data;
             }, function () {
-                console.log('Cannot get list parent');
+                console.log('Tải sản danh mục sản phẩm thất bại!');
             });
         }
+
+        function LoadBrand() {
+            apiService.get('api/Brand/GetAll', null, function (result) {
+                $scope.brand = result.data;
+            }, function () {
+                console.log('Tải sản thương hiệu thất bại!');
+            });
+        }
+
         $scope.ChooseImage = function () {
             var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) {
@@ -52,6 +63,7 @@
             }
             finder.popup();
         }
+
         $scope.ChooseMoreImage = function () {
             var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) {
@@ -62,8 +74,9 @@
             }
             finder.popup();
         }
-        loadProductCategory();
-        loadProductDetail();
-*/    }
 
+        LoadCate();
+        LoadBrand();
+        LoadProductDetail();
+    }
 })(angular.module('MINHTHUShop.product'));

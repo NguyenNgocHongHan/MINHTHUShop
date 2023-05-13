@@ -1,137 +1,128 @@
 ﻿(function (app) {
     app.controller('productController', productController);
 
-    /*productListController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox', '$filter'];*/
+    productController.$inject = ['$scope', '$ngBootbox', '$filter', 'apiService', 'notificationService'];
 
-    function productController(/*$scope, apiService, notificationService, $ngBootbox, $filter*/) {
- /*       $scope.products = [];
+    function productController($scope, $ngBootbox, $filter, apiService, notificationService) {
+        $scope.product = [];
+
+        $scope.index = 0;
+
         $scope.page = 0;
-        $scope.totalPage = 0;
-        $scope.getProducts = getProducts;
-        $scope.keyword = '';
+        $scope.pagesCount = 0;
+        $scope.pageSize = 10;
 
+        $scope.keyword = '';
         $scope.search = search;
 
-        $scope.deleteProduct = deleteProduct;
-
-        $scope.selectAll = selectAll;
-
-        $scope.deleteMultiple = deleteMultiple;
-        $scope.exportExcel = exportExcel;
-        $scope.exportPdf = exportPdf;
-        function exportExcel() {
-            var config = {
-                params: {
-                    filter: $scope.keyword
-                }
-            }
-            apiService.get('/api/product/ExportXls', config, function (response) {
-                if (response.status = 200) {
-                    window.location.href = response.data.Message;
-                }
-            }, function (error) {
-                notificationService.displayError(error);
-
-            });
-        }
-
-        function exportPdf(productId) {
-            var config = {
-                params: {
-                    id: productId
-                }
-            }
-            apiService.get('/api/product/ExportPdf', config, function (response) {
-                if (response.status = 200) {
-                    window.location.href = response.data.Message;
-                }
-            }, function (error) {
-                notificationService.displayError(error);
-
-            });
-        }
-        function deleteMultiple() {
-            var listId = [];
-            $.each($scope.selected, function (i, item) {
-                listId.push(item.ID);
-            });
-            var config = {
-                params: {
-                    checkedProducts: JSON.stringify(listId)
-                }
-            }
-            apiService.del('api/product/deletemulti', config, function (result) {
-                notificationService.displaySuccess('Xóa thành công ' + result.data + ' bản ghi.');
-                search();
-            }, function (error) {
-                notificationService.displayError('Xóa không thành công');
-            });
-        }
+        $scope.GetProduct = GetProduct;
+        $scope.DeleteProduct = DeleteProduct;
+        $scope.DeleteMultiple = DeleteMultiple;
+        $scope.SelectAll = SelectAll;
 
         $scope.isAll = false;
-        function selectAll() {
-            if ($scope.isAll === false) {
-                angular.forEach($scope.products, function (item) {
+
+        $scope.$watch("product", function (n, o) {
+            var checked = $filter("filter")(n, { checked: true });
+            if (checked.length) {
+                $scope.selected = checked;
+                $('#btnCheckboxDelete').removeAttr('disabled');
+            } else {
+                $('#btnCheckboxDelete').attr('disabled', 'disabled');
+            }
+        }, true);
+
+        function DeleteMultiple() {
+            var listId = [];
+            $.each($scope.selected, function (i, item) {
+                listId.push(item.ProductID);
+            });
+
+            $ngBootbox.confirm('Bạn có muốn xóa những sản phẩm này không?').then(function () {
+                var config = {
+                    params: {
+                        checkedProduct: JSON.stringify(listId)
+                    }
+                }
+
+                apiService.del('api/Product/DeleteMulti', config, function (result) {
+                    notificationService.displaySuccess('Đã xóa ' + result.data + ' sản phẩm');
+                    search();
+                }, function (error) {
+                    notificationService.displayError('Xóa không thành công!');
+                })
+            });
+        }
+
+        function DeleteProduct(id) {
+            $ngBootbox.confirm('Bạn có muốn xóa sản phẩm này không?').then(function () {
+                var config = {
+                    params: {
+                        id: id
+                    }
+                }
+                apiService.del('api/Product/Delete', config, function () {
+                    notificationService.displaySuccess('Đã xóa thành công!');
+                    search();
+                }, function () {
+                    notificationService.displayError('Xóa không thành công!');
+                })
+            });
+        }
+
+        function SelectAll() {
+            if ($scope.isAll == false) {
+                angular.forEach($scope.product, function (item) {
                     item.checked = true;
                 });
                 $scope.isAll = true;
-            } else {
-                angular.forEach($scope.products, function (item) {
+            }
+            else {
+                angular.forEach($scope.product, function (item) {
                     item.checked = false;
                 });
                 $scope.isAll = false;
             }
         }
 
-        $scope.$watch("products", function (n, o) {
-            var checked = $filter("filter")(n, { checked: true });
-            if (checked.length) {
-                $scope.selected = checked;
-                $('#btnDelete').removeAttr('disabled');
-            } else {
-                $('#btnDelete').attr('disabled', 'disabled');
-            }
-        }, true);
-
-        function deleteProduct(id) {
-            $ngBootbox.confirm('Bạn có chắc muốn xóa?').then(function () {
-                var config = {
-                    params: {
-                        id: id
-                    }
-                }
-                apiService.del('api/product/delete', config, function () {
-                    notificationService.displaySuccess('Xóa thành công');
-                    search();
-                }, function () {
-                    notificationService.displayError('Xóa không thành công');
-                })
-            });
-        }
-
         function search() {
-            getProducts();
+            GetProduct();
         }
 
-        function getProducts(page) {
+        function GetProduct(page) {
             page = page || 0;
+
             var config = {
                 params: {
                     keyword: $scope.keyword,
                     page: page,
-                    pageSize: 20
+                    pageSize: $scope.pageSize
                 }
             }
-            apiService.get('/api/product/getall', config, function (result) {
-                $scope.products = result.data.Items;
+
+            apiService.get('api/Product/GetAllByPage', config, function (result) {
+                if (result.data.TotalCount == 0) {
+                    notificationService.displayWarning('Không tìm thấy kết quả!');
+                }
+                $scope.product = result.data.Item;
                 $scope.page = result.data.Page;
-                $scope.totalPage = result.data.TotalPage;
+                $scope.pagesCount = result.data.TotalPage;
                 $scope.totalCount = result.data.TotalCount;
             }, function () {
-                console.log('Load product failed.');
+                console.log('Tải sản phẩm thất bại!');
             });
         }
 
-        $scope.getProducts();
-    */}
+        function LoadCate() {
+            apiService.get('api/ProductCategory/GetAll', null, function (result) {
+                $scope.productCategory = result.data;
+            }, function () {
+                console.log('Tải sản danh mục sản phẩm thất bại!');
+            });
+        }
+
+        LoadCate();
+
+        $scope.GetProduct();
+    }
 })(angular.module('MINHTHUShop.product'));

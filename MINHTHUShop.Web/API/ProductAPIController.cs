@@ -162,7 +162,7 @@ namespace MINHTHUShop.Web.API
 
         [Route("DeleteMulti")]
         [HttpDelete]
-        public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedProducts)
+        public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedProduct)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -173,7 +173,7 @@ namespace MINHTHUShop.Web.API
                 }
                 else
                 {
-                    var listProduct = new JavaScriptSerializer().Deserialize<List<int>>(checkedProducts);
+                    var listProduct = new JavaScriptSerializer().Deserialize<List<int>>(checkedProduct);
                     foreach (var item in listProduct)
                     {
                         _productService.Delete(item);

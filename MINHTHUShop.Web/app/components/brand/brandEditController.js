@@ -5,8 +5,7 @@
 
     function brandEditController($scope, $state, $stateParams, apiService, notificationService) {
         $scope.brand = {};
-/*        $scope.parent = [];
-*/
+
         $scope.UpdateBrand = UpdateBrand;
 
         function UpdateBrand() {
@@ -19,14 +18,6 @@
                 });
         }
 
-/*        function LoadParent() {
-            apiService.get('api/Brand/GetAll', null, function (result) {
-                $scope.parent = result.data;
-            }, function () {
-                console.log('Không thể lấy ra danh sách thương hiệu / hãng sản xuất!');
-            });
-        }
-*/
         function LoadBrandDetail() {
             apiService.get('api/Brand/GetById/' + $stateParams.id, null, function (result) {
                 $scope.brand = result.data;
@@ -35,7 +26,6 @@
             });
         }
 
-/*        LoadParent();
-*/        LoadBrandDetail();
+        LoadBrandDetail();
     }
 })(angular.module('MINHTHUShop.brand'));

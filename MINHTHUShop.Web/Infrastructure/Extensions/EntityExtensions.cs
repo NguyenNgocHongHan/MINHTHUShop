@@ -31,6 +31,7 @@ namespace MINHTHUShop.Web.Infrastructure.Extensions
             p.Name = vm.Name;
             p.Image = vm.Image;
             p.ListImg = vm.ListImg;
+            p.OriginalPrice = vm.OriginalPrice;
             p.Price = vm.Price;
             p.PromotionPrice = vm.PromotionPrice;
             p.Description = vm.Description;
