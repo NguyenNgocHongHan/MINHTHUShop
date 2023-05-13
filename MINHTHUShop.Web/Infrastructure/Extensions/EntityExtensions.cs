@@ -36,6 +36,7 @@ namespace MINHTHUShop.Web.Infrastructure.Extensions
             p.PromotionPrice = vm.PromotionPrice;
             p.Description = vm.Description;
             p.Detail = vm.Detail;
+            p.Tag = vm.Tag;
             p.CreateDate = vm.CreateDate;
             p.Status = vm.Status;
             p.MetaTitle = vm.MetaTitle;

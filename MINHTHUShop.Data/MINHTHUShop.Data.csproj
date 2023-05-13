@@ -64,49 +64,9 @@
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\202304220519264_dbShop.cs" />
-    <Compile Include="Migrations\202304220519264_dbShop.designer.cs">
-      <DependentUpon>202304220519264_dbShop.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202304260938430_addCreateDateForTbProduct.cs" />
-    <Compile Include="Migrations\202304260938430_addCreateDateForTbProduct.designer.cs">
-      <DependentUpon>202304260938430_addCreateDateForTbProduct.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202304261232406_addTableError.cs" />
-    <Compile Include="Migrations\202304261232406_addTableError.designer.cs">
-      <DependentUpon>202304261232406_addTableError.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202305021012364_changeTbCustomerToIdentity.cs" />
-    <Compile Include="Migrations\202305021012364_changeTbCustomerToIdentity.designer.cs">
-      <DependentUpon>202305021012364_changeTbCustomerToIdentity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202305021229426_modifyAttributeIdentityAndChangeNameTbRole.cs" />
-    <Compile Include="Migrations\202305021229426_modifyAttributeIdentityAndChangeNameTbRole.designer.cs">
-      <DependentUpon>202305021229426_modifyAttributeIdentityAndChangeNameTbRole.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202305071552221_updateDB.cs" />
-    <Compile Include="Migrations\202305071552221_updateDB.designer.cs">
-      <DependentUpon>202305071552221_updateDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202305080902459_testDB.cs" />
-    <Compile Include="Migrations\202305080902459_testDB.designer.cs">
-      <DependentUpon>202305080902459_testDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202305101455309_change_SEO_Atrribute_In_Tables.cs" />
-    <Compile Include="Migrations\202305101455309_change_SEO_Atrribute_In_Tables.designer.cs">
-      <DependentUpon>202305101455309_change_SEO_Atrribute_In_Tables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202305111841211_changeMaxLengthAttributeTb_Product.cs" />
-    <Compile Include="Migrations\202305111841211_changeMaxLengthAttributeTb_Product.designer.cs">
-      <DependentUpon>202305111841211_changeMaxLengthAttributeTb_Product.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202305111942573_changeRequiredValidationInTables.cs" />
-    <Compile Include="Migrations\202305111942573_changeRequiredValidationInTables.designer.cs">
-      <DependentUpon>202305111942573_changeRequiredValidationInTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202305121140040_addOriginalPriceForTbProduct.cs" />
-    <Compile Include="Migrations\202305121140040_addOriginalPriceForTbProduct.designer.cs">
-      <DependentUpon>202305121140040_addOriginalPriceForTbProduct.cs</DependentUpon>
+    <Compile Include="Migrations\202305131027063_updateRepository.cs" />
+    <Compile Include="Migrations\202305131027063_updateRepository.designer.cs">
+      <DependentUpon>202305131027063_updateRepository.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
@@ -157,38 +117,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202304220519264_dbShop.resx">
-      <DependentUpon>202304220519264_dbShop.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202304260938430_addCreateDateForTbProduct.resx">
-      <DependentUpon>202304260938430_addCreateDateForTbProduct.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202304261232406_addTableError.resx">
-      <DependentUpon>202304261232406_addTableError.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202305021012364_changeTbCustomerToIdentity.resx">
-      <DependentUpon>202305021012364_changeTbCustomerToIdentity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202305021229426_modifyAttributeIdentityAndChangeNameTbRole.resx">
-      <DependentUpon>202305021229426_modifyAttributeIdentityAndChangeNameTbRole.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202305071552221_updateDB.resx">
-      <DependentUpon>202305071552221_updateDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202305080902459_testDB.resx">
-      <DependentUpon>202305080902459_testDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202305101455309_change_SEO_Atrribute_In_Tables.resx">
-      <DependentUpon>202305101455309_change_SEO_Atrribute_In_Tables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202305111841211_changeMaxLengthAttributeTb_Product.resx">
-      <DependentUpon>202305111841211_changeMaxLengthAttributeTb_Product.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202305111942573_changeRequiredValidationInTables.resx">
-      <DependentUpon>202305111942573_changeRequiredValidationInTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202305121140040_addOriginalPriceForTbProduct.resx">
-      <DependentUpon>202305121140040_addOriginalPriceForTbProduct.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202305131027063_updateRepository.resx">
+      <DependentUpon>202305131027063_updateRepository.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

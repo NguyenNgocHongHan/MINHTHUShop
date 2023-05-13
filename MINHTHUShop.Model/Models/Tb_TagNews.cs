@@ -6,18 +6,17 @@ namespace MINHTHUShop.Model.Models
     public class Tb_TagNews
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int TagNewsID { get; set; }
-
-        [Required]
-        public int TagID { get; set; }
-
-        [Required]
+        [Column(Order = 1)]
         public int NewsID { get; set; }
 
-        [ForeignKey("TagID")]
-        public virtual Tb_Tag Tb_Tag { get; set; }
+        [Key]
+        [Column(TypeName = "varchar", Order = 2)]
+        [MaxLength(50)]
+        public string TagID { get; set; }
+
         [ForeignKey("NewsID")]
         public virtual Tb_News Tb_News { get; set; }
+        [ForeignKey("TagID")]
+        public virtual Tb_Tag Tb_Tag { get; set; }
     }
 }

@@ -7,13 +7,13 @@ namespace MINHTHUShop.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class changeTbCustomerToIdentity : IMigrationMetadata
+    public sealed partial class updateRepository : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(changeTbCustomerToIdentity));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(updateRepository));
         
         string IMigrationMetadata.Id
         {
-            get { return "202305021012364_changeTbCustomerToIdentity"; }
+            get { return "202305131027063_updateRepository"; }
         }
         
         string IMigrationMetadata.Source

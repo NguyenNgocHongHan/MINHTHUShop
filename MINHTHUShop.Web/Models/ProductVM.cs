@@ -16,6 +16,7 @@ namespace MINHTHUShop.Web.Models
         public decimal? PromotionPrice { get; set; }
         public string Description { get; set; }
         public string Detail { get; set; }
+        public string Tag { get; set; }
         public DateTime CreateDate { get; set; }
         public bool Status { get; set; }
         public string MetaTitle { get; set; }

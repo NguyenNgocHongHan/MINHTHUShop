@@ -2,7 +2,8 @@
 {
     public class TagVM
     {
-        public int TagID { get; set; }
+        public string TagID { get; set; }
         public string Name { get; set; }
+        public string Type { get; set; }
     }
 }

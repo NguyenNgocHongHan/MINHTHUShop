@@ -7,7 +7,7 @@ namespace MINHTHUShop.Data.Repositories
 {
     public interface ITb_NewsRepository : IRepository<Tb_News>
     {
-        IEnumerable<Tb_News> GetAllByTag(int tagID, int pageIndex, int pageSize, out int totalRow);
+        IEnumerable<Tb_News> GetAllByTag(string tagID, int pageIndex, int pageSize, out int totalRow);
     }
 
     public class Tb_NewsRepository : RepositoryBase<Tb_News>, ITb_NewsRepository
@@ -16,7 +16,7 @@ namespace MINHTHUShop.Data.Repositories
         {
         }
 
-        public IEnumerable<Tb_News> GetAllByTag(int tagID, int pageIndex, int pageSize, out int totalRow)
+        public IEnumerable<Tb_News> GetAllByTag(string tagID, int pageIndex, int pageSize, out int totalRow)
         {
             var query = from n in DbContext.Tb_News
                         join tn in DbContext.Tb_TagNews

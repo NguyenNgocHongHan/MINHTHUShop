@@ -25,9 +25,14 @@ namespace MINHTHUShop.Model.Models
         [Required]
         public string Description { get; set; }
 
-        public DateTime? CreateDate { get; set; } = DateTime.Now;
+        [MaxLength(500)]
+        public string Tag { get; set; }
 
-        public bool? Status { get; set; } = true;
+        [Required]
+        public DateTime CreateDate { get; set; } = DateTime.Now;
+
+        [Required]
+        public bool Status { get; set; } = true;
 
         [ForeignKey("NewsCateID")]
         public virtual Tb_NewsCategory Tb_NewsCategory { get; set; }

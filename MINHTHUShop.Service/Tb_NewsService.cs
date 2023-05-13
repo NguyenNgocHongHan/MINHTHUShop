@@ -37,7 +37,7 @@ namespace MINHTHUShop.Service
         }
 
         //lấy ra tất cả các bài viết theo thẻ tag
-        public IEnumerable<Tb_News> GetAllByTagPaging(int tagID, int pageIndex, int pageSize, out int totalRow)
+        public IEnumerable<Tb_News> GetAllByTagPaging(string tagID, int pageIndex, int pageSize, out int totalRow)
         {
             return _tb_NewsRepository.GetAllByTag(tagID, pageIndex, pageSize, out totalRow);
         }
@@ -81,6 +81,6 @@ namespace MINHTHUShop.Service
 
         IEnumerable<Tb_News> GetAllByCategoryPaging(int cateID, int pageIndex, int pageSize, out int totalRow);
 
-        IEnumerable<Tb_News> GetAllByTagPaging(int tagID, int pageIndex, int pageSize, out int totalRow);
+        IEnumerable<Tb_News> GetAllByTagPaging(string tagID, int pageIndex, int pageSize, out int totalRow);
     }
 }

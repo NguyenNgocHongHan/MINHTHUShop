@@ -40,6 +40,9 @@ namespace MINHTHUShop.Model.Models
 
         public string Detail { get; set; }
 
+        [MaxLength(500)]
+        public string Tag { get; set; }
+
         [Required]
         public DateTime CreateDate { get; set; } = DateTime.Now;
 

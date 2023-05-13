@@ -7,7 +7,7 @@ namespace MINHTHUShop.Data.Repositories
 {
     public interface ITb_ProductRepository : IRepository<Tb_Product>
     {
-        IEnumerable<Tb_Product> GetListProductByTag(int tagID, int pageIndex, int pageSize, out int totalRow);
+        IEnumerable<Tb_Product> GetListProductByTag(string tagID, int pageIndex, int pageSize, out int totalRow);
     }
 
     public class Tb_ProductRepository : RepositoryBase<Tb_Product>, ITb_ProductRepository
@@ -16,7 +16,7 @@ namespace MINHTHUShop.Data.Repositories
         {
         }
 
-        public IEnumerable<Tb_Product> GetListProductByTag(int tagID, int pageIndex, int pageSize, out int totalRow)
+        public IEnumerable<Tb_Product> GetListProductByTag(string tagID, int pageIndex, int pageSize, out int totalRow)
         {
             var query = from p in DbContext.Tb_Products
                         join pt in DbContext.Tb_TagProducts

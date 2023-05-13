@@ -39,9 +39,9 @@
                         <label class="col-sm-3 col-form-label">Tên sản phẩm</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="name" ng-model="product.Name" ng-change="GetMetaTitle()" ng-maxlength="250" placeholder="Tên danh mục sản phẩm" required>
-                            <div class="has-error" ng-show="frmCreateProduct.name.$invalid">
-                                <span ng-show="frmCreateProduct.name.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên sản phẩm!</span>
-                                <span ng-show="frmCreateProduct.name.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
+                            <div class="has-error" ng-show="frmUpdateProduct.name.$invalid">
+                                <span ng-show="frmUpdateProduct.name.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên sản phẩm!</span>
+                                <span ng-show="frmUpdateProduct.name.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
                             </div>
                         </div>
                     </div>
@@ -52,8 +52,8 @@
                                 <option value="">Chọn danh mục sản phẩm</option>
                             </select>
                             <input type="hidden" name="cateID" ng-model="product.CateID" />
-                            <div class="has-error" ng-show="frmCreateProduct.cateID.$invalid">
-                                <span ng-show="frmCreateProduct.cateID.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa chọn tên danh mục sản phẩm!</span>
+                            <div class="has-error" ng-show="frmUpdateProduct.cateID.$invalid">
+                                <span ng-show="frmUpdateProduct.cateID.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa chọn tên danh mục sản phẩm!</span>
                             </div>
                         </div>
                     </div>
@@ -64,8 +64,8 @@
                                 <option value="">Chọn thương hiệu - hãng sản xuất</option>
                             </select>
                             <input type="hidden" name="brandID" ng-model="product.BrandID" />
-                            <div class="has-error" ng-show="frmCreateProduct.brandID.$invalid">
-                                <span ng-show="frmCreateProduct.brandID.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa chọn tên thương hiệu!</span>
+                            <div class="has-error" ng-show="frmUpdateProduct.brandID.$invalid">
+                                <span ng-show="frmUpdateProduct.brandID.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa chọn tên thương hiệu!</span>
                             </div>
                         </div>
                     </div>
@@ -73,8 +73,8 @@
                         <label class="col-sm-3 col-form-label">Giá gốc</label>
                         <div class="col-sm-9">
                             <input type="number" min="0" class="form-control" name="originalPrice" ng-model="product.OriginalPrice" placeholder="Giá nhập hàng" required>
-                            <div class="has-error" ng-show="frmCreateProduct.originalPrice.$invalid">
-                                <span ng-show="frmCreateProduct.originalPrice.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập giá nhập hàng sản phẩm!</span>
+                            <div class="has-error" ng-show="frmUpdateProduct.originalPrice.$invalid">
+                                <span ng-show="frmUpdateProduct.originalPrice.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập giá nhập hàng sản phẩm!</span>
                             </div>
                         </div>
                     </div>
@@ -82,8 +82,8 @@
                         <label class="col-sm-3 col-form-label">Giá bán</label>
                         <div class="col-sm-9">
                             <input type="number" min="0" class="form-control" name="price" ng-model="product.Price" placeholder="Giá tiền sản phẩm" required>
-                            <div class="has-error" ng-show="frmCreateProduct.price.$invalid">
-                                <span ng-show="frmCreateProduct.price.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập giá tiền sản phẩm!</span>
+                            <div class="has-error" ng-show="frmUpdateProduct.price.$invalid">
+                                <span ng-show="frmUpdateProduct.price.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập giá tiền sản phẩm!</span>
                             </div>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                         <div class="col-sm-9">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="image" ng-model="product.Image" ng-maxlength="250" placeholder="Hình ảnh sản phẩm">
-                                <span ng-show="frmCreateProduct.image.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
+                                <span ng-show="frmUpdateProduct.image.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
                                 <button class="btn btn-default btn-sm" type="button" ng-click="ChooseImage()">Chọn ảnh</button>
                             </div>
                         </div>
@@ -127,12 +127,19 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tag</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" name="tag" ng-model="product.Tag" ng-maxlength="500" placeholder="Gắn thẻ (Tag - nếu có)"></textarea>
+                            <span ng-show="frmUpdateProduct.tag.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 500 ký tự!</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Tiêu đề SEO</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="metaTitle" ng-model="product.MetaTitle" ng-maxlength="250" placeholder="Tên tiêu đề SEO (Meta Title)" required>
-                            <div class="has-error" ng-show="frmCreateProduct.metaTitle.$invalid">
-                                <span ng-show="frmCreateProduct.metaTitle.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên tiêu đề SEO!</span>
-                                <span ng-show="frmCreateProduct.metaTitle.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
+                            <div class="has-error" ng-show="frmUpdateProduct.metaTitle.$invalid">
+                                <span ng-show="frmUpdateProduct.metaTitle.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên tiêu đề SEO!</span>
+                                <span ng-show="frmUpdateProduct.metaTitle.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
                             </div>
                         </div>
                     </div>
@@ -140,14 +147,14 @@
                         <label class="col-sm-3 col-form-label">Từ khóa SEO</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="metaKeywords" ng-model="product.MetaKeywords" ng-maxlength="250" placeholder="Từ khóa SEO (Meta Keywords - nếu có)">
-                            <span ng-show="frmCreateProduct.metaKeywords.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
+                            <span ng-show="frmUpdateProduct.metaKeywords.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Mô tả SEO</label>
                         <div class="col-sm-9">
                             <textarea class="form-control" name="metaDescriptions" ng-model="product.MetaDescriptions" ng-maxlength="500" placeholder="Mô tả SEO (Meta Descriptions - nếu có)"></textarea>
-                            <span ng-show="frmCreateProduct.metaDescriptions.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 500 ký tự!</span>
+                            <span ng-show="frmUpdateProduct.metaDescriptions.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 500 ký tự!</span>
                         </div>
                     </div>
                     <div class="form-group row">
