@@ -1,4 +1,5 @@
-﻿using MINHTHUShop.Data.Infrastructure;
+﻿using MINHTHUShop.Common;
+using MINHTHUShop.Data.Infrastructure;
 using MINHTHUShop.Data.Repositories;
 using MINHTHUShop.Model.Models;
 using System.Collections.Generic;
@@ -8,17 +9,44 @@ namespace MINHTHUShop.Service
     public class Tb_NewsService : ITb_NewsService
     {
         private ITb_NewsRepository _tb_NewsRepository;
+        private ITb_TagRepository _tb_TagRepository;
+        private ITb_TagNewsRepository _tb_TagNewsRepository;
         private IUnitOfWork _unitOfWork;
 
-        public Tb_NewsService(ITb_NewsRepository tb_NewsRepository, IUnitOfWork unitOfWork)
+        public Tb_NewsService(ITb_NewsRepository tb_NewsRepository, ITb_TagRepository tb_TagRepository, ITb_TagNewsRepository tb_TagNewsRepository, IUnitOfWork unitOfWork)
         {
             this._tb_NewsRepository = tb_NewsRepository;
+            this._tb_TagRepository = tb_TagRepository;
+            this._tb_TagNewsRepository = tb_TagNewsRepository;
             this._unitOfWork = unitOfWork;
         }
 
         public Tb_News Create(Tb_News tb_News)
         {
-            return _tb_NewsRepository.Add(tb_News);
+            var news = _tb_NewsRepository.Add(tb_News);
+            _unitOfWork.Commit();
+            if (!string.IsNullOrEmpty(tb_News.Tag))
+            {
+                string[] tags = tb_News.Tag.Split(',');
+                for (var i = 0; i < tags.Length; i++)
+                {
+                    var tagId = StringHelper.ToUnsignString(tags[i]);
+                    if (_tb_TagRepository.Count(x => x.TagID == tagId) == 0)
+                    {
+                        Tb_Tag tag = new Tb_Tag();
+                        tag.TagID = tagId;
+                        tag.Name = tags[i].ToUpper();
+                        tag.Type = CommonConstants.NewsTag;
+                        _tb_TagRepository.Add(tag);
+                    }
+
+                    Tb_TagNews newsTag = new Tb_TagNews();
+                    newsTag.NewsID = tb_News.NewsID;
+                    newsTag.TagID = tagId;
+                    _tb_TagNewsRepository.Add(newsTag);
+                }
+            }
+            return news;
         }
 
         public Tb_News Delete(int id)
@@ -60,6 +88,29 @@ namespace MINHTHUShop.Service
         public void Update(Tb_News tb_News)
         {
             _tb_NewsRepository.Update(tb_News);
+
+            if (!string.IsNullOrEmpty(tb_News.Tag))
+            {
+                string[] tags = tb_News.Tag.Split(',');
+                for (var i = 0; i < tags.Length; i++)
+                {
+                    var tagId = StringHelper.ToUnsignString(tags[i]);
+                    if (_tb_TagRepository.Count(x => x.TagID == tagId) == 0)
+                    {
+                        Tb_Tag tag = new Tb_Tag();
+                        tag.TagID = tagId;
+                        tag.Name = tags[i].ToUpper();
+                        tag.Type = CommonConstants.NewsTag;
+                        _tb_TagRepository.Add(tag);
+                    }
+
+                    _tb_TagNewsRepository.DeleteMulti(x => x.NewsID == tb_News.NewsID);
+                    Tb_TagNews newsTag = new Tb_TagNews();
+                    newsTag.NewsID = tb_News.NewsID;
+                    newsTag.TagID = tagId;
+                    _tb_TagNewsRepository.Add(newsTag);
+                }
+            }
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using MINHTHUShop.Data.Infrastructure;
+﻿using MINHTHUShop.Common;
+using MINHTHUShop.Data.Infrastructure;
 using MINHTHUShop.Data.Repositories;
 using MINHTHUShop.Model.Models;
 using System;
@@ -25,10 +26,30 @@ namespace MINHTHUShop.Service
         }
         public Tb_Product Create(Tb_Product tb_Product)
         {
-            var p = _tb_ProductRepository.Add(tb_Product);
+            var product = _tb_ProductRepository.Add(tb_Product);
             _unitOfWork.Commit();
-            //chỉnh sửa sau
-            return p;
+            if (!string.IsNullOrEmpty(tb_Product.Tag))
+            {
+                string[] tags = tb_Product.Tag.Split(',');
+                for (var i = 0; i < tags.Length; i++)
+                {
+                    var tagId = StringHelper.ToUnsignString(tags[i]);
+                    if (_tb_TagRepository.Count(x => x.TagID == tagId) == 0)
+                    {
+                        Tb_Tag tag = new Tb_Tag();
+                        tag.TagID = tagId;
+                        tag.Name = tags[i].ToUpper();
+                        tag.Type = CommonConstants.ProductTag;
+                        _tb_TagRepository.Add(tag);
+                    }
+
+                    Tb_TagProduct productTag = new Tb_TagProduct();
+                    productTag.ProductID = tb_Product.ProductID;
+                    productTag.TagID = tagId;
+                    _tb_TagProductRepository.Add(productTag);
+                }
+            }
+            return product;
         }
 
         public Tb_Product Delete(int id)
@@ -145,7 +166,29 @@ namespace MINHTHUShop.Service
         public void Update(Tb_Product tb_Product)
         {
             _tb_ProductRepository.Update(tb_Product);
-            //chỉnh sửa sau
+
+            if (!string.IsNullOrEmpty(tb_Product.Tag))
+            {
+                string[] tags = tb_Product.Tag.Split(',');
+                for (var i = 0; i < tags.Length; i++)
+                {
+                    var tagId = StringHelper.ToUnsignString(tags[i]);
+                    if (_tb_TagRepository.Count(x => x.TagID == tagId) == 0)
+                    {
+                        Tb_Tag tag = new Tb_Tag();
+                        tag.TagID = tagId;
+                        tag.Name = tags[i].ToUpper();
+                        tag.Type = CommonConstants.ProductTag;
+                        _tb_TagRepository.Add(tag);
+                    }
+
+                    _tb_TagProductRepository.DeleteMulti(x => x.ProductID == tb_Product.ProductID);
+                    Tb_TagProduct productTag = new Tb_TagProduct();
+                    productTag.ProductID = tb_Product.ProductID;
+                    productTag.TagID = tagId;
+                    _tb_TagProductRepository.Add(productTag);
+                }
+            }
         }
     }
 
