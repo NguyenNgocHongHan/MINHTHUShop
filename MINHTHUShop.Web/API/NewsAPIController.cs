@@ -14,17 +14,17 @@ using System.Web.Script.Serialization;
 
 namespace MINHTHUShop.Web.API
 {
-    [RoutePrefix("api/Product")]
-    public class ProductAPIController : APIControllerBase
+    [RoutePrefix("api/News")]
+    public class NewsAPIController : APIControllerBase
     {
         #region Khởi tạo
 
-        private ITb_ProductService _productService;
+        private ITb_NewsService _newsService;
 
-        public ProductAPIController(ITb_ErrorService errorService, ITb_ProductService productService)
+        public NewsAPIController(ITb_ErrorService errorService, ITb_NewsService newsService)
             : base(errorService)
         {
-            this._productService = productService;
+            this._newsService = newsService;
         }
 
         #endregion Khởi tạo
@@ -35,8 +35,8 @@ namespace MINHTHUShop.Web.API
         {
             Func<HttpResponseMessage> func = () =>
             {
-                var model = _productService.GetAll();
-                var responseData = Mapper.Map<IEnumerable<Tb_Product>, IEnumerable<ProductVM>>(model);
+                var model = _newsService.GetAll();
+                var responseData = Mapper.Map<IEnumerable<Tb_News>, IEnumerable<NewsVM>>(model);
                 var response = request.CreateResponse(HttpStatusCode.OK, responseData);
 
                 return response;
@@ -50,8 +50,8 @@ namespace MINHTHUShop.Web.API
         {
             return CreateHttpResponse(request, () =>
             {
-                var model = _productService.GetById(id);
-                var responseData = Mapper.Map<Tb_Product, ProductVM>(model);
+                var model = _newsService.GetById(id);
+                var responseData = Mapper.Map<Tb_News, NewsVM>(model);
                 var response = request.CreateResponse(HttpStatusCode.OK, responseData);
 
                 return response;
@@ -65,14 +65,14 @@ namespace MINHTHUShop.Web.API
             return CreateHttpResponse(request, () =>
             {
                 int totalRow = 0;
-                var model = _productService.GetAll(keyword);
+                var model = _newsService.GetAll(keyword);
                 totalRow = model.Count();
 
                 var query = model.OrderByDescending(x => x.Name).Skip(page * pageSize).Take(pageSize);
 
-                var responseData = Mapper.Map<IEnumerable<Tb_Product>, IEnumerable<ProductVM>>(query.AsEnumerable());
+                var responseData = Mapper.Map<IEnumerable<Tb_News>, IEnumerable<NewsVM>>(query.AsEnumerable());
 
-                var paginationSet = new Pagination<ProductVM>()
+                var paginationSet = new Pagination<NewsVM>()
                 {
                     Item = responseData,
                     Page = page,
@@ -88,7 +88,7 @@ namespace MINHTHUShop.Web.API
 
         [Route("Create")]
         [HttpPost]
-        public HttpResponseMessage Create(HttpRequestMessage request, ProductVM productVM)
+        public HttpResponseMessage Create(HttpRequestMessage request, NewsVM newsVM)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -99,13 +99,13 @@ namespace MINHTHUShop.Web.API
                 }
                 else
                 {
-                    var newProduct = new Tb_Product();
-                    newProduct.UpdateProduct(productVM);
-                    newProduct.CreateDate = DateTime.Now;
-                    _productService.Create(newProduct);
-                    _productService.SaveChanges();
+                    var newNews = new Tb_News();
+                    newNews.UpdateNews(newsVM);
+                    newNews.CreateDate = DateTime.Now;
+                    _newsService.Create(newNews);
+                    _newsService.SaveChanges();
 
-                    var responseData = Mapper.Map<Tb_Product, ProductVM>(newProduct);
+                    var responseData = Mapper.Map<Tb_News, NewsVM>(newNews);
                     response = request.CreateResponse(HttpStatusCode.Created, responseData);
                 }
                 return response;
@@ -114,7 +114,7 @@ namespace MINHTHUShop.Web.API
 
         [Route("Update")]
         [HttpPut]
-        public HttpResponseMessage Update(HttpRequestMessage request, ProductVM productVM)
+        public HttpResponseMessage Update(HttpRequestMessage request, NewsVM newsVM)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -125,12 +125,12 @@ namespace MINHTHUShop.Web.API
                 }
                 else
                 {
-                    var dbProduct = _productService.GetById(productVM.ProductID);
-                    dbProduct.UpdateProduct(productVM);
-                    _productService.Update(dbProduct);
-                    _productService.SaveChanges();
+                    var dbNews = _newsService.GetById(newsVM.NewsID);
+                    dbNews.UpdateNews(newsVM);
+                    _newsService.Update(dbNews);
+                    _newsService.SaveChanges();
 
-                    var responseData = Mapper.Map<Tb_Product, ProductVM>(dbProduct);
+                    var responseData = Mapper.Map<Tb_News, NewsVM>(dbNews);
                     response = request.CreateResponse(HttpStatusCode.Created, responseData);
                 }
                 return response;
@@ -150,10 +150,10 @@ namespace MINHTHUShop.Web.API
                 }
                 else
                 {
-                    var oldProduct = _productService.Delete(id);
-                    _productService.SaveChanges();
+                    var oldNews = _newsService.Delete(id);
+                    _newsService.SaveChanges();
 
-                    var responseData = Mapper.Map<Tb_Product, ProductVM>(oldProduct);
+                    var responseData = Mapper.Map<Tb_News, NewsVM>(oldNews);
                     response = request.CreateResponse(HttpStatusCode.Created, responseData);
                 }
                 return response;
@@ -162,7 +162,7 @@ namespace MINHTHUShop.Web.API
 
         [Route("DeleteMulti")]
         [HttpDelete]
-        public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedProduct)
+        public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedNews)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -173,15 +173,15 @@ namespace MINHTHUShop.Web.API
                 }
                 else
                 {
-                    var listProduct = new JavaScriptSerializer().Deserialize<List<int>>(checkedProduct);
-                    foreach (var item in listProduct)
+                    var listNews = new JavaScriptSerializer().Deserialize<List<int>>(checkedNews);
+                    foreach (var item in listNews)
                     {
-                        _productService.Delete(item);
+                        _newsService.Delete(item);
                     }
 
-                    _productService.SaveChanges();
+                    _newsService.SaveChanges();
 
-                    response = request.CreateResponse(HttpStatusCode.OK, listProduct.Count);
+                    response = request.CreateResponse(HttpStatusCode.OK, listNews.Count);
                 }
                 return response;
             });

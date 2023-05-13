@@ -5,10 +5,12 @@ using System.Web;
 
 namespace MINHTHUShop.Web.Models
 {
-    public class TagVM
+    public class TagNewsVM
     {
+        public int NewsID { get; set; }
         public string TagID { get; set; }
-        public string Name { get; set; }
-        public string Type { get; set; }
+
+        public virtual NewsVM NewsVM { get; set; }
+        public virtual TagVM TagVM { get; set; }
     }
 }

@@ -32,6 +32,19 @@ namespace MINHTHUShop.Service
             return _tb_NewsCategoryRepository.GetAll();
         }
 
+        public IEnumerable<Tb_NewsCategory> GetAll(string keywork)
+        {
+            if (!string.IsNullOrEmpty(keywork))
+            {
+                return _tb_NewsCategoryRepository.GetMulti(x => x.Name.Contains(keywork));
+            }
+            else
+            {
+                return _tb_NewsCategoryRepository.GetAll();
+            }
+        }
+
+
         public IEnumerable<Tb_NewsCategory> GetAllByParentId(int parentID)
         {
             return _tb_NewsCategoryRepository.GetMulti(x => x.ParentID == parentID);
@@ -66,6 +79,8 @@ namespace MINHTHUShop.Service
         Tb_NewsCategory GetById(int id);
 
         IEnumerable<Tb_NewsCategory> GetAll();
+
+        IEnumerable<Tb_NewsCategory> GetAll(string keywork);
 
         IEnumerable<Tb_NewsCategory> GetAllByParentId(int parentID);
     }

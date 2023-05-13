@@ -68,6 +68,14 @@
     <Compile Include="Migrations\202305131027063_updateRepository.designer.cs">
       <DependentUpon>202305131027063_updateRepository.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305131713589_addSEOFeildForFAQAndFAQCategory.cs" />
+    <Compile Include="Migrations\202305131713589_addSEOFeildForFAQAndFAQCategory.designer.cs">
+      <DependentUpon>202305131713589_addSEOFeildForFAQAndFAQCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305131823172_changeLengthNameNewsTable.cs" />
+    <Compile Include="Migrations\202305131823172_changeLengthNameNewsTable.designer.cs">
+      <DependentUpon>202305131823172_changeLengthNameNewsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -119,6 +127,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202305131027063_updateRepository.resx">
       <DependentUpon>202305131027063_updateRepository.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305131713589_addSEOFeildForFAQAndFAQCategory.resx">
+      <DependentUpon>202305131713589_addSEOFeildForFAQAndFAQCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305131823172_changeLengthNameNewsTable.resx">
+      <DependentUpon>202305131823172_changeLengthNameNewsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

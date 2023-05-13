@@ -12,6 +12,8 @@ namespace MINHTHUShop.Web.Mappings
             {
                 cfg.CreateMap<Tb_Brand, BrandVM>();
                 cfg.CreateMap<Tb_Customer, CustomerVM>();
+                cfg.CreateMap<Tb_NewsCategory, NewsCategoryVM>();
+                cfg.CreateMap<Tb_News, NewsVM>();
                 cfg.CreateMap<Tb_OrderDetail, OrderDetailVM>();
                 cfg.CreateMap<Tb_OrderStatus, OrderStatusVM>();
                 cfg.CreateMap<Tb_Order, OrderVM>();
@@ -22,6 +24,7 @@ namespace MINHTHUShop.Web.Mappings
                 cfg.CreateMap<Tb_RoleStaff, RoleStaffVM>();
                 cfg.CreateMap<Tb_ShippingMethod, ShippingMethodVM>();
                 cfg.CreateMap<Tb_Staff, StaffVM>();
+                cfg.CreateMap<Tb_TagNews, TagNewsVM>();
                 cfg.CreateMap<Tb_TagProduct, TagProductVM>();
                 cfg.CreateMap<Tb_Tag, TagVM>();
             });

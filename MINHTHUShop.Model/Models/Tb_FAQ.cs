@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MINHTHUShop.Model.Models
 {
-    public class Tb_FAQ
+    public class Tb_FAQ : SEO
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
 using System.Web.Script.Serialization;
 
@@ -72,7 +71,7 @@ namespace MINHTHUShop.Web.API
 
                 totalRow = model.Count();
 
-                var query = model.Skip(page * pageSize).Take(pageSize);
+                var query = model.OrderByDescending(x => x.Name).Skip(page * pageSize).Take(pageSize);
 
                 var responseData = Mapper.Map<IEnumerable<Tb_Brand>, IEnumerable<BrandVM>>(query);
 
@@ -136,24 +135,7 @@ namespace MINHTHUShop.Web.API
 
                     _brandService.Update(dbBrand);
                     _brandService.SaveChanges();
-                    /*try
-                    {
-                        _productCategoryService.SaveChanges();
-                    }
-                    catch (DbEntityValidationException e)
-                    {
-                        foreach (var eve in e.EntityValidationErrors)
-                        {
-                            Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                                eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                            foreach (var ve in eve.ValidationErrors)
-                            {
-                                Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                                    ve.PropertyName, ve.ErrorMessage);
-                            }
-                        }
-                        throw;
-                    }*/
+
                     var responseData = Mapper.Map<Tb_Brand, BrandVM>(dbBrand);
                     response = request.CreateResponse(HttpStatusCode.Created, responseData);
                 }

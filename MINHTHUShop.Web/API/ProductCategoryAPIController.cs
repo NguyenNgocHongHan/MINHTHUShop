@@ -71,7 +71,7 @@ namespace MINHTHUShop.Web.API
 
                 totalRow = model.Count();
 
-                var query = model.Skip(page * pageSize).Take(pageSize);
+                var query = model.OrderByDescending(x => x.Name).Skip(page * pageSize).Take(pageSize);
 
                 var responseData = Mapper.Map<IEnumerable<Tb_ProductCategory>, IEnumerable<ProductCategoryVM>>(query);
 
@@ -106,8 +106,6 @@ namespace MINHTHUShop.Web.API
                     var newProductCategory = new Tb_ProductCategory();
                     //update
                     newProductCategory.UpdateProductCategory(productCategoryVM);
-                    //lưu createdate = datetime.now (nếu có)
-                    //newProductCategory.CreateDate = DateTime.Now;
                     _productCategoryService.Create(newProductCategory);
                     _productCategoryService.SaveChanges();
 
@@ -137,24 +135,7 @@ namespace MINHTHUShop.Web.API
 
                     _productCategoryService.Update(dbProductCategory);
                     _productCategoryService.SaveChanges();
-                    /*try
-                    {
-                        _productCategoryService.SaveChanges();
-                    }
-                    catch (DbEntityValidationException e)
-                    {
-                        foreach (var eve in e.EntityValidationErrors)
-                        {
-                            Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                                eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                            foreach (var ve in eve.ValidationErrors)
-                            {
-                                Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                                    ve.PropertyName, ve.ErrorMessage);
-                            }
-                        }
-                        throw;
-                    }*/
+
                     var responseData = Mapper.Map<Tb_ProductCategory, ProductCategoryVM>(dbProductCategory);
                     response = request.CreateResponse(HttpStatusCode.Created, responseData);
                 }

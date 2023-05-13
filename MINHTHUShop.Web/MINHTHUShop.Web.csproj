@@ -205,6 +205,8 @@
   <ItemGroup>
     <Compile Include="API\AccountController.cs" />
     <Compile Include="API\BrandAPIController.cs" />
+    <Compile Include="API\NewsAPIController.cs" />
+    <Compile Include="API\NewsCategoryAPIController.cs" />
     <Compile Include="API\ProductAPIController.cs" />
     <Compile Include="API\ProductCategoryAPIController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -225,6 +227,8 @@
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Models\BrandVM.cs" />
     <Compile Include="Models\CustomerVM.cs" />
+    <Compile Include="Models\NewsVM.cs" />
+    <Compile Include="Models\NewsCategoryVM.cs" />
     <Compile Include="Models\OrderDetailVM.cs" />
     <Compile Include="Models\OrderStatusVM.cs" />
     <Compile Include="Models\OrderVM.cs" />
@@ -235,6 +239,7 @@
     <Compile Include="Models\RoleStaffVM.cs" />
     <Compile Include="Models\ShippingMethodVM.cs" />
     <Compile Include="Models\StaffVM.cs" />
+    <Compile Include="Models\TagNewsVM.cs" />
     <Compile Include="Models\TagProductVM.cs" />
     <Compile Include="Models\TagVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -250,6 +255,20 @@
     <Content Include="app\components\brand\brandView.html" />
     <Content Include="app\components\home\homeController.js" />
     <Content Include="app\components\home\homeView.html" />
+    <Content Include="app\components\newsCategory\newsCategory.module.js" />
+    <Content Include="app\components\newsCategory\newsCategoryController.js" />
+    <Content Include="app\components\newsCategory\newsCategoryCreateController.js" />
+    <Content Include="app\components\newsCategory\newsCategoryCreateView.html" />
+    <Content Include="app\components\newsCategory\newsCategoryEditController.js" />
+    <Content Include="app\components\newsCategory\newsCategoryEditView.html" />
+    <Content Include="app\components\newsCategory\newsCategoryView.html" />
+    <Content Include="app\components\news\news.module.js" />
+    <Content Include="app\components\news\newsController.js" />
+    <Content Include="app\components\news\newsCreateController.js" />
+    <Content Include="app\components\news\newsCreateView.html" />
+    <Content Include="app\components\news\newsEditController.js" />
+    <Content Include="app\components\news\newsEditView.html" />
+    <Content Include="app\components\news\newsView.html" />
     <Content Include="app\components\productCategory\productCategory.module.js" />
     <Content Include="app\components\productCategory\productCategoryCreateView.html" />
     <Content Include="app\components\productCategory\productCategoryCreateController.js" />

@@ -59,6 +59,19 @@ namespace MINHTHUShop.Service
             return _tb_NewsRepository.GetAll(new string[] { "Tb_NewsCategory" });
         }
 
+        public IEnumerable<Tb_News> GetAll(string keywork)
+        {
+            if (!string.IsNullOrEmpty(keywork))
+            {
+                return _tb_NewsRepository.GetMulti(x => x.Name.Contains(keywork) || x.Description.Contains(keywork));
+            }
+            else
+            {
+                return _tb_NewsRepository.GetAll();
+            }
+        }
+
+
         public IEnumerable<Tb_News> GetAllByCategoryPaging(int cateID, int pageIndex, int pageSize, out int totalRow)
         {
             return _tb_NewsRepository.GetMultiPaging(x => x.Status == true && x.NewsCateID == cateID, out totalRow, pageIndex, pageSize, new string[] { "Tb_NewsCategory" });
@@ -127,6 +140,8 @@ namespace MINHTHUShop.Service
         Tb_News GetById(int id);
 
         IEnumerable<Tb_News> GetAll();
+
+        IEnumerable<Tb_News> GetAll(string keywork);
 
         IEnumerable<Tb_News> GetAllPaging(int pageIndex, int pageSize, out int totalRow);
 

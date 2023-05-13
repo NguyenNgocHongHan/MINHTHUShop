@@ -16,7 +16,7 @@ namespace MINHTHUShop.Model.Models
         public int NewsCateID { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(250)]
         public string Name { get; set; }
 
         [MaxLength(250)]
