@@ -17,6 +17,7 @@
         $scope.GetMetaTitle = GetMetaTitle;
 
         function UpdateProduct() {
+            $scope.product.ListImg = JSON.stringify($scope.moreImages)
             apiService.put('api/Product/Update', $scope.product,
                 function (result) {
                     notificationService.displaySuccess(result.data.Name + ' đã được cập nhật');
@@ -33,6 +34,7 @@
         function LoadProductDetail() {
             apiService.get('api/Product/GetById/' + $stateParams.id, null, function (result) {
                 $scope.product = result.data;
+                $scope.moreImages = JSON.parse($scope.product.ListImg);
             }, function (error) {
                 notificationService.displayError(error.data);
             });

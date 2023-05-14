@@ -25,6 +25,7 @@
         }
 
         function CreateProduct() {
+            $scope.product.ListImg = JSON.stringify($scope.moreImages)
             apiService.post('api/Product/Create', $scope.product,
                 function (result) {
                     notificationService.displaySuccess('Đã thêm ' + result.data.Name + ' thành công');
@@ -54,7 +55,7 @@
         $scope.ChooseImage = function () {
             var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) {
-                $scope.$apply(function () {
+                $scope.$apply(function () { //dùng để bắt ảnh ngay mà không cần phải đợi lâu để load ảnh
                     $scope.product.Image = fileUrl;
                 })
             }
@@ -67,7 +68,6 @@
                 $scope.$apply(function () {
                     $scope.moreImages.push(fileUrl);
                 })
-
             }
             finder.popup();
         }
