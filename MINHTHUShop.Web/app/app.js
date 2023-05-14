@@ -1,8 +1,13 @@
 ﻿/// <reference path="../content/admin/lib/angular.js/angular.js" />
 (function () {
     angular.module('MINHTHUShop',
-        ['MINHTHUShop.product', ,
+        [
             'MINHTHUShop.productCategory',
+            'MINHTHUShop.newsCategory',
+            'MINHTHUShop.faqCategory',
+            'MINHTHUShop.product',
+            'MINHTHUShop.news',
+            'MINHTHUShop.faq',
             'MINHTHUShop.brand',
             /*'tedushop.application_groups'
             'tedushop.application_roles',
