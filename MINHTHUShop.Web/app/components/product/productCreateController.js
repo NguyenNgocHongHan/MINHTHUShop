@@ -15,7 +15,7 @@
             height: '200px'
         }
 
-        $scope.moreImages = [];
+        $scope.listImg = [];
 
         $scope.CreateProduct = CreateProduct;
         $scope.GetMetaTitle = GetMetaTitle;
@@ -25,7 +25,12 @@
         }
 
         function CreateProduct() {
-            $scope.product.ListImg = JSON.stringify($scope.moreImages)
+            if ($scope.listImg.length == 0) {
+                $scope.product.ListImg = null
+            }
+            else {
+                $scope.product.ListImg = JSON.stringify($scope.listImg) //convert chuỗi từ js thành json
+            } 
             apiService.post('api/Product/Create', $scope.product,
                 function (result) {
                     notificationService.displaySuccess('Đã thêm ' + result.data.Name + ' thành công');
@@ -66,10 +71,19 @@
             var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) {
                 $scope.$apply(function () {
-                    $scope.moreImages.push(fileUrl);
+                    $scope.listImg.push(fileUrl);
                 })
             }
             finder.popup();
+        }
+
+        $scope.DeleteImage = function () {
+            $scope.product.Image = null;
+        }
+
+        $scope.DeleteMoreImage = function () {
+            $scope.listImg = [];
+            $scope.listImg.length = 0;
         }
 
         LoadCate();

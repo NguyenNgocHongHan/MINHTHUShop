@@ -60,38 +60,38 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Tiêu đề SEO</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="metaTitle" ng-model="faq.MetaTitle" ng-maxlength="250" placeholder="Tên tiêu đề SEO (Meta Title)" required>
-                        <div class="has-error" ng-show="frmCreateFAQ.metaTitle.$invalid">
-                            <span ng-show="frmCreateFAQ.metaTitle.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên tiêu đề SEO!</span>
-                            <span ng-show="frmCreateFAQ.metaTitle.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tiêu đề SEO</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="metaTitle" ng-model="faq.MetaTitle" ng-maxlength="250" placeholder="Tên tiêu đề SEO (Meta Title)" required>
+                            <div class="has-error" ng-show="frmCreateFAQ.metaTitle.$invalid">
+                                <span ng-show="frmCreateFAQ.metaTitle.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên tiêu đề SEO!</span>
+                                <span ng-show="frmCreateFAQ.metaTitle.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Từ khóa SEO</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="metaKeywords" ng-model="faq.MetaKeywords" ng-maxlength="250" placeholder="Từ khóa SEO (Meta Keywords - nếu có)">
-                        <span ng-show="frmCreateFAQ.metaKeywords.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Từ khóa SEO</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="metaKeywords" ng-model="faq.MetaKeywords" ng-maxlength="250" placeholder="Từ khóa SEO (Meta Keywords - nếu có)">
+                            <span ng-show="frmCreateFAQ.metaKeywords.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Mô tả SEO</label>
-                    <div class="col-sm-9">
-                        <textarea class="form-control" name="metaDescriptions" ng-model="faq.MetaDescriptions" ng-maxlength="500" placeholder="Mô tả SEO (Meta Descriptions - nếu có)"></textarea>
-                        <span ng-show="frmCreateFAQ.metaDescriptions.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 500 ký tự!</span>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Mô tả SEO</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" name="metaDescriptions" ng-model="faq.MetaDescriptions" ng-maxlength="500" placeholder="Mô tả SEO (Meta Descriptions - nếu có)"></textarea>
+                            <span ng-show="frmCreateFAQ.metaDescriptions.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 500 ký tự!</span>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Trạng thái hoạt động</label>
-                    <div class="col-sm-9">
-                        <div class="custom-checkbox">
-                            <label>
-                                <input type="checkbox" name="status" ng-model="faq.Status" ng-checked="faq.Status">
-                            </label>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Trạng thái hoạt động</label>
+                        <div class="col-sm-9">
+                            <div class="custom-checkbox">
+                                <label>
+                                    <input type="checkbox" name="status" ng-model="faq.Status" ng-checked="faq.Status">
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>

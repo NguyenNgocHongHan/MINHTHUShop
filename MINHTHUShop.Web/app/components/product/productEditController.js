@@ -11,13 +11,32 @@
             height: '200px'
         }
 
-        $scope.moreImages = [];
+        $scope.listImg = [];
 
         $scope.UpdateProduct = UpdateProduct;
         $scope.GetMetaTitle = GetMetaTitle;
 
+        function LoadProductDetail() {
+            apiService.get('api/Product/GetById/' + $stateParams.id, null, function (result) {
+                $scope.product = result.data;
+                if ($scope.product.ListImg == null) {
+                    $scope.listImg = []
+                }
+                else {
+                    $scope.listImg = JSON.parse($scope.product.ListImg); //convert từ 1 chuỗi json thành 1 chuỗi js
+                }
+            }, function (error) {
+                notificationService.displayError(error.data);
+            });
+        }
+
         function UpdateProduct() {
-            $scope.product.ListImg = JSON.stringify($scope.moreImages)
+            if ($scope.listImg.length == 0) {
+                $scope.product.ListImg = null
+            }
+            else {
+                $scope.product.ListImg = JSON.stringify($scope.listImg) // convert từ 1 chuỗi js thành 1 chuỗi json
+            }
             apiService.put('api/Product/Update', $scope.product,
                 function (result) {
                     notificationService.displaySuccess(result.data.Name + ' đã được cập nhật');
@@ -29,15 +48,6 @@
 
         function GetMetaTitle() {
             $scope.product.MetaTitle = commonService.getMetaTitle($scope.product.Name);
-        }
-
-        function LoadProductDetail() {
-            apiService.get('api/Product/GetById/' + $stateParams.id, null, function (result) {
-                $scope.product = result.data;
-                $scope.moreImages = JSON.parse($scope.product.ListImg);
-            }, function (error) {
-                notificationService.displayError(error.data);
-            });
         }
 
         function LoadCate() {
@@ -70,11 +80,19 @@
             var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) {
                 $scope.$apply(function () {
-                    $scope.moreImages.push(fileUrl);
+                    $scope.listImg.push(fileUrl);
                 })
-
             }
             finder.popup();
+        }
+
+        $scope.DeleteImage = function () {
+            $scope.product.Image = null;
+        }
+
+        $scope.DeleteMoreImage = function () {
+            $scope.listImg = [];
+            $scope.listImg.length = 0;
         }
 
         LoadCate();

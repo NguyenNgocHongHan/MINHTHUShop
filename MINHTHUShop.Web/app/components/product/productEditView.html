@@ -97,19 +97,19 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" name="image" ng-model="product.Image" ng-maxlength="250" placeholder="Hình ảnh sản phẩm">
                                 <span ng-show="frmUpdateProduct.image.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
-                                <button class="btn btn-default btn-sm" type="button" ng-click="ChooseImage()">Chọn ảnh</button>
+                                <button class="btn btn-sm btn-default" style="margin-left:5px;" type="button" ng-click="ChooseImage()">Chọn ảnh</button>
+                                <button class="btn btn-sm btn-danger" style="margin-left:5px;" type="button" ng-click="DeleteImage()">Xóa ảnh</button>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Thêm ảnh</label>
                         <div class="col-sm-9">
-                            <div class="input-group">
-                                <ul class="list-inline">
-                                    <li ng-repeat="img in moreImages"><img ng-src="{{img}}" width="100" /></li>
-                                </ul>
-                                <button class="btn btn-default" type="button" ng-click="ChooseMoreImage()">Chọn ảnh</button>
-                            </div>
+                            <ul class="list-inline">
+                                <li class="list-inline-item" ng-repeat="img in listImg"><img ng-src="{{img}}" width="100" /></li>
+                            </ul>
+                            <button class="btn btn-sm btn-default" style="margin-left:5px;" type="button" ng-click="ChooseMoreImage()">Chọn ảnh</button>
+                            <button class="btn btn-sm btn-danger" style="margin-left:5px;" type="button" ng-click="DeleteMoreImage()">Xóa ảnh</button>
                         </div>
                     </div>
                     <div class="form-group row">

@@ -62,6 +62,7 @@
                                 <input type="text" class="form-control" name="image" ng-model="news.Image" ng-maxlength="250" placeholder="Hình ảnh tin tức">
                                 <span ng-show="frmUpdateNews.image.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
                                 <button class="btn btn-default btn-sm" type="button" ng-click="ChooseImage()">Chọn ảnh</button>
+                                <button class="btn btn-danger btn-sm" style="margin-left:5px;" type="button" ng-click="DeleteImage()">Xóa ảnh</button>
                             </div>
                         </div>
                     </div>

@@ -50,6 +50,10 @@
             finder.popup();
         }
 
+        $scope.DeleteImage = function () {
+            $scope.product.Image = null;
+        }
+
         LoadCate();
     }
 })(angular.module('MINHTHUShop.news'));

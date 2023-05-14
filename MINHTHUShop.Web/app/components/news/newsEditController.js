@@ -54,6 +54,10 @@
             finder.popup();
         }
 
+        $scope.DeleteImage = function () {
+            $scope.product.Image = null;
+        }
+
         LoadCate();
         LoadNewsDetail();
     }
