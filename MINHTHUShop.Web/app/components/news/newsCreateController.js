@@ -24,7 +24,7 @@
         function CreateNews() {
             apiService.post('api/News/Create', $scope.news,
                 function (result) {
-                    notificationService.displaySuccess('Đã thêm ' + result.data.Name + ' vào danh mục tin tức');
+                    notificationService.displaySuccess('Đã thêm ' + result.data.Name + ' thành công');
                     //điều hướng đến trang mới
                     $state.go('news');
                 }, function (error) {
@@ -36,7 +36,7 @@
             apiService.get('api/NewsCategory/GetAll', null, function (result) {
                 $scope.newsCategory = result.data;
             }, function () {
-                console.log('Tải sản danh mục sản phẩm thất bại!');
+                console.log('Tải danh mục tin tức thất bại!');
             });
         }
 

@@ -70,5 +70,30 @@ namespace MINHTHUShop.Web.Infrastructure.Extensions
             n.MetaDescriptions = vm.MetaDescriptions;
         }
 
+        public static void UpdateFAQCategory(this Tb_FAQCategory fc, FAQCategoryVM vm)
+        {
+            fc.FAQCateID = vm.FAQCateID;
+            fc.Name = vm.Name;
+            fc.Sort = vm.Sort;
+            fc.ParentID = vm.ParentID;
+            fc.MetaTitle = vm.MetaTitle;
+            fc.MetaKeywords = vm.MetaKeywords;
+            fc.MetaDescriptions = vm.MetaDescriptions;
+        }
+
+        public static void UpdateFAQ(this Tb_FAQ f, FAQVM vm)
+        {
+            f.FAQID = vm.FAQID;
+            f.FAQCateID = vm.FAQCateID;
+            f.Question = vm.Question;
+            f.Answer = vm.Answer;
+            f.CreateDate = vm.CreateDate;
+            f.Status = vm.Status;
+            f.MetaTitle = vm.MetaTitle;
+            f.MetaKeywords = vm.MetaKeywords;
+            f.MetaDescriptions = vm.MetaDescriptions;
+        }
+
+
     }
 }

@@ -1,21 +1,21 @@
 ﻿(function (app) {
-    app.controller('productCategoryCreateController', productCategoryCreateController);
+    app.controller('faqCategoryCreateController', faqCategoryCreateController);
 
-    productCategoryCreateController.$inject = ['$scope', '$state', 'apiService', 'notificationService', 'commonService'];
+    faqCategoryCreateController.$inject = ['$scope', '$state', 'apiService', 'notificationService', 'commonService'];
 
-    function productCategoryCreateController($scope, $state, apiService, notificationService, commonService) {
-        $scope.productCategory = {}
+    function faqCategoryCreateController($scope, $state, apiService, notificationService, commonService) {
+        $scope.faqCategory = {}
         $scope.parentCategory = [];
 
-        $scope.CreateProductCategory = CreateProductCategory;
+        $scope.CreateFAQCategory = CreateFAQCategory;
         $scope.GetMetaTitle = GetMetaTitle;
 
         function GetMetaTitle() {
-            $scope.productCategory.MetaTitle = commonService.getMetaTitle($scope.productCategory.Name);
+            $scope.faqCategory.MetaTitle = commonService.getMetaTitle($scope.faqCategory.Name);
         }
 
         function LoadParentCategory() {
-            apiService.get('api/ProductCategory/GetAll', null, function (result) {
+            apiService.get('api/FAQCategory/GetAll', null, function (result) {
                 /*console.log(result);*/
                 $scope.parentCategory = result.data;
                 /*$scope.parentCategory = commonService.getTree(result.data, "CateID", "ParentID");*/
@@ -27,12 +27,12 @@
             });
         }
 
-        function CreateProductCategory() {
-            apiService.post('api/ProductCategory/Create', $scope.productCategory,
+        function CreateFAQCategory() {
+            apiService.post('api/FAQCategory/Create', $scope.faqCategory,
                 function (result) {
                     notificationService.displaySuccess('Đã thêm ' + result.data.Name + ' thành công');
                     //điều hướng đến trang mới
-                    $state.go('productCategory');
+                    $state.go('faqCategory');
                 }, function (error) {
                     notificationService.displayError('Thêm mới không thành công!');
                 });
@@ -40,4 +40,4 @@
 
         LoadParentCategory();
     }
-})(angular.module('MINHTHUShop.productCategory'));
+})(angular.module('MINHTHUShop.faqCategory'));

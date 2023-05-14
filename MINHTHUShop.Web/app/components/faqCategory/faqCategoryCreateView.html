@@ -1,0 +1,91 @@
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><small>THÊM MỚI DANH MỤC CÂU HỎI THƯỜNG GẶP</small></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
+                    <li class="breadcrumb-item">Quản lý thông tin</li>
+                    <li class="breadcrumb-item"><a ui-sref="faqCategory">Danh mục FAQ</a></li>
+                    <li class="breadcrumb-item active">Thêm mới</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div style="width:90%; margin:auto;">
+        <!-- Horizontal Form -->
+        <div class="card card-success">
+            <div class="card-header">
+                <h3 class="card-title">THÊM MỚI DANH MỤC FAQ</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form class="form-horizontal" novalidate name="frmCreateFAQCategory" role="form" ng-submit="CreateFAQCategory()">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tên danh mục</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="name" ng-model="faqCategory.Name" ng-change="GetMetaTitle()" ng-maxlength="50" placeholder="Tên danh mục câu hỏi thường gặp" required>
+                            <div class="has-error" ng-show="frmCreateFAQCategory.name.$invalid">
+                                <span ng-show="frmCreateFAQCategory.name.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên danh mục!</span>
+                                <span ng-show="frmCreateFAQCategory.name.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 50 ký tự!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Thứ tự danh mục</label>
+                        <div class="col-sm-9">
+                            <input type="number" min="0" class="form-control" name="sort" ng-model="faqCategory.Sort" placeholder="Thứ tự hiển thị danh mục (nếu có)">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Danh mục cha</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="parentID" ng-model="faqCategory.ParentID" ng-options="option.FAQCateID as option.Name for option in parentCategory">
+                                <option value="">Mã danh mục cha (nếu có)</option>
+                            </select>
+                            <input type="hidden" name="parentID" ng-model="faqCategory.ParentID" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tiêu đề SEO</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="metaTitle" ng-model="faqCategory.MetaTitle" ng-maxlength="250" placeholder="Tên tiêu đề SEO (Meta Title)" required>
+                            <div class="has-error" ng-show="frmCreateFAQCategory.metaTitle.$invalid">
+                                <span ng-show="frmCreateFAQCategory.metaTitle.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên tiêu đề SEO!</span>
+                                <span ng-show="frmCreateFAQCategory.metaTitle.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Từ khóa SEO</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="metaKeywords" ng-model="faqCategory.MetaKeywords" ng-maxlength="250" placeholder="Từ khóa SEO (Meta Keywords - nếu có)">
+                            <span ng-show="frmCreateFAQCategory.metaKeywords.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Mô tả SEO</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" name="metaDescriptions" ng-model="faqCategory.MetaDescriptions" ng-maxlength="500" placeholder="Mô tả SEO (Meta Descriptions - nếu có)"></textarea>
+                            <span ng-show="frmCreateFAQCategory.metaDescriptions.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 500 ký tự!</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button ui-sref="faqCategory" class="btn btn-danger">Hủy</button>
+                    <button type="submit" ng-disabled="frmCreateFAQCategory.$invalid" class="btn btn-success float-right">Thêm</button>
+                </div>
+                <!-- /.card-footer -->
+            </form>
+        </div>
+    </div>
+</section>

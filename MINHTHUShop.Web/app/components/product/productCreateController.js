@@ -27,7 +27,7 @@
         function CreateProduct() {
             apiService.post('api/Product/Create', $scope.product,
                 function (result) {
-                    notificationService.displaySuccess('Đã thêm ' + result.data.Name + ' vào danh mục sản phẩm');
+                    notificationService.displaySuccess('Đã thêm ' + result.data.Name + ' thành công');
                     //điều hướng đến trang mới
                     $state.go('product');
                 }, function (error) {
@@ -39,7 +39,7 @@
             apiService.get('api/ProductCategory/GetAll', null, function (result) {
                 $scope.productCategory = result.data;
             }, function () {
-                console.log('Tải sản danh mục sản phẩm thất bại!');
+                console.log('Tải danh mục sản phẩm thất bại!');
             });
         }
 
@@ -47,7 +47,7 @@
             apiService.get('api/Brand/GetAll', null, function (result) {
                 $scope.brand = result.data;
             }, function () {
-                console.log('Tải sản thương hiệu thất bại!');
+                console.log('Tải thương hiệu thất bại!');
             });
         }
 

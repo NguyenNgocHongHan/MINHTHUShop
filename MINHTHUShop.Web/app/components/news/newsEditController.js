@@ -40,7 +40,7 @@
             apiService.get('api/NewsCategory/GetAll', null, function (result) {
                 $scope.newsCategory = result.data;
             }, function () {
-                console.log('Tải sản danh mục tin tức thất bại!');
+                console.log('Tải danh mục tin tức thất bại!');
             });
         }
 

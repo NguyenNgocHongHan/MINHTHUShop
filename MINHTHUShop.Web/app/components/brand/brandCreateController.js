@@ -11,7 +11,7 @@
         function CreateBrand() {
             apiService.post('api/Brand/Create', $scope.brand,
                 function (result) {
-                    notificationService.displaySuccess('Đã thêm ' + result.data.Name + ' vào thương hiệu - hãng sản xuất');
+                    notificationService.displaySuccess('Đã thêm ' + result.data.Name + ' thành công');
                     //điều hướng đến trang mới
                     $state.go('brand');
                 }, function (error) {

@@ -1,7 +1,6 @@
 ﻿using MINHTHUShop.Data.Infrastructure;
 using MINHTHUShop.Data.Repositories;
 using MINHTHUShop.Model.Models;
-using System;
 using System.Collections.Generic;
 
 namespace MINHTHUShop.Service
@@ -43,7 +42,6 @@ namespace MINHTHUShop.Service
                 return _tb_NewsCategoryRepository.GetAll();
             }
         }
-
 
         public IEnumerable<Tb_NewsCategory> GetAllByParentId(int parentID)
         {

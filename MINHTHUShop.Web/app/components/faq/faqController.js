@@ -1,10 +1,10 @@
 ﻿(function (app) {
-    app.controller('newsController', newsController);
+    app.controller('faqController', faqController);
 
-    newsController.$inject = ['$scope', '$ngBootbox', '$filter', 'apiService', 'notificationService'];
+    faqController.$inject = ['$scope', '$ngBootbox', '$filter', 'apiService', 'notificationService'];
 
-    function newsController($scope, $ngBootbox, $filter, apiService, notificationService) {
-        $scope.news = [];
+    function faqController($scope, $ngBootbox, $filter, apiService, notificationService) {
+        $scope.faq = [];
 
         $scope.index = 0;
 
@@ -15,14 +15,14 @@
         $scope.keyword = '';
         $scope.search = search;
 
-        $scope.GetNews = GetNews;
-        $scope.DeleteNews = DeleteNews;
+        $scope.GetFAQ = GetFAQ;
+        $scope.DeleteFAQ = DeleteFAQ;
         $scope.DeleteMultiple = DeleteMultiple;
         $scope.SelectAll = SelectAll;
 
         $scope.isAll = false;
 
-        $scope.$watch("news", function (n, o) {
+        $scope.$watch("faq", function (n, o) {
             var checked = $filter("filter")(n, { checked: true });
             if (checked.length) {
                 $scope.selected = checked;
@@ -35,18 +35,18 @@
         function DeleteMultiple() {
             var listId = [];
             $.each($scope.selected, function (i, item) {
-                listId.push(item.NewsID);
+                listId.push(item.FAQID);
             });
 
-            $ngBootbox.confirm('Bạn có muốn xóa những tin tức này không?').then(function () {
+            $ngBootbox.confirm('Bạn có muốn xóa những FAQ này không?').then(function () {
                 var config = {
                     params: {
-                        checkedNews: JSON.stringify(listId)
+                        checkedFAQ: JSON.stringify(listId)
                     }
                 }
 
-                apiService.del('api/News/DeleteMulti', config, function (result) {
-                    notificationService.displaySuccess('Đã xóa ' + result.data + ' tin tức');
+                apiService.del('api/FAQ/DeleteMulti', config, function (result) {
+                    notificationService.displaySuccess('Đã xóa ' + result.data + ' FAQ');
                     search();
                 }, function (error) {
                     notificationService.displayError('Xóa không thành công!');
@@ -54,14 +54,14 @@
             });
         }
 
-        function DeleteNews(id) {
-            $ngBootbox.confirm('Bạn có muốn xóa tin tức này không?').then(function () {
+        function DeleteFAQ(id) {
+            $ngBootbox.confirm('Bạn có muốn xóa FAQ này không?').then(function () {
                 var config = {
                     params: {
                         id: id
                     }
                 }
-                apiService.del('api/News/Delete', config, function () {
+                apiService.del('api/FAQ/Delete', config, function () {
                     notificationService.displaySuccess('Đã xóa thành công!');
                     search();
                 }, function () {
@@ -72,13 +72,13 @@
 
         function SelectAll() {
             if ($scope.isAll == false) {
-                angular.forEach($scope.news, function (item) {
+                angular.forEach($scope.faq, function (item) {
                     item.checked = true;
                 });
                 $scope.isAll = true;
             }
             else {
-                angular.forEach($scope.news, function (item) {
+                angular.forEach($scope.faq, function (item) {
                     item.checked = false;
                 });
                 $scope.isAll = false;
@@ -86,10 +86,10 @@
         }
 
         function search() {
-            GetNews();
+            GetFAQ();
         }
 
-        function GetNews(page) {
+        function GetFAQ(page) {
             page = page || 0;
 
             var config = {
@@ -100,29 +100,29 @@
                 }
             }
 
-            apiService.get('api/News/GetAllByPage', config, function (result) {
+            apiService.get('api/FAQ/GetAllByPage', config, function (result) {
                 if (result.data.TotalCount == 0) {
                     notificationService.displayWarning('Không tìm thấy kết quả!');
                 }
-                $scope.news = result.data.Item;
+                $scope.faq = result.data.Item;
                 $scope.page = result.data.Page;
                 $scope.pagesCount = result.data.TotalPage;
                 $scope.totalCount = result.data.TotalCount;
             }, function () {
-                console.log('Tải tin tức thất bại!');
+                console.log('Tải FAQ thất bại!');
             });
         }
 
         function LoadCate() {
-            apiService.get('api/NewsCategory/GetAll', null, function (result) {
-                $scope.newsCategory = result.data;
+            apiService.get('api/FAQCategory/GetAll', null, function (result) {
+                $scope.faqCategory = result.data;
             }, function () {
-                console.log('Tải danh mục tin tức thất bại!');
+                console.log('Tải danh mục FAQ thất bại!');
             });
         }
 
         LoadCate();
 
-        $scope.GetNews();
+        $scope.GetFAQ();
     }
-})(angular.module('MINHTHUShop.news'));
+})(angular.module('MINHTHUShop.faq'));

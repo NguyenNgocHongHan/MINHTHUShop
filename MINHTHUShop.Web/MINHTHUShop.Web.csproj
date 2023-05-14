@@ -205,6 +205,8 @@
   <ItemGroup>
     <Compile Include="API\AccountController.cs" />
     <Compile Include="API\BrandAPIController.cs" />
+    <Compile Include="API\FAQAPIController.cs" />
+    <Compile Include="API\FAQCategoryAPIController.cs" />
     <Compile Include="API\NewsAPIController.cs" />
     <Compile Include="API\NewsCategoryAPIController.cs" />
     <Compile Include="API\ProductAPIController.cs" />
@@ -227,6 +229,8 @@
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Models\BrandVM.cs" />
     <Compile Include="Models\CustomerVM.cs" />
+    <Compile Include="Models\FAQCategoryVM.cs" />
+    <Compile Include="Models\FAQVM.cs" />
     <Compile Include="Models\NewsVM.cs" />
     <Compile Include="Models\NewsCategoryVM.cs" />
     <Compile Include="Models\OrderDetailVM.cs" />
@@ -253,6 +257,20 @@
     <Content Include="app\components\brand\brandEditController.js" />
     <Content Include="app\components\brand\brandEditView.html" />
     <Content Include="app\components\brand\brandView.html" />
+    <Content Include="app\components\faqCategory\faqCategory.module.js" />
+    <Content Include="app\components\faqCategory\faqCategoryController.js" />
+    <Content Include="app\components\faqCategory\faqCategoryCreateController.js" />
+    <Content Include="app\components\faqCategory\faqCategoryCreateView.html" />
+    <Content Include="app\components\faqCategory\faqCategoryEditController.js" />
+    <Content Include="app\components\faqCategory\faqCategoryEditView.html" />
+    <Content Include="app\components\faqCategory\faqCategoryView.html" />
+    <Content Include="app\components\faq\faq.module.js" />
+    <Content Include="app\components\faq\faqController.js" />
+    <Content Include="app\components\faq\faqCreateController.js" />
+    <Content Include="app\components\faq\faqCreateView.html" />
+    <Content Include="app\components\faq\faqEditController.js" />
+    <Content Include="app\components\faq\faqEditView.html" />
+    <Content Include="app\components\faq\faqView.html" />
     <Content Include="app\components\home\homeController.js" />
     <Content Include="app\components\home\homeView.html" />
     <Content Include="app\components\newsCategory\newsCategory.module.js" />

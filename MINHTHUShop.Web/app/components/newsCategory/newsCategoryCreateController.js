@@ -30,7 +30,7 @@
         function CreateNewsCategory() {
             apiService.post('api/NewsCategory/Create', $scope.newsCategory,
                 function (result) {
-                    notificationService.displaySuccess('Đã thêm ' + result.data.Name + ' vào danh mục tin tức');
+                    notificationService.displaySuccess('Đã thêm ' + result.data.Name + ' thành công');
                     //điều hướng đến trang mới
                     $state.go('newsCategory');
                 }, function (error) {

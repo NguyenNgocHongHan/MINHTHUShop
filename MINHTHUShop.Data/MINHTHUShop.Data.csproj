@@ -76,6 +76,14 @@
     <Compile Include="Migrations\202305131823172_changeLengthNameNewsTable.designer.cs">
       <DependentUpon>202305131823172_changeLengthNameNewsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305131901126_addCreateDateFeildForFAQTable.cs" />
+    <Compile Include="Migrations\202305131901126_addCreateDateFeildForFAQTable.designer.cs">
+      <DependentUpon>202305131901126_addCreateDateFeildForFAQTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305131941210_changeRequiredAttributeForFAQTable.cs" />
+    <Compile Include="Migrations\202305131941210_changeRequiredAttributeForFAQTable.designer.cs">
+      <DependentUpon>202305131941210_changeRequiredAttributeForFAQTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -133,6 +141,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305131823172_changeLengthNameNewsTable.resx">
       <DependentUpon>202305131823172_changeLengthNameNewsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305131901126_addCreateDateFeildForFAQTable.resx">
+      <DependentUpon>202305131901126_addCreateDateFeildForFAQTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305131941210_changeRequiredAttributeForFAQTable.resx">
+      <DependentUpon>202305131941210_changeRequiredAttributeForFAQTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

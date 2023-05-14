@@ -1,4 +1,5 @@
 ﻿using MINHTHUShop.Model.Abstract;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,7 +21,11 @@ namespace MINHTHUShop.Model.Models
         [Required]
         public string Answer { get; set; }
 
-        public bool? Status { get; set; }
+        [Required]
+        public DateTime CreateDate { get; set; } = DateTime.Now;
+
+        [Required]
+        public bool Status { get; set; }
 
         [ForeignKey("FAQCateID")]
         public virtual Tb_FAQCategory Tb_FAQCategory { get; set; }

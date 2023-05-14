@@ -32,7 +32,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Tên sản phẩm</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" ng-model="product.Name" ng-change="GetMetaTitle()" ng-maxlength="250" placeholder="Tên danh mục sản phẩm" required>
+                            <input type="text" class="form-control" name="name" ng-model="product.Name" ng-change="GetMetaTitle()" ng-maxlength="250" placeholder="Tên sản phẩm" required>
                             <div class="has-error" ng-show="frmCreateProduct.name.$invalid">
                                 <span ng-show="frmCreateProduct.name.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên sản phẩm!</span>
                                 <span ng-show="frmCreateProduct.name.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>

@@ -32,9 +32,9 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Tên tin tức</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" ng-model="news.Name" ng-change="GetMetaTitle()" ng-maxlength="250" placeholder="Tên danh mục sản phẩm" required>
+                            <input type="text" class="form-control" name="name" ng-model="news.Name" ng-change="GetMetaTitle()" ng-maxlength="250" placeholder="Tên tin tức" required>
                             <div class="has-error" ng-show="frmCreateNews.name.$invalid">
-                                <span ng-show="frmCreateNews.name.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên sản phẩm!</span>
+                                <span ng-show="frmCreateNews.name.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên tin tức!</span>
                                 <span ng-show="frmCreateNews.name.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                             </select>
                             <input type="hidden" name="newsCateID" ng-model="news.NewsCateID" />
                             <div class="has-error" ng-show="frmCreateNews.newsCateID.$invalid">
-                                <span ng-show="frmCreateNews.cateID.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa chọn tên danh mục tin tức!</span>
+                                <span ng-show="frmCreateNews.newsCateID.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa chọn tên danh mục tin tức!</span>
                             </div>
                         </div>
                     </div>
