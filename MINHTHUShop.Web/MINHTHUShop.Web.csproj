@@ -233,6 +233,7 @@
     <Compile Include="Models\CustomerVM.cs" />
     <Compile Include="Models\FAQCategoryVM.cs" />
     <Compile Include="Models\FAQVM.cs" />
+    <Compile Include="Models\FooterVM.cs" />
     <Compile Include="Models\NewsVM.cs" />
     <Compile Include="Models\NewsCategoryVM.cs" />
     <Compile Include="Models\OrderDetailVM.cs" />

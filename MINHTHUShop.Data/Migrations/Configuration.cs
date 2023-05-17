@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
+    using MINHTHUShop.Common;
     using MINHTHUShop.Model.Models;
     using System;
     using System.Data.Entity;
@@ -52,6 +53,14 @@
                 var adminUser = manager.FindByEmail("han.nnh.work@gmail.com");
 
                 manager.AddToRoles(adminUser.Id, new string[] { "Quản trị viên"});
+            }
+        }
+
+        private void CreateFooter(MINHTHUShopDbContext context)
+        {
+            if (context.Tb_Footers.Count(x => x.FooterID == CommonConstants.DefaultFooterId) == 0)
+            {
+                string content = "";
             }
         }
     }

@@ -70,6 +70,7 @@
     <Compile Include="Models\Tb_FAQ.cs" />
     <Compile Include="Models\Tb_FAQCategory.cs" />
     <Compile Include="Models\Tb_Feedback.cs" />
+    <Compile Include="Models\Tb_Footer.cs" />
     <Compile Include="Models\Tb_Menu.cs" />
     <Compile Include="Models\Tb_MenuGroup.cs" />
     <Compile Include="Models\Tb_News.cs" />

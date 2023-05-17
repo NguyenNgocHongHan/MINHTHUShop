@@ -68,6 +68,10 @@
     <Compile Include="Migrations\202305150915374_createDB.designer.cs">
       <DependentUpon>202305150915374_createDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305171159329_addFooterTable.cs" />
+    <Compile Include="Migrations\202305171159329_addFooterTable.designer.cs">
+      <DependentUpon>202305171159329_addFooterTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,6 +84,7 @@
     <Compile Include="Repositories\Tb_FAQCategoryRepository.cs" />
     <Compile Include="Repositories\Tb_FAQRepository.cs" />
     <Compile Include="Repositories\Tb_FeedbackRepository.cs" />
+    <Compile Include="Repositories\Tb_FooterRepository.cs" />
     <Compile Include="Repositories\Tb_MenuGroupRepository.cs" />
     <Compile Include="Repositories\Tb_MenuRepository.cs" />
     <Compile Include="Repositories\Tb_NewsCategoryRepository.cs" />
@@ -118,6 +123,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202305150915374_createDB.resx">
       <DependentUpon>202305150915374_createDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305171159329_addFooterTable.resx">
+      <DependentUpon>202305171159329_addFooterTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,4 +1,8 @@
-﻿using System;
+﻿using AutoMapper;
+using MINHTHUShop.Model.Models;
+using MINHTHUShop.Service;
+using MINHTHUShop.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +12,16 @@ namespace MINHTHUShop.Web.Controllers
 {
     public class HomeController : Controller
     {
+        ITb_ProductCategoryService _productCategoryService;
+        /*ITb_ProductService _productService;*/
+        ICommonService _commonService;
+        public HomeController(ITb_ProductCategoryService productCategoryService/*, ITb_ProductService productService*/, ICommonService commonService)
+        {
+            _productCategoryService = productCategoryService;
+            _commonService = commonService;
+            /*_productService = productService;*/
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -30,7 +44,9 @@ namespace MINHTHUShop.Web.Controllers
         [ChildActionOnly]
         public ActionResult Footer()
         {
-            return PartialView();
+            var footerModel = _commonService.GetFooter();
+            var listfooterVM = Mapper.Map<Tb_Footer, FooterVM>(footerModel);
+            return PartialView(listfooterVM);
         }
 
         [ChildActionOnly]
@@ -42,7 +58,9 @@ namespace MINHTHUShop.Web.Controllers
         [ChildActionOnly]
         public ActionResult Category()
         {
-            return PartialView();
+            var model = _productCategoryService.GetAll();
+            var listProductCategoryVM = Mapper.Map<IEnumerable<Tb_ProductCategory>, IEnumerable<ProductCategoryVM>>(model);
+            return PartialView(listProductCategoryVM);
         }
     }
 }

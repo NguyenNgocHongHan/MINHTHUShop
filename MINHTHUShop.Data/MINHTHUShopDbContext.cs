@@ -19,6 +19,7 @@ namespace MINHTHUShop.Data
         public DbSet<Tb_FAQ> Tb_FAQs { get; set; }
         public DbSet<Tb_FAQCategory> Tb_FAQCategories { get; set; }
         public DbSet<Tb_Feedback> Tb_Feedbacks { get; set; }
+        public DbSet<Tb_Footer> Tb_Footers { get; set; }
         public DbSet<Tb_Menu> Tb_Menus { get; set; }
         public DbSet<Tb_MenuGroup> Tb_MenuGroups { get; set; }
         public DbSet<Tb_News> Tb_News { get; set; }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MINHTHUShop.Common
+﻿namespace MINHTHUShop.Common
 {
     public class CommonConstants
     {
@@ -19,6 +13,5 @@ namespace MINHTHUShop.Common
         public const string HomeMetaDescription = "HomeMetaDescription";
 
         public const string Administrator = "Administrator";
-
     }
 }
