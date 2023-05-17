@@ -27,8 +27,10 @@ namespace MINHTHUShop.Model.Models
 
         public int? Position { get; set; }
 
-        public DateTime? CreateDate { get; set; } = DateTime.Now;
-
-        public bool? Status { get; set; } = true;
+        [Required]
+        public DateTime CreateDate { get; set; } = DateTime.Now;
+        
+        [Required]
+        public bool Status { get; set; } = true;
     }
 }

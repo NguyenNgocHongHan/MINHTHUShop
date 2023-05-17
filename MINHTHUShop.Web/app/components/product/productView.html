@@ -7,8 +7,8 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a u-sref="home">Trang chủ</a></li>
-                    <li class="breadcrumb-item">Quản lý thông tin</li>
+                    <li class="breadcrumb-item"><a ui-sref="home">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a ui-sref="home">Quản lý thông tin</a></li>
                     <li class="breadcrumb-item active">Sản phẩm</li>
                 </ol>
             </div>
@@ -53,7 +53,7 @@
                                     <th style="width: 4%">STT</th>
                                     <th>Tên sản phẩm</th>
                                     <th style="width: 15%; text-align: center;">Thuộc danh mục</th>
-                                    <th style="width: 10%; text-align: center;">Giá</th>
+                                    <th style="width: 15%; text-align: center;">Giá đang bán</th>
                                     <th style="width: 10%; text-align: center;">Trạng thái</th>
                                     <th style="width: 10%; text-align:center"></th>
                                     <th style="width: 1%">
@@ -70,7 +70,8 @@
                                     <td style="text-align:center;" ng-repeat="cate in productCategory" ng-if="item.CateID == cate.CateID">
                                         {{cate.Name}}
                                     </td>
-                                    <td style="text-align:center;">{{item.Price}}</td>
+                                    <td style="text-align:center;" ng-if="item.PromotionPrice != null">{{item.PromotionPrice}}</td>
+                                    <td style="text-align:center;" ng-if="item.PromotionPrice == null">{{item.Price}}</td>
                                     <td style="text-align:center;">
                                         <span ng-class="{'badge bg-red':item.Status==false,'badge bg-green':item.Status==true}">
                                             {{item.Status | statusFilter}}

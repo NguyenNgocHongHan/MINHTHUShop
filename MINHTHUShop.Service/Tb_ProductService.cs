@@ -120,6 +120,13 @@ namespace MINHTHUShop.Service
             return _tb_TagRepository.GetSingleByCondition(x => x.TagID == tagID);
         }
 
+        public IEnumerable<Tb_Product> GetProductByCateId(int cateID)
+        {
+            var query = _tb_ProductRepository.GetMulti(x => x.Status == true && x.CateID == cateID);
+
+            return query;
+        }
+
         public IEnumerable<Tb_Product> GeyListProductByCateIdPaging(int cateID, int pageIndex, int pageSize, string sort, out int totalRow)
         {
             var query = _tb_ProductRepository.GetMulti(x => x.Status == true && x.CateID == cateID);
@@ -203,6 +210,7 @@ namespace MINHTHUShop.Service
         IEnumerable<Tb_Product> GetAll();
         IEnumerable<Tb_Product> GetAll(string keywork);
         IEnumerable<Tb_Product> GetLastest(int top);
+        IEnumerable<Tb_Product> GetProductByCateId(int cateID);
         IEnumerable<Tb_Product> GeyListProductByCateIdPaging(int cateID, int pageIndex, int pageSize, string sort, out int totalRow);
         IEnumerable<Tb_Product> Search(string keywork, int pageIndex, int pageSize, string sort, out int totalRow);
         IEnumerable<Tb_Product> GetListProduct(string keywork);

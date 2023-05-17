@@ -2,6 +2,7 @@
 using MINHTHUShop.Data.Infrastructure;
 using MINHTHUShop.Data.Repositories;
 using MINHTHUShop.Model.Models;
+using System.Collections.Generic;
 
 namespace MINHTHUShop.Service
 {
@@ -9,20 +10,20 @@ namespace MINHTHUShop.Service
     {
         Tb_Footer GetFooter();
 
-        /*IEnumerable<Slide> GetSlides();*/
+        IEnumerable<Tb_Banner> GetBanners();
     }
 
     public class CommonService : ICommonService
     {
         private ITb_FooterRepository _footerRepository;
         private IUnitOfWork _unitOfWork;
-        /*ISlideRepository _slideRepository;*/
+        ITb_BannerRepository _bannerRepository;
 
-        public CommonService(ITb_FooterRepository footerRepository, IUnitOfWork unitOfWork/*, ISlideRepository slideRepository*/)
+        public CommonService(ITb_FooterRepository footerRepository, IUnitOfWork unitOfWork, ITb_BannerRepository bannerRepository)
         {
             _footerRepository = footerRepository;
             _unitOfWork = unitOfWork;
-            /*_slideRepository = slideRepository;*/
+            _bannerRepository = bannerRepository;
         }
 
         public Tb_Footer GetFooter()
@@ -30,9 +31,9 @@ namespace MINHTHUShop.Service
             return _footerRepository.GetSingleByCondition(x => x.FooterID == CommonConstants.DefaultFooterId);
         }
 
-        /*public IEnumerable<Slide> GetSlides()
+        public IEnumerable<Tb_Banner> GetBanners()
         {
-            return _slideRepository.GetMulti(x => x.Status);
-        }*/
+            return _bannerRepository.GetMulti(x => x.Status);
+        }
     }
 }

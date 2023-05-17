@@ -72,6 +72,10 @@
     <Compile Include="Migrations\202305171159329_addFooterTable.designer.cs">
       <DependentUpon>202305171159329_addFooterTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305171847301_updateBannerTable.cs" />
+    <Compile Include="Migrations\202305171847301_updateBannerTable.designer.cs">
+      <DependentUpon>202305171847301_updateBannerTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -126,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305171159329_addFooterTable.resx">
       <DependentUpon>202305171159329_addFooterTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305171847301_updateBannerTable.resx">
+      <DependentUpon>202305171847301_updateBannerTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,6 +5,7 @@
     using MINHTHUShop.Common;
     using MINHTHUShop.Model.Models;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -20,7 +21,7 @@
         {
             //  This method will be called after migrating to the latest version.
             CreateUser(context);
-
+            CreateBanner(context);
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
         }
@@ -52,7 +53,7 @@
 
                 var adminUser = manager.FindByEmail("han.nnh.work@gmail.com");
 
-                manager.AddToRoles(adminUser.Id, new string[] { "Quản trị viên"});
+                manager.AddToRoles(adminUser.Id, new string[] { "Quản trị viên" });
             }
         }
 
@@ -61,6 +62,41 @@
             if (context.Tb_Footers.Count(x => x.FooterID == CommonConstants.DefaultFooterId) == 0)
             {
                 string content = "";
+            }
+        }
+
+        private void CreateBanner(MINHTHUShopDbContext context)
+        {
+            if (context.Tb_Banners.Count() == 0)
+            {
+                List<Tb_Banner> listBanner = new List<Tb_Banner>()
+                {
+                    new Tb_Banner() {
+                        Name ="Slide 1",
+                        Sort =1,
+                        Status =true,
+                        Link ="#",
+                        CreateDate = DateTime.Now,
+                        Image ="/Content/Client/images/bag.jpg",
+                        Description =@"	<h2>FLAT 50% 0FF</h2>
+                                <label>FOR ALL PURCHASE <b>VALUE</b></label>
+                                <p>Lorem ipsum dolor sit amet, consectetur 
+                            adipisicing elit, sed do eiusmod tempor incididunt ut labore et </ p >
+                        <span class=""on-get"">GET NOW</span>" },
+                    new Tb_Banner() {
+                        Name ="Slide 2",
+                        Sort =2,
+                        Status =true,
+                        CreateDate = DateTime.Now,
+                        Link ="#",
+                        Image ="/Content/Client/images/bag1.jpg",
+                        Description=@"<h2>FLAT 50% 0FF</h2>
+                                <label>FOR ALL PURCHASE <b>VALUE</b></label>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </ p >
+                                <span class=""on-get"">GET NOW</span>"},
+                    };
+                    context.Tb_Banners.AddRange(listBanner);
+                    context.SaveChanges();
             }
         }
     }

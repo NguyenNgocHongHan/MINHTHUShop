@@ -13,18 +13,35 @@ namespace MINHTHUShop.Web.Controllers
     public class HomeController : Controller
     {
         ITb_ProductCategoryService _productCategoryService;
-        /*ITb_ProductService _productService;*/
+        ITb_ProductService _productService;
         ICommonService _commonService;
-        public HomeController(ITb_ProductCategoryService productCategoryService/*, ITb_ProductService productService*/, ICommonService commonService)
+        public HomeController(ITb_ProductCategoryService productCategoryService, ITb_ProductService productService, ICommonService commonService)
         {
             _productCategoryService = productCategoryService;
             _commonService = commonService;
-            /*_productService = productService;*/
+            _productService = productService;
         }
 
         public ActionResult Index()
         {
-            return View();
+            var bannerModel = _commonService.GetBanners();
+            var bannerView = Mapper.Map<IEnumerable<Tb_Banner>, IEnumerable<BannerVM>>(bannerModel);
+            var homeVM = new HomeVM();
+            homeVM.Banners = bannerView;
+
+            var lastestProductModel = _productService.GetLastest(3);
+            var lastestProductVM = Mapper.Map<IEnumerable<Tb_Product>, IEnumerable<ProductVM>>(lastestProductModel);
+            homeVM.LastestProducts = lastestProductVM;
+
+            var productCategoryModel = _productCategoryService.GetAll();
+            var productCategoryVM = Mapper.Map<IEnumerable<Tb_ProductCategory>, IEnumerable<ProductCategoryVM>>(productCategoryModel);
+            homeVM.ProductCategories = productCategoryVM;
+
+            var productsByCategoryModel = _productService.GetAll();
+            var productsByCategoryVM = Mapper.Map<IEnumerable<Tb_Product>, IEnumerable<ProductVM>>(productsByCategoryModel);
+            homeVM.ProductsByCategory = productsByCategoryVM;
+
+            return View(homeVM);
         }
 
         public ActionResult About()
