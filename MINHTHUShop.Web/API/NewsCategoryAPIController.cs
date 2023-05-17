@@ -15,6 +15,7 @@ using System.Web.Script.Serialization;
 namespace MINHTHUShop.Web.API
 {
     [RoutePrefix("api/NewsCategory")]
+    [Authorize]
     public class NewsCategoryAPIController : APIControllerBase
     {
         #region Khởi tạo

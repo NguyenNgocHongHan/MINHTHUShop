@@ -3,11 +3,9 @@
 (function (app) {
     app.factory('apiService', apiService);
 
-    /*app.service('apiService', apiService);*/
+    apiService.$inject = ['$http', 'notificationService', 'authService'];
 
-    apiService.$inject = ['$http', 'notificationService',/* 'authenticationService'*/];
-
-    function apiService($http, notificationService/*, authenticationService*/) {
+    function apiService($http, notificationService, authService) {
         return {
             get: get,
             post: post,
@@ -16,7 +14,7 @@
         }
 
         function get(url, params, success, failure) {
-            /*authenticationService.setHeader();*/
+            authService.setHeader();
             $http.get(url, params).then(function (result) {
                 success(result);
             }, function (error) {
@@ -25,11 +23,11 @@
         }
 
         function post(url, data, success, failure) {
-            /*authenticationService.setHeader();*/
+            authService.setHeader();
             $http.post(url, data).then(function (result) {
                 success(result);
             }, function (error) {
-                /*console.log(error.status)*/
+                console.log(error.status)
                 if (error.status === 401) {
                     notificationService.displayError('Bạn cần phải ĐĂNG NHẬP!');
                 }
@@ -40,7 +38,7 @@
         }
 
         function put(url, data, success, failure) {
-            /*authenticationService.setHeader();*/
+            authService.setHeader();
             $http.put(url, data).then(function (result) {
                 success(result);
             }, function (error) {
@@ -56,7 +54,7 @@
         }
 
         function del(url, data, success, failure) {
-            /*authenticationService.setHeader();*/
+            authService.setHeader();
             $http.delete(url, data).then(function (result) {
                 success(result);
             }, function (error) {
@@ -67,7 +65,6 @@
                 else if (failure != null) {
                     failure(error);
                 }
-
             });
         }        
     }

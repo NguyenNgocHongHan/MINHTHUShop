@@ -64,25 +64,9 @@
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\202305131027063_updateRepository.cs" />
-    <Compile Include="Migrations\202305131027063_updateRepository.designer.cs">
-      <DependentUpon>202305131027063_updateRepository.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202305131713589_addSEOFeildForFAQAndFAQCategory.cs" />
-    <Compile Include="Migrations\202305131713589_addSEOFeildForFAQAndFAQCategory.designer.cs">
-      <DependentUpon>202305131713589_addSEOFeildForFAQAndFAQCategory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202305131823172_changeLengthNameNewsTable.cs" />
-    <Compile Include="Migrations\202305131823172_changeLengthNameNewsTable.designer.cs">
-      <DependentUpon>202305131823172_changeLengthNameNewsTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202305131901126_addCreateDateFeildForFAQTable.cs" />
-    <Compile Include="Migrations\202305131901126_addCreateDateFeildForFAQTable.designer.cs">
-      <DependentUpon>202305131901126_addCreateDateFeildForFAQTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202305131941210_changeRequiredAttributeForFAQTable.cs" />
-    <Compile Include="Migrations\202305131941210_changeRequiredAttributeForFAQTable.designer.cs">
-      <DependentUpon>202305131941210_changeRequiredAttributeForFAQTable.cs</DependentUpon>
+    <Compile Include="Migrations\202305150915374_createDB.cs" />
+    <Compile Include="Migrations\202305150915374_createDB.designer.cs">
+      <DependentUpon>202305150915374_createDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
@@ -109,7 +93,6 @@
     <Compile Include="Repositories\Tb_ProductCategoryRepository.cs" />
     <Compile Include="Repositories\Tb_ProductCommentRepository.cs" />
     <Compile Include="Repositories\Tb_ProductRepository.cs" />
-    <Compile Include="Repositories\Tb_RoleRepository.cs" />
     <Compile Include="Repositories\Tb_ShippingMethodRepository.cs" />
     <Compile Include="Repositories\Tb_ShippingRepository.cs" />
     <Compile Include="Repositories\Tb_StaffRepository.cs" />
@@ -133,20 +116,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202305131027063_updateRepository.resx">
-      <DependentUpon>202305131027063_updateRepository.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202305131713589_addSEOFeildForFAQAndFAQCategory.resx">
-      <DependentUpon>202305131713589_addSEOFeildForFAQAndFAQCategory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202305131823172_changeLengthNameNewsTable.resx">
-      <DependentUpon>202305131823172_changeLengthNameNewsTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202305131901126_addCreateDateFeildForFAQTable.resx">
-      <DependentUpon>202305131901126_addCreateDateFeildForFAQTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202305131941210_changeRequiredAttributeForFAQTable.resx">
-      <DependentUpon>202305131941210_changeRequiredAttributeForFAQTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202305150915374_createDB.resx">
+      <DependentUpon>202305150915374_createDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

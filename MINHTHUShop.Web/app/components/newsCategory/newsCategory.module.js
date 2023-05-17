@@ -8,20 +8,20 @@
     function config($stateProvider, $urlRouterProvider) {
         $stateProvider.state('newsCategory', {
             url: "/newsCategory",
+            parent: 'base',
             templateUrl: "/app/components/newsCategory/newsCategoryView.html",
-            /*parent: 'base',*/
             controller: "newsCategoryController"
         })
             .state('newsCategoryCreate', {
                 url: "/newsCategoryCreate",
+                parent: 'base',
                 templateUrl: "/app/components/newsCategory/newsCategoryCreateView.html",
-                /*parent: 'base',*/
                 controller: "newsCategoryCreateController"
             })
             .state('newsCategoryEdit', {
                 url: "/newsCategoryEdit/:id",
+                parent: 'base',
                 templateUrl: "/app/components/newsCategory/newsCategoryEditView.html",
-                /*parent: 'base',*/
                 controller: "newsCategoryEditController"
             })
     }

@@ -15,32 +15,32 @@
             'tedushop.statistics',*/
             'MINHTHUShop.common'])
         .config(config)
-        /*.config(configAuthentication)*/;
+        .config(configAuth);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function config($stateProvider, $urlRouterProvider) {
         $stateProvider
-            /*.state('base', {
+            .state('base', {
                 url: '',
-                templateUrl: '/app/shared/views/baseView.html',
+                templateUrl: '/app/shared/view/baseView.html',
                 abstract: true
             }).state('login', {
                 url: "/login",
                 templateUrl: "/app/components/login/loginView.html",
                 controller: "loginController"
-            })*/
+            })
             .state('home', {
                 url: "/admin",
-                /*parent: 'base',*/
+                parent: 'base',
                 templateUrl: "/app/components/home/homeView.html",
                 controller: "homeController"
             });
-        /*$urlRouterProvider.otherwise('/login');*/
-        $urlRouterProvider.otherwise('/admin');
+        $urlRouterProvider.otherwise('/login');
     }
 
-    /*function configAuthentication($httpProvider) {
+    function configAuth($httpProvider) {
+        //kiểm tra request tới server
         $httpProvider.interceptors.push(function ($q, $location) {
             return {
                 request: function (config) {
@@ -67,5 +67,5 @@
                 }
             };
         });
-    }*/
+    }
 })();

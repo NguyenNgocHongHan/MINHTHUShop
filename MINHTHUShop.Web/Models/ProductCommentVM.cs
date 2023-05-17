@@ -6,7 +6,7 @@ namespace MINHTHUShop.Web.Models
     {
         public int CommentID { get; set; }
         public int ProductID { get; set; }
-        public string CustomerID { get; set; }
+        public int CustomerID { get; set; }
         public float Vote { get; set; }
         public string Comment { get; set; }
         public DateTime CreateDate { get; set; }

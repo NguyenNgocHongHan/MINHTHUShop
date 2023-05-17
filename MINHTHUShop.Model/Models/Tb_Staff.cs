@@ -1,42 +1,17 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace MINHTHUShop.Model.Models
 {
-    public class Tb_Staff
+    public class Tb_Staff : IdentityUser
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int StaffID { get; set; }
-
-        [Required]
-        public int RoleID { get; set; }
-
-        [Required]
-        [MaxLength(50)]
-        [Column(TypeName = "varchar")]
-        public string UserName { get; set; }
-
-        [Required]
-        [MaxLength(50)]
-        [Column(TypeName = "varchar")]
-        public string Password { get; set; }
-
-        [Required]
-        [MaxLength(250)]
-        [Column(TypeName = "varchar")]
-        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Email không hợp lệ")]
-        public string Email { get; set; }
-
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
-
-        [Required]
-        [MaxLength(10)]
-        [Column(TypeName = "char")]
-        public string Phone { get; set; }
 
         [Required]
         [MaxLength(250)]
@@ -58,16 +33,13 @@ namespace MINHTHUShop.Model.Models
 
         [Required]
         public bool Status { get; set; } = true;
-        /*
-                public async Task<ClaimsIdentity> GenerateCustomerIdentityAsync(UserManager<Tb_ApplicationStaff> manager, string authenticationType)
-                {
-                    // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
-                    var staffIdentity = await manager.CreateIdentityAsync(this, authenticationType);
-                    // Add custom user claims here
-                    return staffIdentity;
-                }*/
 
-        [ForeignKey("RoleID")]
-        public virtual Tb_RoleStaff Tb_Role { get; set; }
+        public async Task<ClaimsIdentity> GenerateStaffIdentityAsync(UserManager<Tb_Staff> manager, string authenticationType)
+        {
+            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+            var staffIdentity = await manager.CreateIdentityAsync(this, authenticationType);
+            // Add custom user claims here
+            return staffIdentity;
+        }
     }
 }

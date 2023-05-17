@@ -7,8 +7,8 @@ namespace MINHTHUShop.Web.Models
     public class OrderVM
     {
         public int OrderID { get; set; }
-        public string CustomerID { get; set; }
-        public int StaffID { get; set; }
+        public int CustomerID { get; set; }
+        public string StaffID { get; set; }
         public int OrderStatusID { get; set; }
         public int ShippingMethodID { get; set; }
         public int PaymentMethodID { get; set; }

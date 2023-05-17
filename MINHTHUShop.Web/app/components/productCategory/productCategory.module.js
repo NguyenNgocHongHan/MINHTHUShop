@@ -8,20 +8,20 @@
     function config($stateProvider, $urlRouterProvider) {
         $stateProvider.state('productCategory', {
             url: "/productCategory",
+            parent: 'base',
             templateUrl: "/app/components/productCategory/productCategoryView.html",
-            /*parent: 'base',*/
             controller: "productCategoryController"
         })
             .state('productCategoryCreate', {
                 url: "/productCategoryCreate",
+                parent: 'base',
                 templateUrl: "/app/components/productCategory/productCategoryCreateView.html",
-                /*parent: 'base',*/
                 controller: "productCategoryCreateController"
             })
             .state('productCategoryEdit', {
                 url: "/productCategoryEdit/:id",
+                parent: 'base',
                 templateUrl: "/app/components/productCategory/productCategoryEditView.html",
-                /*parent: 'base',*/
                 controller: "productCategoryEditController"
             })
     }

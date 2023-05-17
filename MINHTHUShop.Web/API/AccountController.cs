@@ -66,7 +66,7 @@ namespace MINHTHUShop.Web.API
 
         [HttpPost]
         [Authorize]
-        [Route("logout")]
+        [Route("Logout")]
         public HttpResponseMessage Logout(HttpRequestMessage request)
         {
             var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;

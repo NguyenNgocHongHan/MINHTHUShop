@@ -8,20 +8,20 @@
     function config($stateProvider, $urlRouterProvider) {
         $stateProvider.state('brand', {
             url: "/brand",
+            parent: 'base',
             templateUrl: "/app/components/brand/brandView.html",
-            /*parent: 'base',*/
             controller: "brandController"
         })
             .state('brandCreate', {
                 url: "/brandCreate",
+                parent: 'base',
                 templateUrl: "/app/components/brand/brandCreateView.html",
-                /*parent: 'base',*/
                 controller: "brandCreateController"
             })
             .state('brandEdit', {
                 url: "/brandEdit/:id",
+                parent: 'base',
                 templateUrl: "/app/components/brand/brandEditView.html",
-                /*parent: 'base',*/
                 controller: "brandEditController"
             })
     }

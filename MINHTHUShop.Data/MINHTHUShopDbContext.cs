@@ -4,7 +4,7 @@ using System.Data.Entity;
 
 namespace MINHTHUShop.Data
 {
-    public class MINHTHUShopDbContext : IdentityDbContext<Tb_Customer>
+    public class MINHTHUShopDbContext : IdentityDbContext<Tb_Staff>
     {
         public MINHTHUShopDbContext() : base("MINHTHUShopConnection")
         {
@@ -15,7 +15,7 @@ namespace MINHTHUShop.Data
         public DbSet<Tb_Banner> Tb_Banners { get; set; }
         public DbSet<Tb_Brand> Tb_Brands { get; set; }
         public DbSet<Tb_Config> Tb_Configs { get; set; }
-        //public DbSet<Tb_Customer> Tb_Customers { get; set; }
+        public DbSet<Tb_Customer> Tb_Customers { get; set; }
         public DbSet<Tb_FAQ> Tb_FAQs { get; set; }
         public DbSet<Tb_FAQCategory> Tb_FAQCategories { get; set; }
         public DbSet<Tb_Feedback> Tb_Feedbacks { get; set; }
@@ -32,10 +32,9 @@ namespace MINHTHUShop.Data
         public DbSet<Tb_Product> Tb_Products { get; set; }
         public DbSet<Tb_ProductCategory> Tb_ProductCategories { get; set; }
         public DbSet<Tb_ProductComment> Tb_ProductComments { get; set; }
-        public DbSet<Tb_RoleStaff> Tb_Roles { get; set; }
         public DbSet<Tb_Shipping> Tb_Shippings { get; set; }
         public DbSet<Tb_ShippingMethod> Tb_ShippingMethods { get; set; }
-        public DbSet<Tb_Staff> Tb_Staffs { get; set; }
+        //public DbSet<Tb_Staff> Tb_Staffs { get; set; }
         public DbSet<Tb_Tag> Tb_Tags { get; set; }
         public DbSet<Tb_TagNews> Tb_TagNews { get; set; }
         public DbSet<Tb_TagProduct> Tb_TagProducts { get; set; }
@@ -52,10 +51,10 @@ namespace MINHTHUShop.Data
         //phương thức ghi đè DbContext
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId }).ToTable("ApplicationCustomerRoles");
-            modelBuilder.Entity<IdentityUserLogin>().HasKey(i => i.UserId).ToTable("ApplicationCustomerLogins");
+            modelBuilder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId }).ToTable("ApplicationStaffRoles");
+            modelBuilder.Entity<IdentityUserLogin>().HasKey(i => i.UserId).ToTable("ApplicationStaffLogins");
             modelBuilder.Entity<IdentityRole>().ToTable("ApplicationRoles");
-            modelBuilder.Entity<IdentityUserClaim>().HasKey(i => i.UserId).ToTable("ApplicationCustomerClaims");
+            modelBuilder.Entity<IdentityUserClaim>().HasKey(i => i.UserId).ToTable("ApplicationStaffClaims");
 
         }
     }

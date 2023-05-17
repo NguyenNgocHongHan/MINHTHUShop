@@ -4,7 +4,7 @@ namespace MINHTHUShop.Web.Models
 {
     public class StaffVM
     {
-        public int StaffID { get; set; }
+        public string StaffID { get; set; }
         public int RoleID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }

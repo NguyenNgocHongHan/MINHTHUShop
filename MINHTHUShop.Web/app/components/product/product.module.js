@@ -8,20 +8,20 @@
     function config($stateProvider, $urlRouterProvider) {
         $stateProvider.state('product', {
             url: "/product",
+            parent: 'base',
             templateUrl: "/app/components/product/productView.html",
-            /*parent: 'base',*/
             controller: "productController"
         })
             .state('productCreate', {
                 url: "/productCreate",
+                parent: 'base',
                 templateUrl: "/app/components/product/productCreateView.html",
-                /*parent: 'base',*/
                 controller: "productCreateController"
             })
             .state('productEdit', {
                 url: "/productEdit/:id",
+                parent: 'base',
                 templateUrl: "/app/components/product/productEditView.html",
-                /*parent: 'base',*/
                 controller: "productEditController"
             })
     }

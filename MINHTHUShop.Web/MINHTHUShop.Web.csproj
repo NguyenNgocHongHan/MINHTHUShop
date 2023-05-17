@@ -207,6 +207,7 @@
     <Compile Include="API\BrandAPIController.cs" />
     <Compile Include="API\FAQAPIController.cs" />
     <Compile Include="API\FAQCategoryAPIController.cs" />
+    <Compile Include="API\HomeController.cs" />
     <Compile Include="API\NewsAPIController.cs" />
     <Compile Include="API\NewsCategoryAPIController.cs" />
     <Compile Include="API\ProductAPIController.cs" />
@@ -225,6 +226,7 @@
     </Compile>
     <Compile Include="Infrastructure\Core\APIControllerBase.cs" />
     <Compile Include="Infrastructure\Core\Pagination.cs" />
+    <Compile Include="Infrastructure\Core\ServiceFactory.cs" />
     <Compile Include="Infrastructure\Extensions\EntityExtensions.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Models\BrandVM.cs" />
@@ -273,6 +275,9 @@
     <Content Include="app\components\faq\faqView.html" />
     <Content Include="app\components\home\homeController.js" />
     <Content Include="app\components\home\homeView.html" />
+    <Content Include="app\components\home\rootController.js" />
+    <Content Include="app\components\login\loginController.js" />
+    <Content Include="app\components\login\loginView.html" />
     <Content Include="app\components\newsCategory\newsCategory.module.js" />
     <Content Include="app\components\newsCategory\newsCategoryController.js" />
     <Content Include="app\components\newsCategory\newsCategoryCreateController.js" />
@@ -306,8 +311,12 @@
     <Content Include="app\shared\filter\statusFillter.js" />
     <Content Include="app\shared\module\MINHTHUShop.common.js" />
     <Content Include="app\shared\service\apiService.js" />
+    <Content Include="app\shared\service\authData.js" />
+    <Content Include="app\shared\service\authService.js" />
     <Content Include="app\shared\service\commonService.js" />
+    <Content Include="app\shared\service\loginService.js" />
     <Content Include="app\shared\service\notificationService.js" />
+    <Content Include="app\shared\view\baseView.html" />
     <Content Include="Content\Admin\css\adminlte.css" />
     <Content Include="Content\Admin\css\adminlte.min.css" />
     <Content Include="Content\Admin\css\alt\adminlte.components.css" />
@@ -327,6 +336,7 @@
     <Content Include="Content\Admin\img\avatar3.png" />
     <Content Include="Content\Admin\img\avatar4.png" />
     <Content Include="Content\Admin\img\avatar5.png" />
+    <Content Include="Content\Admin\img\background.jpg" />
     <Content Include="Content\Admin\img\boxed-bg.jpg" />
     <Content Include="Content\Admin\img\boxed-bg.png" />
     <Content Include="Content\Admin\img\credit\american-express.png" />
@@ -360,6 +370,12 @@
     <Content Include="Content\Admin\js\pages\dashboard.js" />
     <Content Include="Content\Admin\js\pages\dashboard2.js" />
     <Content Include="Content\Admin\js\pages\dashboard3.js" />
+    <Content Include="Content\Admin\lib\angular-loading-bar\loading-bar.css" />
+    <Content Include="Content\Admin\lib\angular-loading-bar\loading-bar.js" />
+    <Content Include="Content\Admin\lib\angular-loading-bar\loading-bar.min.css" />
+    <Content Include="Content\Admin\lib\angular-loading-bar\loading-bar.min.js" />
+    <Content Include="Content\Admin\lib\angular-local-storage\angular-local-storage.js" />
+    <Content Include="Content\Admin\lib\angular-local-storage\angular-local-storage.min.js" />
     <Content Include="Content\Admin\lib\angular-ui-router\angular-ui-router.js" />
     <Content Include="Content\Admin\lib\angular-ui-router\angular-ui-router.min.js" />
     <Content Include="Content\Admin\lib\angular-ui-router\resolveService.js" />
@@ -6186,6 +6202,67 @@
     <Content Include="Content\Admin\lib\toastr.js\toastr.css" />
     <Content Include="Content\Admin\lib\toastr.js\toastr.min.css" />
     <Content Include="Content\Admin\lib\toastr.js\toastr.min.js" />
+    <Content Include="Content\Client\css\bootstrap.css" />
+    <Content Include="Content\Client\css\etalage.css" />
+    <Content Include="Content\Client\css\form.css" />
+    <Content Include="Content\Client\css\style.css" />
+    <Content Include="Content\Client\images\a-star.png" />
+    <Content Include="Content\Client\images\arrow1.png" />
+    <Content Include="Content\Client\images\arrow2.png" />
+    <Content Include="Content\Client\images\avatar.png" />
+    <Content Include="Content\Client\images\b-arrow.png" />
+    <Content Include="Content\Client\images\ba.jpg" />
+    <Content Include="Content\Client\images\baa.jpg" />
+    <Content Include="Content\Client\images\bag.jpg" />
+    <Content Include="Content\Client\images\bag1.jpg" />
+    <Content Include="Content\Client\images\bo.jpg" />
+    <Content Include="Content\Client\images\bott.jpg" />
+    <Content Include="Content\Client\images\bottle.jpg" />
+    <Content Include="Content\Client\images\ch.jpg" />
+    <Content Include="Content\Client\images\facebook.png" />
+    <Content Include="Content\Client\images\gpluse.png" />
+    <Content Include="Content\Client\images\img-sprite.png" />
+    <Content Include="Content\Client\images\label_new.png" />
+    <Content Include="Content\Client\images\logo.png" />
+    <Content Include="Content\Client\images\pi.jpg" />
+    <Content Include="Content\Client\images\pi1.jpg" />
+    <Content Include="Content\Client\images\pi2.jpg" />
+    <Content Include="Content\Client\images\pi3.jpg" />
+    <Content Include="Content\Client\images\pi4.jpg" />
+    <Content Include="Content\Client\images\pic.jpg" />
+    <Content Include="Content\Client\images\pic1.jpg" />
+    <Content Include="Content\Client\images\pic10.jpg" />
+    <Content Include="Content\Client\images\pic11.jpg" />
+    <Content Include="Content\Client\images\pic12.jpg" />
+    <Content Include="Content\Client\images\pic13.jpg" />
+    <Content Include="Content\Client\images\pic2.jpg" />
+    <Content Include="Content\Client\images\pic3.jpg" />
+    <Content Include="Content\Client\images\pic4.jpg" />
+    <Content Include="Content\Client\images\pic5.jpg" />
+    <Content Include="Content\Client\images\pic6.jpg" />
+    <Content Include="Content\Client\images\pic7.jpg" />
+    <Content Include="Content\Client\images\pic8.jpg" />
+    <Content Include="Content\Client\images\review.png" />
+    <Content Include="Content\Client\images\rss.png" />
+    <Content Include="Content\Client\images\s1.jpg" />
+    <Content Include="Content\Client\images\s2.jpg" />
+    <Content Include="Content\Client\images\s3.jpg" />
+    <Content Include="Content\Client\images\s4.jpg" />
+    <Content Include="Content\Client\images\sh.jpg" />
+    <Content Include="Content\Client\images\si1.jpg" />
+    <Content Include="Content\Client\images\si2.jpg" />
+    <Content Include="Content\Client\images\si3.jpg" />
+    <Content Include="Content\Client\images\si4.jpg" />
+    <Content Include="Content\Client\images\star.png" />
+    <Content Include="Content\Client\images\tick1.png" />
+    <Content Include="Content\Client\images\twitter.png" />
+    <Content Include="Content\Client\images\wa.jpg" />
+    <Content Include="Content\Client\images\wat.jpg" />
+    <Content Include="Content\Client\images\zoom.png" />
+    <Content Include="Content\Client\js\jquery.etalage.min.js" />
+    <Content Include="Content\Client\js\jquery.flexisel.js" />
+    <Content Include="Content\Client\js\jquery.min.js" />
+    <Content Include="Content\Client\js\jquery.wmuSlider.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Lib\CKFinder.dll" />
@@ -6218,7 +6295,6 @@
   <ItemGroup>
     <Folder Include="app\components\roleCustomer\" />
     <Folder Include="app\components\roleStaff\" />
-    <Folder Include="Content\Client\" />
     <Folder Include="UploadFile\" />
   </ItemGroup>
   <ItemGroup>
@@ -6405,6 +6481,9 @@
     <Content Include="Content\Admin\lib\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\Admin\lib\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\Admin\lib\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="ConnectionStrings.config" />
+    <Content Include="AppSettings.config" />
+    <Content Include="Content\Client\images\Thumbs.db" />
     <None Include="NWebsecConfig\HttpHeaderSecurityModuleConfig.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -6422,6 +6501,11 @@
     <Content Include="Scripts\plugins\fontawesome-free\webfonts\fa-solid-900.ttf" />
     <Content Include="Scripts\plugins\fontawesome-free\webfonts\fa-solid-900.woff" />
     <Content Include="Scripts\plugins\fontawesome-free\webfonts\fa-solid-900.woff2" />
+    <Content Include="Views\Shared\Layouts.cshtml" />
+    <Content Include="Views\Shared\Header.cshtml" />
+    <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Category.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

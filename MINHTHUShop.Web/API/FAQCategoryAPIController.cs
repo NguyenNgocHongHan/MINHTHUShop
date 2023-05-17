@@ -15,6 +15,7 @@ using System.Web.Script.Serialization;
 namespace MINHTHUShop.Web.API
 {
     [RoutePrefix("api/FAQCategory")]
+    [Authorize]
     public class FAQCategoryAPIController : APIControllerBase
     {
         #region Khởi tạo
