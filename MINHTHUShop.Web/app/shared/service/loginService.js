@@ -31,13 +31,17 @@
             }
 
             this.Logout = function () {
-                apiService.post('/api/Account/Logout', null, function (response) {
+                authService.removeToken();
+                authData.authenticationData.IsAuthenticated = false;
+                authData.authenticationData.userName = "";
+
+                /*apiService.post('/api/Account/Logout', null, function (response) {
                     authService.removeToken();
                     authData.authenticationData.IsAuthenticated = false;
                     authData.authenticationData.userName = "";
                     authData.authenticationData.accessToken = "";
 
-                }, null);
+                }, null);*/
             }
         }]);
 })(angular.module('MINHTHUShop.common'));

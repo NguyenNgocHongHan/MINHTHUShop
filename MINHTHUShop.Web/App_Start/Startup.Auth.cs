@@ -35,7 +35,6 @@ namespace MINHTHUShop.Web.App_Start
                 Provider = new AuthorizationServerProvider(),
                 AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(30),
                 AllowInsecureHttp = true,
-
             });
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
 
@@ -121,13 +120,11 @@ namespace MINHTHUShop.Web.App_Start
                 }
                 else
                 {
-                    context.SetError("invalid_grant", "Tài khoản hoặc mật khẩu không đúng!'");
+                    context.SetError("invalid_grant", "Tài khoản hoặc mật khẩu không chính xác!'");
                     context.Rejected();
                 }
             }
         }
-
-
 
         private static UserManager<Tb_Staff> CreateManager(IdentityFactoryOptions<UserManager<Tb_Staff>> options, IOwinContext context)
         {

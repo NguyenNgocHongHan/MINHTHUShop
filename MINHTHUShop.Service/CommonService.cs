@@ -6,18 +6,12 @@ using System.Collections.Generic;
 
 namespace MINHTHUShop.Service
 {
-    public interface ICommonService
-    {
-        Tb_Footer GetFooter();
-
-        IEnumerable<Tb_Banner> GetBanners();
-    }
-
     public class CommonService : ICommonService
     {
         private ITb_FooterRepository _footerRepository;
         private IUnitOfWork _unitOfWork;
         ITb_BannerRepository _bannerRepository;
+        ITb_AboutRepository _aboutRepository;
 
         public CommonService(ITb_FooterRepository footerRepository, IUnitOfWork unitOfWork, ITb_BannerRepository bannerRepository)
         {
@@ -35,5 +29,15 @@ namespace MINHTHUShop.Service
         {
             return _bannerRepository.GetMulti(x => x.Status);
         }
+
+    }
+
+
+    public interface ICommonService
+    {
+        Tb_Footer GetFooter();
+
+        IEnumerable<Tb_Banner> GetBanners();
+
     }
 }

@@ -1,7 +1,7 @@
 ﻿(function (app) {
     'use strict';
-    app.service('authService', ['$http', '$q', '$window', 'authData',
-        function ($http, $q, $window, authData) {
+    app.service('authService', ['$http', '$q', '$window',/* 'authData',*/
+        function ($http, $q, $window/*, authData*/) {
             var tokenInfo;
 
             this.setTokenInfo = function (data) {
@@ -34,13 +34,17 @@
 
             this.setHeader = function () {
                 delete $http.defaults.headers.common['X-Requested-With'];
-                if ((authData.authenticationData != undefined) && (authData.authenticationData.accessToken != undefined) && (authData.authenticationData.accessToken != null) && (authData.authenticationData.accessToken != "")) {
+                /*if ((authData.authenticationData != undefined) && (authData.authenticationData.accessToken != undefined) && (authData.authenticationData.accessToken != null) && (authData.authenticationData.accessToken != "")) {
                     $http.defaults.headers.common['Authorization'] = 'Bearer ' + authData.authenticationData.accessToken;
+                    $http.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+                }*/
+                if ((tokenInfo != undefined) && (tokenInfo.accessToken != undefined) && (tokenInfo.accessToken != null) && (tokenInfo.accessToken != "")) {
+                    $http.defaults.headers.common['Authorization'] = 'Bearer ' + tokenInfo.accessToken;
                     $http.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
                 }
             }
 
-            this.validateRequest = function () {
+            /*this.validateRequest = function () {
                 var url = 'api/Home/TestMethod';
                 var deferred = $q.defer();
                 $http.get(url).then(function () {
@@ -49,7 +53,7 @@
                     deferred.reject(error);
                 });
                 return deferred.promise;
-            }
+            }*/
 
             this.init();
         }

@@ -109,7 +109,7 @@
                 $scope.pagesCount = result.data.TotalPage;
                 $scope.totalCount = result.data.TotalCount;
             }, function () {
-                console.log('Tải thương hiệu / hãng sản xuất thất bại!');
+                console.log('Tải thương hiệu - hãng sản xuất thất bại!');
             });
         }
 

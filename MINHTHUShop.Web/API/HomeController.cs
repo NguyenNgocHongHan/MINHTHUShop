@@ -1,8 +1,9 @@
-﻿using MINHTHUShop.Service;
+﻿using AutoMapper;
+using MINHTHUShop.Model.Models;
+using MINHTHUShop.Service;
 using MINHTHUShop.Web.Infrastructure.Core;
-using System;
+using MINHTHUShop.Web.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -13,17 +14,19 @@ namespace MINHTHUShop.Web.API
     [Authorize]
     public class HomeController : APIControllerBase
     {
-        ITb_ErrorService _tb_errorService;
-        public HomeController(ITb_ErrorService tb_errorService) : base(tb_errorService)
+        private ITb_ErrorService _tb_errorService;
+
+        public HomeController(ITb_ErrorService tb_errorService, Tb_AboutService tb_AboutService) : base(tb_errorService)
         {
             this._tb_errorService = tb_errorService;
         }
 
-        [HttpGet]
+        /*[HttpGet]
         [Route("TestMethod")]
+        [AllowAnonymous]
         public string TestMethod()
         {
-            return "Xin chào member của cửa hàng Minh Thư!";
-        }
+            return "Chào thành viên của MINH THƯ Shop!";
+        }*/
     }
 }

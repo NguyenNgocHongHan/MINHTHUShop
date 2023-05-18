@@ -4,13 +4,13 @@
     rootController.$inject = ['$scope', '$state', 'authData', 'authService', 'loginService']
 
     function rootController($scope, $state, authData, authService, loginService) {
-        $scope.logout = function () {
+        $scope.Logout = function () {
             loginService.Logout();
             $state.go('login');
         }
 
         $scope.authentication = authData.authenticationData;
         //$scope.sideBar = "/app/shared/views/sideBar.html";
-        //authService.validateRequest();
+        /*authService.validateRequest();*/
     }
 })(angular.module('MINHTHUShop'));

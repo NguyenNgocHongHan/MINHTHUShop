@@ -76,6 +76,14 @@
     <Compile Include="Migrations\202305171847301_updateBannerTable.designer.cs">
       <DependentUpon>202305171847301_updateBannerTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305181621392_addCreateAttributeForAboutTable.cs" />
+    <Compile Include="Migrations\202305181621392_addCreateAttributeForAboutTable.designer.cs">
+      <DependentUpon>202305181621392_addCreateAttributeForAboutTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305181803419_deleteSEOForAboutTable.cs" />
+    <Compile Include="Migrations\202305181803419_deleteSEOForAboutTable.designer.cs">
+      <DependentUpon>202305181803419_deleteSEOForAboutTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -133,6 +141,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305171847301_updateBannerTable.resx">
       <DependentUpon>202305171847301_updateBannerTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305181621392_addCreateAttributeForAboutTable.resx">
+      <DependentUpon>202305181621392_addCreateAttributeForAboutTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305181803419_deleteSEOForAboutTable.resx">
+      <DependentUpon>202305181803419_deleteSEOForAboutTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

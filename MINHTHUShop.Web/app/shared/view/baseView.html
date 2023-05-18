@@ -110,9 +110,9 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="javascript:void(0);" class="brand-link">
-            <img src="../../../Content/Admin/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light">Minh Thư</span>
+        <a href="javascript:void(0);" class="brand-link" style="text-align:center">
+            <!--<img src="../../../Content/Admin/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">-->
+            <span class="brand-text font-weight-light"><b>Minh Thư</b> Shop</span>
         </a>
 
         <!-- Sidebar -->
@@ -123,9 +123,10 @@
                     <img src="../../../Content/Admin/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="javascript:void(0);">{{authentication.userName}}</a>
+                    <a href="javascript:void(0);" class="d-block">{{authentication.userName}}</a>
                 </div>
                 <div class="btn ml-auto">
+                    <a ui-sref="#"><i class='right fas fa-user-edit'></i></a>
                     <a href="#" ng-click="Logout()"><i class='right fas fa-sign-out-alt'></i></a>
                 </div>
             </div>
@@ -134,67 +135,53 @@
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-                         with font-awesome or any other icon font library -->
+                    with font-awesome or any other icon font library -->
+                    <li class="nav-header">QUẢN LÝ THÔNG TIN</li>
                     <li class="nav-item">
-                        <a href="javascript:void(0);" class="nav-link" role="button">
-                            <i class="nav-icon fas fa-copy"></i>
-                            <p>
-                                Quản lý thông tin
-                                <i class="fas fa-angle-left right"></i>
-                                <span class="badge badge-info right">6</span>
-                            </p>
+                        <a ui-sref="productCategory" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Danh mục sản phẩm</p>
                         </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a ui-sref="productCategory" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Danh mục sản phẩm</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a ui-sref="newsCategory" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Danh mục tin tức</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a ui-sref="faqCategory" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Danh mục FAQ</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a ui-sref="product" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Sản phẩm</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a ui-sref="news" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Tin tức</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a ui-sref="faq" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>FAQ</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a ui-sref="brand" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Thương hiệu</p>
-                                </a>
-                            </li>
-
-
-
-
-
-                        </ul>
                     </li>
+                    <li class="nav-item">
+                        <a ui-sref="newsCategory" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Danh mục tin tức</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a ui-sref="faqCategory" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Danh mục FAQ</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a ui-sref="product" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Sản phẩm</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a ui-sref="news" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Tin tức</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a ui-sref="faq" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>FAQ</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a ui-sref="brand" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Thương hiệu</p>
+                        </a>
+                    </li>
+
                 </ul>
+
             </nav>
             <!-- /.sidebar-menu -->
         </div>

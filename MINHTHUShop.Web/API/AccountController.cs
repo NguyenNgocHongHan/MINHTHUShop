@@ -64,7 +64,7 @@ namespace MINHTHUShop.Web.API
             return request.CreateResponse(HttpStatusCode.OK, result);
         }
 
-        [HttpPost]
+        /*[HttpPost]
         [Authorize]
         [Route("Logout")]
         public HttpResponseMessage Logout(HttpRequestMessage request)
@@ -72,6 +72,6 @@ namespace MINHTHUShop.Web.API
             var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
             authenticationManager.SignOut();
             return request.CreateResponse(HttpStatusCode.OK, new { success = true });
-        }
+        }*/
     }
 }

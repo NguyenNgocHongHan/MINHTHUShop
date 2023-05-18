@@ -1,10 +1,11 @@
 ﻿using MINHTHUShop.Model.Abstract;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MINHTHUShop.Model.Models
 {
-    public class Tb_About : SEO
+    public class Tb_About
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -33,6 +34,10 @@ namespace MINHTHUShop.Model.Models
 
         public string Description { get; set; }
 
-        public bool? Status { get; set; } = true;
+        [Required]
+        public DateTime CreateDate { get; set; } = DateTime.Now;
+
+        [Required]
+        public bool Status { get; set; } = true;
     }
 }
