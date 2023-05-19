@@ -34,7 +34,8 @@ namespace MINHTHUShop.Model.Models
         [Required]
         public decimal Price { get; set; }
 
-        public decimal? PromotionPrice { get; set; }
+        [Required]
+        public decimal PromotionPrice { get; set; }
 
         public string Description { get; set; }
 

@@ -127,10 +127,10 @@ namespace MINHTHUShop.Service
             return query;
         }
 
-        public IEnumerable<Tb_Product> GeyListProductByCateIdPaging(int cateID, int pageIndex, int pageSize, string sort, out int totalRow)
+        public IEnumerable<Tb_Product> GetListProductByCateIdPaging(int cateID, int pageIndex, int pageSize/*, string sort*/, out int totalRow)
         {
-            var query = _tb_ProductRepository.GetMulti(x => x.Status == true && x.CateID == cateID);
-            switch (sort)
+            var query = _tb_ProductRepository.GetMulti(x => x.Status && x.CateID == cateID);
+            /*switch (sort)
             {
                 case "discount":
                     query = query.OrderByDescending(x => x.PromotionPrice.HasValue);
@@ -141,8 +141,9 @@ namespace MINHTHUShop.Service
                 default:
                     query = query.OrderByDescending(x => x.CreateDate);
                     break;
-            }
+            }*/
             totalRow = query.Count();
+
             return query.Skip((pageIndex - 1) * pageSize).Take(pageSize);
         }
 
@@ -157,7 +158,7 @@ namespace MINHTHUShop.Service
             switch (sort)
             {
                 case "discount":
-                    query = query.OrderByDescending(x => x.PromotionPrice.HasValue);
+                    query = query.OrderByDescending(x => x.PromotionPrice);
                     break;
                 case "price":
                     query = query.OrderBy(x => x.Price);
@@ -211,11 +212,11 @@ namespace MINHTHUShop.Service
         IEnumerable<Tb_Product> GetAll(string keywork);
         IEnumerable<Tb_Product> GetLastest(int top);
         IEnumerable<Tb_Product> GetProductByCateId(int cateID);
-        IEnumerable<Tb_Product> GeyListProductByCateIdPaging(int cateID, int pageIndex, int pageSize, string sort, out int totalRow);
         IEnumerable<Tb_Product> Search(string keywork, int pageIndex, int pageSize, string sort, out int totalRow);
-        IEnumerable<Tb_Product> GetListProduct(string keywork);
         IEnumerable<Tb_Product> GetRelatedProduct(int id, int top);
+        IEnumerable<Tb_Product> GetListProduct(string keywork);
         IEnumerable<string> GetListProductByName(string name);
         IEnumerable<Tb_Product> GetListProductByTag(string tagID, int pageIndex, int pageSize, out int totalRow);
+        IEnumerable<Tb_Product> GetListProductByCateIdPaging(int cateID, int pageIndex, int pageSize/*, string sort*/, out int totalRow);
     }
 }
