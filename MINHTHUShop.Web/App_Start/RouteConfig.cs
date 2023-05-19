@@ -35,6 +35,13 @@ namespace MINHTHUShop.Web
             );
 
             routes.MapRoute(
+                name: "Search",
+                url: "tim-kiem.html",
+                defaults: new { controller = "Product", action = "Search", id = UrlParameter.Optional },
+                namespaces: new string[] { "MINHTHUShop.Web.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Product Category",
                 url: "{metaTitle}.pc-{cateId}.html",
                 defaults: new { controller = "Product", action = "DetailCategory", cateId = UrlParameter.Optional },

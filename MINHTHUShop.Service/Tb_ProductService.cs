@@ -160,14 +160,17 @@ namespace MINHTHUShop.Service
             var query = _tb_ProductRepository.GetMulti(x => x.Status == true && x.Name.Contains(keywork));
             switch (sort)
             {
-                case "discount":
+                case "new":
+                    query = query.OrderByDescending(x => x.CreateDate);
+                    break;
+                case "lowToHigh":
+                    query = query.OrderBy(x => x.PromotionPrice);
+                    break;
+                case "highToLow":
                     query = query.OrderByDescending(x => x.PromotionPrice);
                     break;
-                case "price":
-                    query = query.OrderBy(x => x.Price);
-                    break;
                 default:
-                    query = query.OrderByDescending(x => x.CreateDate);
+                    query = query.OrderBy(x => x.Name);
                     break;
             }
             totalRow = query.Count();
