@@ -31,12 +31,12 @@ namespace MINHTHUShop.Web.Controllers
             return View();
         }
 
-        public ActionResult DetailCategory(int cateID, int pageIndex = 1)
+        public ActionResult DetailCategory(int cateID, int pageIndex = 1, string sort = "")
         {
             int pageSize = int.Parse(ConfigHelper.GetByKey("PageSize"));
             int totalRow = 0;
 
-            var productModel = _productService.GetListProductByCateIdPaging(cateID, pageIndex, pageSize, out totalRow);
+            var productModel = _productService.GetListProductByCateIdPaging(cateID, pageIndex, pageSize, sort, out totalRow);
             var productVM = Mapper.Map<IEnumerable<Tb_Product>, IEnumerable<ProductVM>>(productModel);
 
             int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);

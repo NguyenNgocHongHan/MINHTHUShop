@@ -127,21 +127,24 @@ namespace MINHTHUShop.Service
             return query;
         }
 
-        public IEnumerable<Tb_Product> GetListProductByCateIdPaging(int cateID, int pageIndex, int pageSize/*, string sort*/, out int totalRow)
+        public IEnumerable<Tb_Product> GetListProductByCateIdPaging(int cateID, int pageIndex, int pageSize, string sort, out int totalRow)
         {
             var query = _tb_ProductRepository.GetMulti(x => x.Status && x.CateID == cateID);
-            /*switch (sort)
+            switch (sort)
             {
-                case "discount":
-                    query = query.OrderByDescending(x => x.PromotionPrice.HasValue);
+                case "lowToHigh":
+                    query = query.OrderBy(x => x.PromotionPrice);
                     break;
-                case "price":
-                    query = query.OrderBy(x => x.Price);
+                case "highToLow":
+                    query = query.OrderByDescending(x => x.PromotionPrice);
                     break;
-                default:
+                case "new":
                     query = query.OrderByDescending(x => x.CreateDate);
                     break;
-            }*/
+                default:
+                    query = query.OrderBy(x => x.Name);
+                    break;
+            }
             totalRow = query.Count();
 
             return query.Skip((pageIndex - 1) * pageSize).Take(pageSize);
@@ -217,6 +220,6 @@ namespace MINHTHUShop.Service
         IEnumerable<Tb_Product> GetListProduct(string keywork);
         IEnumerable<string> GetListProductByName(string name);
         IEnumerable<Tb_Product> GetListProductByTag(string tagID, int pageIndex, int pageSize, out int totalRow);
-        IEnumerable<Tb_Product> GetListProductByCateIdPaging(int cateID, int pageIndex, int pageSize/*, string sort*/, out int totalRow);
+        IEnumerable<Tb_Product> GetListProductByCateIdPaging(int cateID, int pageIndex, int pageSize, string sort, out int totalRow);
     }
 }

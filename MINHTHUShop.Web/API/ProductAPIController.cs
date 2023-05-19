@@ -69,7 +69,7 @@ namespace MINHTHUShop.Web.API
                 var model = _productService.GetAll(keyword);
                 totalRow = model.Count();
 
-                var query = model.OrderByDescending(x => x.Name).Skip(page * pageSize).Take(pageSize);
+                var query = model.OrderBy(x => x.Name).Skip(page * pageSize).Take(pageSize);
 
                 var responseData = Mapper.Map<IEnumerable<Tb_Product>, IEnumerable<ProductVM>>(query.AsEnumerable());
 

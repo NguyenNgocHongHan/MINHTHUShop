@@ -69,7 +69,7 @@ namespace MINHTHUShop.Web.API
                 var model = _faqService.GetAll(keyword);
                 totalRow = model.Count();
 
-                var query = model.OrderByDescending(x => x.Question).Skip(page * pageSize).Take(pageSize);
+                var query = model.OrderBy(x => x.Question).Skip(page * pageSize).Take(pageSize);
 
                 var responseData = Mapper.Map<IEnumerable<Tb_FAQ>, IEnumerable<FAQVM>>(query.AsEnumerable());
 
