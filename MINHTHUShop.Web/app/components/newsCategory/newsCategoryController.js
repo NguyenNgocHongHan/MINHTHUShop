@@ -5,6 +5,8 @@
 
     function newsCategoryController($scope, $ngBootbox, $filter, apiService, notificationService) {
         $scope.newsCategory = [];
+        $scope.parentCategory = [];
+
         $scope.GetNewsCategory = GetNewsCategory;
 
         $scope.index = 0;
@@ -113,6 +115,21 @@
             });
         }
 
+        function LoadParentCategory() {
+            apiService.get('api/NewsCategory/GetAll', null, function (result) {
+                /*console.log(result);*/
+                $scope.parentCategory = result.data;
+                /*$scope.parentCategory = commonService.getTree(result.data, "CateID", "ParentID");*/
+                /*$scope.parentCategories.forEach(function (item) {
+                    recur(item, 0, $scope.flatFolders);
+                });*/
+            }, function () {
+                console.log('Không thể lấy ra danh sách thư mục cha!');
+            });
+        }
+
         $scope.GetNewsCategory();
+
+        LoadParentCategory();
     }
 })(angular.module('MINHTHUShop.newsCategory'));

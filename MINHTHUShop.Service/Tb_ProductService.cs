@@ -132,14 +132,14 @@ namespace MINHTHUShop.Service
             var query = _tb_ProductRepository.GetMulti(x => x.Status && x.CateID == cateID);
             switch (sort)
             {
+                case "new":
+                    query = query.OrderByDescending(x => x.CreateDate);
+                    break;
                 case "lowToHigh":
                     query = query.OrderBy(x => x.PromotionPrice);
                     break;
                 case "highToLow":
                     query = query.OrderByDescending(x => x.PromotionPrice);
-                    break;
-                case "new":
-                    query = query.OrderByDescending(x => x.CreateDate);
                     break;
                 default:
                     query = query.OrderBy(x => x.Name);

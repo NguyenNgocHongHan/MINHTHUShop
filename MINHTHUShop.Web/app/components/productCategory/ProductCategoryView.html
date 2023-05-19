@@ -68,7 +68,7 @@
                                     <td>{{item.Name}}</td>
                                     <td style="text-align:center;">{{item.Sort}}</td>
                                     <td style="text-align:center;">
-                                        <p ng-repeat="cate in productCategory" ng-if="item.ParentID == cate.CateID">{{cate.Name}}</p>
+                                        <p ng-repeat="cate in parentCategory" ng-if="item.ParentID == cate.CateID">{{cate.Name}}</p>
                                     </td>
                                     <td style="text-align:center;">
                                         <button class="btn btn-sm btn-primary" ui-sref="productCategoryEdit({id:item.CateID})">

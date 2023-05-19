@@ -5,6 +5,8 @@
 
     function faqCategoryController($scope, $ngBootbox, $filter, apiService, notificationService) {
         $scope.faqCategory = [];
+        $scope.parentCategory = [];
+
         $scope.GetFAQCategory = GetFAQCategory;
 
         $scope.index = 0;
@@ -113,6 +115,21 @@
             });
         }
 
+        function LoadParentCategory() {
+            apiService.get('api/FAQCategory/GetAll', null, function (result) {
+                /*console.log(result);*/
+                $scope.parentCategory = result.data;
+                /*$scope.parentCategory = commonService.getTree(result.data, "CateID", "ParentID");*/
+                /*$scope.parentCategories.forEach(function (item) {
+                    recur(item, 0, $scope.flatFolders);
+                });*/
+            }, function () {
+                console.log('Không thể lấy ra danh sách thư mục cha!');
+            });
+        }
+
         $scope.GetFAQCategory();
+
+        LoadParentCategory();
     }
 })(angular.module('MINHTHUShop.faqCategory'));

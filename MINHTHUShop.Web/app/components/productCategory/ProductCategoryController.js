@@ -5,6 +5,7 @@
 
     function productCategoryController($scope, $ngBootbox, $filter, apiService, notificationService) {
         $scope.productCategory = [];
+        $scope.parentCategory = [];
         $scope.GetProductCategory = GetProductCategory;
 
         $scope.index = 0;
@@ -113,6 +114,21 @@
             });
         }
 
+        function LoadParentCategory() {
+            apiService.get('api/ProductCategory/GetAll', null, function (result) {
+                /*console.log(result);*/
+                $scope.parentCategory = result.data;
+                /*$scope.parentCategory = commonService.getTree(result.data, "CateID", "ParentID");*/
+                /*$scope.parentCategories.forEach(function (item) {
+                    recur(item, 0, $scope.flatFolders);
+                });*/
+            }, function () {
+                console.log('Không thể lấy ra danh sách thư mục cha!');
+            });
+        }
+
         $scope.GetProductCategory();
+
+        LoadParentCategory();
     }
 })(angular.module('MINHTHUShop.productCategory'));

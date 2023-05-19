@@ -11,10 +11,6 @@
                 <li class="item1">
                     <a href="@url">
                         @category.Name
-                        @if (childCategories.Count() > 0)
-                        {
-                            <img class="arrow-img" src="~/Content/Client/images/arrow1.png" alt="" />
-                        }
                     </a>
                     @if (childCategories.Count() > 0)
                     {
@@ -22,7 +18,7 @@
                             @foreach (var childCategory in childCategories)
                             {
                                 var childUrl = "/" + childCategory.MetaTitle + ".pc-" + childCategory.CateID + ".html";
-                                <li class="subitem1"><a href="@childUrl">@childCategory.Name</a></li>
+                                <li class="subitem1"><a href="@childUrl" style="padding-left:30px">&bull; @childCategory.Name</a></li>
                             }
                         </ul>
                     }
