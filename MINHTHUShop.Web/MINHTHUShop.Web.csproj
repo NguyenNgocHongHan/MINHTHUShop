@@ -8238,6 +8238,7 @@
     <Content Include="Views\Shared\Category.cshtml" />
     <Content Include="Views\Product\DetailCategory.cshtml" />
     <Content Include="Views\Product\Search.cshtml" />
+    <Content Include="Views\Product\DetailProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

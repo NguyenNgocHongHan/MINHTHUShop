@@ -141,9 +141,16 @@
                             <h6 style="height:70px; font-size:small"><a href="@urlChild">@product.Name</a></h6>
                             <div class="star-price">
                                 <div class="dolor-grid">
-                                    <span class="actual">@product.PromotionPrice.ToString("N0") đ</span>
-                                    <br />
-                                    <span class="reducedfrom"><small>@product.Price.ToString("N0") đ</small></span>
+                                    @if (product.Price == product.PromotionPrice)
+                                    {
+                                        <span class="actual">@product.Price.ToString("N0") đ</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="actual">@product.PromotionPrice.ToString("N0") đ</span>
+                                        <br />
+                                        <span class="reducedfrom"><small>@product.Price.ToString("N0") đ</small></span>
+                                    }
                                     <span class="rating">
                                         <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
                                         <label for="rating-input-1-5" class="rating-star1"> </label>

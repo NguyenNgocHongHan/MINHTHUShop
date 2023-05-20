@@ -88,6 +88,14 @@
     <Compile Include="Migrations\202305191457400_updateRequiredPromotionPrice.designer.cs">
       <DependentUpon>202305191457400_updateRequiredPromotionPrice.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305201905338_changeValidateListImg.cs" />
+    <Compile Include="Migrations\202305201905338_changeValidateListImg.designer.cs">
+      <DependentUpon>202305201905338_changeValidateListImg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305201936168_changeValidateListImgToString.cs" />
+    <Compile Include="Migrations\202305201936168_changeValidateListImgToString.designer.cs">
+      <DependentUpon>202305201936168_changeValidateListImgToString.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -154,6 +162,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305191457400_updateRequiredPromotionPrice.resx">
       <DependentUpon>202305191457400_updateRequiredPromotionPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305201905338_changeValidateListImg.resx">
+      <DependentUpon>202305201905338_changeValidateListImg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305201936168_changeValidateListImgToString.resx">
+      <DependentUpon>202305201936168_changeValidateListImgToString.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

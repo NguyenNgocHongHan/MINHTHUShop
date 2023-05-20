@@ -1,32 +1,6 @@
 ﻿﻿@model IEnumerable<MINHTHUShop.Web.Models.ProductCategoryVM>
 
-<div class="sub-cate">
-    <div class=" top-nav rsidebar span_1_of_left">
-        <h3 class="cate">DANH MỤC SẢN PHẨM</h3>
-        <ul class="menu">
-            @foreach (var category in Model.Where(x => x.ParentID == null))
-            {
-                var url = "/" + category.MetaTitle + ".pc-" + category.CateID + ".html";
-                var childCategories = Model.Where(x => x.ParentID == category.CateID);
-                <li class="item1">
-                    <a href="@url">
-                        @category.Name
-                    </a>
-                    @if (childCategories.Count() > 0)
-                    {
-                        <ul class="cute">
-                            @foreach (var childCategory in childCategories)
-                            {
-                                var childUrl = "/" + childCategory.MetaTitle + ".pc-" + childCategory.CateID + ".html";
-                                <li class="subitem1"><a href="@childUrl" style="padding-left:30px">&bull; @childCategory.Name</a></li>
-                            }
-                        </ul>
-                    }
-                </li>
-            }
-        </ul>
-    </div>
-    <!--initiate accordion-->
+@section footerJS{
     <script type="text/javascript">
         $(function () {
             var menu_ul = $('.menu > li > ul'),
@@ -46,6 +20,38 @@
 
         });
     </script>
+}
+
+<div class="sub-cate">
+    <div class=" top-nav rsidebar span_1_of_left">
+        <h3 class="cate">DANH MỤC SẢN PHẨM</h3>
+        <ul class="menu">
+            @foreach (var category in Model.Where(x => x.ParentID == null))
+            {
+                var url = "/" + category.MetaTitle + ".pc-" + category.CateID + ".html";
+                var childCategories = Model.Where(x => x.ParentID == category.CateID);
+                <li class="item1">
+                    @if (childCategories.Count() > 0)
+                    {
+                        <a href="#">@category.Name</a>
+                        <ul class="cute">
+                            @foreach (var childCategory in childCategories)
+                            {
+                                var childUrl = "/" + childCategory.MetaTitle + ".pc-" + childCategory.CateID + ".html";
+                                <li class="subitem1"><a href="@childUrl" style="padding-left:30px">&bull; @childCategory.Name</a></li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <a href="@url">@category.Name</a>
+                    }
+                </li>
+            }
+        </ul>
+    </div>
+    <!--initiate accordion-->
+
     <div class=" chain-grid menu-chain">
         <a href="single.html"><img class="img-responsive chain" src="~/Content/Client/images/wat.jpg" alt=" " /></a>
         <div class="grid-chain-bottom chain-watch">

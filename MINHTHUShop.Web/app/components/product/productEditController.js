@@ -31,12 +31,7 @@
         }
 
         function UpdateProduct() {
-            if ($scope.listImg.length == 0) {
-                $scope.product.ListImg = null
-            }
-            else {
-                $scope.product.ListImg = JSON.stringify($scope.listImg) // convert từ 1 chuỗi js thành 1 chuỗi json
-            }
+            $scope.product.ListImg = JSON.stringify($scope.listImg) // convert từ 1 chuỗi js thành 1 chuỗi json
             apiService.put('api/Product/Update', $scope.product,
                 function (result) {
                     notificationService.displaySuccess(result.data.Name + ' đã được cập nhật');
@@ -92,7 +87,6 @@
 
         $scope.DeleteMoreImage = function () {
             $scope.listImg = [];
-            $scope.listImg.length = 0;
         }
 
         LoadCate();

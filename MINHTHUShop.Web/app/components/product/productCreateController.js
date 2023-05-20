@@ -25,12 +25,7 @@
         }
 
         function CreateProduct() {
-            if ($scope.listImg.length == 0) {
-                $scope.product.ListImg = null
-            }
-            else {
-                $scope.product.ListImg = JSON.stringify($scope.listImg) //convert chuỗi từ js thành json
-            } 
+            $scope.product.ListImg = JSON.stringify($scope.listImg) //convert chuỗi từ js thành json
             apiService.post('api/Product/Create', $scope.product,
                 function (result) {
                     notificationService.displaySuccess('Đã thêm ' + result.data.Name + ' thành công');
@@ -83,7 +78,6 @@
 
         $scope.DeleteMoreImage = function () {
             $scope.listImg = [];
-            $scope.listImg.length = 0;
         }
 
         LoadCate();

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace MINHTHUShop.Web.Controllers
 {
@@ -26,9 +27,18 @@ namespace MINHTHUShop.Web.Controllers
         }
 
         // GET: Product
-        public ActionResult DetailProduct(int productId)
+        public ActionResult DetailProduct(int productID)
         {
-            return View();
+            var productModel = _productService.GetById(productID);
+            var viewModel = Mapper.Map<Tb_Product, ProductVM>(productModel);
+
+            var relatedProduct = _productService.GetRelatedProduct(productID, 10);
+            ViewBag.RelatedProducts = Mapper.Map<IEnumerable<Tb_Product>, IEnumerable<ProductVM>>(relatedProduct);
+
+            List<string> listImages = new JavaScriptSerializer().Deserialize<List<string>>(viewModel.ListImg);
+            ViewBag.ListImg = listImages;
+
+            return View(viewModel);
         }
 
         public ActionResult DetailCategory(int cateID, int pageIndex = 1, string sort = "")
@@ -69,12 +79,12 @@ namespace MINHTHUShop.Web.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Search(string keyword, int page = 1, string sort = "")
+        public ActionResult Search(string keyword, int pageIndex = 1, string sort = "")
         {
             int totalRow = 0;
             int pageSize = int.Parse(ConfigHelper.GetByKey("PageSize"));
 
-            var productModel = _productService.Search(keyword, page, pageSize, sort, out totalRow);
+            var productModel = _productService.Search(keyword, pageIndex, pageSize, sort, out totalRow);
             var productVM = Mapper.Map<IEnumerable<Tb_Product>, IEnumerable<ProductVM>>(productModel);
 
             int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
@@ -89,7 +99,7 @@ namespace MINHTHUShop.Web.Controllers
                 Item = productVM,
                 Brand = brandVM,
                 MaxPage = int.Parse(ConfigHelper.GetByKey("MaxPage")),
-                Page = page,
+                Page = pageIndex,
                 TotalCount = totalRow,
                 TotalPage = totalPage
             };

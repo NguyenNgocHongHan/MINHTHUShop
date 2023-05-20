@@ -36,7 +36,7 @@ namespace MINHTHUShop.Web.API
         {
             return CreateHttpResponse(request, () =>
             {
-                var model = _brandService.GetAll();
+                var model = _brandService.GetAll().OrderBy(x=>x.Name);
                 var responseData = Mapper.Map<IEnumerable<Tb_Brand>, IEnumerable<BrandVM>>(model);
                 //nếu không dùng View Model thì mình có thể dùng câu lệnh bên dưới, nhưng có nhiều dữ liệu không cần thiết cũng được lấy ra theo
                 //vì vậy sử dụng View Model để lấy ra những trường cần thiết

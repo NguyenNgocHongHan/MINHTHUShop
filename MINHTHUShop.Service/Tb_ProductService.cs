@@ -112,7 +112,7 @@ namespace MINHTHUShop.Service
         public IEnumerable<Tb_Product> GetRelatedProduct(int id, int top)
         {
             var product = _tb_ProductRepository.GetById(id);
-            return _tb_ProductRepository.GetMulti(x => x.Status == true && x.ProductID != id && x.CateID == product.CateID).OrderByDescending(x => x.CreateDate).Take(top);
+            return _tb_ProductRepository.GetMulti(x => x.Status == true && x.ProductID != id && (x.CateID == product.CateID || x.BrandID == product.BrandID)).OrderByDescending(x => x.CreateDate).Take(top);
         }
 
         public Tb_Tag GetTag(string tagID)

@@ -21,7 +21,6 @@
         </div>
     </div>
 
-    @*Phân trang*@
     @if (Model.Count > 0)
     {
         <div class="grid-product">
@@ -43,14 +42,22 @@
                             }
                         }
                         <h6 style="height:60px; font-size:small; padding-right:10px">@product.Name</h6>
-                        <span class="actual"><small>@product.PromotionPrice.ToString("N2") đ</small></span>
-                        <span class="reducedfrom"><small>@product.Price.ToString("N2") đ</small></span>
+                        @if (@product.Price == product.PromotionPrice)
+                        {
+                            <span class="actual"><small>@product.Price.ToString("N0") đ</small></span>
+                        }
+                        else
+                        {
+                            <span class="actual"><small>@product.PromotionPrice.ToString("N0") đ</small></span>
+                            <span class="reducedfrom"><small>@product.Price.ToString("N0") đ</small></span>
+                        }
                     </div>
                 </a>
             }
 
             <div class="clearfix"> </div>
 
+            @*Phân trang*@
             @if (Model.TotalPage > 1)
             {
                 <nav aria-label="Phân trang" style="text-align:center">
