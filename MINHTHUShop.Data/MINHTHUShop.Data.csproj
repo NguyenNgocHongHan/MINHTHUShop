@@ -96,6 +96,14 @@
     <Compile Include="Migrations\202305201936168_changeValidateListImgToString.designer.cs">
       <DependentUpon>202305201936168_changeValidateListImgToString.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305211002161_changFieldForPageTable.cs" />
+    <Compile Include="Migrations\202305211002161_changFieldForPageTable.designer.cs">
+      <DependentUpon>202305211002161_changFieldForPageTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305211220322_changeNameWebpageTable.cs" />
+    <Compile Include="Migrations\202305211220322_changeNameWebpageTable.designer.cs">
+      <DependentUpon>202305211220322_changeNameWebpageTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -116,7 +124,7 @@
     <Compile Include="Repositories\Tb_OrderDetailRepository.cs" />
     <Compile Include="Repositories\Tb_OrderRepository.cs" />
     <Compile Include="Repositories\Tb_OrderStatusRepository.cs" />
-    <Compile Include="Repositories\Tb_PageRepository.cs" />
+    <Compile Include="Repositories\Tb_WebpageRepository.cs" />
     <Compile Include="Repositories\Tb_PaymentMethodRepository.cs" />
     <Compile Include="Repositories\Tb_PaymentRepository.cs" />
     <Compile Include="Repositories\Tb_ProductCategoryRepository.cs" />
@@ -168,6 +176,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305201936168_changeValidateListImgToString.resx">
       <DependentUpon>202305201936168_changeValidateListImgToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305211002161_changFieldForPageTable.resx">
+      <DependentUpon>202305211002161_changFieldForPageTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305211220322_changeNameWebpageTable.resx">
+      <DependentUpon>202305211220322_changeNameWebpageTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

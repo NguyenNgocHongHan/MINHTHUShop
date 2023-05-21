@@ -94,6 +94,17 @@ namespace MINHTHUShop.Web.Infrastructure.Extensions
             f.MetaDescriptions = vm.MetaDescriptions;
         }
 
+        public static void UpdateWebpage(this Tb_Webpage wp, WebpageVM vm)
+        {
+            wp.PageID = vm.PageID;
+            wp.Name = vm.Name;
+            wp.Description = vm.Description;
+            wp.CreateDate = vm.CreateDate;
+            wp.Status = vm.Status;
+            wp.MetaTitle = vm.MetaTitle;
+            wp.MetaKeywords = vm.MetaKeywords;
+            wp.MetaDescriptions = vm.MetaDescriptions;
+        }
 
     }
 }

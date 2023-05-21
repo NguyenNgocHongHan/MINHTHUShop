@@ -27,7 +27,7 @@ namespace MINHTHUShop.Data
         public DbSet<Tb_Order> Tb_Orders { get; set; }
         public DbSet<Tb_OrderDetail> Tb_OrderDetails { get; set; }
         public DbSet<Tb_OrderStatus> Tb_OrderStatuses { get; set; }
-        public DbSet<Tb_Page> Tb_Pages { get; set; }
+        public DbSet<Tb_Webpage> Tb_Webpages { get; set; }
         public DbSet<Tb_Payment> Tb_Payments { get; set; }
         public DbSet<Tb_PaymentMethod> Tb_PaymentMethods { get; set; }
         public DbSet<Tb_Product> Tb_Products { get; set; }

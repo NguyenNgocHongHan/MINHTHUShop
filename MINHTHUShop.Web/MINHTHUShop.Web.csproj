@@ -214,6 +214,7 @@
     <Compile Include="API\NewsCategoryAPIController.cs" />
     <Compile Include="API\ProductAPIController.cs" />
     <Compile Include="API\ProductCategoryAPIController.cs" />
+    <Compile Include="API\WebpageAPIController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\WebpageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -247,6 +249,7 @@
     <Compile Include="Models\OrderDetailVM.cs" />
     <Compile Include="Models\OrderStatusVM.cs" />
     <Compile Include="Models\OrderVM.cs" />
+    <Compile Include="Models\WebpageVM.cs" />
     <Compile Include="Models\PaymentMethodVM.cs" />
     <Compile Include="Models\ProductCategoryVM.cs" />
     <Compile Include="Models\ProductCommentVM.cs" />
@@ -301,6 +304,8 @@
     <Content Include="app\components\news\newsEditController.js" />
     <Content Include="app\components\news\newsEditView.html" />
     <Content Include="app\components\news\newsView.html" />
+    <Content Include="app\components\webpage\webpage.module.js" />
+    <Content Include="app\components\webpage\webpageController.js" />
     <Content Include="app\components\productCategory\productCategory.module.js" />
     <Content Include="app\components\productCategory\productCategoryCreateView.html" />
     <Content Include="app\components\productCategory\productCategoryCreateController.js" />
@@ -315,6 +320,11 @@
     <Content Include="app\components\product\productEditController.js" />
     <Content Include="app\components\product\productEditView.html" />
     <Content Include="app\components\product\productView.html" />
+    <Content Include="app\components\webpage\webpageCreateController.js" />
+    <Content Include="app\components\webpage\webpageCreateView.html" />
+    <Content Include="app\components\webpage\webpageEditController.js" />
+    <Content Include="app\components\webpage\webpageEditView.html" />
+    <Content Include="app\components\webpage\webpageView.html" />
     <Content Include="app\shared\directive\pagerDirective.html" />
     <Content Include="app\shared\directive\pagerDirective.js" />
     <Content Include="app\shared\filter\statusFillter.js" />
@@ -8241,6 +8251,7 @@
     <Content Include="Views\Product\Search.cshtml" />
     <Content Include="Views\Product\DetailProduct.cshtml" />
     <Content Include="Views\Product\ListProductByTag.cshtml" />
+    <Content Include="Views\Webpage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

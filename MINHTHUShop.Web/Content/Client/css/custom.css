@@ -30,3 +30,24 @@
                 background: #eeeeee;
             }
 
+.account, .introduce {
+    float: left;
+    width: 40%;
+}
+
+.introduce {
+    width: 24%;
+}
+
+.account a, .introduce a, ul.login li a {
+    text-decoration: none;
+    font-size: 1em;
+    color: #000;
+}
+
+    .introduce a span {
+        width: 26px;
+        height: 26px;
+        display: inline-block;
+        vertical-align: middle;
+    }

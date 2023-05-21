@@ -78,7 +78,7 @@
     <Compile Include="Models\Tb_Order.cs" />
     <Compile Include="Models\Tb_OrderDetail.cs" />
     <Compile Include="Models\Tb_OrderStatus.cs" />
-    <Compile Include="Models\Tb_Page.cs" />
+    <Compile Include="Models\Tb_Webpage.cs" />
     <Compile Include="Models\Tb_Payment.cs" />
     <Compile Include="Models\Tb_PaymentMethod.cs" />
     <Compile Include="Models\Tb_Product.cs" />

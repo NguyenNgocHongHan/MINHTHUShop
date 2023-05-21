@@ -8,6 +8,8 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.Data.Entity.Validation;
+    using System.Diagnostics;
     using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<MINHTHUShop.Data.MINHTHUShopDbContext>
@@ -22,6 +24,7 @@
             //  This method will be called after migrating to the latest version.
             CreateUser(context);
             CreateBanner(context);
+            CreatePage(context);
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
         }
@@ -95,8 +98,41 @@
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </ p >
                                 <span class=""on-get"">GET NOW</span>"},
                     };
-                    context.Tb_Banners.AddRange(listBanner);
+                context.Tb_Banners.AddRange(listBanner);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreatePage(MINHTHUShopDbContext context)
+        {
+            if (context.Tb_Webpages.Count() == 0)
+            {
+                try
+                {
+                    var page = new Tb_Webpage()
+                    {
+                        Name = "Giới thiệu",
+                        MetaTitle = "gioi-thieu",
+                        Description = @"Đến với Minh Thư Shop khách hàng sẽ trải nghiệm việc mua sắm trực tuyến với các bước thanh toán an toàn, đơn giản, nhanh chóng, đáp ứng tiêu chuẩn Quốc tế.
+Với phương châm “Chất lượng thật - Giá trị thật”, chúng tôi luôn nỗ lực không ngừng nhằm nâng cao chất lượng dịch vụ để khách hàng được hưởng các dịch vụ chăm sóc tốt nhất!",
+                        Status = true,
+                        CreateDate = DateTime.Now
+                    };
+                    context.Tb_Webpages.Add(page);
                     context.SaveChanges();
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var eve in ex.EntityValidationErrors)
+                    {
+                        Trace.WriteLine($"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation error.");
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Trace.WriteLine($"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"");
+                        }
+                    }
+                }
+
             }
         }
     }

@@ -9,10 +9,7 @@
             'MINHTHUShop.news',
             'MINHTHUShop.faq',
             'MINHTHUShop.brand',
-            /*'tedushop.application_groups'
-            'tedushop.application_roles',
-            'tedushop.application_users',
-            'tedushop.statistics',*/
+            'MINHTHUShop.webpage',
             'MINHTHUShop.common'])
         .config(config)
         .config(configAuth);

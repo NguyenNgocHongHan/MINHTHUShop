@@ -11,7 +11,6 @@ namespace MINHTHUShop.Service
         private ITb_FooterRepository _footerRepository;
         private IUnitOfWork _unitOfWork;
         ITb_BannerRepository _bannerRepository;
-        ITb_AboutRepository _aboutRepository;
 
         public CommonService(ITb_FooterRepository footerRepository, IUnitOfWork unitOfWork, ITb_BannerRepository bannerRepository)
         {

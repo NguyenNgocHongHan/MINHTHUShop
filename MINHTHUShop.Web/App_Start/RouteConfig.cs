@@ -28,11 +28,18 @@ namespace MINHTHUShop.Web
             );
 
             routes.MapRoute(
+                name: "Webpage",
+                url: "trang/{metaTitle}.html",
+                defaults: new { controller = "Webpage", action = "Index", metaTitle = UrlParameter.Optional },
+                namespaces: new string[] { "MINHTHUShop.Web.Controllers" }
+            );
+
+            /*routes.MapRoute(
                 name: "About",
                 url: "gioi-thieu.html",
                 defaults: new { controller = "About", action = "Index", id = UrlParameter.Optional },
                 namespaces: new string[] { "MINHTHUShop.Web.Controllers" }
-            );
+            );*/
 
             routes.MapRoute(
                 name: "Search",

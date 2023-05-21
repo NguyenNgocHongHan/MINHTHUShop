@@ -22,6 +22,7 @@ namespace MINHTHUShop.Web.Mappings
                 cfg.CreateMap<Tb_OrderDetail, OrderDetailVM>();
                 cfg.CreateMap<Tb_OrderStatus, OrderStatusVM>();
                 cfg.CreateMap<Tb_Order, OrderVM>();
+                cfg.CreateMap<Tb_Webpage, WebpageVM>();
                 cfg.CreateMap<Tb_PaymentMethod, PaymentMethodVM>();
                 cfg.CreateMap<Tb_ProductCategory, ProductCategoryVM>();
                 cfg.CreateMap<Tb_ProductComment, ProductCommentVM>();
