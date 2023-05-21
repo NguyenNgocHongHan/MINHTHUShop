@@ -104,6 +104,10 @@
     <Compile Include="Migrations\202305211220322_changeNameWebpageTable.designer.cs">
       <DependentUpon>202305211220322_changeNameWebpageTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305211705414_changeFiledsForAboutTable.cs" />
+    <Compile Include="Migrations\202305211705414_changeFiledsForAboutTable.designer.cs">
+      <DependentUpon>202305211705414_changeFiledsForAboutTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -182,6 +186,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305211220322_changeNameWebpageTable.resx">
       <DependentUpon>202305211220322_changeNameWebpageTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305211705414_changeFiledsForAboutTable.resx">
+      <DependentUpon>202305211705414_changeFiledsForAboutTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

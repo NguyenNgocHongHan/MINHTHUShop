@@ -1,5 +1,4 @@
-﻿using MINHTHUShop.Model.Abstract;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,7 +14,6 @@ namespace MINHTHUShop.Model.Models
         [MaxLength(50)]
         public string Name { get; set; }
 
-        [Required]
         [MaxLength(10)]
         [Column(TypeName = "char")]
         public string Phone { get; set; }
@@ -26,13 +24,17 @@ namespace MINHTHUShop.Model.Models
         public string Email { get; set; }
 
         [MaxLength(250)]
-        public string Fanpage { get; set; }
+        public string Website { get; set; }
 
         [Required]
         [MaxLength(250)]
         public string Address { get; set; }
 
         public string Description { get; set; }
+
+        public double? MapLat { get; set; } //vĩ độ
+
+        public double? MapLong { get; set; } //kinh độ
 
         [Required]
         public DateTime CreateDate { get; set; } = DateTime.Now;

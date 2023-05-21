@@ -7891,6 +7891,7 @@
     <Content Include="Content\Client\images\img-sprite.png" />
     <Content Include="Content\Client\images\label_new.png" />
     <Content Include="Content\Client\images\logo.png" />
+    <Content Include="Content\Client\images\logoMINHTHU.jpg" />
     <Content Include="Content\Client\images\pi.jpg" />
     <Content Include="Content\Client\images\pi1.jpg" />
     <Content Include="Content\Client\images\pi2.jpg" />
@@ -7927,6 +7928,7 @@
     <Content Include="Content\Client\images\wat.jpg" />
     <Content Include="Content\Client\images\zoom.png" />
     <Content Include="Content\Client\js\common.js" />
+    <Content Include="Content\Client\js\controller\about.js" />
     <Content Include="Content\Client\js\jquery.etalage.min.js" />
     <Content Include="Content\Client\js\jquery.flexisel.js" />
     <Content Include="Content\Client\js\jquery.min.js" />
@@ -7980,7 +7982,6 @@
   <ItemGroup>
     <Folder Include="app\components\roleStaff\" />
     <Folder Include="UploadFile\" />
-    <Folder Include="Views\About\" />
     <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
@@ -8252,6 +8253,7 @@
     <Content Include="Views\Product\DetailProduct.cshtml" />
     <Content Include="Views\Product\ListProductByTag.cshtml" />
     <Content Include="Views\Webpage\Index.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

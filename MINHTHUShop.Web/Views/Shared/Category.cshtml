@@ -33,12 +33,12 @@
                 <li class="item1">
                     @if (childCategories.Count() > 0)
                     {
-                        <a href="#">@category.Name</a>
+                        <a href="#" style="color:gray;">@category.Name</a>
                         <ul class="cute">
                             @foreach (var childCategory in childCategories)
                             {
                                 var childUrl = "/" + childCategory.MetaTitle + ".pc-" + childCategory.CateID + ".html";
-                                <li class="subitem1"><a href="@childUrl" style="padding-left:30px">&bull; @childCategory.Name</a></li>
+                                <li class="subitem1"><a href="@childUrl" style="padding-left:50px">@childCategory.Name</a></li>
                             }
                         </ul>
                     }

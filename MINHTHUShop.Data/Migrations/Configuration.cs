@@ -6,7 +6,6 @@
     using MINHTHUShop.Model.Models;
     using System;
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Data.Entity.Validation;
     using System.Diagnostics;
@@ -25,9 +24,11 @@
             CreateUser(context);
             CreateBanner(context);
             CreatePage(context);
+            CreateAbout(context);
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
         }
+
         private void CreateUser(MINHTHUShopDbContext context)
         {
             var manager = new UserManager<Tb_Staff>(new UserStore<Tb_Staff>(new MINHTHUShopDbContext()));
@@ -83,7 +84,7 @@
                         Image ="/Content/Client/images/bag.jpg",
                         Description =@"	<h2>FLAT 50% 0FF</h2>
                                 <label>FOR ALL PURCHASE <b>VALUE</b></label>
-                                <p>Lorem ipsum dolor sit amet, consectetur 
+                                <p>Lorem ipsum dolor sit amet, consectetur
                             adipisicing elit, sed do eiusmod tempor incididunt ut labore et </ p >
                         <span class=""on-get"">GET NOW</span>" },
                     new Tb_Banner() {
@@ -132,7 +133,40 @@ Với phương châm “Chất lượng thật - Giá trị thật”, chúng t�
                         }
                     }
                 }
+            }
+        }
 
+        private void CreateAbout(MINHTHUShopDbContext context)
+        {
+            if (context.Tb_Abouts.Count() == 0)
+            {
+                try
+                {
+                    var about = new MINHTHUShop.Model.Models.Tb_About()
+                    {
+                        Name = "MINH THƯ SHOP: Chi nhánh Nha Trang",
+                        Address = "835/1 đường 23/10 Nha Trang",
+                        Email = "minhthushop.cosmetic@gmail.com",
+                        MapLat = 12.2570747,
+                        MapLong = 109.149187,
+                        Phone = "0374798026",
+                        CreateDate = DateTime.Now,
+                        Status = true
+                    };
+                    context.Tb_Abouts.Add(about);
+                    context.SaveChanges();
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var eve in ex.EntityValidationErrors)
+                    {
+                        Trace.WriteLine($"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation error.");
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Trace.WriteLine($"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"");
+                        }
+                    }
+                }
             }
         }
     }
