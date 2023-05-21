@@ -1,0 +1,32 @@
+﻿.tag h6 {
+    font-size: 1em;
+    color: #777;
+    margin-bottom: 10px;
+    text-shadow: 0 1px 0 #ffffff;
+}
+
+.tag_nav {
+    float: left;
+}
+
+    .tag_nav li {
+        display: inline-block;
+        margin: 5px 5px;
+    }
+
+        .tag_nav li a {
+            padding: 5px;
+            display: block;
+            -webkit-transition: all 0.3s ease-out;
+            -moz-transition: all 0.3s ease-out;
+            -o-transition: all 0.3s ease-out;
+            transition: all 0.3s ease-out;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+        }
+
+            .tag_nav li a:hover {
+                background: #eeeeee;
+            }
+

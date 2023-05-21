@@ -6212,6 +6212,7 @@
     <Content Include="Content\Admin\lib\toastr.js\toastr.min.css" />
     <Content Include="Content\Admin\lib\toastr.js\toastr.min.js" />
     <Content Include="Content\Client\css\bootstrap.css" />
+    <Content Include="Content\Client\css\custom.css" />
     <Content Include="Content\Client\css\etalage.css" />
     <Content Include="Content\Client\css\form.css" />
     <Content Include="Content\Client\css\style.css" />
@@ -8239,6 +8240,7 @@
     <Content Include="Views\Product\DetailCategory.cshtml" />
     <Content Include="Views\Product\Search.cshtml" />
     <Content Include="Views\Product\DetailProduct.cshtml" />
+    <Content Include="Views\Product\ListProductByTag.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

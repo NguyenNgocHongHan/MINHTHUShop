@@ -102,10 +102,15 @@ namespace MINHTHUShop.Service
         {
             return _tb_ProductRepository.GetMulti(x => x.Status == true && x.Name.Contains(name)).Select(y => y.Name);
         }
-
-        public IEnumerable<Tb_Product> GetListProductByTag(string tagID, int pageIndex, int pageSize, out int totalRow)
+        public IEnumerable<Tb_Tag> GetListTagByProductId(int id)
         {
-            var model = _tb_ProductRepository.GetListProductByTag(tagID, pageIndex, pageSize, out totalRow);
+            return _tb_TagProductRepository.GetMulti(x => x.ProductID == id, new string[] { "Tb_Tag" }).Select(y => y.Tb_Tag);
+        }
+
+        public IEnumerable<Tb_Product> GetListProductByTag(string tagID, int pageIndex, int pageSize, string sort, out int totalRow)
+        {
+            var model = _tb_ProductRepository.GetListProductByTag(tagID, pageIndex, pageSize, sort, out totalRow);
+            
             return model;
         }
 
@@ -212,7 +217,6 @@ namespace MINHTHUShop.Service
         void Update(Tb_Product tb_Product);
         Tb_Product Delete(int id); 
         Tb_Product GetById(int id);
-        Tb_Tag GetTag(string tagID);
         void SaveChanges();
         IEnumerable<Tb_Product> GetAll();
         IEnumerable<Tb_Product> GetAll(string keywork);
@@ -222,7 +226,10 @@ namespace MINHTHUShop.Service
         IEnumerable<Tb_Product> GetRelatedProduct(int id, int top);
         IEnumerable<Tb_Product> GetListProduct(string keywork);
         IEnumerable<string> GetListProductByName(string name);
-        IEnumerable<Tb_Product> GetListProductByTag(string tagID, int pageIndex, int pageSize, out int totalRow);
+
+        Tb_Tag GetTag(string tagID);
+        IEnumerable<Tb_Tag> GetListTagByProductId(int id);
+        IEnumerable<Tb_Product> GetListProductByTag(string tagID, int pageIndex, int pageSize, string sort, out int totalRow);
         IEnumerable<Tb_Product> GetListProductByCateIdPaging(int cateID, int pageIndex, int pageSize, string sort, out int totalRow);
     }
 }

@@ -38,6 +38,8 @@ namespace MINHTHUShop.Web.Controllers
             List<string> listImages = new JavaScriptSerializer().Deserialize<List<string>>(viewModel.ListImg);
             ViewBag.ListImg = listImages;
 
+            ViewBag.Tags = Mapper.Map<IEnumerable<Tb_Tag>, IEnumerable<TagVM>>(_productService.GetListTagByProductId(productID));
+
             return View(viewModel);
         }
 
@@ -105,6 +107,34 @@ namespace MINHTHUShop.Web.Controllers
             };
 
             return View(paginationSet);
+        }
+
+        public ActionResult ListProductByTag(string tagID, int pageIndex = 1, string sort = "")
+        {
+            int pageSize = int.Parse(ConfigHelper.GetByKey("PageSize"));
+            int totalRow = 0;
+
+            var productModel = _productService.GetListProductByTag(tagID, pageIndex, pageSize, sort, out totalRow);
+            var productVM = Mapper.Map<IEnumerable<Tb_Product>, IEnumerable<ProductVM>>(productModel);
+
+            int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
+
+            var brandModel = _brandService.GetAll();
+            var brandVM = Mapper.Map<IEnumerable<Tb_Brand>, IEnumerable<BrandVM>>(brandModel);
+
+            ViewBag.Tag = Mapper.Map<Tb_Tag, TagVM>(_productService.GetTag(tagID));
+
+            var pagination = new Pagination<ProductVM>()
+            {
+                Item = productVM,
+                Brand = brandVM,
+                MaxPage = int.Parse(ConfigHelper.GetByKey("MaxPage")),
+                Page = pageIndex,
+                TotalCount = totalRow,
+                TotalPage = totalPage
+            };
+
+            return View(pagination);
         }
     }
 }

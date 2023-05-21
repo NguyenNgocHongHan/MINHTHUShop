@@ -80,8 +80,6 @@
             <div class="clearfix"> </div>
         </div>
         <div class="desc1 span_3_of_2">
-
-
             <h4>@Model.Name</h4>
             <div class="cart-b">
                 <div class="left-n">@Model.PromotionPrice.ToString("N0") đ</div>
@@ -93,16 +91,27 @@
                 var tietKiem = @Model.Price - @Model.PromotionPrice;
                 <h6><small>Giá thị trường: @Model.Price.ToString("N0") đ - Tiết kiệm:  @tietKiem.ToString("N0") đ</small></h6>
             }
-        <div class="share">
-            <ul class="share_nav pull-right">
-                <li><h6><small>Chia sẻ: </small></h6></li>
-                <li><a href="#"><img src="~/Content/Client/images/facebook.png" title="facebook"></a></li>
-                <li><a href="#"><img src="~/Content/Client/images/twitter.png" title="Twiiter"></a></li>
-                <li><a href="#"><img src="~/Content/Client/images/rss.png" title="Rss"></a></li>
-                <li><a href="#"><img src="~/Content/Client/images/gpluse.png" title="Google+"></a></li>
-            </ul>
-        </div>
+            <div class="share">
+                <ul class="share_nav pull-right">
+                    <li><h6><small>Chia sẻ: </small></h6></li>
+                    <li><a href="#"><img src="~/Content/Client/images/facebook.png" title="facebook"></a></li>
+                    <li><a href="#"><img src="~/Content/Client/images/twitter.png" title="Twiiter"></a></li>
+                    <li><a href="#"><img src="~/Content/Client/images/rss.png" title="Rss"></a></li>
+                    <li><a href="#"><img src="~/Content/Client/images/gpluse.png" title="Google+"></a></li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+            <div class="tag">
+                <h6>Tag: </h6>
+                <ul class="tag_nav">
+                    @foreach (var tag in (IEnumerable<MINHTHUShop.Web.Models.TagVM>)ViewBag.Tags)
+                    {
+                        <li><a href="/tag/@(tag.TagID).html">@(tag.Name)</a></li>
+                    }
 
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
         </div>
         <div class="clearfix"> </div>
     </div>
@@ -116,7 +125,7 @@
             <li>
                 <img src="@product.Image" />
                 <div class="grid-flex">
-                    <a href="/@(product.MetaTitle).p-@(product.ProductID).html"><h6 style="height:40px">@product.Name</h6></a><p style="color: #F97E76;"><b>@product.PromotionPrice.ToString("N0") đ</b></p>
+                    <a href="/@(product.MetaTitle).p-@(product.ProductID).html"><h6 style="height:60px">@product.Name</h6></a><p style="color: #F97E76;"><b>@product.PromotionPrice.ToString("N0") đ</b></p>
                 </div>
             </li>
         }
