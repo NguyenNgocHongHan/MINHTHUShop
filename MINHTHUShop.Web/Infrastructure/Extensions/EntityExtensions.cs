@@ -1,5 +1,6 @@
 ﻿using MINHTHUShop.Model.Models;
 using MINHTHUShop.Web.Models;
+using System;
 
 namespace MINHTHUShop.Web.Infrastructure.Extensions
 {
@@ -104,6 +105,27 @@ namespace MINHTHUShop.Web.Infrastructure.Extensions
             wp.MetaTitle = vm.MetaTitle;
             wp.MetaKeywords = vm.MetaKeywords;
             wp.MetaDescriptions = vm.MetaDescriptions;
+        }
+
+        public static void UpdateFeedback(this Tb_Feedback fb, FeedbackVM vm)
+        {
+            fb.FeedbackID = vm.FeedbackID;
+            fb.CustomerID = vm.CustomerID;
+            fb.Message = vm.Message;
+            fb.CreateDate = DateTime.Now;
+            fb.IsRead = vm.IsRead;
+        }
+
+        public static void UpdateBanner(this Tb_Banner bn, BannerVM vm)
+        {
+            bn.BannerID = vm.BannerID;
+            bn.Name = vm.Name;
+            bn.Description = vm.Description;
+            bn.Image = vm.Image;
+            bn.Link = vm.Link;
+            bn.Sort = vm.Sort;
+            bn.CreateDate = vm.CreateDate;
+            bn.Status = vm.Status;
         }
 
     }

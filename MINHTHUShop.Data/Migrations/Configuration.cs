@@ -86,7 +86,7 @@
                                 <label>FOR ALL PURCHASE <b>VALUE</b></label>
                                 <p>Lorem ipsum dolor sit amet, consectetur
                             adipisicing elit, sed do eiusmod tempor incididunt ut labore et </ p >
-                        <span class=""on-get"">GET NOW</span>" },
+                        " },
                     new Tb_Banner() {
                         Name ="Slide 2",
                         Sort =2,
@@ -97,7 +97,7 @@
                         Description=@"<h2>FLAT 50% 0FF</h2>
                                 <label>FOR ALL PURCHASE <b>VALUE</b></label>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </ p >
-                                <span class=""on-get"">GET NOW</span>"},
+                                "},
                     };
                 context.Tb_Banners.AddRange(listBanner);
                 context.SaveChanges();

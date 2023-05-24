@@ -20,12 +20,11 @@ namespace MINHTHUShop.Model.Models
         [MaxLength(250)]
         public string Image { get; set; }
 
+        [Required]
         [MaxLength(250)]
         public string Link { get; set; }
 
         public int? Sort { get; set; }
-
-        public int? Position { get; set; }
 
         [Required]
         public DateTime CreateDate { get; set; } = DateTime.Now;

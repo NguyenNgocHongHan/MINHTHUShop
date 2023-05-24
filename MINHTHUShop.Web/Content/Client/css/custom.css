@@ -40,3 +40,8 @@
         font-size: 1em;
         color: #000;
     }
+
+.error {
+    color:red;
+    font-style:italic;
+}

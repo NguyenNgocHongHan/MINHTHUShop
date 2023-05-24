@@ -10,6 +10,7 @@
             'MINHTHUShop.faq',
             'MINHTHUShop.brand',
             'MINHTHUShop.webpage',
+            'MINHTHUShop.banner',
             'MINHTHUShop.common'])
         .config(config)
         .config(configAuth);

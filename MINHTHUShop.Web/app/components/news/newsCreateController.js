@@ -51,7 +51,7 @@
         }
 
         $scope.DeleteImage = function () {
-            $scope.product.Image = null;
+            $scope.news.Image = null;
         }
 
         LoadCate();

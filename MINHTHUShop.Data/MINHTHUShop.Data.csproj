@@ -108,6 +108,14 @@
     <Compile Include="Migrations\202305211705414_changeFiledsForAboutTable.designer.cs">
       <DependentUpon>202305211705414_changeFiledsForAboutTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305221818452_deletePositionFieldForBannerTable.cs" />
+    <Compile Include="Migrations\202305221818452_deletePositionFieldForBannerTable.designer.cs">
+      <DependentUpon>202305221818452_deletePositionFieldForBannerTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305241730599_testMigration.cs" />
+    <Compile Include="Migrations\202305241730599_testMigration.designer.cs">
+      <DependentUpon>202305241730599_testMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -189,6 +197,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305211705414_changeFiledsForAboutTable.resx">
       <DependentUpon>202305211705414_changeFiledsForAboutTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305221818452_deletePositionFieldForBannerTable.resx">
+      <DependentUpon>202305221818452_deletePositionFieldForBannerTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305241730599_testMigration.resx">
+      <DependentUpon>202305241730599_testMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
