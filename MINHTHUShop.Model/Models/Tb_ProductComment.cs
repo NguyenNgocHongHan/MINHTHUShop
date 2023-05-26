@@ -15,7 +15,7 @@ namespace MINHTHUShop.Model.Models
         public int ProductID { get; set; }
 
         [Required]
-        public int CustomerID { get; set; }
+        public string CustomerID { get; set; }
 
         [Required]
         public float Vote { get; set; }
@@ -34,6 +34,6 @@ namespace MINHTHUShop.Model.Models
         [ForeignKey("ProductID")]
         public virtual Tb_Product Tb_Product { get; set; }
         [ForeignKey("CustomerID")]
-        public virtual Tb_Customer Tb_Customer { get; set; }
+        public virtual Tb_User Customer { get; set; }
     }
 }

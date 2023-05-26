@@ -1,39 +1,34 @@
 ﻿using BotDetect.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
 using MINHTHUShop.Common;
 using MINHTHUShop.Model.Models;
 using MINHTHUShop.Service;
-using MINHTHUShop.Web.App_Start;
 using MINHTHUShop.Web.Models;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using System.Linq;
 using System;
+using System.Data.Entity.Validation;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using AutoMapper;
-using System.Data.Entity.Validation;
-using MINHTHUShop.Web.Infrastructure.Core;
+using System.Web;
+using System.Web.Mvc;
 
 namespace MINHTHUShop.Web.Controllers
 {
     public class AccountController : Controller
     {
-        #region Khởi tạo
-
-        private ITb_CustomerService _tb_CustomerService;
-
-        public AccountController(ITb_CustomerService tb_CustomerService)
+        
+        // GET: Account
+        public ActionResult Login(string returnUrl)
         {
-            this._tb_CustomerService = tb_CustomerService;
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
         }
 
-        #endregion Khởi tạo
-
-        // GET: Account
-        public ActionResult Login()
+        [HttpPost]
+        public ActionResult Login(LoginVM model, string returnUrl)
         {
-            return View();
+            return View(model);
         }
 
         [HttpGet]
@@ -42,7 +37,7 @@ namespace MINHTHUShop.Web.Controllers
             return View();
         }
 
-        [HttpPost]
+/*        [HttpPost]
         [ValidateAntiForgeryToken]
         [CaptchaValidation("CaptchaCode", "registerCaptcha", "Mã xác nhận không đúng")]
         public ActionResult Register(CustomerVM model)
@@ -96,7 +91,7 @@ namespace MINHTHUShop.Web.Controllers
 
             return View();
         }
-
+*/
         //create a string MD5
         public static string GetMD5(string str)
         {
@@ -108,10 +103,8 @@ namespace MINHTHUShop.Web.Controllers
             for (int i = 0; i < targetData.Length; i++)
             {
                 byte2String += targetData[i].ToString("x2");
-
             }
             return byte2String;
         }
-
     }
 }

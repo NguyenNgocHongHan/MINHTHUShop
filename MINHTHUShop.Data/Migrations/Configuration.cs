@@ -31,11 +31,11 @@
 
         private void CreateUser(MINHTHUShopDbContext context)
         {
-            var manager = new UserManager<Tb_Staff>(new UserStore<Tb_Staff>(new MINHTHUShopDbContext()));
+            var manager = new UserManager<Tb_User>(new UserStore<Tb_User>(new MINHTHUShopDbContext()));
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new MINHTHUShopDbContext()));
 
-            var user = new Tb_Staff()
+            var user = new Tb_User()
             {
                 UserName = "admin",
                 Email = "han.nnh.work@gmail.com",

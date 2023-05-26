@@ -2,11 +2,9 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using MINHTHUShop.Data;
 using MINHTHUShop.Model.Models;
-using MINHTHUShop.Web.Infrastructure.Core;
 using Owin;
 using System;
 using System.Security.Claims;
@@ -27,7 +25,7 @@ namespace MINHTHUShop.Web.App_Start
 
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
-            app.CreatePerOwinContext<UserManager<Tb_Staff>>(CreateManager);
+            app.CreatePerOwinContext<UserManager<Tb_User>>(CreateManager);
 
             app.UseOAuthAuthorizationServer(new OAuthAuthorizationServerOptions
             {
@@ -46,10 +44,10 @@ namespace MINHTHUShop.Web.App_Start
                 Provider = new CookieAuthenticationProvider
                 {
                     // Enables the application to validate the security stamp when the user logs in.
-                    // This is a security feature which is used when you change a password or add an external login to your account.  
-                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, Tb_Staff>(
+                    // This is a security feature which is used when you change a password or add an external login to your account.
+                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, Tb_User>(
                         validateInterval: TimeSpan.FromMinutes(30),
-                        regenerateIdentity: (manager, user) => user.GenerateStaffIdentityAsync(manager, DefaultAuthenticationTypes.ApplicationCookie))
+                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager, DefaultAuthenticationTypes.ApplicationCookie))
                 }
             });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);*/
@@ -73,12 +71,14 @@ namespace MINHTHUShop.Web.App_Start
                 ClientSecret = "T0cgiSG6Gi7BKMr-fCCkdErO"
             });*/
         }
+
         public class AuthorizationServerProvider : OAuthAuthorizationServerProvider
         {
             public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
             {
                 context.Validated();
             }
+
             public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
             {
                 var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin");
@@ -87,8 +87,8 @@ namespace MINHTHUShop.Web.App_Start
 
                 context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
-                UserManager<Tb_Staff> userManager = context.OwinContext.GetUserManager<UserManager<Tb_Staff>>();
-                Tb_Staff user;
+                UserManager<Tb_User> userManager = context.OwinContext.GetUserManager<UserManager<Tb_User>>();
+                Tb_User user;
                 try
                 {
                     user = await userManager.FindAsync(context.UserName, context.Password);
@@ -106,17 +106,16 @@ namespace MINHTHUShop.Web.App_Start
                     /*var listGroup = applicationGroupService.GetListGroupByUserId(user.Id);
                     if (listGroup.Any(x => x.Name == CommonConstants.Administrator))
                     {*/
-                        ClaimsIdentity identity = await userManager.CreateIdentityAsync(
-                                       user,
-                                       DefaultAuthenticationTypes.ExternalBearer);
-                        context.Validated(identity);
+                    ClaimsIdentity identity = await userManager.CreateIdentityAsync(
+                                   user,
+                                   DefaultAuthenticationTypes.ExternalBearer);
+                    context.Validated(identity);
                     /*}
                     else
                     {
                         context.Rejected();
                         context.SetError("invalid_group", "Bạn không phải là admin");
                     }*/
-
                 }
                 else
                 {
@@ -126,10 +125,10 @@ namespace MINHTHUShop.Web.App_Start
             }
         }
 
-        private static UserManager<Tb_Staff> CreateManager(IdentityFactoryOptions<UserManager<Tb_Staff>> options, IOwinContext context)
+        private static UserManager<Tb_User> CreateManager(IdentityFactoryOptions<UserManager<Tb_User>> options, IOwinContext context)
         {
-            var userStore = new UserStore<Tb_Staff>(context.Get<MINHTHUShopDbContext>());
-            var owinManager = new UserManager<Tb_Staff>(userStore);
+            var userStore = new UserStore<Tb_User>(context.Get<MINHTHUShopDbContext>());
+            var owinManager = new UserManager<Tb_User>(userStore);
             return owinManager;
         }
     }

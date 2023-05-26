@@ -2,10 +2,9 @@
 
 namespace MINHTHUShop.Web.Models
 {
-    public class StaffVM
+    public class UserVM
     {
-        public string StaffID { get; set; }
-        public int RoleID { get; set; }
+        public string UserID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
@@ -19,7 +18,5 @@ namespace MINHTHUShop.Web.Models
         public bool? IsLoggedIn { get; set; }
         public DateTime? LastLogin { get; set; }
         public bool Status { get; set; }
-
-        public virtual RoleStaffVM RoleStaffVM { get; set; }
     }
 }

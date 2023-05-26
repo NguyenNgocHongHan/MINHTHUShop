@@ -1,33 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace MINHTHUShop.Model.Models
 {
-    public class Tb_Customer
+    public class Tb_User : IdentityUser
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CustomerID { get; set; }
-
-        [Required]
-        [MaxLength(250)]
-        [Column(TypeName = "varchar")]
-        public string Email { get; set; }
-
-        [Required]
-        [Column(TypeName = "varchar")]
-        public string Password { get; set; }
-
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
-
-        [Required]
-        [MaxLength(10)]
-        [Column(TypeName = "char")]
-        public string Phone { get; set; }
 
         [Required]
         [MaxLength(250)]
@@ -50,6 +34,12 @@ namespace MINHTHUShop.Model.Models
         [Required]
         public bool Status { get; set; } = true;
 
-        public virtual IEnumerable<Tb_Order> Tb_Orders { get; set; }
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Tb_User> manager, string authenticationType)
+        {
+            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+            var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
+            // Add custom user claims here
+            return userIdentity;
+        }
     }
 }

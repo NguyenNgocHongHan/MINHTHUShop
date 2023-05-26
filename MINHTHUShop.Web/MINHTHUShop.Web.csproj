@@ -249,26 +249,25 @@
     <Compile Include="Models\AboutVM.cs" />
     <Compile Include="Models\BannerVM.cs" />
     <Compile Include="Models\BrandVM.cs" />
-    <Compile Include="Models\CustomerVM.cs" />
     <Compile Include="Models\FAQCategoryVM.cs" />
     <Compile Include="Models\FAQVM.cs" />
     <Compile Include="Models\FeedbackVM.cs" />
     <Compile Include="Models\FooterVM.cs" />
     <Compile Include="Models\HomeVM.cs" />
+    <Compile Include="Models\LoginVM.cs" />
     <Compile Include="Models\NewsVM.cs" />
     <Compile Include="Models\NewsCategoryVM.cs" />
     <Compile Include="Models\OrderDetailVM.cs" />
     <Compile Include="Models\OrderStatusVM.cs" />
     <Compile Include="Models\OrderVM.cs" />
-    <Compile Include="Models\RegisterVM.cs" />
     <Compile Include="Models\WebpageVM.cs" />
     <Compile Include="Models\PaymentMethodVM.cs" />
     <Compile Include="Models\ProductCategoryVM.cs" />
     <Compile Include="Models\ProductCommentVM.cs" />
     <Compile Include="Models\ProductVM.cs" />
-    <Compile Include="Models\RoleStaffVM.cs" />
+    <Compile Include="Models\RoleUserVM.cs" />
     <Compile Include="Models\ShippingMethodVM.cs" />
-    <Compile Include="Models\StaffVM.cs" />
+    <Compile Include="Models\UserVM.cs" />
     <Compile Include="Models\TagNewsVM.cs" />
     <Compile Include="Models\TagProductVM.cs" />
     <Compile Include="Models\TagVM.cs" />
@@ -8001,7 +8000,7 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\components\roleStaff\" />
+    <Folder Include="app\components\roleUser\" />
     <Folder Include="UploadFile\" />
   </ItemGroup>
   <ItemGroup>
@@ -8275,6 +8274,7 @@
     <Content Include="Views\Webpage\Index.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

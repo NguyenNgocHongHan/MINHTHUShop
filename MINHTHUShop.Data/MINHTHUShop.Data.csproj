@@ -128,6 +128,10 @@
     <Compile Include="Migrations\202305251734335_updateValidationForPwdInCustomerTB.designer.cs">
       <DependentUpon>202305251734335_updateValidationForPwdInCustomerTB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305262108458_changeStaffAndCustomerTB.cs" />
+    <Compile Include="Migrations\202305262108458_changeStaffAndCustomerTB.designer.cs">
+      <DependentUpon>202305262108458_changeStaffAndCustomerTB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -135,7 +139,6 @@
     <Compile Include="Repositories\Tb_BannerRepository.cs" />
     <Compile Include="Repositories\Tb_BrandRepository.cs" />
     <Compile Include="Repositories\Tb_ConfigRepository.cs" />
-    <Compile Include="Repositories\Tb_CustomerRepository.cs" />
     <Compile Include="Repositories\Tb_ErrorRepository.cs" />
     <Compile Include="Repositories\Tb_FAQCategoryRepository.cs" />
     <Compile Include="Repositories\Tb_FAQRepository.cs" />
@@ -156,7 +159,7 @@
     <Compile Include="Repositories\Tb_ProductRepository.cs" />
     <Compile Include="Repositories\Tb_ShippingMethodRepository.cs" />
     <Compile Include="Repositories\Tb_ShippingRepository.cs" />
-    <Compile Include="Repositories\Tb_StaffRepository.cs" />
+    <Compile Include="Repositories\Tb_UserRepository.cs" />
     <Compile Include="Repositories\Tb_TagNewsRepository.cs" />
     <Compile Include="Repositories\Tb_TagProductRepository.cs" />
     <Compile Include="Repositories\Tb_TagRepository.cs" />
@@ -224,6 +227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305251734335_updateValidationForPwdInCustomerTB.resx">
       <DependentUpon>202305251734335_updateValidationForPwdInCustomerTB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305262108458_changeStaffAndCustomerTB.resx">
+      <DependentUpon>202305262108458_changeStaffAndCustomerTB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

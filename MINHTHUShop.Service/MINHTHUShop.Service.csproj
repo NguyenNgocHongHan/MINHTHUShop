@@ -46,7 +46,6 @@
     <Compile Include="Tb_AboutService.cs" />
     <Compile Include="Tb_BannerService.cs" />
     <Compile Include="Tb_BrandService.cs" />
-    <Compile Include="Tb_CustomerService.cs" />
     <Compile Include="Tb_ErrorService.cs" />
     <Compile Include="Tb_FAQCategoryService.cs" />
     <Compile Include="Tb_FAQService.cs" />

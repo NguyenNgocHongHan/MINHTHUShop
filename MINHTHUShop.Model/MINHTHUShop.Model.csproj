@@ -65,7 +65,6 @@
     <Compile Include="Models\Tb_About.cs" />
     <Compile Include="Models\Tb_Banner.cs" />
     <Compile Include="Models\Tb_Brand.cs" />
-    <Compile Include="Models\Tb_Customer.cs" />
     <Compile Include="Models\Tb_Error.cs" />
     <Compile Include="Models\Tb_FAQ.cs" />
     <Compile Include="Models\Tb_FAQCategory.cs" />
@@ -84,10 +83,10 @@
     <Compile Include="Models\Tb_Product.cs" />
     <Compile Include="Models\Tb_ProductCategory.cs" />
     <Compile Include="Models\Tb_ProductComment.cs" />
-    <Compile Include="Models\Tb_RoleStaff.cs" />
+    <Compile Include="Models\Tb_RoleUser.cs" />
     <Compile Include="Models\Tb_Shipping.cs" />
     <Compile Include="Models\Tb_ShippingMethod.cs" />
-    <Compile Include="Models\Tb_Staff.cs" />
+    <Compile Include="Models\Tb_User.cs" />
     <Compile Include="Models\Tb_Tag.cs" />
     <Compile Include="Models\Tb_TagNews.cs" />
     <Compile Include="Models\Tb_TagProduct.cs" />

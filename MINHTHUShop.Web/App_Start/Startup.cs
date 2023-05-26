@@ -40,7 +40,7 @@ namespace MINHTHUShop.Web.App_Start
             builder.RegisterType<MINHTHUShopDbContext>().AsSelf().InstancePerRequest();
 
             //Asp.net Identity
-            builder.RegisterType<ApplicationUserStore>().As<IUserStore<Tb_Staff>>().InstancePerRequest();
+            builder.RegisterType<ApplicationUserStore>().As<IUserStore<Tb_User>>().InstancePerRequest();
             builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
             builder.RegisterType<ApplicationSignInManager>().AsSelf().InstancePerRequest();
             builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();

@@ -1,6 +1,6 @@
 ﻿namespace MINHTHUShop.Web.Models
 {
-    public class RoleStaffVM
+    public class RoleUserVM
     {
         public int RoleID { get; set; }
         public string Name { get; set; }

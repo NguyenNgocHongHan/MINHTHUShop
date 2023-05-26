@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace MINHTHUShop.Web.App_Start
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
-    public class ApplicationUserStore : UserStore<Tb_Staff>
+    public class ApplicationUserStore : UserStore<Tb_User>
     {
         public ApplicationUserStore(MINHTHUShopDbContext context)
             : base(context)
@@ -20,18 +20,18 @@ namespace MINHTHUShop.Web.App_Start
         }
     }
 
-    public class ApplicationUserManager : UserManager<Tb_Staff>
+    public class ApplicationUserManager : UserManager<Tb_User>
     {
-        public ApplicationUserManager(IUserStore<Tb_Staff> store)
+        public ApplicationUserManager(IUserStore<Tb_User> store)
             : base(store)
         {
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<Tb_Staff>(context.Get<MINHTHUShopDbContext>()));
+            var manager = new ApplicationUserManager(new UserStore<Tb_User>(context.Get<MINHTHUShopDbContext>()));
             // Configure validation logic for usernames
-            manager.UserValidator = new UserValidator<Tb_Staff>(manager)
+            manager.UserValidator = new UserValidator<Tb_User>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
@@ -57,23 +57,23 @@ namespace MINHTHUShop.Web.App_Start
             if (dataProtectionProvider != null)
             {
                 manager.UserTokenProvider =
-                    new DataProtectorTokenProvider<Tb_Staff>(dataProtectionProvider.Create("ASP.NET Identity"));
+                    new DataProtectorTokenProvider<Tb_User>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
         }
     }
 
     // Configure the application sign-in manager which is used in this application.
-    public class ApplicationSignInManager : SignInManager<Tb_Staff, string>
+    public class ApplicationSignInManager : SignInManager<Tb_User, string>
     {
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)
         {
         }
 
-        public override Task<ClaimsIdentity> CreateUserIdentityAsync(Tb_Staff user)
+        public override Task<ClaimsIdentity> CreateUserIdentityAsync(Tb_User user)
         {
-            return user.GenerateStaffIdentityAsync((ApplicationUserManager)UserManager, DefaultAuthenticationTypes.ApplicationCookie);
+            return user.GenerateUserIdentityAsync((ApplicationUserManager)UserManager, DefaultAuthenticationTypes.ApplicationCookie);
         }
 
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)

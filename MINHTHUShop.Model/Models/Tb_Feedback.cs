@@ -11,7 +11,7 @@ namespace MINHTHUShop.Model.Models
         public int FeedbackID { get; set; }
 
         [Required]
-        public int CustomerID { get; set; }
+        public string CustomerID { get; set; }
 
         [Required]
         public string Message { get; set; }
@@ -21,6 +21,6 @@ namespace MINHTHUShop.Model.Models
         public bool? IsRead { get; set; } = false;
 
         [ForeignKey("CustomerID")]
-        public virtual Tb_Customer Tb_Customer { get; set; }
+        public virtual Tb_User Customer { get; set; }
     }
 }

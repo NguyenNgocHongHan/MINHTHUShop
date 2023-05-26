@@ -12,10 +12,7 @@ namespace MINHTHUShop.Model.Models
         public int OrderID { get; set; }
 
         [Required]
-        public int CustomerID { get; set; }
-
-        [Required]
-        public string StaffID { get; set; }
+        public string CustomerID { get; set; }
 
         [Required]
         public int OrderStatusID { get; set; }
@@ -39,9 +36,7 @@ namespace MINHTHUShop.Model.Models
         public bool IsCancel { get; set; } = false;
 
         [ForeignKey("CustomerID")]
-        public virtual Tb_Customer Tb_Customer { get; set; }
-        [ForeignKey("StaffID")]
-        public virtual Tb_Staff Tb_Staff { get; set; }
+        public virtual Tb_User Customer { get; set; }
         [ForeignKey("OrderStatusID")]
         public virtual Tb_OrderStatus Tb_OrderStatus { get; set; }
         [ForeignKey("ShippingMethodID")]
