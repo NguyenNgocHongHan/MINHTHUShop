@@ -2,11 +2,8 @@
 using MINHTHUShop.Data.Infrastructure;
 using MINHTHUShop.Data.Repositories;
 using MINHTHUShop.Model.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MINHTHUShop.Service
 {
@@ -17,13 +14,14 @@ namespace MINHTHUShop.Service
         private ITb_TagProductRepository _tb_TagProductRepository;
         private IUnitOfWork _unitOfWork;
 
-        public  Tb_ProductService(ITb_ProductRepository tb_ProductRepository, ITb_TagRepository tb_TagRepository, ITb_TagProductRepository tb_TagProductRepository, IUnitOfWork unitOfWork)
+        public Tb_ProductService(ITb_ProductRepository tb_ProductRepository, ITb_TagRepository tb_TagRepository, ITb_TagProductRepository tb_TagProductRepository, IUnitOfWork unitOfWork)
         {
             this._tb_ProductRepository = tb_ProductRepository;
             this._tb_TagRepository = tb_TagRepository;
             this._tb_TagProductRepository = tb_TagProductRepository;
             this._unitOfWork = unitOfWork;
         }
+
         public Tb_Product Create(Tb_Product tb_Product)
         {
             var product = _tb_ProductRepository.Add(tb_Product);
@@ -102,6 +100,7 @@ namespace MINHTHUShop.Service
         {
             return _tb_ProductRepository.GetMulti(x => x.Status == true && x.Name.Contains(name)).Select(y => y.Name);
         }
+
         public IEnumerable<Tb_Tag> GetListTagByProductId(int id)
         {
             return _tb_TagProductRepository.GetMulti(x => x.ProductID == id, new string[] { "Tb_Tag" }).Select(y => y.Tb_Tag);
@@ -110,7 +109,7 @@ namespace MINHTHUShop.Service
         public IEnumerable<Tb_Product> GetListProductByTag(string tagID, int pageIndex, int pageSize, string sort, out int totalRow)
         {
             var model = _tb_ProductRepository.GetListProductByTag(tagID, pageIndex, pageSize, sort, out totalRow);
-            
+
             return model;
         }
 
@@ -140,12 +139,15 @@ namespace MINHTHUShop.Service
                 case "new":
                     query = query.OrderByDescending(x => x.CreateDate);
                     break;
+
                 case "lowToHigh":
                     query = query.OrderBy(x => x.PromotionPrice);
                     break;
+
                 case "highToLow":
                     query = query.OrderByDescending(x => x.PromotionPrice);
                     break;
+
                 default:
                     query = query.OrderBy(x => x.Name);
                     break;
@@ -168,12 +170,15 @@ namespace MINHTHUShop.Service
                 case "new":
                     query = query.OrderByDescending(x => x.CreateDate);
                     break;
+
                 case "lowToHigh":
                     query = query.OrderBy(x => x.PromotionPrice);
                     break;
+
                 case "highToLow":
                     query = query.OrderByDescending(x => x.PromotionPrice);
                     break;
+
                 default:
                     query = query.OrderBy(x => x.Name);
                     break;
@@ -214,22 +219,37 @@ namespace MINHTHUShop.Service
     public interface ITb_ProductService
     {
         Tb_Product Create(Tb_Product tb_Product);
+
         void Update(Tb_Product tb_Product);
-        Tb_Product Delete(int id); 
+
+        Tb_Product Delete(int id);
+
         Tb_Product GetById(int id);
+
         void SaveChanges();
+
         IEnumerable<Tb_Product> GetAll();
+
         IEnumerable<Tb_Product> GetAll(string keywork);
+
         IEnumerable<Tb_Product> GetLastest(int top);
+
         IEnumerable<Tb_Product> GetProductByCateId(int cateID);
+
         IEnumerable<Tb_Product> Search(string keywork, int pageIndex, int pageSize, string sort, out int totalRow);
+
         IEnumerable<Tb_Product> GetRelatedProduct(int id, int top);
+
         IEnumerable<Tb_Product> GetListProduct(string keywork);
+
         IEnumerable<string> GetListProductByName(string name);
 
         Tb_Tag GetTag(string tagID);
+
         IEnumerable<Tb_Tag> GetListTagByProductId(int id);
+
         IEnumerable<Tb_Product> GetListProductByTag(string tagID, int pageIndex, int pageSize, string sort, out int totalRow);
+
         IEnumerable<Tb_Product> GetListProductByCateIdPaging(int cateID, int pageIndex, int pageSize, string sort, out int totalRow);
     }
 }

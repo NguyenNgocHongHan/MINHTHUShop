@@ -260,6 +260,7 @@
     <Compile Include="Models\OrderDetailVM.cs" />
     <Compile Include="Models\OrderStatusVM.cs" />
     <Compile Include="Models\OrderVM.cs" />
+    <Compile Include="Models\RegisterVM.cs" />
     <Compile Include="Models\WebpageVM.cs" />
     <Compile Include="Models\PaymentMethodVM.cs" />
     <Compile Include="Models\ProductCategoryVM.cs" />
@@ -7969,6 +7970,7 @@
     <Content Include="Content\Client\lib\jqueryui\themes\smoothness\theme.css" />
     <Content Include="Content\Client\lib\jqueryui\themes\smoothness\theme.min.css" />
     <Content Include="Content\Client\template\about_template.html" />
+    <Content Include="Content\Client\template\register_template.html" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Lib\CKFinder.dll" />
@@ -8001,7 +8003,6 @@
   <ItemGroup>
     <Folder Include="app\components\roleStaff\" />
     <Folder Include="UploadFile\" />
-    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -8273,6 +8274,7 @@
     <Content Include="Views\Product\ListProductByTag.cshtml" />
     <Content Include="Views\Webpage\Index.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

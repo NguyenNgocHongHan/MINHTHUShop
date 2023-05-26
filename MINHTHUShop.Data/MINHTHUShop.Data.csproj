@@ -116,6 +116,18 @@
     <Compile Include="Migrations\202305241730599_testMigration.designer.cs">
       <DependentUpon>202305241730599_testMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305251536288_updateCustomerTB.cs" />
+    <Compile Include="Migrations\202305251536288_updateCustomerTB.designer.cs">
+      <DependentUpon>202305251536288_updateCustomerTB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305251640484_updateValidationForCustomerTB.cs" />
+    <Compile Include="Migrations\202305251640484_updateValidationForCustomerTB.designer.cs">
+      <DependentUpon>202305251640484_updateValidationForCustomerTB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305251734335_updateValidationForPwdInCustomerTB.cs" />
+    <Compile Include="Migrations\202305251734335_updateValidationForPwdInCustomerTB.designer.cs">
+      <DependentUpon>202305251734335_updateValidationForPwdInCustomerTB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -203,6 +215,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305241730599_testMigration.resx">
       <DependentUpon>202305241730599_testMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305251536288_updateCustomerTB.resx">
+      <DependentUpon>202305251536288_updateCustomerTB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305251640484_updateValidationForCustomerTB.resx">
+      <DependentUpon>202305251640484_updateValidationForCustomerTB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305251734335_updateValidationForPwdInCustomerTB.resx">
+      <DependentUpon>202305251734335_updateValidationForPwdInCustomerTB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

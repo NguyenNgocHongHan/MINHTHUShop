@@ -14,11 +14,9 @@ namespace MINHTHUShop.Model.Models
         [Required]
         [MaxLength(250)]
         [Column(TypeName = "varchar")]
-        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Email không hợp lệ")]
         public string Email { get; set; }
 
         [Required]
-        [MaxLength(250)]
         [Column(TypeName = "varchar")]
         public string Password { get; set; }
 

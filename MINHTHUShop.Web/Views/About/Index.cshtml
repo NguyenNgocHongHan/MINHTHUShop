@@ -73,7 +73,7 @@
                     <h5 style="color:grey">Nội dung phản hồi:</h5>
                     @Html.TextAreaFor(model => model.Message);
 
-                    <h5 style="color: grey">Nhập mã capcha:</h5>
+                    <h5 style="color: grey">Nhập mã Captcha:</h5>
                     MvcCaptcha aboutCaptcha = new MvcCaptcha("aboutCaptcha");
                     @Html.Captcha(aboutCaptcha)
                     @Html.TextBox("CaptchaCode")

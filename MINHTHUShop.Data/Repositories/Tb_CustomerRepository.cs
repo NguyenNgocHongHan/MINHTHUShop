@@ -1,5 +1,6 @@
 ﻿using MINHTHUShop.Data.Infrastructure;
 using MINHTHUShop.Model.Models;
+using System.Threading.Tasks;
 
 namespace MINHTHUShop.Data.Repositories
 {
