@@ -48,9 +48,9 @@ namespace MINHTHUShop.Service
             return _tb_AboutRepository.GetById(id);
         }
 
-        public Tb_About GetDefaultAbout()
+        public IEnumerable<Tb_About> GetDefaultAbout()
         {
-            return _tb_AboutRepository.GetSingleByCondition(x => x.Status);
+            return _tb_AboutRepository.GetMulti(x => x.Status);
         }
 
         public void SaveChanges()
@@ -66,7 +66,7 @@ namespace MINHTHUShop.Service
 
     public interface ITb_AboutService
     {
-        Tb_About GetDefaultAbout();
+        IEnumerable<Tb_About> GetDefaultAbout();
 
         Tb_About Create(Tb_About tb_About);
 

@@ -5,6 +5,7 @@ using MINHTHUShop.Model.Models;
 using MINHTHUShop.Service;
 using MINHTHUShop.Web.Infrastructure.Extensions;
 using MINHTHUShop.Web.Models;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace MINHTHUShop.Web.Controllers
@@ -24,7 +25,7 @@ namespace MINHTHUShop.Web.Controllers
         public ActionResult Index()
         {
             FeedbackVM viewModel = new FeedbackVM();
-            viewModel.About = GetDetail();
+            viewModel.AboutVMs = GetDetail();
             return View(viewModel);
         }
 
@@ -54,15 +55,15 @@ namespace MINHTHUShop.Web.Controllers
                 //sau khi gửi phản hồi thành công thì trả về rỗng
                 feedbackVM.Message = "";
             }
-            feedbackVM.About = GetDetail();
+            feedbackVM.AboutVMs = GetDetail();
 
             return View("Index", feedbackVM);
         }
 
-        private AboutVM GetDetail()
+        private IEnumerable<AboutVM> GetDetail()
         {
             var model = _tb_AboutService.GetDefaultAbout();
-            var aboutVM = Mapper.Map<Tb_About, AboutVM>(model);
+            var aboutVM = Mapper.Map<IEnumerable<Tb_About>, IEnumerable<AboutVM>>(model);
             return aboutVM;
         }
     }

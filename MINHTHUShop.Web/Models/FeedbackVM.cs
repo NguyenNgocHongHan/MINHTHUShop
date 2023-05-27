@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,6 +17,6 @@ namespace MINHTHUShop.Web.Models
 
         [ForeignKey("CustomerID")]
         public virtual UserVM CustomerVM { get; set; }
-        public AboutVM About { get; set; }
+        public IEnumerable<AboutVM> AboutVMs { set; get; }
     }
 }
