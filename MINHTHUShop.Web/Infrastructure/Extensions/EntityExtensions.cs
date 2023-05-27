@@ -110,9 +110,12 @@ namespace MINHTHUShop.Web.Infrastructure.Extensions
         public static void UpdateFeedback(this Tb_Feedback fb, FeedbackVM vm)
         {
             fb.FeedbackID = vm.FeedbackID;
-            fb.CustomerID = vm.CustomerID;
+            fb.Name = vm.Name;
+            fb.Phone = vm.Phone;
+            fb.Email = vm.Email;
             fb.Message = vm.Message;
-            fb.CreateDate = DateTime.Now;
+            fb.Note = vm.Note;
+            fb.CreateDate = vm.CreateDate;
             fb.IsRead = vm.IsRead;
         }
 
@@ -139,7 +142,7 @@ namespace MINHTHUShop.Web.Infrastructure.Extensions
             ab.Description = vm.Description;
             ab.MapLat = vm.MapLat;
             ab.MapLong = vm.MapLong;
-            ab.CreateDate = DateTime.Now;
+            ab.CreateDate = vm.CreateDate;
             ab.Status = vm.Status;
 
 

@@ -1,4 +1,5 @@
 ﻿@model MINHTHUShop.Web.Models.FeedbackVM
+
 @using BotDetect.Web.Mvc;
 
 @{
@@ -14,8 +15,8 @@
 
 <style>
     #map {
+        height: 100%;
         @*height: 400px;*@
-        height:100%;
     }
 </style>
 
@@ -71,20 +72,29 @@
                     {
                         <div class="alert alert-success" role="alert">
                             Bạn đã gửi phản hồi <strong>thành công</strong>.
-                            <br />Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất!
+                            <br />Chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất!
                         </div>
                     }
                     @Html.ValidationSummary(false, "", new { @class = "error" });
 
-                    <h5 style="color:grey">Nội dung phản hồi:</h5>
+                    <h5 style="color:grey">Họ và tên <span style="color:orangered"> (*)</span></h5>
+                    @Html.TextBoxFor(model => model.Name, new { @class = "textbox" });
+
+                    <h5 style="color:grey">Số điện thoại <span style="color:orangered"> (*)</span></h5>
+                    @Html.TextBoxFor(model => model.Phone, new { @class = "textbox" });
+
+                    <h5 style="color:grey">Email <span style="color:orangered"> (*)</span></h5>
+                    @Html.TextBoxFor(model => model.Email, new { @class = "textbox" });
+
+                    <h5 style="color:grey">Nội dung phản hồi <span style="color:orangered"> (*)</span></h5>
                     @Html.TextAreaFor(model => model.Message);
 
                     <h5 style="color: grey">Nhập mã Captcha:</h5>
-                    MvcCaptcha aboutCaptcha = new MvcCaptcha("aboutCaptcha");
+                    MvcCaptcha aboutCaptcha = new MvcCaptcha("AboutCaptcha");
                     @Html.Captcha(aboutCaptcha)
                     @Html.TextBox("CaptchaCode")
 
-                    <input type="submit" value="Gửi đi">
+                    <input type="submit" value="Gửi">
                     <div class="clearfix"> </div>
                 }
             </div>

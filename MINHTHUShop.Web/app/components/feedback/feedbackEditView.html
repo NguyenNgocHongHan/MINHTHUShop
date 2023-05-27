@@ -1,0 +1,82 @@
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><small>CẬP NHẬT FEEDBACK</small></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a ui-sref="home">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a ui-sref="home">Quản lý thông tin</a></li>
+                    <li class="breadcrumb-item"><a ui-sref="feedback">Feedback</a></li>
+                    <li class="breadcrumb-item active">Cập nhật</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div style="width:95%; margin:auto;">
+        <!-- Horizontal Form -->
+        <div class="card card-success">
+            <div class="card-header">
+                <h3 class="card-title">CẬP NHẬT Feedback: {{feedback.Name}}</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form class="form-horizontal" novalidate name="frmUpdateFeedback" role="form" ng-submit="UpdateFeedback()">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Mã Feedback</label>
+                        <lable class="col-sm-9 col-form-label">{{feedback.FeedbackID}}</lable>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tên khách hàng</label>
+                        <lable class="col-sm-9 col-form-label">{{feedback.Name}}</lable>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Số điện thoại</label>
+                        <lable class="col-sm-9 col-form-label">{{feedback.Phone}}</lable>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Email</label>
+                        <lable class="col-sm-9 col-form-label">{{feedback.Email}}</lable>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Nội dung phản hồi</label>
+                        <lable class="col-sm-9 col-form-label">{{feedback.Message}}</lable>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Ghi chú</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" name="note" ckeditor="ckeditorOptions" ng-model="feedback.Note" placeholder="Mô tả ghi chú"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Ngày tạo</label>
+                        <label class="col-sm-9 col-form-label">{{feedback.CreateDate | date:'dd/MM/yyyy hh:mm:ss'}}</label>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Trạng thái đọc</label>
+                        <div class="col-sm-9">
+                            <div class="custom-checkbox">
+                                <label class="col-form-label">
+                                    <input type="checkbox" name="isRead" ng-model="feedback.IsRead" ng-checked="feedback.IsRead">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button ui-sref="feedback" class="btn btn-danger">Hủy</button>
+                    <button type="submit" ng-disabled="frmUpdatefeedback.$invalid" class="btn btn-success float-right">Lưu</button>
+                </div>
+                <!-- /.card-footer -->
+            </form>
+        </div>
+    </div>
+</section>

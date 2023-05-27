@@ -116,6 +116,9 @@
     <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NWebsec, Version=6.0.0.0, Culture=neutral, PublicKeyToken=3613da5f958908a1, processorArchitecture=MSIL">
       <HintPath>..\packages\NWebsec.6.0.0\lib\net45\NWebsec.dll</HintPath>
     </Reference>
@@ -182,9 +185,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -220,6 +220,7 @@
     <Compile Include="API\BrandAPIController.cs" />
     <Compile Include="API\FAQAPIController.cs" />
     <Compile Include="API\FAQCategoryAPIController.cs" />
+    <Compile Include="API\FeedbackAPIController.cs" />
     <Compile Include="API\HomeController.cs" />
     <Compile Include="API\NewsAPIController.cs" />
     <Compile Include="API\NewsCategoryAPIController.cs" />
@@ -311,6 +312,11 @@
     <Content Include="app\components\faq\faqEditController.js" />
     <Content Include="app\components\faq\faqEditView.html" />
     <Content Include="app\components\faq\faqView.html" />
+    <Content Include="app\components\feedback\feedback.module.js" />
+    <Content Include="app\components\feedback\feedbackController.js" />
+    <Content Include="app\components\feedback\feedbackEditController.js" />
+    <Content Include="app\components\feedback\feedbackEditView.html" />
+    <Content Include="app\components\feedback\feedbackView.html" />
     <Content Include="app\components\home\homeController.js" />
     <Content Include="app\components\home\homeView.html" />
     <Content Include="app\components\home\rootController.js" />
@@ -353,7 +359,8 @@
     <Content Include="app\components\webpage\webpageView.html" />
     <Content Include="app\shared\directive\pagerDirective.html" />
     <Content Include="app\shared\directive\pagerDirective.js" />
-    <Content Include="app\shared\filter\statusFillter.js" />
+    <Content Include="app\shared\filter\isReadFilter.js" />
+    <Content Include="app\shared\filter\statusFilter.js" />
     <Content Include="app\shared\module\MINHTHUShop.common.js" />
     <Content Include="app\shared\service\apiService.js" />
     <Content Include="app\shared\service\authData.js" />

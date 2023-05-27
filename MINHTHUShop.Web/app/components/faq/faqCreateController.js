@@ -40,16 +40,6 @@
             });
         }
 
-        $scope.ChooseImage = function () {
-            var finder = new CKFinder();
-            finder.selectActionFunction = function (fileUrl) {
-                $scope.$apply(function () {
-                    $scope.faq.Image = fileUrl;
-                })
-            }
-            finder.popup();
-        }
-
         LoadCate();
     }
 })(angular.module('MINHTHUShop.faq'));
