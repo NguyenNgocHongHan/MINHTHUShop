@@ -128,5 +128,22 @@ namespace MINHTHUShop.Web.Infrastructure.Extensions
             bn.Status = vm.Status;
         }
 
+        public static void UpdateAbout(this Tb_About ab, AboutVM vm)
+        {
+            ab.AboutID = vm.AboutID;
+            ab.Name = vm.Name;
+            ab.Phone = vm.Phone;
+            ab.Email = vm.Email;
+            ab.Website = vm.Website;
+            ab.Address = vm.Address;
+            ab.Description = vm.Description;
+            ab.MapLat = vm.MapLat;
+            ab.MapLong = vm.MapLong;
+            ab.CreateDate = DateTime.Now;
+            ab.Status = vm.Status;
+
+
+        }
     }
+
 }

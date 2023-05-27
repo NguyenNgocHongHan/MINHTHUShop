@@ -11,6 +11,7 @@
             'MINHTHUShop.brand',
             'MINHTHUShop.webpage',
             'MINHTHUShop.banner',
+            'MINHTHUShop.about',
             'MINHTHUShop.common'])
         .config(config)
         .config(configAuth);

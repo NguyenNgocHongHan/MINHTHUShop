@@ -34,7 +34,7 @@
                         <lable class="col-sm-9 col-form-label">{{brand.BrandID}}</lable>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Tên thương hiệu</label>
+                        <label class="col-sm-3 col-form-label">Tên thương hiệu <span style="color:red"> (*)</span></label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="name" ng-model="brand.Name" ng-maxlength="50" placeholder="Tên thương hiệu - hãng sản xuất" required>
                             <div class="has-error" ng-show="frmUpdateBrand.name.$invalid">
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Nguồn gốc, xuất xứ</label>
+                        <label class="col-sm-3 col-form-label">Nguồn gốc, xuất xứ <span style="color:red"> (*)</span></label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="brandOrigin" ng-model="brand.BrandOrigin" ng-maxlength="50" placeholder="Tên tiêu đề SEO (Meta Title - nếu có)" required>
                             <div class="has-error" ng-show="frmUpdateBrand.metaTitle.$invalid">

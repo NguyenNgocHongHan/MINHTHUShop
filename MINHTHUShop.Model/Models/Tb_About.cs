@@ -11,16 +11,16 @@ namespace MINHTHUShop.Model.Models
         public int AboutID { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(250)]
         public string Name { get; set; }
 
+        [Required]
         [MaxLength(10)]
         [Column(TypeName = "char")]
         public string Phone { get; set; }
 
         [MaxLength(250)]
         [Column(TypeName = "varchar")]
-        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Email không hợp lệ")]
         public string Email { get; set; }
 
         [MaxLength(250)]

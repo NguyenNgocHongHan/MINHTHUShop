@@ -132,6 +132,18 @@
     <Compile Include="Migrations\202305262108458_changeStaffAndCustomerTB.designer.cs">
       <DependentUpon>202305262108458_changeStaffAndCustomerTB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305270804489_updateValidatePhoneFieldForAboutTB.cs" />
+    <Compile Include="Migrations\202305270804489_updateValidatePhoneFieldForAboutTB.designer.cs">
+      <DependentUpon>202305270804489_updateValidatePhoneFieldForAboutTB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305270843277_updateValidateFieldsForAboutTB.cs" />
+    <Compile Include="Migrations\202305270843277_updateValidateFieldsForAboutTB.designer.cs">
+      <DependentUpon>202305270843277_updateValidateFieldsForAboutTB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305270902099_updateValidateFieldsForNewsTB.cs" />
+    <Compile Include="Migrations\202305270902099_updateValidateFieldsForNewsTB.designer.cs">
+      <DependentUpon>202305270902099_updateValidateFieldsForNewsTB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -230,6 +242,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305262108458_changeStaffAndCustomerTB.resx">
       <DependentUpon>202305262108458_changeStaffAndCustomerTB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305270804489_updateValidatePhoneFieldForAboutTB.resx">
+      <DependentUpon>202305270804489_updateValidatePhoneFieldForAboutTB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305270843277_updateValidateFieldsForAboutTB.resx">
+      <DependentUpon>202305270843277_updateValidateFieldsForAboutTB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305270902099_updateValidateFieldsForNewsTB.resx">
+      <DependentUpon>202305270902099_updateValidateFieldsForNewsTB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

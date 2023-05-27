@@ -19,6 +19,7 @@ namespace MINHTHUShop.Model.Models
         [MaxLength(250)]
         public string Name { get; set; }
 
+        [Required]
         [MaxLength(250)]
         public string Image { get; set; }
 

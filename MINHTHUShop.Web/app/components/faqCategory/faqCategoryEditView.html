@@ -34,7 +34,7 @@
                         <lable class="col-sm-9 col-form-label">{{faqCategory.FAQCateID}}</lable>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Tên danh mục</label>
+                        <label class="col-sm-3 col-form-label">Tên danh mục <span style="color:red"> (*)</span></label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="name" ng-model="faqCategory.Name" ng-change="GetMetaTitle()" ng-maxlength="50" placeholder="Tên danh mục câu hỏi thường gặp" required>
                             <div class="has-error" ng-show="frmUpdateFAQCategory.name.$invalid">
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Tiêu đề SEO</label>
+                        <label class="col-sm-3 col-form-label">Tiêu đề SEO <span style="color:red"> (*)</span></label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="metaTitle" ng-model="faqCategory.MetaTitle" ng-maxlength="250" placeholder="Tên tiêu đề SEO (Meta Title - nếu có)" required>
                             <div class="has-error" ng-show="frmUpdateFAQCategory.metaTitle.$invalid">

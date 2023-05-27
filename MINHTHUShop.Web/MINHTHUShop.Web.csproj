@@ -214,6 +214,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\AboutAPIController.cs" />
     <Compile Include="API\AccountController.cs" />
     <Compile Include="API\BannerAPIController.cs" />
     <Compile Include="API\BrandAPIController.cs" />
@@ -275,6 +276,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\components\about\about.module.js" />
+    <Content Include="app\components\about\aboutController.js" />
+    <Content Include="app\components\about\aboutCreateController.js" />
+    <Content Include="app\components\about\aboutCreateView.html" />
+    <Content Include="app\components\about\aboutEditController.js" />
+    <Content Include="app\components\about\aboutEditView.html" />
+    <Content Include="app\components\about\aboutView.html" />
     <Content Include="app\components\banner\banner.module.js" />
     <Content Include="app\components\banner\bannerController.js" />
     <Content Include="app\components\banner\bannerCreateController.js" />

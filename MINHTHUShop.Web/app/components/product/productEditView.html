@@ -34,7 +34,7 @@
                         <lable class="col-sm-9 col-form-label">{{product.ProductID}}</lable>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Tên sản phẩm</label>
+                        <label class="col-sm-3 col-form-label">Tên sản phẩm <span style="color:red"> (*)</span></label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="name" ng-model="product.Name" ng-change="GetMetaTitle()" ng-maxlength="250" placeholder="Tên sản phẩm" required>
                             <div class="has-error" ng-show="frmUpdateProduct.name.$invalid">
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Tên danh mục</label>
+                        <label class="col-sm-3 col-form-label">Tên danh mục <span style="color:red"> (*)</span></label>
                         <div class="col-sm-9">
                             <select class="form-control" name="cateID" ng-model="product.CateID" ng-options="option.CateID as option.Name for option in productCategory" required>
                                 <option value="">Chọn danh mục sản phẩm</option>
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Tên thương hiệu</label>
+                        <label class="col-sm-3 col-form-label">Tên thương hiệu <span style="color:red"> (*)</span></label>
                         <div class="col-sm-9">
                             <select class="form-control" name="brandID" ng-model="product.BrandID" ng-options="option.BrandID as option.Name for option in brand" required>
                                 <option value="">Chọn thương hiệu - hãng sản xuất</option>
@@ -68,7 +68,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Giá gốc</label>
+                        <label class="col-sm-3 col-form-label">Giá gốc <span style="color:red"> (*)</span></label>
                         <div class="col-sm-9">
                             <input type="number" min="0" class="form-control" name="originalPrice" ng-model="product.OriginalPrice" placeholder="Giá nhập hàng" required>
                             <div class="has-error" ng-show="frmUpdateProduct.originalPrice.$invalid">
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Giá bán</label>
+                        <label class="col-sm-3 col-form-label">Giá bán <span style="color:red"> (*)</span></label>
                         <div class="col-sm-9">
                             <input type="number" min="0" class="form-control" name="price" ng-model="product.Price" placeholder="Giá tiền sản phẩm" required>
                             <div class="has-error" ng-show="frmUpdateProduct.price.$invalid">
@@ -132,7 +132,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Tiêu đề SEO</label>
+                        <label class="col-sm-3 col-form-label">Tiêu đề SEO <span style="color:red"> (*)</span></label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="metaTitle" ng-model="product.MetaTitle" ng-maxlength="250" placeholder="Tên tiêu đề SEO (Meta Title)" required>
                             <div class="has-error" ng-show="frmUpdateProduct.metaTitle.$invalid">

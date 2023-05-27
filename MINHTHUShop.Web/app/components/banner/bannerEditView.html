@@ -34,23 +34,17 @@
                         <lable class="col-sm-9 col-form-label">{{banner.BannerID}}</lable>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Tên banner</label>
+                        <label class="col-sm-3 col-form-label">Tên banner <span style="color:red"> (*)</span></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" ng-model="banner.Name" ng-maxlength="50" placeholder="Tên thương hiệu - hãng sản xuất" required>
+                            <input type="text" class="form-control" name="name" ng-model="banner.Name" ng-maxlength="50" placeholder="Tên banner" required>
                             <div class="has-error" ng-show="frmUpdateBanner.name.$invalid">
-                                <span ng-show="frmUpdateBanner.name.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên thương hiệu!</span>
+                                <span ng-show="frmUpdateBanner.name.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên banner!</span>
                                 <span ng-show="frmUpdateBanner.name.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 50 ký tự!</span>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Nội dung banner</label>
-                        <div class="col-sm-9">
-                            <textarea class="form-control" name="description" ckeditor="ckeditorOptions" ng-model="banner.Description" placeholder="Mô tả nội dung banner"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Hình ảnh</label>
+                        <label class="col-sm-3 col-form-label">Hình ảnh <span style="color:red"> (*)</span></label>
                         <div class="col-sm-9">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="image" ng-model="banner.Image" ng-maxlength="250" placeholder="Hình ảnh banner" required>
@@ -64,13 +58,19 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Đường dẫn</label>
+                        <label class="col-sm-3 col-form-label">Đường dẫn <span style="color:red"> (*)</span></label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="link" ng-model="banner.Link" ng-maxlength="250" placeholder="Đường dẫn URL trỏ tới" required>
                             <div class="has-error" ng-show="frmUpdateBanner.link.$invalid">
                                 <span ng-show="frmUpdateBanner.link.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập đường dẫn banner!</span>
                                 <span ng-show="frmUpdateBanner.link.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Nội dung banner</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" name="description" ckeditor="ckeditorOptions" ng-model="banner.Description" placeholder="Mô tả nội dung banner"></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
