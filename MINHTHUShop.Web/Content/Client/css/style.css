@@ -85,18 +85,14 @@ ul.support {
 
 .header-bottom-right {
     float: right;
-    width: 41%;
-    text-align: center;
+    width: 30%;
+    text-align: right;
     padding-top: 1.7em;
 }
 
-.account, .cart {
-    float: left;
-    width: 40%;
-}
-
 .cart {
-    width: 20%;
+    float: right;
+    width: 30%;
 }
 
 .account a span {
@@ -121,10 +117,8 @@ ul.support {
         vertical-align: middle;
     }
 
-ul.login {
+.account, ul.login {
     float: left;
-    width: 40%;
-    margin: 0;
 }
 
     ul.login li {

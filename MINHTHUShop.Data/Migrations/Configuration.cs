@@ -53,6 +53,7 @@
                 {
                     roleManager.Create(new IdentityRole { Name = "Quản trị viên" });
                     roleManager.Create(new IdentityRole { Name = "Nhân viên" });
+                    roleManager.Create(new IdentityRole { Name = "Khách hàng" });
                 }
 
                 var adminUser = manager.FindByEmail("han.nnh.work@gmail.com");

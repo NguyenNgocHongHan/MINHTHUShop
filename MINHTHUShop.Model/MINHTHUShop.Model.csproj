@@ -83,7 +83,6 @@
     <Compile Include="Models\Tb_Product.cs" />
     <Compile Include="Models\Tb_ProductCategory.cs" />
     <Compile Include="Models\Tb_ProductComment.cs" />
-    <Compile Include="Models\Tb_RoleUser.cs" />
     <Compile Include="Models\Tb_Shipping.cs" />
     <Compile Include="Models\Tb_ShippingMethod.cs" />
     <Compile Include="Models\Tb_User.cs" />

@@ -22,6 +22,7 @@ namespace MINHTHUShop.Web.Controllers
             _productService = productService;
         }
 
+        [OutputCache(Duration = 60, Location = System.Web.UI.OutputCacheLocation.Client)]
         public ActionResult Index()
         {
             var bannerModel = _commonService.GetBanners();

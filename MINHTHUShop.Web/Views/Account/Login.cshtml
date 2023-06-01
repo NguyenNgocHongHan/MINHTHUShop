@@ -13,8 +13,8 @@
         {
             @Html.ValidationSummary(false, "", new { @class = "error" })
             <div>
-                <span>Email <label style="color:red"> (*)</label></span>
-                @Html.TextBoxFor(model => model.Email)
+                <span>Tên tài khoản <label style="color:red"> (*)</label></span>
+                @Html.TextBoxFor(model => model.UserName)
             </div>
             <div>
                 <span>Password <label style="color:red"> (*)</label></span>
@@ -29,8 +29,8 @@
             <a class="forgot" href="#">Quên mật khẩu?</a>
         }
 
-        @*        @Html.Partial("_ExternalLoginsListPartial", new MINHTHUShop.Web.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        *@
+@*                @Html.Partial("_ExternalLoginsListPartial", new MINHTHUShop.Web.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+*@        
     </div>
     <div class="login-left">
         <h3>ĐỐI VỚI KHÁCH HÀNG CHƯA CÓ TÀI KHOẢN</h3>

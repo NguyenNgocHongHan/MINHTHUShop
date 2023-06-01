@@ -27,7 +27,6 @@ namespace MINHTHUShop.Web.Mappings
                 cfg.CreateMap<Tb_ProductCategory, ProductCategoryVM>();
                 cfg.CreateMap<Tb_ProductComment, ProductCommentVM>();
                 cfg.CreateMap<Tb_Product, ProductVM>();
-                cfg.CreateMap<Tb_RoleUser, RoleUserVM>();
                 cfg.CreateMap<Tb_ShippingMethod, ShippingMethodVM>();
                 cfg.CreateMap<Tb_User, UserVM>();
                 cfg.CreateMap<Tb_TagNews, TagNewsVM>();
