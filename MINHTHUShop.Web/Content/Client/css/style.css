@@ -74,7 +74,7 @@ ul.support {
 
 .header-bottom-left {
     float: left;
-    width: 50%;
+    width: 60%;
 }
 
 .logo {
@@ -728,8 +728,8 @@ p.m_text {
 }
 
 .etalage_zoom_area div {
-    width: 460px !important;
-    height: 500px !important;
+    width: 260px !important;
+    height: 300px !important;
 }
 
 /*--product--*/
@@ -1492,7 +1492,7 @@ select.in-drop {
     }
 
     .etalage_zoom_area div {
-        width: 320px !important;
+        width: 120px !important;
     }
 
     .span_3_of_2 {
@@ -1595,7 +1595,7 @@ select.in-drop {
     }
 
     .etalage_zoom_area div {
-        width: 380px !important;
+        width: 180px !important;
     }
 
     .arrow-img {
@@ -1772,7 +1772,7 @@ select.in-drop {
 
     .etalage_zoom_area div {
         width: 100px !important;
-        height: 540px !important;
+        height: 340px !important;
     }
 
     .banner-off {

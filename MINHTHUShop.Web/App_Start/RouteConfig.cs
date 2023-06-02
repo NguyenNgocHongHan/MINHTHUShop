@@ -48,6 +48,13 @@ namespace MINHTHUShop.Web
             );
 
             routes.MapRoute(
+                name: "ListProducts",
+                url: "san-pham.html",
+                defaults: new { controller = "Product", action = "ListProducts", id = UrlParameter.Optional },
+                namespaces: new string[] { "MINHTHUShop.Web.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "TagList",
                 url: "tag/{tagID}.html",
                 defaults: new { controller = "Product", action = "ListProductByTag", tagID = UrlParameter.Optional },

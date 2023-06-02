@@ -3,13 +3,6 @@
     ViewBag.Title = Model.Name;
     Layout = "~/Views/Shared/Layouts.cshtml";
 }
-
-<div class="single_top">
-    <div class="single_grid">
-        <div class="toogle">
-            <h3 class="m_3">@Model.Name</h3>
-            <p class="m_text">@Html.Raw(Model.Description)</p>
-        </div>
-        <div class="clearfix"> </div>
-    </div>
+<div class="women-product">
+    @Html.Raw(Model.Description)
 </div>

@@ -136,5 +136,32 @@ namespace MINHTHUShop.Web.Controllers
 
             return View(pagination);
         }
+
+        public ActionResult ListProducts(int pageIndex = 1, string sort = "")
+        {
+            int totalRow = 0;
+            int pageSize = int.Parse(ConfigHelper.GetByKey("PageSize"));
+
+            var productModel = _productService.GetListProductPaging(pageIndex, pageSize, sort, out totalRow);
+            var productVM = Mapper.Map<IEnumerable<Tb_Product>, IEnumerable<ProductVM>>(productModel);
+
+            int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
+
+            var brandModel = _brandService.GetAll();
+            var brandVM = Mapper.Map<IEnumerable<Tb_Brand>, IEnumerable<BrandVM>>(brandModel);
+
+            var paginationSet = new Pagination<ProductVM>()
+            {
+                Item = productVM,
+                Brand = brandVM,
+                MaxPage = int.Parse(ConfigHelper.GetByKey("MaxPage")),
+                Page = pageIndex,
+                TotalCount = totalRow,
+                TotalPage = totalPage
+            };
+
+            return View(paginationSet);
+        }
+
     }
 }

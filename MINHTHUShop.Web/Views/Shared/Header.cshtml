@@ -44,7 +44,7 @@
                     if (Request.IsAuthenticated)
                     {
                         @Html.AntiForgeryToken()
-                        <div class="account"><a href="/tai-khoan.html"><span> </span>Chào <strong>@User.Identity.GetUserName()</strong></a> | <a href="#" id="btnLogout">Thoát</a></div>
+                        <div class="account"><a href="/tai-khoan.html"><span> </span>Chào <strong>@User.Identity.GetUserName()</strong></a> | <a href="#" id="btnLogout">Đăng xuất</a></div>
                     }
                     else
                     {

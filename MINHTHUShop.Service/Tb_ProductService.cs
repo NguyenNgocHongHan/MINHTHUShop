@@ -108,7 +108,7 @@ namespace MINHTHUShop.Service
 
         public IEnumerable<Tb_Product> GetListProductByTag(string tagID, int pageIndex, int pageSize, string sort, out int totalRow)
         {
-            var model = _tb_ProductRepository.GetListProductByTag(tagID, pageIndex, pageSize, sort, out totalRow);
+            var model = _tb_ProductRepository.GetListProductByTag(tagID, pageIndex, pageSize, sort, out totalRow).OrderBy(x => x.Name);
 
             return model;
         }
@@ -133,7 +133,7 @@ namespace MINHTHUShop.Service
 
         public IEnumerable<Tb_Product> GetListProductByCateIdPaging(int cateID, int pageIndex, int pageSize, string sort, out int totalRow)
         {
-            var query = _tb_ProductRepository.GetMulti(x => x.Status && x.CateID == cateID);
+            var query = _tb_ProductRepository.GetMulti(x => x.Status && x.CateID == cateID).OrderBy(x => x.Name);
             switch (sort)
             {
                 case "new":
@@ -164,7 +164,7 @@ namespace MINHTHUShop.Service
 
         public IEnumerable<Tb_Product> Search(string keywork, int pageIndex, int pageSize, string sort, out int totalRow)
         {
-            var query = _tb_ProductRepository.GetMulti(x => x.Status == true && x.Name.Contains(keywork));
+            var query = _tb_ProductRepository.GetMulti(x => x.Status == true && x.Name.Contains(keywork)).OrderBy(x => x.Name);
             switch (sort)
             {
                 case "new":
@@ -214,42 +214,52 @@ namespace MINHTHUShop.Service
                 }
             }
         }
+
+        public IEnumerable<Tb_Product> GetListProductPaging(int pageIndex, int pageSize, string sort, out int totalRow)
+        {
+            var query = _tb_ProductRepository.GetMulti(x => x.Status == true).OrderBy(x => x.Name);
+            switch (sort)
+            {
+                case "new":
+                    query = query.OrderByDescending(x => x.CreateDate);
+                    break;
+
+                case "lowToHigh":
+                    query = query.OrderBy(x => x.PromotionPrice);
+                    break;
+
+                case "highToLow":
+                    query = query.OrderByDescending(x => x.PromotionPrice);
+                    break;
+
+                default:
+                    query = query.OrderBy(x => x.Name);
+                    break;
+            }
+            totalRow = query.Count();
+            return query.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+        }
     }
 
     public interface ITb_ProductService
     {
         Tb_Product Create(Tb_Product tb_Product);
-
         void Update(Tb_Product tb_Product);
-
         Tb_Product Delete(int id);
-
         Tb_Product GetById(int id);
-
         void SaveChanges();
-
         IEnumerable<Tb_Product> GetAll();
-
         IEnumerable<Tb_Product> GetAll(string keywork);
-
         IEnumerable<Tb_Product> GetLastest(int top);
-
         IEnumerable<Tb_Product> GetProductByCateId(int cateID);
-
         IEnumerable<Tb_Product> Search(string keywork, int pageIndex, int pageSize, string sort, out int totalRow);
-
         IEnumerable<Tb_Product> GetRelatedProduct(int id, int top);
-
         IEnumerable<Tb_Product> GetListProduct(string keywork);
-
         IEnumerable<string> GetListProductByName(string name);
-
         Tb_Tag GetTag(string tagID);
-
         IEnumerable<Tb_Tag> GetListTagByProductId(int id);
-
         IEnumerable<Tb_Product> GetListProductByTag(string tagID, int pageIndex, int pageSize, string sort, out int totalRow);
-
         IEnumerable<Tb_Product> GetListProductByCateIdPaging(int cateID, int pageIndex, int pageSize, string sort, out int totalRow);
+        IEnumerable<Tb_Product> GetListProductPaging(int pageIndex, int pageSize, string sort, out int totalRow);
     }
 }

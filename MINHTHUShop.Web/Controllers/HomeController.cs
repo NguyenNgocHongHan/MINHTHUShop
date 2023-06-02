@@ -14,12 +14,14 @@ namespace MINHTHUShop.Web.Controllers
     {
         ITb_ProductCategoryService _productCategoryService;
         ITb_ProductService _productService;
+        ITb_BrandService _brandService;
         ICommonService _commonService;
-        public HomeController(ITb_ProductCategoryService productCategoryService, ITb_ProductService productService, ICommonService commonService)
+        public HomeController(ITb_ProductCategoryService productCategoryService, ITb_ProductService productService, ITb_BrandService brandService, ICommonService commonService)
         {
             _productCategoryService = productCategoryService;
             _commonService = commonService;
             _productService = productService;
+            _brandService = brandService;
         }
 
         [OutputCache(Duration = 60, Location = System.Web.UI.OutputCacheLocation.Client)]
@@ -41,6 +43,10 @@ namespace MINHTHUShop.Web.Controllers
             var productsByCategoryModel = _productService.GetAll();
             var productsByCategoryVM = Mapper.Map<IEnumerable<Tb_Product>, IEnumerable<ProductVM>>(productsByCategoryModel);
             homeVM.ProductsByCategory = productsByCategoryVM;
+
+            var brandModel = _brandService.GetAll();
+            var brandVM = Mapper.Map<IEnumerable<Tb_Brand>, IEnumerable<BrandVM>>(brandModel);
+            homeVM.Brand = brandVM;
 
             return View(homeVM);
         }

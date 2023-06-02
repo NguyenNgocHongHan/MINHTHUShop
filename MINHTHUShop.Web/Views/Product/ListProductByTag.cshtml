@@ -20,15 +20,14 @@
         </div>
     </div>
 
-    @*Phân trang*@
     @if (Model.Count > 0)
     {
         <div class="grid-product">
             @foreach (var product in Model.Item)
             {
                 var url = "/" + product.MetaTitle + ".p-" + product.ProductID + ".html";
-                <a href="@url">
-                    <div class="product-grid">
+                <div class="product-grid">
+                    <a href="@url" style="text-decoration:none;">
                         <div class="content_box">
                             <div class="left-grid-view grid-view-left">
                                 <img src="@product.Image" class="img-responsive watch-right" alt="@product.Name" />
@@ -51,12 +50,15 @@
                             <span class="actual"><small>@product.PromotionPrice.ToString("N0") đ</small></span>
                             <span class="reducedfrom"><small>@product.Price.ToString("N0") đ</small></span>
                         }
-                    </div>
-                </a>
+                    </a>
+                    <a class="now-get get-cart" href="#" style="margin-right: 10px;">&#128722; Thêm</a>
+                    <div class="clearfix"> </div>
+                </div>
             }
 
             <div class="clearfix"> </div>
 
+            @*Phân trang*@
             @if (Model.TotalPage > 1)
             {
                 <nav aria-label="Phân trang" style="text-align:center">

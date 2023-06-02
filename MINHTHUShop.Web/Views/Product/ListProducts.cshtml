@@ -1,15 +1,14 @@
 ﻿@model MINHTHUShop.Web.Infrastructure.Core.Pagination<MINHTHUShop.Web.Models.ProductVM>
 
 @{
-    var keyword = (string)ViewBag.Keyword;
-    ViewBag.Title = "Kết quả tìm kiếm " + keyword;
+    ViewBag.Title = "Tất cả sản phẩm";
     Layout = "~/Views/Shared/Layouts.cshtml";
 }
 
 <div class="women-product">
     <div class=" w_content">
         <div class="women">
-            <a href="#"><h4>Kết quả tìm kiếm: @keyword - <span>@Model.TotalCount sản phẩm</span></h4></a>
+            <a href="#"><h4>Tất cả sản phẩm - <span>@Model.TotalCount sản phẩm</span></h4></a>
             <ul class="w_nav">
                 <li>Sắp xếp: </li>
                 <li><a class="active" href="?pageIndex=@Model.Page&sort=new">Mới nhất</a></li> |
@@ -114,3 +113,4 @@
     }
 
 </div>
+
