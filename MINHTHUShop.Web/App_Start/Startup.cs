@@ -48,12 +48,12 @@ namespace MINHTHUShop.Web.App_Start
 
 
             // Repositories
-            builder.RegisterAssemblyTypes(typeof(Tb_NewsCategoryRepository).Assembly)
+            builder.RegisterAssemblyTypes(typeof(Tb_ProductCategoryRepository).Assembly)
                 .Where(t => t.Name.EndsWith("Repository"))
                 .AsImplementedInterfaces().InstancePerRequest();
 
             // Services
-            builder.RegisterAssemblyTypes(typeof(Tb_NewsCategoryService).Assembly)
+            builder.RegisterAssemblyTypes(typeof(Tb_ProductCategoryService).Assembly)
                .Where(t => t.Name.EndsWith("Service"))
                .AsImplementedInterfaces().InstancePerRequest();
 

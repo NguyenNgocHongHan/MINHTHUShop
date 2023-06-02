@@ -3,10 +3,8 @@
     angular.module('MINHTHUShop',
         [
             'MINHTHUShop.productCategory',
-            'MINHTHUShop.newsCategory',
             'MINHTHUShop.faqCategory',
             'MINHTHUShop.product',
-            'MINHTHUShop.news',
             'MINHTHUShop.faq',
             'MINHTHUShop.brand',
             'MINHTHUShop.webpage',

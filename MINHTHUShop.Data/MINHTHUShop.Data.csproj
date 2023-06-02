@@ -186,6 +186,14 @@
     <Compile Include="Migrations\202305272016036_addNoteFieldsForFeedbackTB.designer.cs">
       <DependentUpon>202305272016036_addNoteFieldsForFeedbackTB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306022055208_deleteNewsTable.cs" />
+    <Compile Include="Migrations\202306022055208_deleteNewsTable.designer.cs">
+      <DependentUpon>202306022055208_deleteNewsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306022149185_deletePaymentandProductCommentTable.cs" />
+    <Compile Include="Migrations\202306022149185_deletePaymentandProductCommentTable.designer.cs">
+      <DependentUpon>202306022149185_deletePaymentandProductCommentTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -200,21 +208,16 @@
     <Compile Include="Repositories\Tb_FooterRepository.cs" />
     <Compile Include="Repositories\Tb_MenuGroupRepository.cs" />
     <Compile Include="Repositories\Tb_MenuRepository.cs" />
-    <Compile Include="Repositories\Tb_NewsCategoryRepository.cs" />
-    <Compile Include="Repositories\Tb_NewsRepository.cs" />
     <Compile Include="Repositories\Tb_OrderDetailRepository.cs" />
     <Compile Include="Repositories\Tb_OrderRepository.cs" />
     <Compile Include="Repositories\Tb_OrderStatusRepository.cs" />
-    <Compile Include="Repositories\Tb_WebpageRepository.cs" />
     <Compile Include="Repositories\Tb_PaymentMethodRepository.cs" />
-    <Compile Include="Repositories\Tb_PaymentRepository.cs" />
+    <Compile Include="Repositories\Tb_WebpageRepository.cs" />
     <Compile Include="Repositories\Tb_ProductCategoryRepository.cs" />
-    <Compile Include="Repositories\Tb_ProductCommentRepository.cs" />
     <Compile Include="Repositories\Tb_ProductRepository.cs" />
     <Compile Include="Repositories\Tb_ShippingMethodRepository.cs" />
     <Compile Include="Repositories\Tb_ShippingRepository.cs" />
     <Compile Include="Repositories\Tb_UserRepository.cs" />
-    <Compile Include="Repositories\Tb_TagNewsRepository.cs" />
     <Compile Include="Repositories\Tb_TagProductRepository.cs" />
     <Compile Include="Repositories\Tb_TagRepository.cs" />
     <Compile Include="Repositories\Tb_TargetRepository.cs" />
@@ -305,6 +308,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305272016036_addNoteFieldsForFeedbackTB.resx">
       <DependentUpon>202305272016036_addNoteFieldsForFeedbackTB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306022055208_deleteNewsTable.resx">
+      <DependentUpon>202306022055208_deleteNewsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306022149185_deletePaymentandProductCommentTable.resx">
+      <DependentUpon>202306022149185_deletePaymentandProductCommentTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

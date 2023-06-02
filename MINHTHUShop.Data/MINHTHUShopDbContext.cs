@@ -22,22 +22,17 @@ namespace MINHTHUShop.Data
         public DbSet<Tb_Footer> Tb_Footers { get; set; }
         public DbSet<Tb_Menu> Tb_Menus { get; set; }
         public DbSet<Tb_MenuGroup> Tb_MenuGroups { get; set; }
-        public DbSet<Tb_News> Tb_News { get; set; }
-        public DbSet<Tb_NewsCategory> Tb_NewsCategories { get; set; }
         public DbSet<Tb_Order> Tb_Orders { get; set; }
         public DbSet<Tb_OrderDetail> Tb_OrderDetails { get; set; }
         public DbSet<Tb_OrderStatus> Tb_OrderStatuses { get; set; }
         public DbSet<Tb_Webpage> Tb_Webpages { get; set; }
-        public DbSet<Tb_Payment> Tb_Payments { get; set; }
         public DbSet<Tb_PaymentMethod> Tb_PaymentMethods { get; set; }
         public DbSet<Tb_Product> Tb_Products { get; set; }
         public DbSet<Tb_ProductCategory> Tb_ProductCategories { get; set; }
-        public DbSet<Tb_ProductComment> Tb_ProductComments { get; set; }
         public DbSet<Tb_Shipping> Tb_Shippings { get; set; }
         public DbSet<Tb_ShippingMethod> Tb_ShippingMethods { get; set; }
         //public DbSet<Tb_User> Tb_Users { get; set; }
         public DbSet<Tb_Tag> Tb_Tags { get; set; }
-        public DbSet<Tb_TagNews> Tb_TagNews { get; set; }
         public DbSet<Tb_TagProduct> Tb_TagProducts { get; set; }
         public DbSet<Tb_Target> Tb_Targets { get; set; }
 

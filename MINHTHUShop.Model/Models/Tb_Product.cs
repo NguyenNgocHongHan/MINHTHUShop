@@ -57,6 +57,5 @@ namespace MINHTHUShop.Model.Models
         public virtual Tb_Brand Tb_Brand { get; set; }
 
         public virtual IEnumerable<Tb_TagProduct> Tb_TagProducts { get; set; }
-        public virtual IEnumerable<Tb_ProductComment> Tb_ProductComments { get; set; }
     }
 }

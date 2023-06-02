@@ -45,32 +45,6 @@ namespace MINHTHUShop.Web.Infrastructure.Extensions
             p.MetaDescriptions = vm.MetaDescriptions;
         }
 
-        public static void UpdateNewsCategory(this Tb_NewsCategory nc, NewsCategoryVM vm)
-        {
-            nc.NewsCateID = vm.NewsCateID;
-            nc.Name = vm.Name;
-            nc.Sort = vm.Sort;
-            nc.ParentID = vm.ParentID;
-            nc.MetaTitle = vm.MetaTitle;
-            nc.MetaKeywords = vm.MetaKeywords;
-            nc.MetaDescriptions = vm.MetaDescriptions;
-        }
-
-        public static void UpdateNews(this Tb_News n, NewsVM vm)
-        {
-            n.NewsID = vm.NewsID;
-            n.NewsCateID = vm.NewsCateID;
-            n.Name = vm.Name;
-            n.Image = vm.Image;
-            n.Description = vm.Description;
-            n.Tag = vm.Tag;
-            n.CreateDate = vm.CreateDate;
-            n.Status = vm.Status;
-            n.MetaTitle = vm.MetaTitle;
-            n.MetaKeywords = vm.MetaKeywords;
-            n.MetaDescriptions = vm.MetaDescriptions;
-        }
-
         public static void UpdateFAQCategory(this Tb_FAQCategory fc, FAQCategoryVM vm)
         {
             fc.FAQCateID = vm.FAQCateID;

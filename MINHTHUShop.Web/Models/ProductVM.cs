@@ -27,6 +27,5 @@ namespace MINHTHUShop.Web.Models
         public virtual BrandVM Brand { get; set; }
 
         public virtual IEnumerable<TagProductVM> TagProductVMs { get; set; }
-        public virtual IEnumerable<ProductCommentVM> ProductCommentVMs { get; set; }
     }
 }

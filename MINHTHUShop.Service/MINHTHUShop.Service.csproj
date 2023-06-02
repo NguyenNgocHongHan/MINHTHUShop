@@ -50,8 +50,6 @@
     <Compile Include="Tb_FAQCategoryService.cs" />
     <Compile Include="Tb_FAQService.cs" />
     <Compile Include="Tb_FeedbackService.cs" />
-    <Compile Include="Tb_NewsCategoryService.cs" />
-    <Compile Include="Tb_NewsService.cs" />
     <Compile Include="Tb_OrderService.cs" />
     <Compile Include="Tb_WebpageService.cs" />
     <Compile Include="Tb_ProductCategoryService.cs" />
