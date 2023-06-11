@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Giỏ hàng";
+    Layout = "~/Views/Shared/Layouts.cshtml";
+}
+
+@section footerJS{
+    <script src="~/Content/Client/js/controller/cart.js"></script>
+}
+
+<div class="single_top">
+    <div class="single_grid">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td style="text-align:center; font-weight:bolder">STT</td>
+                    <td style="text-align: center; font-weight: bolder">Sản phẩm</td>
+                    <td style="text-align: center; font-weight: bolder">Hình ảnh</td>
+                    <td style="text-align: center; font-weight: bolder">Giá tiền</td>
+                    <td style="text-align: center; font-weight: bolder;">Số lượng</td>
+                    <td style="text-align: center; font-weight: bolder">Thành tiền</td>
+                    <td style="text-align: center; font-weight: bolder"></td>
+                </tr>
+            </thead>
+            <tbody id="cartBody">
+            </tbody>
+        </table>
+        <div class="pull-right">
+            <b>Tổng tiền: <span id="lblTotalOrder" style="color:green"></span> VNĐ</b>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+
+<script id="tplCart" type="x-tmpl-mustache">
+    <tr>
+        <td>{{STT}}</td>
+        <td>{{Name}}</td>
+        <td><img src="{{Image}}" height="50" /></td>
+        <td class="actual">{{PromotionPriceF}}</td>
+        <td><input type="number" data-id="{{ProductID}}" data-price="{{PromotionPrice}}" value="{{Quantity}}" class="input txtQuantity" style="width: 50px" /></td>
+        <td id="total_{{ProductID}}">{{Total}}</td>
+        <td><button class="btn btn-danger btnDeleteItem" data-id="{{ProductID}}">x</button></td>
+    </tr>
+</script>

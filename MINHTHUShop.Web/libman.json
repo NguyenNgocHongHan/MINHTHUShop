@@ -64,6 +64,15 @@
         "themes/smoothness/jquery-ui.css",
         "jquery-ui.js"
       ]
+    },
+    {
+      "library": "mustache.js@2.2.1",
+      "destination": "Content/Client/lib/mustache.js/"
     }
-  ]
+  ,
+{
+  "library": "numeral.js@2.0.6",
+  "destination": "Content/Client/lib/numeral.js/"
+}
+]
 }

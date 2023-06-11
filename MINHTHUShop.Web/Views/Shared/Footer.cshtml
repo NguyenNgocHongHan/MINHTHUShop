@@ -1,13 +1,40 @@
-﻿﻿@model MINHTHUShop.Web.Models.FooterVM
+﻿<div class="footer">
+    <div class="container">
+        <div class="col-md-3 footer-grid ">
+            <h3>Menu</h3>
+            <ul>
+                <li><a href="/">Trang chủ</a></li>
+                <li><a href="kitchen.html">Kitchen</a></li>
+                <li><a href="care.html">Personal Care</a></li>
+                <li><a href="hold.html">Household</a></li>
+                <li><a href="codes.html">Short Codes</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+        <div class="col-md-4 footer-grid ">
+            <h3>Dịch vụ khách hàng</h3>
+            <ul>
+                <li><a href="#">Phí vận chuyển</a></li>
+                <li><a href="#">Phương thức thanh toán</a></li>
+                <li><a href="#">Câu hỏi thường gặp</a></li>
+                <li><a href="/gioi-thieu.html">Giới thiệu</a></li>
+                <li><a href="/lien-he.html">Liên hệ</a></li>
 
-<div class="footer">
-    <div class="footer-top">
-        
-        <div class="clearfix"> </div>
-    </div>
-    <div class="footer-bottom">
-        <div class="container">
-            @Html.Raw(Model.Description)
+            </ul>
+        </div>
+        <div class="col-md-5 footer-grid ">
+            <div class="footer-bottom">
+                <h2><a href="/"><span><b>Minh Thư</b> Shop</span></a></h2>
+                <p>835/1 ĐƯỜNG 23/10, TP. NHA TRANG</p>
+                <div class="fo-para">
+                    <p style="float:left;">&#9743; <i>0776192014</i></p>
+                    <p style="float:right;"><a href="mailto:minhthushop.cosmetic@gmail.com" style="text-decoration:none">&#9993; <i>minhthushop.cosmetic@gmail.com</i></a></p>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="copy-right">
+            <p> &copy; 2016 Big store. All Rights Reserved | Design by  <a href="http://w3layouts.com/"> W3layouts</a></p>
         </div>
     </div>
 </div>

@@ -27,6 +27,13 @@ namespace MINHTHUShop.Web
             );
 
             routes.MapRoute(
+                name: "Cart",
+                url: "gio-hang.html",
+                defaults: new { controller = "Cart", action = "Index", id = UrlParameter.Optional },
+                namespaces: new string[] { "MINHTHUShop.Web.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "About",
                 url: "lien-he.html",
                 defaults: new { controller = "About", action = "Index", id = UrlParameter.Optional },

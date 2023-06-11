@@ -42,8 +42,8 @@
     }
 
 .error {
-    color:red;
-    font-style:italic;
+    color: red;
+    font-style: italic;
 }
 
 .register-top-grid input[type="password"], .register-bottom-grid input[type="password"] {
@@ -76,4 +76,59 @@
     width: 96%;
     font-size: 0.9em;
     padding: 10px;
+}
+
+.footer {
+    padding: 5em 0;
+}
+
+.footer-bottom h2 a {
+    text-decoration: none;
+}
+
+.footer-bottom h2 {
+    font-size: 2.5em;
+    display: inline-block;
+    position: relative;
+}
+
+h2 {
+    margin: 0;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin: auto;
+}
+
+    .footer-bottom h2 span {
+        font-size: 24px;
+        display: block;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        padding-top: 6px;
+    }
+
+p.fo-para {
+    font-size: 1em;
+    line-height: 2em;
+    padding: 1em 0 3em;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.address {
+    margin-top: 2em;
+}
+
+.copy-right p {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 4em;
+}
+
+.contact-right iframe {
+    width: 100%;
+    height: 400px;
+    text-align:center;
 }

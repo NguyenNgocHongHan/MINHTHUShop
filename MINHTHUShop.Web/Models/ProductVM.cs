@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace MINHTHUShop.Web.Models
 {
+    [Serializable]
     public class ProductVM
     {
         public int ProductID { get; set; }

@@ -25,45 +25,6 @@
 <div class="main">
     <div class="reservation_top">
         <div class="contact_right">
-            <h3>Cửa hàng</h3>
-            @foreach (var item in Model.AboutVMs)
-            {
-                <input type="hidden" id="hidAddress" value="@item.Name<br />Địa chỉ: @item.Address" />
-                <input type="hidden" id="hidLat" value="@item.MapLat" />
-                <input type="hidden" id="hidLong" value="@item.MapLong" />
-                <input type="hidden" id="hidName" value="@item.Name" />
-
-                <address class="address">
-                    <p>@item.Name<br /><small>@item.Address</small></p>
-                    <dl>
-                        <dt> </dt>
-                        @if (item.Phone != null)
-                        {
-                            <dd>Điện thoại: <span>@item.Phone</span></dd>
-                        }
-                        @if (item.Email != null)
-                        {
-                            <dd>Email: <a href="mailto:(@item.Email)">@item.Email</a></dd>
-                        }
-                        @if (item.Website != null)
-                        {
-                            <dd>Website: <a href="@item.Website">@item.Website</a></dd>
-                        }
-                        @if (item.Description != null)
-                        {
-                            <dd>Mô tả: <span>@item.Description</span></dd>
-                        }
-                    </dl>
-                </address>
-                <div class="clearfix"></div>
-                <div id="map"></div>
-
-            }
-        </div>
-    </div>
-
-    <div class="reservation_top">
-        <div class="contact_right">
             <h3>Gửi phản hồi</h3>
             <div class="contact-form">
                 @using (Html.BeginForm("SendFeedback", "About", FormMethod.Post))
