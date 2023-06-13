@@ -10,13 +10,11 @@ namespace MINHTHUShop.Web.Mappings
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Tb_About, AboutVM>();
                 cfg.CreateMap<Tb_Banner, BannerVM>();
                 cfg.CreateMap<Tb_Brand, BrandVM>();
                 cfg.CreateMap<Tb_FAQCategory, FAQCategoryVM>();
                 cfg.CreateMap<Tb_FAQ, FAQVM>();
                 cfg.CreateMap<Tb_Feedback, FeedbackVM>();
-                cfg.CreateMap<Tb_Footer, FooterVM>();
                 cfg.CreateMap<Tb_OrderDetail, OrderDetailVM>();
                 cfg.CreateMap<Tb_OrderStatus, OrderStatusVM>();
                 cfg.CreateMap<Tb_Order, OrderVM>();

@@ -8,20 +8,13 @@ namespace MINHTHUShop.Service
 {
     public class CommonService : ICommonService
     {
-        private ITb_FooterRepository _footerRepository;
         private IUnitOfWork _unitOfWork;
         ITb_BannerRepository _bannerRepository;
 
-        public CommonService(ITb_FooterRepository footerRepository, IUnitOfWork unitOfWork, ITb_BannerRepository bannerRepository)
+        public CommonService(IUnitOfWork unitOfWork, ITb_BannerRepository bannerRepository)
         {
-            _footerRepository = footerRepository;
             _unitOfWork = unitOfWork;
             _bannerRepository = bannerRepository;
-        }
-
-        public Tb_Footer GetFooter()
-        {
-            return _footerRepository.GetSingleByCondition(x => x.FooterID == CommonConstants.DefaultFooterId);
         }
 
         public IEnumerable<Tb_Banner> GetBanners()
@@ -34,8 +27,6 @@ namespace MINHTHUShop.Service
 
     public interface ICommonService
     {
-        Tb_Footer GetFooter();
-
         IEnumerable<Tb_Banner> GetBanners();
 
     }

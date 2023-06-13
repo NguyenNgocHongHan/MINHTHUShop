@@ -206,33 +206,37 @@
     <Compile Include="Migrations\202306130224030_deleteFieldTotalCostForOrderTable.designer.cs">
       <DependentUpon>202306130224030_deleteFieldTotalCostForOrderTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306132111185_renameIdentityTables.cs" />
+    <Compile Include="Migrations\202306132111185_renameIdentityTables.designer.cs">
+      <DependentUpon>202306132111185_renameIdentityTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306132152435_deleteUnnecessaryTables.cs" />
+    <Compile Include="Migrations\202306132152435_deleteUnnecessaryTables.designer.cs">
+      <DependentUpon>202306132152435_deleteUnnecessaryTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Tb_AboutRepository.cs" />
     <Compile Include="Repositories\Tb_BannerRepository.cs" />
     <Compile Include="Repositories\Tb_BrandRepository.cs" />
-    <Compile Include="Repositories\Tb_ConfigRepository.cs" />
     <Compile Include="Repositories\Tb_ErrorRepository.cs" />
     <Compile Include="Repositories\Tb_FAQCategoryRepository.cs" />
     <Compile Include="Repositories\Tb_FAQRepository.cs" />
     <Compile Include="Repositories\Tb_FeedbackRepository.cs" />
-    <Compile Include="Repositories\Tb_FooterRepository.cs" />
     <Compile Include="Repositories\Tb_MenuGroupRepository.cs" />
     <Compile Include="Repositories\Tb_MenuRepository.cs" />
     <Compile Include="Repositories\Tb_OrderDetailRepository.cs" />
     <Compile Include="Repositories\Tb_OrderRepository.cs" />
     <Compile Include="Repositories\Tb_OrderStatusRepository.cs" />
     <Compile Include="Repositories\Tb_PaymentMethodRepository.cs" />
+    <Compile Include="Repositories\Tb_TargetRepository.cs" />
     <Compile Include="Repositories\Tb_WebpageRepository.cs" />
     <Compile Include="Repositories\Tb_ProductCategoryRepository.cs" />
     <Compile Include="Repositories\Tb_ProductRepository.cs" />
     <Compile Include="Repositories\Tb_ShippingMethodRepository.cs" />
-    <Compile Include="Repositories\Tb_ShippingRepository.cs" />
     <Compile Include="Repositories\Tb_UserRepository.cs" />
     <Compile Include="Repositories\Tb_TagProductRepository.cs" />
     <Compile Include="Repositories\Tb_TagRepository.cs" />
-    <Compile Include="Repositories\Tb_TargetRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -335,6 +339,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202306130224030_deleteFieldTotalCostForOrderTable.resx">
       <DependentUpon>202306130224030_deleteFieldTotalCostForOrderTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306132111185_renameIdentityTables.resx">
+      <DependentUpon>202306132111185_renameIdentityTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306132152435_deleteUnnecessaryTables.resx">
+      <DependentUpon>202306132152435_deleteUnnecessaryTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

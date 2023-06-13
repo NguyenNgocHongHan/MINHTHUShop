@@ -2,7 +2,6 @@
 {
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
-    using MINHTHUShop.Common;
     using MINHTHUShop.Model.Models;
     using System;
     using System.Collections.Generic;
@@ -24,7 +23,6 @@
             CreateUser(context);
             CreateBanner(context);
             CreatePage(context);
-            CreateAbout(context);
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
         }
@@ -59,14 +57,6 @@
                 var adminUser = manager.FindByEmail("han.nnh.work@gmail.com");
 
                 manager.AddToRoles(adminUser.Id, new string[] { "Quản trị viên" });
-            }
-        }
-
-        private void CreateFooter(MINHTHUShopDbContext context)
-        {
-            if (context.Tb_Footers.Count(x => x.FooterID == CommonConstants.DefaultFooterId) == 0)
-            {
-                string content = "";
             }
         }
 
@@ -121,40 +111,6 @@ Với phương châm “Chất lượng thật - Giá trị thật”, chúng t�
                         CreateDate = DateTime.Now
                     };
                     context.Tb_Webpages.Add(page);
-                    context.SaveChanges();
-                }
-                catch (DbEntityValidationException ex)
-                {
-                    foreach (var eve in ex.EntityValidationErrors)
-                    {
-                        Trace.WriteLine($"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation error.");
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-                            Trace.WriteLine($"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"");
-                        }
-                    }
-                }
-            }
-        }
-
-        private void CreateAbout(MINHTHUShopDbContext context)
-        {
-            if (context.Tb_Abouts.Count() == 0)
-            {
-                try
-                {
-                    var about = new MINHTHUShop.Model.Models.Tb_About()
-                    {
-                        Name = "MINH THƯ SHOP: Chi nhánh Nha Trang",
-                        Address = "835/1 đường 23/10 Nha Trang",
-                        Email = "minhthushop.cosmetic@gmail.com",
-                        MapLat = 12.2570747,
-                        MapLong = 109.149187,
-                        Phone = "0374798026",
-                        CreateDate = DateTime.Now,
-                        Status = true
-                    };
-                    context.Tb_Abouts.Add(about);
                     context.SaveChanges();
                 }
                 catch (DbEntityValidationException ex)

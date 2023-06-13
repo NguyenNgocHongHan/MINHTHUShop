@@ -3,7 +3,7 @@
     public class CommonConstants
     {
         public const string ProductTag = "product";
-        public const string DefaultFooterId = "default";
+        /*public const string DefaultFooterId = "default";*/
 
         public const string SessionCart = "SessionCart";
 

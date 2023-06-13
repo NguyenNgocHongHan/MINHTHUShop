@@ -2,20 +2,18 @@
 using MINHTHUShop.Model.Models;
 using MINHTHUShop.Service;
 using MINHTHUShop.Web.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace MINHTHUShop.Web.Controllers
 {
     public class HomeController : Controller
     {
-        ITb_ProductCategoryService _productCategoryService;
-        ITb_ProductService _productService;
-        ITb_BrandService _brandService;
-        ICommonService _commonService;
+        private ITb_ProductCategoryService _productCategoryService;
+        private ITb_ProductService _productService;
+        private ITb_BrandService _brandService;
+        private ICommonService _commonService;
+
         public HomeController(ITb_ProductCategoryService productCategoryService, ITb_ProductService productService, ITb_BrandService brandService, ICommonService commonService)
         {
             _productCategoryService = productCategoryService;
@@ -49,28 +47,6 @@ namespace MINHTHUShop.Web.Controllers
             homeVM.Brand = brandVM;
 
             return View(homeVM);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
-        [ChildActionOnly]
-        public ActionResult Footer()
-        {
-            var footerModel = _commonService.GetFooter();
-            var listfooterVM = Mapper.Map<Tb_Footer, FooterVM>(footerModel);
-            return PartialView(listfooterVM);
         }
 
         [ChildActionOnly]

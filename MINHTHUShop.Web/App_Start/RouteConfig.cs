@@ -41,9 +41,9 @@ namespace MINHTHUShop.Web
             );
 
             routes.MapRoute(
-                name: "About",
+                name: "Feedback",
                 url: "lien-he.html",
-                defaults: new { controller = "About", action = "Index", id = UrlParameter.Optional },
+                defaults: new { controller = "Feedback", action = "Index", id = UrlParameter.Optional },
                 namespaces: new string[] { "MINHTHUShop.Web.Controllers" }
             );
 

@@ -232,7 +232,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\AboutAPIController.cs" />
     <Compile Include="API\AccountController.cs" />
     <Compile Include="API\BannerAPIController.cs" />
     <Compile Include="API\BrandAPIController.cs" />
@@ -250,7 +249,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CartController.cs" />
@@ -265,14 +264,12 @@
     <Compile Include="Infrastructure\Core\ServiceFactory.cs" />
     <Compile Include="Infrastructure\Extensions\EntityExtensions.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
-    <Compile Include="Models\AboutVM.cs" />
     <Compile Include="Models\BannerVM.cs" />
     <Compile Include="Models\BrandVM.cs" />
     <Compile Include="Models\CartVM.cs" />
     <Compile Include="Models\FAQCategoryVM.cs" />
     <Compile Include="Models\FAQVM.cs" />
     <Compile Include="Models\FeedbackVM.cs" />
-    <Compile Include="Models\FooterVM.cs" />
     <Compile Include="Models\HomeVM.cs" />
     <Compile Include="Models\LoginVM.cs" />
     <Compile Include="Models\OrderDetailVM.cs" />
@@ -291,13 +288,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
-    <Content Include="app\components\about\about.module.js" />
-    <Content Include="app\components\about\aboutController.js" />
-    <Content Include="app\components\about\aboutCreateController.js" />
-    <Content Include="app\components\about\aboutCreateView.html" />
-    <Content Include="app\components\about\aboutEditController.js" />
-    <Content Include="app\components\about\aboutEditView.html" />
-    <Content Include="app\components\about\aboutView.html" />
     <Content Include="app\components\banner\banner.module.js" />
     <Content Include="app\components\banner\bannerController.js" />
     <Content Include="app\components\banner\bannerCreateController.js" />
@@ -7961,7 +7951,6 @@
     <Content Include="Content\Client\images\wat.jpg" />
     <Content Include="Content\Client\images\zoom.png" />
     <Content Include="Content\Client\js\common.js" />
-    <Content Include="Content\Client\js\controller\about.js" />
     <Content Include="Content\Client\js\controller\cart.js" />
     <Content Include="Content\Client\js\jquery.etalage.min.js" />
     <Content Include="Content\Client\js\jquery.flexisel.js" />
@@ -8454,7 +8443,7 @@
     <Content Include="Views\Product\DetailProduct.cshtml" />
     <Content Include="Views\Product\ListProductByTag.cshtml" />
     <Content Include="Views\Webpage\Index.cshtml" />
-    <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Feedback\Index.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Product\ListProducts.cshtml" />

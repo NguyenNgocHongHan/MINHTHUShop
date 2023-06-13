@@ -62,14 +62,12 @@
   <ItemGroup>
     <Compile Include="Abstract\ISEO.cs" />
     <Compile Include="Abstract\SEO.cs" />
-    <Compile Include="Models\Tb_About.cs" />
     <Compile Include="Models\Tb_Banner.cs" />
     <Compile Include="Models\Tb_Brand.cs" />
     <Compile Include="Models\Tb_Error.cs" />
     <Compile Include="Models\Tb_FAQ.cs" />
     <Compile Include="Models\Tb_FAQCategory.cs" />
     <Compile Include="Models\Tb_Feedback.cs" />
-    <Compile Include="Models\Tb_Footer.cs" />
     <Compile Include="Models\Tb_Menu.cs" />
     <Compile Include="Models\Tb_MenuGroup.cs" />
     <Compile Include="Models\Tb_Order.cs" />
@@ -79,14 +77,12 @@
     <Compile Include="Models\Tb_PaymentMethod.cs" />
     <Compile Include="Models\Tb_Product.cs" />
     <Compile Include="Models\Tb_ProductCategory.cs" />
-    <Compile Include="Models\Tb_Shipping.cs" />
     <Compile Include="Models\Tb_ShippingMethod.cs" />
     <Compile Include="Models\Tb_User.cs" />
     <Compile Include="Models\Tb_Tag.cs" />
     <Compile Include="Models\Tb_TagProduct.cs" />
     <Compile Include="Models\Tb_Target.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\Tb_Config.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

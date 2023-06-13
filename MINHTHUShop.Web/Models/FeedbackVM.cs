@@ -31,7 +31,5 @@ namespace MINHTHUShop.Web.Models
         public DateTime CreateDate { get; set; }
 
         public bool IsRead { get; set; }
-
-        public IEnumerable<AboutVM> AboutVMs { set; get; }
     }
 }

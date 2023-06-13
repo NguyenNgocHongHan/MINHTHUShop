@@ -151,7 +151,7 @@ namespace MINHTHUShop.Web.Controllers
                     await _userManager.AddToRolesAsync(adminUser.Id, new string[] { "Khách hàng" });
 
                 //send confirmation email
-                string emailSubject = "Xác nhận gửi phản hồi thành công";
+                /*string emailSubject = "Xác nhận gửi phản hồi thành công";
                 string username = model.Name;
                 string emailMessage = "Xin chào " + username + ", \n" +
                     "Cảm ơn bạn đã đăng ký thành viên trên website cửa hàng. Sự hài lòng của bạn luôn là ưu tiên số một đối với chúng tôi.\n" +
@@ -159,7 +159,7 @@ namespace MINHTHUShop.Web.Controllers
                     "Người gửi,\n" +
                     "Cửa hàng Minh Thư\n";
                 EmailSender emailSender = new EmailSender();
-                await emailSender.SendEmail(emailSubject, model.Email, username, emailMessage);
+                await emailSender.SendEmail(emailSubject, model.Email, username, emailMessage);*/
 
                 ViewData["SuccessMsg"] = "Đăng ký thành công";
             }

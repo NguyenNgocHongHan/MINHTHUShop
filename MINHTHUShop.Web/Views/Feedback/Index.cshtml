@@ -7,10 +7,6 @@
     Layout = "~/Views/Shared/Layouts.cshtml";
 }
 
-@section footerJS{
-    <script src="~/Content/Client/js/controller/about.js"></script>
-}
-
 <link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
 
 <div class="main">
@@ -18,7 +14,7 @@
         <div class="contact_right">
             <h3>Gửi phản hồi</h3>
             <div class="contact-form">
-                @using (Html.BeginForm("SendFeedback", "About", FormMethod.Post))
+                @using (Html.BeginForm("SendFeedback", "Feedback", FormMethod.Post))
                 {
                     if (ViewData["SuccessMsg"] != null)
                     {
@@ -42,8 +38,8 @@
                     @Html.TextAreaFor(model => model.Message);
 
                     <h5 style="color: grey">Nhập mã Captcha:</h5>
-                    MvcCaptcha aboutCaptcha = new MvcCaptcha("AboutCaptcha");
-                    @Html.Captcha(aboutCaptcha)
+                    MvcCaptcha feedbackCaptcha = new MvcCaptcha("FeedbackCaptcha");
+                    @Html.Captcha(feedbackCaptcha)
                     @Html.TextBox("CaptchaCode")
 
                     <input type="submit" value="Gửi">
