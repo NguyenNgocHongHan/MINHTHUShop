@@ -8,13 +8,14 @@ namespace MINHTHUShop.Web.Models
     {
         public int OrderID { get; set; }
         public string CustomerID { get; set; }
+        public string CustomerName { get; set; }
+        public string CustomerAddress { get; set; }
+        public string CustomerMobile { get; set; }
         public int OrderStatusID { get; set; }
         public int ShippingMethodID { get; set; }
         public int PaymentMethodID { get; set; }
-        public decimal? Total { get; set; }
         public DateTime CreateDate { get; set; }
         public string Note { get; set; }
-        public bool IsCancel { get; set; }
 
         [ForeignKey("CustomerID")]
         public virtual UserVM CustomerVM { get; set; }
@@ -23,5 +24,7 @@ namespace MINHTHUShop.Web.Models
         public virtual PaymentMethodVM PaymentMethodVM { get; set; }
 
         public virtual IEnumerable<OrderDetailVM> OrderDetailVMs { get; set; }
+        public IEnumerable<PaymentMethodVM> PaymentMethodVMs { get; set; }
+        public IEnumerable<ShippingMethodVM> ShippingMethodVMs { get; set; }
     }
 }

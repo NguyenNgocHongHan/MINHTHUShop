@@ -1,7 +1,5 @@
 ﻿using MINHTHUShop.Data.Infrastructure;
 using MINHTHUShop.Model.Models;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 
 namespace MINHTHUShop.Data.Repositories
 {

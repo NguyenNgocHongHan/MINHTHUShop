@@ -51,6 +51,8 @@
     <Compile Include="Tb_FAQService.cs" />
     <Compile Include="Tb_FeedbackService.cs" />
     <Compile Include="Tb_OrderService.cs" />
+    <Compile Include="Tb_PaymentMethodService.cs" />
+    <Compile Include="Tb_ShippingMethodService.cs" />
     <Compile Include="Tb_WebpageService.cs" />
     <Compile Include="Tb_ProductCategoryService.cs" />
     <Compile Include="Tb_ProductService.cs" />

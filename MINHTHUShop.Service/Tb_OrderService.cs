@@ -19,25 +19,26 @@ namespace MINHTHUShop.Service
             this._unitOfWork = unitOfWork;
         }
 
-        public Tb_Order Create(ref Tb_Order tb_Order, List<Tb_OrderDetail> tb_OrderDetails)
+        public bool Create(Tb_Order order, List<Tb_OrderDetail> orderDetails)
         {
             try
             {
-                _tb_OrderRepository.Add(tb_Order);
+                _tb_OrderRepository.Add(order);
                 _unitOfWork.Commit();
-                foreach (var tb_OrderDetail in tb_OrderDetails)
+
+                foreach (var orderDetail in orderDetails)
                 {
-                    tb_OrderDetail.OrderID = tb_Order.OrderID;
-                    _tb_OrderDetailRepository.Add(tb_OrderDetail);
+                    orderDetail.OrderID = order.OrderID;
+                    _tb_OrderDetailRepository.Add(orderDetail);
                 }
-                return tb_Order;
+                _unitOfWork.Commit();
+                return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
         }
-
         public void SaveChanges()
         {
             _unitOfWork.Commit();
@@ -52,7 +53,7 @@ namespace MINHTHUShop.Service
 
     public interface ITb_OrderService
     {
-        Tb_Order Create(ref Tb_Order tb_Order, List<Tb_OrderDetail> tb_OrderDetails);
+        bool Create(Tb_Order order, List<Tb_OrderDetail> orderDetails);
 
         void UpdateStatus(int orderID);
 

@@ -118,9 +118,22 @@ namespace MINHTHUShop.Web.Infrastructure.Extensions
             ab.MapLong = vm.MapLong;
             ab.CreateDate = vm.CreateDate;
             ab.Status = vm.Status;
-
-
         }
+
+        public static void UpdateOrder(this Tb_Order od, OrderVM vm)
+        {
+            od.OrderID = vm.OrderID;
+            od.CustomerID = vm.CustomerID;
+            od.CustomerName = vm.CustomerName;
+            od.CustomerAddress = vm.CustomerAddress;
+            od.CustomerMobile = vm.CustomerMobile;
+            od.OrderStatusID = vm.OrderStatusID;
+            od.ShippingMethodID = vm.ShippingMethodID;
+            od.PaymentMethodID = vm.PaymentMethodID;
+            od.Note = vm.Note;
+            od.CreateDate = DateTime.Now;
+    }
+
     }
 
 }

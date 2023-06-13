@@ -194,6 +194,18 @@
     <Compile Include="Migrations\202306022149185_deletePaymentandProductCommentTable.designer.cs">
       <DependentUpon>202306022149185_deletePaymentandProductCommentTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306121805138_addFieldsForOrderTable.cs" />
+    <Compile Include="Migrations\202306121805138_addFieldsForOrderTable.designer.cs">
+      <DependentUpon>202306121805138_addFieldsForOrderTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306122127269_updateOrderTable.cs" />
+    <Compile Include="Migrations\202306122127269_updateOrderTable.designer.cs">
+      <DependentUpon>202306122127269_updateOrderTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306130224030_deleteFieldTotalCostForOrderTable.cs" />
+    <Compile Include="Migrations\202306130224030_deleteFieldTotalCostForOrderTable.designer.cs">
+      <DependentUpon>202306130224030_deleteFieldTotalCostForOrderTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -314,6 +326,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202306022149185_deletePaymentandProductCommentTable.resx">
       <DependentUpon>202306022149185_deletePaymentandProductCommentTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306121805138_addFieldsForOrderTable.resx">
+      <DependentUpon>202306121805138_addFieldsForOrderTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306122127269_updateOrderTable.resx">
+      <DependentUpon>202306122127269_updateOrderTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306130224030_deleteFieldTotalCostForOrderTable.resx">
+      <DependentUpon>202306130224030_deleteFieldTotalCostForOrderTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -31,6 +31,23 @@
               .appendTo(ul);
             };
 
+        $('.btnAddToCart').off('click').on('click', function (e) {
+            e.preventDefault();
+            var productID = parseInt($(this).data('id'));
+            $.ajax({
+                url: '/Cart/Add',
+                data: {
+                    productID: productID
+                },
+                type: 'POST',
+                dataType: 'json',
+                success: function (response) {
+                    if (response.status) {
+                        alert('Đã thêm vào giỏ hàng!');
+                    }
+                }
+            });
+        });
 
         $('#btnLogout').off('click').on('click', function (e) {
             e.preventDefault();

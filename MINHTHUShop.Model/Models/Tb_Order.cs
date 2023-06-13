@@ -18,22 +18,27 @@ namespace MINHTHUShop.Model.Models
         public int OrderStatusID { get; set; }
 
         [Required]
+        [MaxLength(50)]
+        public string CustomerName { get; set; }
+
+        [Required]
+        [MaxLength(250)]
+        public string CustomerAddress { get; set; }
+
+        [Required]
+        public string CustomerMobile { get; set; }
+
+        [Required]
         public int ShippingMethodID { get; set; }
 
         [Required]
         public int PaymentMethodID { get; set; }
 
-        public decimal? Total { get; set; }
-
         [Required]
         public DateTime CreateDate { get; set; } = DateTime.Now;
 
         [MaxLength(500)]
-
         public string Note { get; set; }
-
-        [Required]
-        public bool IsCancel { get; set; } = false;
 
         [ForeignKey("CustomerID")]
         public virtual Tb_User Customer { get; set; }
