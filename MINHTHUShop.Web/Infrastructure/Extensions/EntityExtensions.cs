@@ -116,8 +116,43 @@ namespace MINHTHUShop.Web.Infrastructure.Extensions
             od.ShippingMethodID = vm.ShippingMethodID;
             od.PaymentMethodID = vm.PaymentMethodID;
             od.Note = vm.Note;
-            od.CreateDate = DateTime.Now;
-    }
+            od.CreateDate = vm.CreateDate;
+        }
+
+        public static void UpdateGroup(this Tb_Group g, GroupVM vm)
+        {
+            g.GroupID = vm.GroupID;
+            g.Name = vm.Name;
+            g.Description = vm.Description;
+        }
+
+        public static void UpdateRole(this Tb_Role r, RoleVM vm, string action = "create")
+        {
+            if (action == "update")
+                r.Id = vm.Id;
+            else
+                r.Id = Guid.NewGuid().ToString();
+            r.Name = vm.Name;
+            r.Description = vm.Description;
+        }
+
+        public static void UpdateUser(this Tb_User u, UserVM vm, string action = "create")
+        {
+
+            u.Id = vm.Id;
+            u.UserName = vm.UserName;
+            u.Email = vm.Email;
+            u.Name = vm.Name;
+            u.PhoneNumber = vm.PhoneNumber;
+            u.Address = vm.Address;
+            u.Gender = vm.Gender;
+            u.DateOfBirth = vm.DateOfBirth;
+            u.Avatar = vm.Avatar;
+            u.CreateDate = vm.CreateDate;
+            u.IsLoggedIn = vm.IsLoggedIn;
+            u.LastLogin = vm.LastLogin;
+            u.Status = vm.Status;
+        }
 
     }
 

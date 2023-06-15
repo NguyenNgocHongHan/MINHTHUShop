@@ -214,7 +214,20 @@
     <Compile Include="Migrations\202306132152435_deleteUnnecessaryTables.designer.cs">
       <DependentUpon>202306132152435_deleteUnnecessaryTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306132311145_updateAndAddUserGroupTB.cs" />
+    <Compile Include="Migrations\202306132311145_updateAndAddUserGroupTB.designer.cs">
+      <DependentUpon>202306132311145_updateAndAddUserGroupTB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306140237472_updateAuthorizationTableInDatabase.cs" />
+    <Compile Include="Migrations\202306140237472_updateAuthorizationTableInDatabase.designer.cs">
+      <DependentUpon>202306140237472_updateAuthorizationTableInDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306140249459_updateIdentityTable.cs" />
+    <Compile Include="Migrations\202306140249459_updateIdentityTable.designer.cs">
+      <DependentUpon>202306140249459_updateIdentityTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Tb_RoleGroupRepository.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Tb_BannerRepository.cs" />
@@ -223,13 +236,16 @@
     <Compile Include="Repositories\Tb_FAQCategoryRepository.cs" />
     <Compile Include="Repositories\Tb_FAQRepository.cs" />
     <Compile Include="Repositories\Tb_FeedbackRepository.cs" />
+    <Compile Include="Repositories\Tb_GroupRepository.cs" />
     <Compile Include="Repositories\Tb_MenuGroupRepository.cs" />
     <Compile Include="Repositories\Tb_MenuRepository.cs" />
     <Compile Include="Repositories\Tb_OrderDetailRepository.cs" />
     <Compile Include="Repositories\Tb_OrderRepository.cs" />
     <Compile Include="Repositories\Tb_OrderStatusRepository.cs" />
     <Compile Include="Repositories\Tb_PaymentMethodRepository.cs" />
+    <Compile Include="Repositories\Tb_RoleRepository.cs" />
     <Compile Include="Repositories\Tb_TargetRepository.cs" />
+    <Compile Include="Repositories\Tb_UserGroupRepository.cs" />
     <Compile Include="Repositories\Tb_WebpageRepository.cs" />
     <Compile Include="Repositories\Tb_ProductCategoryRepository.cs" />
     <Compile Include="Repositories\Tb_ProductRepository.cs" />
@@ -345,6 +361,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202306132152435_deleteUnnecessaryTables.resx">
       <DependentUpon>202306132152435_deleteUnnecessaryTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306132311145_updateAndAddUserGroupTB.resx">
+      <DependentUpon>202306132311145_updateAndAddUserGroupTB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306140237472_updateAuthorizationTableInDatabase.resx">
+      <DependentUpon>202306140237472_updateAuthorizationTableInDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306140249459_updateIdentityTable.resx">
+      <DependentUpon>202306140249459_updateIdentityTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

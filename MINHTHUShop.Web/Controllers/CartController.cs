@@ -6,6 +6,7 @@ using MINHTHUShop.Service;
 using MINHTHUShop.Web.App_Start;
 using MINHTHUShop.Web.Infrastructure.Extensions;
 using MINHTHUShop.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -85,6 +86,7 @@ namespace MINHTHUShop.Web.Controllers
 
             orderNew.UpdateOrder(order);
             orderNew.CustomerID = User.Identity.GetUserId();
+            orderNew.CreateDate = DateTime.Now;
 
             var cart = (List<CartVM>)Session[CommonConstants.SessionCart];
             List<Tb_OrderDetail> orderDetails = new List<Tb_OrderDetail>();

@@ -1,0 +1,57 @@
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><small>QUYỀN</small></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a ui-sref="home">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a ui-sref="home">Quản lý phân quyền</a></li>
+                    <li class="breadcrumb-item"><a ui-sref="role">Quyền</a></li>
+                    <li class="breadcrumb-item active">Thêm mới</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div style="width:95%; margin:auto;">
+        <!-- Horizontal Form -->
+        <div class="card card-success">
+            <div class="card-header">
+                <h3 class="card-title">THÊM MỚI QUYỀN</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form class="form-horizontal" novalidate name="frmCreateRole" role="form" ng-submit="CreateRole()">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tên quyền <span style="color:red"> (*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="name" ng-model="role.Name" placeholder="Tên quyền người dùng" required>
+                            <div class="has-error" ng-show="frmCreateRole.name.$invalid">
+                                <span ng-show="frmUpdateRole.name.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên quyền!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Mô tả</label>
+                        <div class="col-sm-9">
+                            <textarea type="text" class="form-control" name="description" ng-model="role.Description" placeholder="Mô tả quyền người dùng"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button ui-sref="role" class="btn btn-danger">Hủy</button>
+                    <button type="submit" ng-disabled="frmCreateRole.$invalid" class="btn btn-success float-right">Thêm</button>
+                </div>
+                <!-- /.card-footer -->
+            </form>
+        </div>
+    </div>
+</section>

@@ -44,7 +44,7 @@
                         <div class="col-sm-9">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="image" ng-model="banner.Image" ng-maxlength="250" placeholder="Hình ảnh tin tức" required>
-                                <div class="has-error" ng-show="frmCreateBanner.name.$invalid">
+                                <div class="has-error" ng-show="frmCreateBanner.image.$invalid">
                                     <span ng-show="frmCreateBanner.image.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập hình ảnh!</span>
                                     <span ng-show="frmCreateBanner.image.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
                                 </div>

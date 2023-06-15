@@ -31,6 +31,10 @@ namespace MINHTHUShop.Data
         public DbSet<Tb_TagProduct> Tb_TagProducts { get; set; }
         public DbSet<Tb_Target> Tb_Targets { get; set; }
         public DbSet<Tb_Error> Tb_Errors { get; set; }
+        public DbSet<Tb_Group> Tb_Groups { get; set; }
+        public DbSet<Tb_Role> Tb_Roles { get; set; }
+        public DbSet<Tb_RoleGroup> Tb_RoleGroups { get; set; }
+        public DbSet<Tb_UserGroup> Tb_UserGroups { get; set; }
 
         //phương thức tạo mới chính nó
         public static MINHTHUShopDbContext Create()
@@ -42,10 +46,9 @@ namespace MINHTHUShop.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId }).ToTable("Tb_UserRole");
-            modelBuilder.Entity<IdentityUserLogin>().HasKey(i => i.UserId).ToTable("Tb_UserLogin");
             modelBuilder.Entity<IdentityRole>().ToTable("Tb_Role");
             modelBuilder.Entity<IdentityUserClaim>().HasKey(i => i.UserId).ToTable("Tb_UserClaim");
-
+            modelBuilder.Entity<IdentityUserLogin>().HasKey(i => i.UserId).ToTable("Tb_UserLogin");
         }
     }
 }

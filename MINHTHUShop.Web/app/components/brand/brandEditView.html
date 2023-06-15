@@ -46,8 +46,8 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Nguồn gốc, xuất xứ <span style="color:red"> (*)</span></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="brandOrigin" ng-model="brand.BrandOrigin" ng-maxlength="50" placeholder="Tên tiêu đề SEO (Meta Title - nếu có)" required>
-                            <div class="has-error" ng-show="frmUpdateBrand.metaTitle.$invalid">
+                            <input type="text" class="form-control" name="brandOrigin" ng-model="brand.BrandOrigin" ng-maxlength="50" placeholder="Nguồn gốc, xuất xứ thương hiệu" required>
+                            <div class="has-error" ng-show="frmUpdateBrand.brandOrigin.$invalid">
                                 <span ng-show="frmUpdateBrand.brandOrigin.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập nguồn gốc, xuất xứ thương hiệu!</span>
                                 <span ng-show="frmUpdateBrand.brandOrigin.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 50 ký tự!</span>
                             </div>

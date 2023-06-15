@@ -68,11 +68,15 @@
     <Compile Include="Models\Tb_FAQ.cs" />
     <Compile Include="Models\Tb_FAQCategory.cs" />
     <Compile Include="Models\Tb_Feedback.cs" />
+    <Compile Include="Models\Tb_Group.cs" />
     <Compile Include="Models\Tb_Menu.cs" />
     <Compile Include="Models\Tb_MenuGroup.cs" />
     <Compile Include="Models\Tb_Order.cs" />
     <Compile Include="Models\Tb_OrderDetail.cs" />
     <Compile Include="Models\Tb_OrderStatus.cs" />
+    <Compile Include="Models\Tb_Role.cs" />
+    <Compile Include="Models\Tb_RoleGroup.cs" />
+    <Compile Include="Models\Tb_UserGroup.cs" />
     <Compile Include="Models\Tb_Webpage.cs" />
     <Compile Include="Models\Tb_PaymentMethod.cs" />
     <Compile Include="Models\Tb_Product.cs" />

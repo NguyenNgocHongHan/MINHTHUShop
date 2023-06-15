@@ -238,9 +238,12 @@
     <Compile Include="API\FAQAPIController.cs" />
     <Compile Include="API\FAQCategoryAPIController.cs" />
     <Compile Include="API\FeedbackAPIController.cs" />
+    <Compile Include="API\GroupAPIController.cs" />
     <Compile Include="API\HomeController.cs" />
     <Compile Include="API\ProductAPIController.cs" />
     <Compile Include="API\ProductCategoryAPIController.cs" />
+    <Compile Include="API\RoleAPIController.cs" />
+    <Compile Include="API\UserAPIController.cs" />
     <Compile Include="API\WebpageAPIController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -270,12 +273,14 @@
     <Compile Include="Models\FAQCategoryVM.cs" />
     <Compile Include="Models\FAQVM.cs" />
     <Compile Include="Models\FeedbackVM.cs" />
+    <Compile Include="Models\GroupVM.cs" />
     <Compile Include="Models\HomeVM.cs" />
     <Compile Include="Models\LoginVM.cs" />
     <Compile Include="Models\OrderDetailVM.cs" />
     <Compile Include="Models\OrderStatusVM.cs" />
     <Compile Include="Models\OrderVM.cs" />
     <Compile Include="Models\RegisterVM.cs" />
+    <Compile Include="Models\RoleVM.cs" />
     <Compile Include="Models\WebpageVM.cs" />
     <Compile Include="Models\PaymentMethodVM.cs" />
     <Compile Include="Models\ProductCategoryVM.cs" />
@@ -321,11 +326,32 @@
     <Content Include="app\components\feedback\feedbackEditController.js" />
     <Content Include="app\components\feedback\feedbackEditView.html" />
     <Content Include="app\components\feedback\feedbackView.html" />
+    <Content Include="app\components\group\group.module.js" />
+    <Content Include="app\components\group\groupController.js" />
+    <Content Include="app\components\group\groupCreateController.js" />
+    <Content Include="app\components\group\groupCreateView.html" />
+    <Content Include="app\components\group\groupEditController.js" />
+    <Content Include="app\components\group\groupEditView.html" />
+    <Content Include="app\components\group\groupView.html" />
     <Content Include="app\components\home\homeController.js" />
     <Content Include="app\components\home\homeView.html" />
     <Content Include="app\components\home\rootController.js" />
     <Content Include="app\components\login\loginController.js" />
     <Content Include="app\components\login\loginView.html" />
+    <Content Include="app\components\role\role.module.js" />
+    <Content Include="app\components\role\roleController.js" />
+    <Content Include="app\components\role\roleCreateController.js" />
+    <Content Include="app\components\role\roleCreateView.html" />
+    <Content Include="app\components\role\roleEditController.js" />
+    <Content Include="app\components\role\roleEditView.html" />
+    <Content Include="app\components\role\roleView.html" />
+    <Content Include="app\components\user\user.module.js" />
+    <Content Include="app\components\user\userController.js" />
+    <Content Include="app\components\user\userCreateController.js" />
+    <Content Include="app\components\user\userCreateView.html" />
+    <Content Include="app\components\user\userEditController.js" />
+    <Content Include="app\components\user\userEditView.html" />
+    <Content Include="app\components\user\userView.html" />
     <Content Include="app\components\webpage\webpage.module.js" />
     <Content Include="app\components\webpage\webpageController.js" />
     <Content Include="app\components\productCategory\productCategory.module.js" />
@@ -347,10 +373,12 @@
     <Content Include="app\components\webpage\webpageEditController.js" />
     <Content Include="app\components\webpage\webpageEditView.html" />
     <Content Include="app\components\webpage\webpageView.html" />
+    <Content Include="app\shared\directive\asDateDirective.js" />
     <Content Include="app\shared\directive\pagerDirective.html" />
     <Content Include="app\shared\directive\pagerDirective.js" />
     <Content Include="app\shared\filter\isReadFilter.js" />
     <Content Include="app\shared\filter\statusFilter.js" />
+    <Content Include="app\shared\filter\statusUserFilter.js" />
     <Content Include="app\shared\module\MINHTHUShop.common.js" />
     <Content Include="app\shared\service\apiService.js" />
     <Content Include="app\shared\service\authData.js" />
@@ -454,6 +482,8 @@
     <Content Include="Content\Admin\lib\bootstrap\js\bootstrap.esm.min.js" />
     <Content Include="Content\Admin\lib\bootstrap\js\bootstrap.js" />
     <Content Include="Content\Admin\lib\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\Admin\lib\checklist-model\checklist-model.js" />
+    <Content Include="Content\Admin\lib\checklist-model\checklist-model.min.js" />
     <Content Include="Content\Admin\lib\ckeditor\adapters\jquery.js" />
     <Content Include="Content\Admin\lib\ckeditor\adapters\jquery.min.js" />
     <Content Include="Content\Admin\lib\ckeditor\ckeditor.js" />
@@ -8170,7 +8200,6 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\components\roleUser\" />
     <Folder Include="UploadFile\" />
   </ItemGroup>
   <ItemGroup>
@@ -8416,6 +8445,7 @@
     <Content Include="Content\Client\fontawesome-free-5.15.4-web\webfonts\fa-solid-900.woff" />
     <Content Include="Content\Client\fontawesome-free-5.15.4-web\webfonts\fa-solid-900.woff2" />
     <Content Include="Content\Client\lib\jquery-validate\jquery-validation-sri.json" />
+    <Content Include="Content\Admin\lib\checklist-model\checklist-model.min.js.map" />
     <None Include="NWebsecConfig\HttpHeaderSecurityModuleConfig.xsd">
       <SubType>Designer</SubType>
     </None>

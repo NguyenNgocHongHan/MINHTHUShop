@@ -91,7 +91,6 @@ namespace MINHTHUShop.Web.API
 
         [Route("Create")]
         [HttpPost]
-        [AllowAnonymous]
         public HttpResponseMessage Create(HttpRequestMessage request, BrandVM brandVM)
         {
             return CreateHttpResponse(request, () =>
@@ -119,7 +118,6 @@ namespace MINHTHUShop.Web.API
 
         [Route("Update")]
         [HttpPut]
-        [AllowAnonymous]
         public HttpResponseMessage Update(HttpRequestMessage request, BrandVM brandVM)
         {
             return CreateHttpResponse(request, () =>
@@ -146,7 +144,6 @@ namespace MINHTHUShop.Web.API
 
         [Route("Delete")]
         [HttpDelete]
-        [AllowAnonymous]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
             return CreateHttpResponse(request, () =>
@@ -170,7 +167,6 @@ namespace MINHTHUShop.Web.API
 
         [Route("DeleteMulti")]
         [HttpDelete]
-        [AllowAnonymous]
         public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedBrand)
         {
             return CreateHttpResponse(request, () =>

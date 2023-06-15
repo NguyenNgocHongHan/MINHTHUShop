@@ -1,0 +1,108 @@
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><small>QUYỀN</small></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a ui-sref="home">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a ui-sref="home">Quản lý phân quyền</a></li>
+                    <li class="breadcrumb-item active">Quyền</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <form class="form-inline float-sm-left">
+                    <div class="input-group input-group-sm">
+                        <input class="form-control" type="text" ng-model="keyword" placeholder="Tìm kiếm">
+                        <button class="btn btn-navbar" type="submit" ng-click="search(page)">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <form class="form-inline float-sm-right">
+                    <div class="btn-group btn-group-sm">
+                        <button ui-sref="roleCreate" type="button" class="btn btn-success btn-sm">
+                            <i class="fa fa-plus"> Thêm mới</i>
+                        </button>
+                        <button ng-click="DeleteMultiple()" type="button" class="btn btn-danger btn-sm" style="margin-left:5px;" id="btnCheckboxDelete" disabled>
+                            <i class="fa fa-trash"> Xóa nhiều</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="width: 4%">STT</th>
+                                    <th style="width: 35%;">Tên quyền</th>
+                                    <th>Mô tả</th>
+                                    <th style="width: 10%; text-align:center;"></th>
+                                    <th style="width: 1%">
+                                        <label>
+                                            <input name="clickAll" type="checkbox" ng-click="SelectAll()" />
+                                        </label>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in role | filter: keyword">
+                                    <td>{{page*10+$index+1}}</td>
+                                    <td>{{item.Name}}</td>
+                                    <td>{{item.Description}}</td>
+                                    <td style="text-align:center;">
+                                        <button class="btn btn-sm btn-primary" ui-sref="roleEdit({id:item.Id})">
+                                            <i class="fa fa-pencil-alt"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger" ng-click="DeleteRole(item.Id)">
+                                            <i class="fa fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" ng-model="item.checked" name="clickAll" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div ng-if="loading">
+                            <div class="col-xs-4"></div>
+                            <div class="col-xs-4">
+                                <i class="fa fa-refresh fa-4x fa-spin"></i> <label class="label label-primary">Đang tải...</label>
+                            </div>
+                            <div class="col-xs-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--        </div>-->
+        <!-- /.card-body -->
+        <div ng-if="totalCount>pageSize" class="card-footer">
+            <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></pager-directive>
+        </div>
+        <div ng-if="totalCount==0" style="text-align:center; margin:20px 0">
+            <small><i>Tìm thấy <strong style="color:red">{{totalCount}}</strong> kết quả</i></small>
+        </div>
+        <div ng-if="totalCount!=0" style="text-align: center; margin: 20px 0">
+            <small><i>Tìm thấy <strong style="color:green">{{totalCount}}</strong> kết quả</i></small>
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+</section>

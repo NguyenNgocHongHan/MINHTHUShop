@@ -76,6 +76,10 @@
     {
       "library": "jquery-validate@1.19.5",
       "destination": "Content/Client/lib/jquery-validate/"
+    },
+    {
+      "library": "checklist-model@1.0.0",
+      "destination": "Content/Admin/lib/checklist-model/"
     }
   ]
 }

@@ -10,6 +10,9 @@
             'MINHTHUShop.webpage',
             'MINHTHUShop.banner',
             'MINHTHUShop.feedback',
+            'MINHTHUShop.group',
+            'MINHTHUShop.role',
+            'MINHTHUShop.user',
             'MINHTHUShop.common'])
         .config(config)
         .config(configAuth);
