@@ -41,7 +41,10 @@ namespace MINHTHUShop.Web.API
                 HttpResponseMessage response = null;
                 int totalRow = 0;
                 var model = _userManager.Users;
-                IEnumerable<UserVM> modelVM = Mapper.Map<IEnumerable<Tb_User>, IEnumerable<UserVM>>(model);
+                totalRow = model.Count();
+
+                var query = model.OrderBy(x => x.Name).Skip(page * pageSize).Take(pageSize);
+                IEnumerable<UserVM> modelVM = Mapper.Map<IEnumerable<Tb_User>, IEnumerable<UserVM>>(query);
 
                 Pagination<UserVM> pagination = new Pagination<UserVM>()
                 {
@@ -59,7 +62,6 @@ namespace MINHTHUShop.Web.API
 
         [Route("GetById/{id}")]
         [HttpGet]
-        [Authorize(Roles = "ViewUser")]
         public HttpResponseMessage GetById(HttpRequestMessage request, string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -88,11 +90,25 @@ namespace MINHTHUShop.Web.API
         {
             if (ModelState.IsValid)
             {
+                var userByEmail = await _userManager.FindByEmailAsync(userVM.Email);
+                if (userByEmail != null)
+                {
+                    ModelState.AddModelError("email", "Email đã tồn tại!");
+                }
+                var userByUserName = await _userManager.FindByNameAsync(userVM.UserName);
+                if (userByUserName != null)
+                {
+                    ModelState.AddModelError("username", "Tên tài khoản đã tồn tại!");
+                }
                 var newUser = new Tb_User();
                 newUser.UpdateUser(userVM);
                 try
                 {
                     newUser.Id = Guid.NewGuid().ToString();
+                    newUser.EmailConfirmed = true;
+                    newUser.CreateDate = DateTime.Now;
+                    newUser.Status = true;
+
                     var result = await _userManager.CreateAsync(newUser, userVM.Password);
                     if (result.Succeeded)
                     {

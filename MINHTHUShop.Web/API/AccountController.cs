@@ -50,7 +50,6 @@ namespace MINHTHUShop.Web.API
 
         [HttpPost]
         [AllowAnonymous]//cho phép không cần login
-        [Authorize(Roles = "Login")]
         [Route("Login")]
         public async Task<HttpResponseMessage> Login(HttpRequestMessage request, string userName, string password, bool rememberMe)
         {

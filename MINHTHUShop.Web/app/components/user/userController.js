@@ -3,9 +3,9 @@
 
     app.controller('userController', userController);
 
-    userController.$inject = ['$scope', '$ngBootbox', '$filter', 'apiService', 'notificationService'];
+    userController.$inject = ['$scope', '$state', '$ngBootbox', '$filter', 'apiService', 'notificationService'];
 
-    function userController($scope, $ngBootbox, $filter, apiService, notificationService) {
+    function userController($scope, $state, $ngBootbox, $filter, apiService, notificationService) {
         $scope.loading = true;
         $scope.user = [];
         $scope.index = 0; //đánh số stt trên trang view
@@ -109,8 +109,9 @@
             $scope.loading = false;
 
         }
-        function dataLoadFailed(response) {
-            notificationService.displayError(response.data);
+        function dataLoadFailed() {
+            notificationService.displayError('Bạn không có quyền truy cập tính năng này!');
+            $state.go('home');
         }
 
         function clearSearch() {

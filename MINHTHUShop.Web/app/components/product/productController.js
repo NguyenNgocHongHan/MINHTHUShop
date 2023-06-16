@@ -5,6 +5,7 @@
 
     function productController($scope, $ngBootbox, $filter, apiService, notificationService) {
         $scope.product = [];
+        $scope.productCategory = [];
 
         $scope.index = 0;
 
@@ -121,8 +122,7 @@
             });
         }
 
-        LoadCate();
-
         $scope.GetProduct();
+        LoadCate();
     }
 })(angular.module('MINHTHUShop.product'));

@@ -36,7 +36,9 @@ namespace MINHTHUShop.Web.API
                 HttpResponseMessage response = null;
                 int totalRow = 0;
                 var model = _roleService.GetAll(page, pageSize, out totalRow, keyword);
-                IEnumerable<RoleVM> modelVM = Mapper.Map<IEnumerable<Tb_Role>, IEnumerable<RoleVM>>(model);
+                totalRow = model.Count();
+                var query = model.OrderBy(x => x.Name).Skip(page * pageSize).Take(pageSize);
+                IEnumerable<RoleVM> modelVM = Mapper.Map<IEnumerable<Tb_Role>, IEnumerable<RoleVM>>(query);
 
                 Pagination<RoleVM> pagination = new Pagination<RoleVM>()
                 {
@@ -71,7 +73,6 @@ namespace MINHTHUShop.Web.API
 
         [Route("GetById/{id}")]
         [HttpGet]
-        [Authorize(Roles = "ViewRole")]
         public HttpResponseMessage GetById(HttpRequestMessage request, string id)
         {
             if (string.IsNullOrEmpty(id))

@@ -62,5 +62,11 @@ namespace MINHTHUShop.Web.Controllers
             var listProductCategoryVM = Mapper.Map<IEnumerable<Tb_ProductCategory>, IEnumerable<ProductCategoryVM>>(model);
             return PartialView(listProductCategoryVM);
         }
+
+        [ChildActionOnly]
+        public ActionResult Footer()
+        {
+            return PartialView();
+        }
     }
 }

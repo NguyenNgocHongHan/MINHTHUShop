@@ -24,7 +24,7 @@
                 <form class="form-inline float-sm-left">
                     <div class="input-group input-group-sm">
                         <input class="form-control" type="text" ng-model="keyword" placeholder="Tìm kiếm">
-                        <button class="btn btn-navbar" type="submit" ng-click="search(key)">
+                        <button class="btn btn-navbar" type="submit" ng-click="search()">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -65,7 +65,7 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="item in product">
-                                    <td>{{page*10+$index+1}}</td>
+                                    <td style="text-align:center;">{{page*10+$index+1}}</td>
                                     <td>{{item.Name}}</td>
                                     <td style="text-align:center;" ng-repeat="cate in productCategory" ng-if="item.CateID == cate.CateID">
                                         {{cate.Name}}

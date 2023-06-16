@@ -3,9 +3,9 @@
 
     app.controller('roleController', roleController);
 
-    roleController.$inject = ['$scope', '$ngBootbox', '$filter', 'apiService', 'notificationService'];
+    roleController.$inject = ['$scope', '$state', '$ngBootbox', '$filter', 'apiService', 'notificationService'];
 
-    function roleController($scope, $ngBootbox, $filter, apiService, notificationService) {
+    function roleController($scope, $state, $ngBootbox, $filter, apiService, notificationService) {
         $scope.loading = true;
         $scope.role = [];
         $scope.index = 0; //đánh số stt trên trang view
@@ -109,8 +109,9 @@
             $scope.loading = false;
 
         }
-        function dataLoadFailed(response) {
-            notificationService.displayError(response.data);
+        function dataLoadFailed() {
+            notificationService.displayError('Bạn không có quyền truy cập tính năng này!');
+            $state.go('home');
         }
 
         function clearSearch() {

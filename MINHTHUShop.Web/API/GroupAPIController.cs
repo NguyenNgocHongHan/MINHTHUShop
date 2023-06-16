@@ -54,7 +54,6 @@ namespace MINHTHUShop.Web.API
 
         [Route("GetById/{id:int}")]
         [HttpGet]
-        [Authorize(Roles = "ViewGroup")]
         public HttpResponseMessage GetById(HttpRequestMessage request, int id)
         {
             if (id == 0)
@@ -82,8 +81,10 @@ namespace MINHTHUShop.Web.API
                 HttpResponseMessage response = null;
                 int totalRow = 0;
                 var model = _groupService.GetAll(page, pageSize, out totalRow, keyword);
+                totalRow = model.Count();
+                var query = model.OrderBy(x => x.Name).Skip(page * pageSize).Take(pageSize);
 
-                IEnumerable<GroupVM> modelVM = Mapper.Map<IEnumerable<Tb_Group>, IEnumerable<GroupVM>>(model);
+                IEnumerable<GroupVM> modelVM = Mapper.Map<IEnumerable<Tb_Group>, IEnumerable<GroupVM>>(query);
 
                 Pagination<GroupVM> pagination = new Pagination<GroupVM>()
                 {

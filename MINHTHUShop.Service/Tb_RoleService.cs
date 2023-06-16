@@ -52,7 +52,7 @@ namespace MINHTHUShop.Service
         {
             var query = _roleRepository.GetAll();
             if (!string.IsNullOrEmpty(keyword))
-                query = query.Where(x => x.Description.Contains(keyword));
+                query = query.Where(x => x.Description.Contains(keyword) || x.Name.Contains(keyword));
 
             totalRow = query.Count();
             return query.OrderBy(x => x.Description).Skip(page * pageSize).Take(pageSize);

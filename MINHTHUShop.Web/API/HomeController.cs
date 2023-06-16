@@ -15,12 +15,12 @@ namespace MINHTHUShop.Web.API
             this._tb_errorService = tb_errorService;
         }
 
-        /*[HttpGet]
-        [Route("TestMethod")]
-        [AllowAnonymous]
-        public string TestMethod()
+        [HttpGet]
+        [Authorize(Roles = "Login")]
+        [Route("GetHome")]
+        public string GetHome()
         {
             return "Chào thành viên của MINH THƯ Shop!";
-        }*/
+        }
     }
 }
