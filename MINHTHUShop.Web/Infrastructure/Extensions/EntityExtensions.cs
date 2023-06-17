@@ -119,6 +119,28 @@ namespace MINHTHUShop.Web.Infrastructure.Extensions
             od.CreateDate = vm.CreateDate;
         }
 
+        public static void UpdateOrderStatus(this Tb_OrderStatus os, OrderStatusVM vm)
+        {
+            os.OrderStatusID = vm.OrderStatusID;
+            os.Name = vm.Name;
+            os.Description = vm.Description;
+        }
+
+        public static void UpdateShippingMethod(this Tb_ShippingMethod sm, ShippingMethodVM vm)
+        {
+            sm.ShippingMethodID = vm.ShippingMethodID;
+            sm.Name = vm.Name;
+            sm.Description = vm.Description;
+            sm.Cost = vm.Cost;
+        }
+
+        public static void UpdatePaymentMethod(this Tb_PaymentMethod pm, PaymentMethodVM vm)
+        {
+            pm.PaymentMethodID = vm.PaymentMethodID;
+            pm.Name = vm.Name;
+            pm.Description = vm.Description;
+        }
+
         public static void UpdateGroup(this Tb_Group g, GroupVM vm)
         {
             g.GroupID = vm.GroupID;

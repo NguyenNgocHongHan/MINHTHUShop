@@ -13,6 +13,7 @@
             'MINHTHUShop.group',
             'MINHTHUShop.role',
             'MINHTHUShop.user',
+            'MINHTHUShop.order',
             'MINHTHUShop.common'])
         .config(config)
         .config(configAuth);

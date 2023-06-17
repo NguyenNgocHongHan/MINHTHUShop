@@ -240,9 +240,14 @@
     <Compile Include="API\FeedbackAPIController.cs" />
     <Compile Include="API\GroupAPIController.cs" />
     <Compile Include="API\HomeController.cs" />
+    <Compile Include="API\OrderAPIController.cs" />
+    <Compile Include="API\OrderDetailAPIController.cs" />
+    <Compile Include="API\OrderStatusAPIController.cs" />
+    <Compile Include="API\PaymentMethodAPIController.cs" />
     <Compile Include="API\ProductAPIController.cs" />
     <Compile Include="API\ProductCategoryAPIController.cs" />
     <Compile Include="API\RoleAPIController.cs" />
+    <Compile Include="API\ShippingMethodAPIController.cs" />
     <Compile Include="API\UserAPIController.cs" />
     <Compile Include="API\WebpageAPIController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -338,6 +343,11 @@
     <Content Include="app\components\home\rootController.js" />
     <Content Include="app\components\login\loginController.js" />
     <Content Include="app\components\login\loginView.html" />
+    <Content Include="app\components\order\order.module.js" />
+    <Content Include="app\components\order\orderController.js" />
+    <Content Include="app\components\order\orderEditController.js" />
+    <Content Include="app\components\order\orderEditView.html" />
+    <Content Include="app\components\order\orderView.html" />
     <Content Include="app\components\role\role.module.js" />
     <Content Include="app\components\role\roleController.js" />
     <Content Include="app\components\role\roleCreateController.js" />
@@ -377,6 +387,7 @@
     <Content Include="app\shared\directive\pagerDirective.html" />
     <Content Include="app\shared\directive\pagerDirective.js" />
     <Content Include="app\shared\filter\isReadFilter.js" />
+    <Content Include="app\shared\filter\orderStatusFilter.js" />
     <Content Include="app\shared\filter\statusFilter.js" />
     <Content Include="app\shared\filter\statusUserFilter.js" />
     <Content Include="app\shared\module\MINHTHUShop.common.js" />
@@ -8201,6 +8212,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UploadFile\" />
+    <Folder Include="Views\OrderAPI\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

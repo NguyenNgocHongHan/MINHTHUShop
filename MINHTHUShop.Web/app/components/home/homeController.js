@@ -5,10 +5,7 @@
 
     function homeController($state, apiService, notificationService) {
         function viewHome() {
-            var config = {
-                params: {}
-            }
-            apiService.get('api/Home/GetHome', config,
+            apiService.get('api/Home/GetHome', null,
                 function () {
                     console.log('Đăng nhập thành công');
                 }, function () {

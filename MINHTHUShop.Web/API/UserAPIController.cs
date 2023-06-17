@@ -31,6 +31,24 @@ namespace MINHTHUShop.Web.API
             _userManager = userManager;
         }
 
+
+        [Route("GetAll")]
+        [HttpGet]
+        public HttpResponseMessage GetAll(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                var model = _userManager.Users;
+                var responseData = Mapper.Map<IEnumerable<Tb_User>, IEnumerable<UserVM>>(model);
+                //nếu không dùng View Model thì mình có thể dùng câu lệnh bên dưới, nhưng có nhiều dữ liệu không cần thiết cũng được lấy ra theo
+                //vì vậy sử dụng View Model để lấy ra những trường cần thiết
+                //var response = request.CreateResponse(HttpStatusCode.OK, model);
+                var response = request.CreateResponse(HttpStatusCode.OK, responseData);
+
+                return response;
+            });
+        }
+
         [Route("GetAllByPage")]
         [Authorize(Roles = "ViewUser")]
         [HttpGet]

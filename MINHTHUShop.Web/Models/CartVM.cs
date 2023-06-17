@@ -2,7 +2,6 @@
 
 namespace MINHTHUShop.Web.Models
 {
-    [Serializable]
     public class CartVM
     {
         public int ProductID { get; set; }
