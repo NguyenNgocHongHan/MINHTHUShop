@@ -1,7 +1,10 @@
 ﻿
 @{
     var tag = (MINHTHUShop.Web.Models.TagVM)ViewBag.Tag;
-    ViewBag.Title = "ListProductByTag";
+    var page = Model.Page;
+    ViewBag.Title = page == 1 ? "Kết quả tìm kiếm cho tag " + tag.Name : "Kết quả tìm kiếm cho tag " + tag.Name + " - Trang " + page;
+    ViewBag.MetaKeyword = page == 1 ? "Kết quả tìm kiếm cho tag " + tag.Name : "Kết quả tìm kiếm cho tag " + tag.Name + " - Trang " + page;
+    ViewBag.MetaDescription = page == 1 ? "Kết quả tìm kiếm cho tag " + tag.Name : "Kết quả tìm kiếm cho tag " + tag.Name + " - Trang " + page;
     Layout = "~/Views/Shared/Layouts.cshtml";
 }
 

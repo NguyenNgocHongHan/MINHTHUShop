@@ -1,9 +1,12 @@
 ﻿@model MINHTHUShop.Web.Infrastructure.Core.Pagination<MINHTHUShop.Web.Models.ProductVM>
 
 @{
-    ViewBag.Title = "DetailCategory";
-    Layout = "~/Views/Shared/Layouts.cshtml";
     var productCategory = (MINHTHUShop.Web.Models.ProductCategoryVM)ViewBag.ProductCategory;
+    var page = Model.Page;
+    ViewBag.Title = page == 1 ? productCategory.Name : productCategory.Name + " - Trang " + page; ;
+    ViewBag.MetaKeywords = page == 1 ? productCategory.MetaKeywords : productCategory.MetaKeywords + " - Trang " + page;
+    ViewBag.MetaDescriptions = page == 1 ? productCategory.MetaDescriptions : productCategory.MetaDescriptions + " - Trang " + page;
+    Layout = "~/Views/Shared/Layouts.cshtml";
 }
 
 <div class="women-product">

@@ -22,8 +22,8 @@
 
         function GetRevenues() {
             if ($scope.fromDate == '' || $scope.toDate == '') {
-                $scope.fromDate = '01/01/2023'
-                $scope.toDate = '12/31/2023'
+                $scope.fromDate = '01/01/2020';
+                $scope.toDate = '01/01/2030';
             }
             var config = {
                 params: {

@@ -3,6 +3,8 @@
 @{
     var keyword = (string)ViewBag.Keyword;
     ViewBag.Title = "Kết quả tìm kiếm " + keyword;
+    ViewBag.MetaKeywords = "tìm kiếm";
+    ViewBag.MetaDescriptions = "Trang danh sách sản phẩm được tìm kiếm theo từ khóa " + keyword;
     Layout = "~/Views/Shared/Layouts.cshtml";
 }
 

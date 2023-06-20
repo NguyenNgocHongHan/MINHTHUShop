@@ -70,7 +70,7 @@
                                     <td style="text-align:center;" ng-repeat="cate in productCategory" ng-if="item.CateID == cate.CateID">
                                         {{cate.Name}}
                                     </td>
-                                    <td style="text-align:center;">{{item.PromotionPrice}}</td>
+                                    <td style="text-align:center;">{{item.PromotionPrice | number}}</td>
                                     <td style="text-align:center;">
                                         <span ng-class="{'badge bg-red':item.Status==false,'badge bg-green':item.Status==true}">
                                             {{item.Status | statusFilter}}

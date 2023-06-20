@@ -77,7 +77,7 @@ namespace MINHTHUShop.Service
         {
             if (!string.IsNullOrEmpty(keywork))
             {
-                return _tb_OrderRepository.GetMulti(x=>x.CustomerName.Contains(keywork) || x.CustomerID.Contains(keywork) /*|| _tb_UserRepository.CheckContains(y => y.Id == x.CustomerID && y.UserName.Contains(keywork))*/);
+                return _tb_OrderRepository.GetMulti(x=>x.CustomerName.Contains(keywork) || x.Customer.UserName.Contains(keywork));
             }
             else
             {
