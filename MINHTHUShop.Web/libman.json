@@ -80,6 +80,30 @@
     {
       "library": "checklist-model@1.0.0",
       "destination": "Content/Admin/lib/checklist-model/"
+    },
+    {
+      "library": "Chart.js@4.3.0",
+      "destination": "Content/Admin/lib/Chart.js/",
+      "files": [
+        "chart.min.js"
+      ]
+    },
+    {
+      "library": "angular-chart.js@1.1.1",
+      "destination": "Content/Admin/lib/angular-chart.js/",
+      "files": [
+        "angular-chart.min.js"
+      ]
     }
-  ]
+  ,
+{
+  "library": "angular-chart.js@1.1.1",
+  "destination": "Content/Admin/Content/angular-chart.js/"
+}
+,
+{
+  "library": "Chart.js@4.3.0",
+  "destination": "Content/Admin/lib/Chart.js/"
+}
+]
 }

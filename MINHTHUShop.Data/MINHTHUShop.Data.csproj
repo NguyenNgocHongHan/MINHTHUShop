@@ -226,6 +226,10 @@
     <Compile Include="Migrations\202306140249459_updateIdentityTable.designer.cs">
       <DependentUpon>202306140249459_updateIdentityTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306191236315_RevenueStatistics.cs" />
+    <Compile Include="Migrations\202306191236315_RevenueStatistics.designer.cs">
+      <DependentUpon>202306191236315_RevenueStatistics.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Tb_RoleGroupRepository.cs" />
     <Compile Include="MINHTHUShopDbContext.cs" />
@@ -370,6 +374,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202306140249459_updateIdentityTable.resx">
       <DependentUpon>202306140249459_updateIdentityTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306191236315_RevenueStatistics.resx">
+      <DependentUpon>202306191236315_RevenueStatistics.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

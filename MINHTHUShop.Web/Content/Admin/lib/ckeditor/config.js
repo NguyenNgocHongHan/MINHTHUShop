@@ -36,6 +36,11 @@ CKEDITOR.editorConfig = function( config ) {
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 
+	/*config.filebrowserBrowseUrl = '/Content/Admin/lib/ckfinder/ckfinder.html',
+		config.filebrowserUploadUrl = '/Content/Admin/lib/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Files',
+		config.filebrowserWindowWidth = '1000',
+		config.filebrowserWindowHeight = '700'*/
+
 	config.filebrowserBrowseUrl = '/Content/Admin/lib/ckfinder/ckfinder.html',
 		config.filebrowserUploadUrl = '/Content/Admin/lib/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Files',
 		config.filebrowserWindowWidth = '1000',

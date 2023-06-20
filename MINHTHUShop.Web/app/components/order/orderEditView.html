@@ -51,7 +51,7 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Phương thức vận chuyển</label>
-                        <label class="col-sm-9 col-form-label" ng-repeat="shipping in shippingmethod" ng-if="order.ShippingMethodID == shipping.ShippingMethodID">{{shipping.Name}} - Phí vận chuyển: <b style="color:green;">{{shipping.Cost}}</b> đ</label>
+                        <label class="col-sm-9 col-form-label" ng-repeat="shipping in shippingMethod" ng-if="order.ShippingMethodID == shipping.ShippingMethodID">{{shipping.Name}} ({{shipping.Cost | number}} đ)</label>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Phương thức thanh toán</label>
@@ -81,22 +81,30 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Tên sản phẩm</th>
-                                        <th style="text-align: center;">Thuộc danh mục</th>
-                                        <th style="text-align: center;">Giá đang bán</th>
+                                        <th style="text-align: center;">Tên sản phẩm</th>
+                                        <th style="text-align: center;">Giá bán</th>
                                         <th style="text-align: center;">Số lượng</th>
                                         <th style="text-align: center;">Thành tiền</th>
                                     </tr>
                                 </thead>
-                                <tbody ng-repeat="detail in orderDetail" ng-if="detail.OrderID == order.OrderID">
-                                    <tr ng-repeat="item in product" ng-if="detail.ProductID == item.ProductID">
-                                        <td>{{item.Name}}</td>
-                                        <td style="text-align:center;" ng-repeat="cate in productCategory" ng-if="item.CateID == cate.CateID">
-                                            {{cate.Name}}
-                                        </td>
-                                        <td style="text-align:center;">{{item.PromotionPrice}}</td>
+                                <tbody>
+                                    <tr ng-repeat="detail in orderDetail" ng-if="detail.OrderID == order.OrderID">
+                                        <td ng-repeat="item in product" ng-if="detail.ProductID == item.ProductID">{{item.Name}}</td>
+                                        <td ng-repeat="item in product" ng-if="detail.ProductID == item.ProductID" style="text-align:center;">{{item.PromotionPrice | number}}</td>
                                         <td style="text-align:center;">{{detail.Quantity}}</td>
-                                        <td style="text-align:center;" ><b>{{item.PromotionPrice * detail.Quantity}}</b></td>
+                                        <td ng-repeat="item in product" ng-if="detail.ProductID == item.ProductID" style="text-align:center;"><b>{{item.PromotionPrice * detail.Quantity | number}}</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;"><b>Tạm tính:</b></td>
+                                        <td style="text-align:center;"><b style="color: orangered">{{totalOrder | number}}</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;"><b>Phí vận chuyển:</b></td>
+                                        <td style="text-align:center;"><b style="color: orangered">{{shipCost | number}}</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;"><b><u>Tổng đơn hàng:</u></b></td>
+                                        <td style="text-align:center;"><b style="color: green">{{totalOrder + shipCost | number}}</b></td>
                                     </tr>
                                 </tbody>
                             </table>

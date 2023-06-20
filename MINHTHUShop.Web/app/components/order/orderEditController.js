@@ -5,29 +5,61 @@
 
     function orderEditController($scope, $state, $stateParams, apiService, notificationService, commonService) {
         $scope.order = {}
-        $scope.orderDetail = {}
+        $scope.orderDetail = [];
         $scope.product = [];
-        $scope.productCategory = [];
+        $scope.shippingMethod = [];
 
         $scope.page = 0;
         $scope.pagesCount = 0;
         $scope.pageSize = 10;
 
         $scope.keyword = '';
-        $scope.search = search;
-
-        $scope.GetProduct = GetProduct;
 
         $scope.ckeditorOptions = {
             languague: 'vi',
             height: '200px'
         }
 
+        $scope.LoadProduct = LoadProduct;
         $scope.UpdateOrder = UpdateOrder;
 
         function LoadOrderDetail() {
             apiService.get('api/Order/GetById/' + $stateParams.id, null, function (result) {
                 $scope.order = result.data;
+
+                $scope.shipCost = 0;
+                apiService.get('api/ShippingMethod/GetAll', null, function (result) {
+                    $scope.shippingMethod = result.data;
+                    $.each($scope.shippingMethod, function (i, s) {
+                        if (s.ShippingMethodID == $scope.order.ShippingMethodID) {
+                            $scope.shipCost = s.Cost;
+                        }
+                    });
+                }, function () {
+                    console.log('Tải phương thức vận chuyển thất bại!');
+                });
+
+                $scope.totalOrder = 0;
+
+                apiService.get('api/OrderDetail/GetAll', null, function (result) {
+                    $scope.orderDetail = result.data;
+                    $.each($scope.orderDetail, function (i, od) {
+                        if ($scope.order.OrderID == od.OrderID) {
+                            apiService.get('api/Product/GetAll', null, function (result) {
+                                $scope.product = result.data;
+                                $.each($scope.product, function (i, p) {
+                                    if (od.ProductID == p.ProductID) {
+                                        $scope.totalOrder += (od.Quantity * p.PromotionPrice);
+                                    }
+                                });
+                            }, function () {
+                                console.log('Tải sản phẩm thất bại!');
+                            });
+                        }
+                    });
+                }, function (error) {
+                    notificationService.displayError('Tải chi tiết đơn hàng thất bại!');
+                });
             }, function (error) {
                 notificationService.displayError(error.data);
             });
@@ -53,7 +85,7 @@
 
         function LoadShippingMethod() {
             apiService.get('api/ShippingMethod/GetAll', null, function (result) {
-                $scope.shippingmethod = result.data;
+                $scope.shippingMethod = result.data;
             }, function () {
                 console.log('Tải phương thức vận chuyển thất bại!');
             });
@@ -75,49 +107,19 @@
             });
         }
 
-        function search() {
-            GetProduct();
-        }
-
-        function GetProduct(page) {
-            page = page || 0;
-
-            var config = {
-                params: {
-                    keyword: $scope.keyword,
-                    page: page,
-                    pageSize: $scope.pageSize
-                }
-            }
-
-            apiService.get('api/Product/GetAllByPage', config, function (result) {
-                if (result.data.TotalCount == 0) {
-                    notificationService.displayWarning('Không tìm thấy kết quả!');
-                }
-                $scope.product = result.data.Item;
-                $scope.page = result.data.Page;
-                $scope.pagesCount = result.data.TotalPage;
-                $scope.totalCount = result.data.TotalCount;
+        function LoadProduct() {
+            apiService.get('api/Product/GetAll', null, function (result) {
+                $scope.product = result.data;
             }, function () {
                 console.log('Tải sản phẩm thất bại!');
             });
         }
 
-        function LoadCate() {
-            apiService.get('api/ProductCategory/GetAll', null, function (result) {
-                $scope.productCategory = result.data;
-            }, function () {
-                console.log('Tải sản danh mục sản phẩm thất bại!');
-            });
-        }
-
-        $scope.GetProduct();
-        LoadCate();
-
-        LoadShippingMethod();
         LoadPaymentMethod();
         LoadStatus();
-        LoadOrderDetail();
         LoadOrderDetailDetail();
+        LoadProduct();
+        LoadShippingMethod();
+        LoadOrderDetail();
     }
 })(angular.module('MINHTHUShop.order'));

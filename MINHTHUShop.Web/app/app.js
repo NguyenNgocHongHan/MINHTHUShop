@@ -14,6 +14,7 @@
             'MINHTHUShop.role',
             'MINHTHUShop.user',
             'MINHTHUShop.order',
+            'MINHTHUShop.statistic',
             'MINHTHUShop.common'])
         .config(config)
         .config(configAuth);

@@ -36,9 +36,6 @@
                         <button ui-sref="userCreate" type="button" class="btn btn-success btn-sm">
                             <i class="fa fa-plus"> Thêm mới</i>
                         </button>
-                        <button ng-click="DeleteMultiple()" type="button" class="btn btn-danger btn-sm" style="margin-left:5px;" id="btnCheckboxDelete" disabled>
-                            <i class="fa fa-trash"> Xóa nhiều</i>
-                        </button>
                     </div>
                 </form>
             </div>
@@ -55,12 +52,7 @@
                                     <th style="text-align: center">Email</th>
                                     <th style="text-align: center">Tên tài khoản</th>
                                     <th style="width: 10%; text-align: center;">Trạng thái</th>
-                                    <th style="width: 10%; text-align:center;"></th>
-                                    <th style="width: 1%">
-                                        <label>
-                                            <input name="clickAll" type="checkbox" ng-click="SelectAll()" />
-                                        </label>
-                                    </th>
+                                    <th style="width: 15%; text-align:center;"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,7 +60,7 @@
                                     <td>{{page*10+$index+1}}</td>
                                     <td>{{item.Name}}</td>
                                     <td>{{item.Email}}</td>
-                                    <td>{{item.UserName}}</td>
+                                    <td style="text-align: center">{{item.UserName}}</td>
                                     <td style="text-align:center;">
                                         <span ng-class="{'badge bg-red':item.Status==false,'badge bg-green':item.Status==true}">
                                             {{item.Status | statusUserFilter}}
@@ -81,9 +73,6 @@
                                         <button class="btn btn-sm btn-danger" ng-click="DeleteUser(item.Id)">
                                             <i class="fa fa-trash-alt"></i>
                                         </button>
-                                    </td>
-                                    <td>
-                                        <input type="checkbox" ng-model="item.checked" name="clickAll" />
                                     </td>
                                 </tr>
                             </tbody>

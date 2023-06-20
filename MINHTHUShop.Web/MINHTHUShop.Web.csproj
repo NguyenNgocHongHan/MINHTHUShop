@@ -262,6 +262,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="API\StatisticController.cs" />
     <Compile Include="Controllers\WebpageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
@@ -355,6 +356,8 @@
     <Content Include="app\components\role\roleEditController.js" />
     <Content Include="app\components\role\roleEditView.html" />
     <Content Include="app\components\role\roleView.html" />
+    <Content Include="app\components\statistic\statisticController.js" />
+    <Content Include="app\components\statistic\statisticView.html" />
     <Content Include="app\components\user\user.module.js" />
     <Content Include="app\components\user\userController.js" />
     <Content Include="app\components\user\userCreateController.js" />
@@ -398,6 +401,9 @@
     <Content Include="app\shared\service\loginService.js" />
     <Content Include="app\shared\service\notificationService.js" />
     <Content Include="app\shared\view\baseView.html" />
+    <Content Include="Content\Admin\Content\angular-chart.js\angular-chart.js" />
+    <Content Include="Content\Admin\Content\angular-chart.js\angular-chart.min.js" />
+    <Content Include="Content\Admin\Content\angular-chart.js\Chart.js" />
     <Content Include="Content\Admin\css\adminlte.css" />
     <Content Include="Content\Admin\css\adminlte.min.css" />
     <Content Include="Content\Admin\css\alt\adminlte.components.css" />
@@ -493,6 +499,12 @@
     <Content Include="Content\Admin\lib\bootstrap\js\bootstrap.esm.min.js" />
     <Content Include="Content\Admin\lib\bootstrap\js\bootstrap.js" />
     <Content Include="Content\Admin\lib\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\Admin\lib\Chart.js\chart.js" />
+    <Content Include="Content\Admin\lib\Chart.js\chart.min.js" />
+    <Content Include="Content\Admin\lib\Chart.js\chart.umd.js" />
+    <Content Include="Content\Admin\lib\Chart.js\chart.umd.min.js" />
+    <Content Include="Content\Admin\lib\Chart.js\helpers.js" />
+    <Content Include="Content\Admin\lib\Chart.js\helpers.min.js" />
     <Content Include="Content\Admin\lib\checklist-model\checklist-model.js" />
     <Content Include="Content\Admin\lib\checklist-model\checklist-model.min.js" />
     <Content Include="Content\Admin\lib\ckeditor\adapters\jquery.js" />
@@ -8458,6 +8470,13 @@
     <Content Include="Content\Client\fontawesome-free-5.15.4-web\webfonts\fa-solid-900.woff2" />
     <Content Include="Content\Client\lib\jquery-validate\jquery-validation-sri.json" />
     <Content Include="Content\Admin\lib\checklist-model\checklist-model.min.js.map" />
+    <Content Include="app\components\statistic\statistic.module.js" />
+    <Content Include="Content\Admin\Content\angular-chart.js\angular-chart.min.js.map" />
+    <Content Include="Content\Admin\lib\Chart.js\chart.cjs.map" />
+    <Content Include="Content\Admin\lib\Chart.js\chart.js.map" />
+    <Content Include="Content\Admin\lib\Chart.js\chart.umd.js.map" />
+    <Content Include="Content\Admin\lib\Chart.js\helpers.cjs.map" />
+    <Content Include="Content\Admin\lib\Chart.js\helpers.js.map" />
     <None Include="NWebsecConfig\HttpHeaderSecurityModuleConfig.xsd">
       <SubType>Designer</SubType>
     </None>

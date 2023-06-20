@@ -38,7 +38,6 @@ namespace MINHTHUShop.Web.API
 
         [Route("GetAll")]
         [HttpGet]
-        [Authorize(Roles = "ViewGroup")]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
         {
             return CreateHttpResponse(request, () =>

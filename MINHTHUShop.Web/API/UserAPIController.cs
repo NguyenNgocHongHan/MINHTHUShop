@@ -13,6 +13,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Script.Serialization;
 
 namespace MINHTHUShop.Web.API
 {
@@ -50,7 +51,6 @@ namespace MINHTHUShop.Web.API
         }
 
         [Route("GetAllByPage")]
-        [Authorize(Roles = "ViewUser")]
         [HttpGet]
         public HttpResponseMessage GetAllByPage(HttpRequestMessage request, int page, int pageSize = 20, string keyword = null)
         {
@@ -104,6 +104,7 @@ namespace MINHTHUShop.Web.API
 
         [HttpPost]
         [Route("Create")]
+        [Authorize(Roles = "CreateUser")]
         public async Task<HttpResponseMessage> Create(HttpRequestMessage request, UserVM userVM)
         {
             if (ModelState.IsValid)
@@ -173,6 +174,7 @@ namespace MINHTHUShop.Web.API
 
         [HttpPut]
         [Route("Update")]
+        [Authorize(Roles = "UpdateUser")]
         public async Task<HttpResponseMessage> Update(HttpRequestMessage request, UserVM userVM)
         {
             if (ModelState.IsValid)
@@ -221,6 +223,7 @@ namespace MINHTHUShop.Web.API
 
         [HttpDelete]
         [Route("Delete")]
+        [Authorize(Roles = "DeleteUser")]
         public async Task<HttpResponseMessage> Delete(HttpRequestMessage request, string id)
         {
             var user = await _userManager.FindByIdAsync(id);

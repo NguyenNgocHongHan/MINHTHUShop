@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonService.cs" />
+    <Compile Include="StatisticService.cs" />
     <Compile Include="Tb_OrderDetailService.cs" />
     <Compile Include="Tb_OrderStatusService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

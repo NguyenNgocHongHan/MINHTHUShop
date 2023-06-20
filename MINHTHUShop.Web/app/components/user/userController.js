@@ -17,8 +17,6 @@
         $scope.clearSearch = clearSearch;
 
         $scope.DeleteUser = DeleteUser;
-        $scope.DeleteMultiple = DeleteMultiple;
-        $scope.SelectAll = SelectAll;
 
         $scope.isAll = false;
 
@@ -32,28 +30,6 @@
             }
         }, true);
 
-        function DeleteMultiple() {
-            var listId = [];
-            $.each($scope.selected, function (i, item) {
-                listId.push(item.Id);
-            });
-
-            $ngBootbox.confirm('Bạn có muốn xóa những người dùng này không?').then(function () {
-                var config = {
-                    params: {
-                        checkedUser: JSON.stringify(listId)
-                    }
-                }
-
-                apiService.del('api/User/DeleteMulti', config, function (result) {
-                    notificationService.displaySuccess('Đã xóa ' + result.data + ' người dùng');
-                    search();
-                }, function (error) {
-                    notificationService.displayError('Xóa không thành công!');
-                })
-            });
-        }
-
         function DeleteUser(id) {
             $ngBootbox.confirm('Bạn có muốn xóa người dùng này không?').then(function () {
                 var config = {
@@ -65,24 +41,10 @@
                     notificationService.displaySuccess('Đã xóa thành công!');
                     search();
                 }, function () {
-                    notificationService.displayError('Xóa không thành công!');
+                    notificationService.displayError('Bạn không có quyền truy cập tính năng này!');
+                    $state.go('user');
                 })
             });
-        }
-
-        function SelectAll() {
-            if ($scope.isAll === false) {
-                angular.forEach($scope.user, function (item) {
-                    item.checked = true;
-                });
-                $scope.isAll = true;
-            }
-            else {
-                angular.forEach($scope.user, function (item) {
-                    item.checked = false;
-                });
-                $scope.isAll = false;
-            }
         }
 
         function search(page) {
@@ -110,8 +72,7 @@
 
         }
         function dataLoadFailed() {
-            notificationService.displayError('Bạn không có quyền truy cập tính năng này!');
-            $state.go('home');
+            notificationService.displayError('Tải danh sách người dùng thất bại!');
         }
 
         function clearSearch() {

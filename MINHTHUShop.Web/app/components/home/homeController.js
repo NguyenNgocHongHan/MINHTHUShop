@@ -9,7 +9,7 @@
                 function () {
                     console.log('Đăng nhập thành công');
                 }, function () {
-                    notificationService.displayWarning('Bạn không có quyền truy cập vào tài khoản!');
+                    notificationService.displayWarning('Bạn không có quyền truy cập vào ứng dụng này!');
                     $state.go('login');
                 });
         }

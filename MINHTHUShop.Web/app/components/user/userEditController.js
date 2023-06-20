@@ -20,8 +20,9 @@
         }
 
         function createFailed(response) {
-            notificationService.displayError(response.data.Message);
+            notificationService.displayError('Bạn không có quyền truy cập tính năng này!');
             notificationService.displayErrorValidation(response);
+            $state.go('user');
         }
 
         function LoadDetail() {
@@ -40,6 +41,7 @@
                     $scope.groups = response.data;
                 }, function (response) {
                     notificationService.displayError('Không tải được danh sách các nhóm.');
+                    $state.go('user');
                 });
 
         }

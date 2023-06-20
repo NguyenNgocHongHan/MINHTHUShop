@@ -3,8 +3,8 @@
         ['ui.router',
             'ngBootbox',
             'ngCkeditor',
-            'checklist-model'/*,
-            'chart.js',
+            'checklist-model',
+            'chart.js'/*,
             'LocalStorageModule',
             'ui.select',
             'ngSanitize'*/
