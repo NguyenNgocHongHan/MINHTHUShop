@@ -1,4 +1,5 @@
 ﻿using MINHTHUShop.Model.Abstract;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -28,19 +29,27 @@ namespace MINHTHUShop.Model.Models
         public string ListImg { get; set; }
 
         [Required]
-        [Column(TypeName = "decimal(12, 0)")]
+        public decimal OriginalPrice { get; set; }
+
+        [Required]
         public decimal Price { get; set; }
 
-        [Column(TypeName = "decimal(12, 0)")]
-        public decimal? PromotionPrice { get; set; }
+        [Required]
+        public decimal PromotionPrice { get; set; }
 
-        [MaxLength(500)]
         public string Description { get; set; }
 
         public string Detail { get; set; }
 
+        [MaxLength(500)]
+        public string Tag { get; set; }
+
+        [Required]
+        public DateTime CreateDate { get; set; } = DateTime.Now;
+
+        [Required]
         [DefaultValue(true)]
-        public bool? Status { get; set; }
+        public bool Status { get; set; }
 
         [ForeignKey("CateID")]
         public virtual Tb_ProductCategory Tb_ProductCategory { get; set; }
@@ -48,6 +57,5 @@ namespace MINHTHUShop.Model.Models
         public virtual Tb_Brand Tb_Brand { get; set; }
 
         public virtual IEnumerable<Tb_TagProduct> Tb_TagProducts { get; set; }
-        public virtual IEnumerable<Tb_ProductComment> Tb_ProductComments { get; set; }
     }
 }

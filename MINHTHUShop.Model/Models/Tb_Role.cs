@@ -1,19 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations;
 
 namespace MINHTHUShop.Model.Models
 {
-    public class Tb_Role
+    public class Tb_Role : IdentityRole
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int RoleID { get; set; }
+        public Tb_Role() : base()
+        {
+        }
 
-        [Required]
-        [MaxLength(50)]
-        public string Name { get; set; }
-
-        [MaxLength(250)]
+        [StringLength(250)]
         public string Description { get; set; }
     }
 }

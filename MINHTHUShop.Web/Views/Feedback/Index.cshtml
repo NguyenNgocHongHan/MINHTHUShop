@@ -1,0 +1,54 @@
+﻿@model MINHTHUShop.Web.Models.FeedbackVM
+
+@using BotDetect.Web.Mvc;
+
+@{
+    ViewBag.Title = "Liên hệ";
+    ViewBag.MetaKeywords = "liên hệ, phản hồi";
+    ViewBag.MetaDescriptions = "Trang liên hệ - phản hồi đến cửa hàng Minh Thư";
+    Layout = "~/Views/Shared/Layouts.cshtml";
+}
+
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
+
+<div class="main">
+    <div class="reservation_top">
+        <div class="contact_right">
+            <h3>Gửi phản hồi</h3>
+            <div class="contact-form">
+                @using (Html.BeginForm("SendFeedback", "Feedback", FormMethod.Post))
+                {
+                    if (ViewData["SuccessMsg"] != null)
+                    {
+                        <div class="alert alert-success" role="alert">
+                            Bạn đã gửi phản hồi <strong>thành công</strong>.
+                            <br />Chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất!
+                        </div>
+                    }
+                    @Html.ValidationSummary(false, "", new { @class = "error" });
+
+                    <h5 style="color:grey">Họ và tên <span style="color:orangered"> (*)</span></h5>
+                    @Html.TextBoxFor(model => model.Name, new { @class = "textbox" });
+
+                    <h5 style="color:grey">Số điện thoại <span style="color:orangered"> (*)</span></h5>
+                    @Html.TextBoxFor(model => model.Phone, new { @class = "textbox" });
+
+                    <h5 style="color:grey">Email <span style="color:orangered"> (*)</span></h5>
+                    @Html.TextBoxFor(model => model.Email, new { @class = "textbox" });
+
+                    <h5 style="color:grey">Nội dung phản hồi <span style="color:orangered"> (*)</span></h5>
+                    @Html.TextAreaFor(model => model.Message);
+
+                    <h5 style="color: grey">Nhập mã Captcha:</h5>
+                    MvcCaptcha feedbackCaptcha = new MvcCaptcha("FeedbackCaptcha");
+                    @Html.Captcha(feedbackCaptcha)
+                    @Html.TextBox("CaptchaCode")
+
+                    <input type="submit" value="Gửi">
+                    <div class="clearfix"> </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

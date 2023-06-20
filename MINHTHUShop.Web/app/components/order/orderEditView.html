@@ -1,0 +1,123 @@
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><small>CẬP NHẬT ĐƠN HÀNG</small></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a ui-sref="home">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a ui-sref="home">Quản lý thông tin</a></li>
+                    <li class="breadcrumb-item"><a ui-sref="order">Đơn hàng</a></li>
+                    <li class="breadcrumb-item active">Cập nhật</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div style="width:95%; margin:auto;">
+        <!-- Horizontal Form -->
+        <div class="card card-success">
+            <div class="card-header">
+                <h3 class="card-title">CẬP NHẬT ĐƠN HÀNG</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form class="form-horizontal" novalidate name="frmUpdateOrder" role="form" ng-submit="UpdateOrder()">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Mã đơn hàng</label>
+                        <lable class="col-sm-9 col-form-label">{{order.OrderID}}</lable>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Mã khách hàng</label>
+                        <lable class="col-sm-9 col-form-label">{{order.CustomerID}}</lable>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tên khách đặt hàng</label>
+                        <lable class="col-sm-9 col-form-label">{{order.CustomerName}}</lable>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Địa chỉ nhận hàng</label>
+                        <lable class="col-sm-9 col-form-label">{{order.CustomerAddress}}</lable>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Ngày tạo</label>
+                        <label class="col-sm-9 col-form-label">{{order.CreateDate | date:'dd/MM/yyyy hh:mm:ss'}}</label>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Phương thức vận chuyển</label>
+                        <label class="col-sm-9 col-form-label" ng-repeat="shipping in shippingMethod" ng-if="order.ShippingMethodID == shipping.ShippingMethodID">{{shipping.Name}} ({{shipping.Cost | number}} đ)</label>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Phương thức thanh toán</label>
+                        <label class="col-sm-9 col-form-label" ng-repeat="payment in paymentmethod" ng-if="order.PaymentMethodID == payment.PaymentMethodID">{{payment.Name}}</label>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Trạng thái đơn hàng <span style="color:red"> (*)</span></label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="status" ng-model="order.OrderStatusID" ng-options="option.OrderStatusID as option.Name for option in orderstatus" required>
+                                <option value="">Chọn trạng thái</option>
+                            </select>
+                            <input type="hidden" name="status" ng-model="order.OrderStatusID" />
+                            <div class="has-error" ng-show="frmUpdateOrder.status.$invalid">
+                                <span ng-show="frmUpdateOrder.status.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa chọn trạng thái đơn hàng!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Ghi chú đơn hàng</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" name="note" ckeditor="ckeditorOptions" ng-model="order.Note" placeholder="Ghi chú về đơn hàng"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Chi tiết đơn hàng</label>
+                        <div class="col-sm-9">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center;">Tên sản phẩm</th>
+                                        <th style="text-align: center;">Giá bán</th>
+                                        <th style="text-align: center;">Số lượng</th>
+                                        <th style="text-align: center;">Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="detail in orderDetail" ng-if="detail.OrderID == order.OrderID">
+                                        <td ng-repeat="item in product" ng-if="detail.ProductID == item.ProductID">{{item.Name}}</td>
+                                        <td ng-repeat="item in product" ng-if="detail.ProductID == item.ProductID" style="text-align:center;">{{item.PromotionPrice | number}}</td>
+                                        <td style="text-align:center;">{{detail.Quantity}}</td>
+                                        <td ng-repeat="item in product" ng-if="detail.ProductID == item.ProductID" style="text-align:center;"><b>{{item.PromotionPrice * detail.Quantity | number}}</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;"><b>Tạm tính:</b></td>
+                                        <td style="text-align:center;"><b style="color: orangered">{{totalOrder | number}}</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;"><b>Phí vận chuyển:</b></td>
+                                        <td style="text-align:center;"><b style="color: orangered">{{shipCost | number}}</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;"><b><u>Tổng đơn hàng:</u></b></td>
+                                        <td style="text-align:center;"><b style="color: green">{{totalOrder + shipCost | number}}</b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button ui-sref="order" class="btn btn-danger">Hủy</button>
+                    <button type="submit" ng-disabled="frmUpdateOrder.$invalid" class="btn btn-success float-right">Lưu</button>
+                </div>
+                <!-- /.card-footer -->
+            </form>
+        </div>
+    </div>
+</section>

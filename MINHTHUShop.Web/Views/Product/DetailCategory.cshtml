@@ -1,0 +1,119 @@
+﻿@model MINHTHUShop.Web.Infrastructure.Core.Pagination<MINHTHUShop.Web.Models.ProductVM>
+
+@{
+    var productCategory = (MINHTHUShop.Web.Models.ProductCategoryVM)ViewBag.ProductCategory;
+    var page = Model.Page;
+    ViewBag.Title = page == 1 ? productCategory.Name : productCategory.Name + " - Trang " + page; ;
+    ViewBag.MetaKeywords = page == 1 ? productCategory.MetaKeywords : productCategory.MetaKeywords + " - Trang " + page;
+    ViewBag.MetaDescriptions = page == 1 ? productCategory.MetaDescriptions : productCategory.MetaDescriptions + " - Trang " + page;
+    Layout = "~/Views/Shared/Layouts.cshtml";
+}
+
+<div class="women-product">
+    <div class=" w_content">
+        <div class="women">
+            <a href="/@(productCategory.MetaTitle).pc-@(productCategory.CateID).html"><h4>@productCategory.Name - <span>@Model.TotalCount sản phẩm</span> </h4></a>
+            <ul class="w_nav">
+                <li>Sắp xếp: </li>
+                <li><a class="active" href="?pageIndex=@Model.Page&sort=new">Mới nhất</a></li> |
+                <li><a href="?pageIndex=@Model.Page&sort=lowToHigh">Giá thấp đến cao </a></li> |
+                <li><a href="?pageIndex=@Model.Page&sort=highToLow">Giá cao đến thấp</a></li>
+                <div class="clearfix"> </div>
+            </ul>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+
+    @if (Model.Count > 0)
+    {
+        <div class="grid-product">
+            @foreach (var product in Model.Item)
+            {
+                var url = "/" + product.MetaTitle + ".p-" + product.ProductID + ".html";
+                <div class="product-grid">
+                    <a href="@url" style="text-decoration:none;">
+                        <div class="content_box">
+                            <div class="left-grid-view grid-view-left">
+                                <img src="@product.Image" class="img-responsive watch-right" alt="@product.Name" />
+                            </div>
+                        </div>
+                        @foreach (var brand in Model.Brand)
+                        {
+                            if (brand.BrandID == product.BrandID)
+                            {
+                                <b>@brand.Name</b>
+                            }
+                        }
+                        <h6 style="height:60px; font-size:small; padding-right:10px">@product.Name</h6>
+                        @if (@product.Price == product.PromotionPrice)
+                        {
+                            <span class="actual"><small>@product.Price.ToString("N0") đ</small></span>
+                        }
+                        else
+                        {
+                            <span class="actual"><small>@product.PromotionPrice.ToString("N0") đ</small></span>
+                            <span class="reducedfrom"><small>@product.Price.ToString("N0") đ</small></span>
+                        }
+                    </a>
+                    <a class="now-get get-cart btnAddToCart" href="#" data-id="@product.ProductID" style="margin-right: 10px;">&#128722; Thêm</a>
+                    <div class="clearfix"> </div>
+                </div>
+            }
+
+            <div class="clearfix"> </div>
+
+            @*Phân trang*@
+            @if (Model.TotalPage > 1)
+            {
+                <nav aria-label="Phân trang" style="text-align:center">
+                    <ul class="pagination justify-content-center">
+                        @if (Model.Page > 1)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="?pageIndex=1" aria-label="Trang đầu">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?pageIndex=@(Model.Page-1)" aria-label="Trang trước">
+                                    <span aria-hidden="true">&lsaquo;</span>
+                                </a>
+                            </li>
+                        }
+
+                        @for (int i = 1; i <= Model.TotalPage; i++)
+                        {
+                            if (Model.Page == i)
+                            {
+                                <li class="page-item active"><a class="page-link" href="?pageIndex=@i" title="Trang @i">@i</a></li>
+                            }
+                            else
+                            {
+                                <li class="page-item"><a class="page-link" href="?pageIndex=@i" title="Trang @i">@i</a></li>
+                            }
+                        }
+                        @if (Model.Page < Model.TotalPage)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="?pageIndex=@(Model.Page+1)" aria-label="Trang sau">
+                                    <span aria-hidden="true">&rsaquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?pageIndex=@Model.TotalPage" aria-label="Trang cuối">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            }
+            <div class="clearfix"> </div>
+        </div>
+    }
+    else
+    {
+        <div class="text-center"><span><i>Không có sản phẩm được tìm thấy!</i></span></div>
+    }
+
+</div>

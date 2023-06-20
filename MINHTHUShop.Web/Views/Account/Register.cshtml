@@ -1,0 +1,58 @@
+﻿﻿@model MINHTHUShop.Web.Models.RegisterVM
+@using BotDetect.Web.Mvc;
+
+@{
+    ViewBag.Title = "Đăng ký";
+    ViewBag.MetaKeywords = "đăng ký";
+    ViewBag.MetaDescriptions = "Trang đăng ký website Minh Thư";
+    Layout = "~/Views/Shared/Layouts.cshtml";
+}
+
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
+
+<div class="register">
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken(); //ngăn chặn giả mạo
+        @Html.ValidationSummary(false, "", new { @class = "error" })
+
+        if (ViewData["SuccessMsg"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                Bạn đã đang ký <strong>thành công</strong>!
+                <br />Vui lòng nhấn <a href="/dang-nhap.html">vào đây </a>để đăng nhập.
+            </div>
+        }
+        <div class="register-top-grid">
+            <h3>ĐĂNG KÝ TÀI KHOẢN</h3>
+            <div class="mation">
+                <span>Tài khoản <label style="color:red"> (*)</label></span>
+                @Html.TextBoxFor(model => model.UserName)
+                <span>Mật khẩu <label style="color:red"> (*)</label></span>
+                @Html.PasswordFor(model => model.Password)
+                <span>Họ tên <label style="color:red"> (*)</label></span>
+                @Html.TextBoxFor(model => model.Name)
+                <span>Email <label style="color:red"> (*)</label></span>
+                @Html.TextBoxFor(model => model.Email)
+                <span>Số điện thoại <label style="color:red"> (*)</label></span>
+                @Html.TextBoxFor(model => model.Phone)
+                <span>Địa chỉ <label style="color:red"> (*)</label></span>
+                @Html.TextBoxFor(model => model.Address)
+
+                @{
+                    MvcCaptcha registerCaptcha = new MvcCaptcha("registerCaptcha");
+                }
+                @Html.Captcha(registerCaptcha)
+                <span>Nhập mã Captcha <label style="color:red"> (*)</label></span>
+                @Html.TextBox("CaptchaCode")
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="clearfix"> </div>
+        <div class="register-but">
+            <input type="submit" value="Đăng ký">
+            <div class="clearfix"> </div>
+        </div>
+    }
+</div>
+

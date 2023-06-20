@@ -6,11 +6,17 @@ namespace MINHTHUShop.Model.Models
     public class Tb_Tag
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int TagID { get; set; }
-
         [Required]
         [MaxLength(50)]
+        [Column(TypeName = "varchar")]
+        public string TagID { get; set; }
+
+        [MaxLength(50)]
+        [Required]
         public string Name { get; set; }
+
+        [MaxLength(50)]
+        [Required]
+        public string Type { get; set; }
     }
 }

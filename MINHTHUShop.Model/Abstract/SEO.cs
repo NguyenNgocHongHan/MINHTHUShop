@@ -4,6 +4,7 @@ namespace MINHTHUShop.Model.Abstract
 {
     public abstract class SEO : ISEO
     {
+        [Required]
         [MaxLength(250)]
         public string MetaTitle { get; set; }
 

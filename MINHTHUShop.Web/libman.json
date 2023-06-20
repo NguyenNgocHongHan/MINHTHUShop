@@ -1,0 +1,101 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "bootstrap@5.2.3",
+      "destination": "Content/Admin/lib/bootstrap/"
+    },
+    {
+      "library": "angular.js@1.8.3",
+      "destination": "Content/Admin/lib/angular.js/"
+    },
+    {
+      "library": "toastr.js@2.1.4",
+      "destination": "Content/Admin/lib/toastr.js/"
+    },
+    {
+      "library": "angular-ui-router@1.1.0",
+      "destination": "Content/Admin/lib/angular-ui-router/"
+    },
+    {
+      "library": "jquery@3.6.4",
+      "destination": "Content/Admin/lib/jquery/"
+    },
+    {
+      "library": "bootbox.js@6.0.0",
+      "destination": "Content/Admin/lib/bootbox.js/"
+    },
+    {
+      "library": "ckeditor@4.21.0",
+      "destination": "Content/Admin/lib/ckeditor/"
+    },
+    {
+      "library": "ng-ckeditor@0.2.1",
+      "destination": "Content/Admin/lib/ng-ckeditor/"
+    },
+    {
+      "library": "angular-loading-bar@0.9.0",
+      "destination": "Content/Admin/lib/angular-loading-bar/"
+    },
+    {
+      "library": "angular-local-storage@0.7.1",
+      "destination": "Content/Admin/lib/angular-local-storage/"
+    },
+    {
+      "library": "jqueryui@1.13.2",
+      "destination": "Content/Client/lib/jqueryui/",
+      "files": [
+        "jquery-ui.min.js",
+        "themes/smoothness/images/ui-icons_cd0a0a_256x240.png",
+        "themes/smoothness/images/ui-icons_888888_256x240.png",
+        "themes/smoothness/images/ui-icons_454545_256x240.png",
+        "themes/smoothness/images/ui-icons_2e83ff_256x240.png",
+        "themes/smoothness/images/ui-icons_222222_256x240.png",
+        "themes/smoothness/images/ui-bg_highlight-soft_75_cccccc_1x100.png",
+        "themes/smoothness/images/ui-bg_glass_95_fef1ec_1x400.png",
+        "themes/smoothness/images/ui-bg_glass_75_e6e6e6_1x400.png",
+        "themes/smoothness/images/ui-bg_glass_75_dadada_1x400.png",
+        "themes/smoothness/images/ui-bg_glass_65_ffffff_1x400.png",
+        "themes/smoothness/images/ui-bg_glass_55_fbf9ee_1x400.png",
+        "themes/smoothness/theme.min.css",
+        "themes/smoothness/theme.css",
+        "themes/smoothness/jquery-ui.min.css",
+        "themes/smoothness/jquery-ui.css",
+        "jquery-ui.js"
+      ]
+    },
+    {
+      "library": "mustache.js@2.2.1",
+      "destination": "Content/Client/lib/mustache.js/"
+    },
+    {
+      "library": "numeral.js@2.0.6",
+      "destination": "Content/Client/lib/numeral.js/"
+    },
+    {
+      "library": "jquery-validate@1.19.5",
+      "destination": "Content/Client/lib/jquery-validate/"
+    },
+    {
+      "library": "checklist-model@1.0.0",
+      "destination": "Content/Admin/lib/checklist-model/"
+    },
+    {
+      "library": "angular-chart.js@1.1.1",
+      "destination": "Content/Admin/Content/angular-chart.js/"
+    },
+    {
+      "library": "Chart.js@4.3.0",
+      "destination": "Content/Admin/lib/Chart.js/"
+    },
+    {
+      "library": "angular-ui-select@0.19.8",
+      "destination": "Content/Admin/lib/angular-ui-select/"
+    },
+    {
+      "library": "angular-sanitize@1.8.3",
+      "destination": "Content/Admin/lib/angular-sanitize/"
+    }
+  ]
+}

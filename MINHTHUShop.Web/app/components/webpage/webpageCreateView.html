@@ -1,0 +1,92 @@
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><small>THÊM MỚI WEBPAGE</small></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a ui-sref="home">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a ui-sref="home">Quản lý thông tin</a></li>
+                    <li class="breadcrumb-item"><a ui-sref="webpage">Webpage</a></li>
+                    <li class="breadcrumb-item active">Thêm mới</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div style="width:95%; margin:auto;">
+        <!-- Horizontal Form -->
+        <div class="card card-success">
+            <div class="card-header">
+                <h3 class="card-title">THÊM MỚI WEBPAGE</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form class="form-horizontal" novalidate name="frmCreateWebpage" role="form" ng-submit="CreateWebpage()">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tên trang <span style="color:red"> (*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="name" ng-model="webpage.Name" ng-change="GetMetaTitle()" ng-maxlength="250" placeholder="Tên trang" required>
+                            <div class="has-error" ng-show="frmCreateWebpage.name.$invalid">
+                                <span ng-show="frmCreateWebpage.name.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên trang!</span>
+                                <span ng-show="frmCreateWebpage.name.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Nội dung trang</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" name="description" ckeditor="ckeditorOptions" ng-model="webpage.Description" placeholder="Mô tả nội dung trang"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tiêu đề SEO <span style="color:red"> (*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="metaTitle" ng-model="webpage.MetaTitle" ng-maxlength="250" placeholder="Tên tiêu đề SEO (Meta Title)" required>
+                            <div class="has-error" ng-show="frmCreateWebpage.metaTitle.$invalid">
+                                <span ng-show="frmCreateWebpage.metaTitle.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên tiêu đề SEO!</span>
+                                <span ng-show="frmCreateWebpage.metaTitle.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Từ khóa SEO</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="metaKeywords" ng-model="webpage.MetaKeywords" ng-maxlength="250" placeholder="Từ khóa SEO (Meta Keywords - nếu có)">
+                            <span ng-show="frmCreateWebpage.metaKeywords.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Mô tả SEO</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" name="metaDescriptions" ng-model="webpage.MetaDescriptions" ng-maxlength="500" placeholder="Mô tả SEO (Meta Descriptions - nếu có)"></textarea>
+                            <span ng-show="frmCreateWebpage.metaDescriptions.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 500 ký tự!</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Trạng thái hoạt động</label>
+                        <div class="col-sm-9">
+                            <div class="custom-checkbox">
+                                <label>
+                                    <input type="checkbox" name="status" ng-model="webpage.Status" ng-checked="webpage.Status">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button ui-sref="webpage" class="btn btn-danger">Hủy</button>
+                    <button type="submit" ng-disabled="frmCreateWebpage.$invalid" class="btn btn-success float-right">Thêm</button>
+                </div>
+                <!-- /.card-footer -->
+            </form>
+        </div>
+    </div>
+</section>

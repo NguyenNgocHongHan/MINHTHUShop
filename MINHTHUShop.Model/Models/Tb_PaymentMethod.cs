@@ -15,7 +15,5 @@ namespace MINHTHUShop.Model.Models
 
         [MaxLength(250)]
         public string Description { get; set; }
-
-        public bool? Status { get; set; } = true;
     }
 }

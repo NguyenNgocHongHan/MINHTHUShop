@@ -1,0 +1,106 @@
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><small>ĐƠN HÀNG</small></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a ui-sref="home">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a ui-sref="home">Quản lý hóa đơn</a></li>
+                    <li class="breadcrumb-item active">Đơn hàng</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <form class="form-inline float-sm-left">
+                    <div class="input-group input-group-sm">
+                        <input class="form-control" type="text" ng-model="keyword" placeholder="Tìm kiếm">
+                        <button class="btn btn-navbar" type="submit" ng-click="search()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <form class="form-inline float-sm-right">
+                    <div class="btn-group btn-group-sm">
+                        <button ng-click="DeleteMultiple()" type="button" class="btn btn-danger btn-sm" style="margin-left:5px;" id="btnCheckboxDelete" disabled>
+                            <i class="fa fa-trash"> Xóa nhiều</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="width: 4%">STT</th>
+                                    <th>Tên tài khoản</th>
+                                    <th style="width: 25%; text-align: center;">Ngày tạo</th>
+                                    <th style="width: 20%; text-align: center;">Trạng thái đơn hàng</th>
+                                    <th style="width: 10%; text-align:center"></th>
+                                    <th style="width: 1%">
+                                        <label>
+                                            <input name="clickAll" type="checkbox" ng-click="SelectAll()" />
+                                        </label>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in order">
+                                    <td style="text-align:center;">{{page*10+$index+1}}</td>
+                                    <td ng-repeat="user in users" ng-if="item.CustomerID == user.Id">
+                                        {{user.UserName}}
+                                    </td>
+                                    <td style="text-align:center;">{{item.CreateDate | date:'dd/MM/yyyy hh:mm:ss'}}</td>
+                                    <td style="text-align:center;">
+                                        <span  ng-repeat="status in orderstatus" ng-if="status.OrderStatusID == item.OrderStatusID">
+                                            {{status.Name}}
+                                        </span>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <button class="btn btn-sm btn-primary" ui-sref="orderEdit({id:item.OrderID})">
+                                            <i class="fa fa-pencil-alt"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger" ng-click="DeleteOrder(item.OrderID)">
+                                            <i class="fa fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" ng-model="item.checked" name="clickAll" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--        </div>-->
+        <!-- /.card-body -->
+        <div ng-if="totalCount>pageSize" class="card-footer">
+            <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="GetOrder(page)"></pager-directive>
+        </div>
+        <div ng-if="totalCount==0" style="text-align:center; margin:20px 0">
+            <small><i>Tìm thấy <strong style="color:red">{{totalCount}}</strong> kết quả</i></small>
+        </div>
+        <div ng-if="totalCount!=0" style="text-align: center; margin: 20px 0">
+            <small><i>Tìm thấy <strong style="color:green">{{totalCount}}</strong> kết quả</i></small>
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+</section>

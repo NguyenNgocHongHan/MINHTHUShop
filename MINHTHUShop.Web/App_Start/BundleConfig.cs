@@ -8,7 +8,29 @@ namespace MINHTHUShop.Web
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            bundles.Add(new ScriptBundle("~/js/jquery")
+                    .Include("~/Content/Client/js/jquery.min.js"));
+
+            bundles.Add(new ScriptBundle("~/js/plugins")
+                    .Include(
+                        "~/Content/Client/lib/jqueryui/jquery-ui.min.js",
+                        "~/Content/Client/lib/mustache.js/mustache.js",
+                        "~/Content/Client/lib/numeral.js/numeral.min.js",
+                        "~/Content/Client/lib/jquery-validate/jquery.validate.js",
+                        "~/Content/Client/lib/jquery-validate/additional-methods.min.js",
+                        "~/Content/Client/js/common.js"
+                    ));
+
+            bundles.Add(new StyleBundle("~/css/base")
+                    .Include("~/Content/Client/css/bootstrap.css", new CssRewriteUrlTransform())
+                    .Include("~/Content/Client/fontawesome-free-5.15.4-web/css/fontawesome.css", new CssRewriteUrlTransform())
+                    .Include("~/Content/Client/lib/jqueryui/themes/smoothness/jquery-ui.min.css", new CssRewriteUrlTransform())
+                    .Include("~/Content/Client/css/style.css", new CssRewriteUrlTransform())
+                    .Include("~/Content/Client/css/custom.css", new CssRewriteUrlTransform())
+                    );
+
+            BundleTable.EnableOptimizations = true;
+            /*bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -24,7 +46,7 @@ namespace MINHTHUShop.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css"));*/
         }
     }
 }

@@ -1,31 +1,229 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿﻿@model MINHTHUShop.Web.Models.HomeVM
+
+@{
+    ViewBag.Title = "Trang chủ";
+    ViewBag.MetaKeywords = "trang chủ";
+    ViewBag.MetaDescriptions = "Trang chủ website Minh Thư";
+    Layout = "~/Views/Shared/Layouts.cshtml";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+@section footerJs{
+    <script src="~/Content/Client/js/jquery.wmuSlider.js"></script>
+    <script>
+        $('.example1').wmuSlider();
+    </script>
+}
+
+<div class="shoes-grid">
+    <div class="wrap-in">
+        <div class="wmuSlider example1 slide-grid">
+            <div class="wmuSliderWrapper">
+                @foreach (var banner in Model.Banners)
+                {
+                    <a href="@banner.Link">
+                        <article style="position: absolute; width: 100%; opacity: 0;">
+                            <div class="banner-matter">
+                                <div class="col-md-5 banner-bag">
+                                    <img class="img-responsive " src="@banner.Image" alt="@banner.Name" />
+                                </div>
+                                <div class="col-md-7 banner-off">
+                                    <p>@Html.Raw(banner.Description)</p>
+                                    <span class="on-get" style="margin-top: 20px;">XEM NGAY</span>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </article>
+                    </a>
+                }
+            </div>
+            <ul class="wmuSliderPagination">
+                @for (int count = 0; count < Model.Banners.Count(); count++)
+                {
+                    <li><a href="#" class="">@count</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="products">
+        <h5 class="latest-product">SẢN PHẨM MỚI NHẤT</h5>
+        <a class="view-all" href="/san-pham.html">Xem tất cả<span> </span></a>
+    </div>
+
+    <div class="product-left">
+        @{ var i = 1;}
+        @foreach (var product in Model.LastestProducts)
+        {
+            var url = "/" + product.MetaTitle + ".p-" + product.ProductID + ".html";
+            if (i < 3)
+            {
+                <div class="col-md-4 chain-grid">
+                    <a href="@url"><img class="img-responsive chain" src="@product.Image" alt=" " /></a>
+                    <span class="star"> </span>
+                    <div class="grid-chain-bottom">
+                        <h6 style="height:70px; font-size:small; font-weight:unset"><a href="@url">@product.Name</a></h6>
+
+                        <div class="star-price">
+                            <a href="@url">
+                                <div class="dolor-grid">
+                                    @foreach (var brand in Model.Brand)
+                                    {
+                                        if (brand.BrandID == product.BrandID)
+                                        {
+                                            <b>@brand.Name</b>
+                                        }
+                                    }
+                                    <br />
+                                    @if (@product.Price == product.PromotionPrice)
+                                    {
+                                        <span class="actual"><small>@product.Price.ToString("N0") đ</small></span>
+                                    }
+                                    else
+                                    {
+                                        <span class="actual"><small>@product.PromotionPrice.ToString("N0") đ</small></span>
+                                        <br />
+                                        <span class="reducedfrom"><small>@product.Price.ToString("N0") đ</small></span>
+                                    }
+                                </div>
+                            </a>
+                            <a class="now-get get-cart btnAddToCart" href="#" data-id="@product.ProductID">&#128722; Thêm</a>
+                            <div class="clearfix"> </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            if (i == 3)
+            {
+                <div class="col-md-4 chain-grid grid-top-chain">
+                    <a href="@url"><img class="img-responsive chain" src="@product.Image" alt=" " /></a>
+                    <span class="star"> </span>
+                    <div class="grid-chain-bottom">
+                        <h6 style="height:70px; font-size:small; font-weight:unset"><a href="@url">@product.Name</a></h6>
+
+                        <div class="star-price">
+                            <a href="@url">
+                                <div class="dolor-grid">
+                                    @foreach (var brand in Model.Brand)
+                                    {
+                                        if (brand.BrandID == product.BrandID)
+                                        {
+                                            <b>@brand.Name</b>
+                                        }
+                                    }
+                                    <br />
+                                    @if (@product.Price == product.PromotionPrice)
+                                    {
+                                        <span class="actual"><small>@product.Price.ToString("N0") đ</small></span>
+                                    }
+                                    else
+                                    {
+                                        <span class="actual"><small>@product.PromotionPrice.ToString("N0") đ</small></span>
+                                        <br />
+                                        <span class="reducedfrom"><small>@product.Price.ToString("N0") đ</small></span>
+                                    }
+                                </div>
+                            </a>
+                            <a class="now-get get-cart btnAddToCart" href="#" data-id="@product.ProductID">&#128722; Thêm</a>
+                            <div class="clearfix"> </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            i++;
+        }
+        <div class="clearfix"> </div>
+    </div>
+    @foreach (var productCategory in Model.ProductCategories)
+    {
+        var categoryId = productCategory.CateID;
+        var productsByCategory = Model.ProductsByCategory.Where(p => p.CateID == categoryId && p.Status == true);
+        var url = "/" + productCategory.MetaTitle + ".pc-" + productCategory.CateID + ".html";
+        if (productsByCategory.Count() > 0)
+        {
+            <div class="products">
+                <h5 class="latest-product">@productCategory.Name</h5>
+                <a class="view-all" href="@url">Xem tất cả<span> </span></a>
+            </div>
+        }
+        var item = 1;
+        foreach (var product in productsByCategory.Take(3))
+        {
+            var urlChild = "/" + product.MetaTitle + ".p-" + product.ProductID + ".html";
+            if (item < 3)
+            {
+                <div class="col-md-4 chain-grid">
+                    <a href="@urlChild"><img class="img-responsive chain" src="@product.Image" alt=" " /></a>
+                    <span class="star"> </span>
+                    <div class="grid-chain-bottom">
+                        <h6 style="height:70px; font-size:small; font-weight:unset"><a href="@url">@product.Name</a></h6>
+
+                        <div class="star-price">
+                            <a href="@urlChild">
+                                <div class="dolor-grid">
+                                    @foreach (var brand in Model.Brand)
+                                    {
+                                        if (brand.BrandID == product.BrandID)
+                                        {
+                                            <b>@brand.Name</b>
+                                        }
+                                    }
+                                    <br />
+                                    @if (@product.Price == product.PromotionPrice)
+                                    {
+                                        <span class="actual"><small>@product.Price.ToString("N0") đ</small></span>
+                                    }
+                                    else
+                                    {
+                                        <span class="actual"><small>@product.PromotionPrice.ToString("N0") đ</small></span>
+                                        <br />
+                                        <span class="reducedfrom"><small>@product.Price.ToString("N0") đ</small></span>
+                                    }
+                                </div>
+                            </a>
+                            <a class="now-get get-cart btnAddToCart" href="#" data-id="@product.ProductID">&#128722; Thêm</a>
+                            <div class="clearfix"> </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            if (item == 3)
+            {
+                <div class="col-md-4 chain-grid grid-top-chain">
+                    <a href="@urlChild"><img class="img-responsive chain" src="@product.Image" alt=" " /></a>
+                    <span class="star"> </span>
+                    <div class="grid-chain-bottom">
+                        <h6 style="height:70px; font-size:small; font-weight:unset"><a href="@url">@product.Name</a></h6>
+
+                        <div class="star-price">
+                            <a href="@urlChild">
+                                <div class="dolor-grid">
+                                    @foreach (var brand in Model.Brand)
+                                    {
+                                        if (brand.BrandID == product.BrandID)
+                                        {
+                                            <b>@brand.Name</b>
+                                        }
+                                    }
+                                    <br />
+                                    @if (@product.Price == product.PromotionPrice)
+                                    {
+                                        <span class="actual"><small>@product.Price.ToString("N0") đ</small></span>
+                                    }
+                                    else
+                                    {
+                                        <span class="actual"><small>@product.PromotionPrice.ToString("N0") đ</small></span>
+                                        <br />
+                                        <span class="reducedfrom"><small>@product.Price.ToString("N0") đ</small></span>
+                                    }
+                                </div>
+                            </a>
+                            <a class="now-get get-cart btnAddToCart" href="#" data-id="@product.ProductID">&#128722; Thêm</a>
+                            <div class="clearfix"> </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            item++;
+        }
+    }
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>

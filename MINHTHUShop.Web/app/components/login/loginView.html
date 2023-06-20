@@ -1,0 +1,49 @@
+﻿<div class="hold-transition login-page" style="background-image: url('../../../Content/Admin/img/background.jpg'); background-size:100% 100%; background-attachment:fixed;">
+    <div class="login-box" style="margin:auto;">
+        <!-- /.login-logo -->
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="#" class="h1"><b>Minh Thư </b> SHOP</a>
+            </div>
+            <div class="card-body">
+                <p class="login-box-msg">ĐĂNG NHẬP</p>
+
+                <form role="form" method="post" ng-submit="LoginSubmit()">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Tên tài khoản" ng-model="loginData.userName">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user-alt"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" ng-model="loginData.password" placeholder="Mật khẩu">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">
+                                    Nhớ mật khẩu
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <div class="row">
+                        <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.login-box -->
+</div>

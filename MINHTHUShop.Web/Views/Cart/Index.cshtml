@@ -1,0 +1,111 @@
+﻿@model MINHTHUShop.Web.Models.OrderVM
+
+@{
+    ViewBag.Title = "Giỏ hàng";
+    ViewBag.MetaKeywords = "giỏ hàng";
+    ViewBag.MetaDescriptions = "Trang giỏ hàng website Minh Thư";
+    Layout = "~/Views/Shared/Layouts.cshtml";
+}
+
+@section footerJS{
+    <script src="~/Content/Client/js/controller/cart.js"></script>
+}
+
+<div class="single_top">
+    <div class="single_grid">
+        <div id="cartContent">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td style="text-align: center; font-weight: bolder; width: 5%;">STT</td>
+                        <td style="text-align: center; font-weight: bolder; width: 35% ">Sản phẩm</td>
+                        <td style="text-align: center; font-weight: bolder; width: 15%">Hình ảnh</td>
+                        <td style="text-align: center; font-weight: bolder; width: 15%">Giá tiền</td>
+                        <td style="text-align: center; font-weight: bolder; width: 10%">Số lượng</td>
+                        <td style="text-align: center; font-weight: bolder; width: 15%">Thành tiền</td>
+                        <td style="text-align: center; font-weight: bolder; width: 5%"><a href="#" id="btnDeleteAll" style="color:red; text-decoration:none;">Xóa hết</a></td>
+                    </tr>
+                </thead>
+                <tbody id="cartBody">
+                </tbody>
+            </table>
+            <div class="clearfix"></div>
+            <div class="pull-right">
+                <b>Tạm tính: <span class="lblTotalOrder" style="color:orangered"></span> đ</b>
+            </div>
+            <div class="clearfix"></div>
+            <div style="margin-top:5px;">
+                <a href="/san-pham.html" class="pull-left" style="text-decoration: none; color: #1DBAA5;" id="btnContinue">Tiếp tục mua sắm</a>
+                <button class="pull-right" style="background-color: orangered; color: white; border: none; border-radius: 3px; padding: 5px 10px;" id="btnCheckout"><b>Tiến hành đặt hàng</b></button>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+            <div id="divCheckout" style="display:none;">
+                <div class="reservation_top">
+                    <div class="contact_right">
+                        @if (Request.IsAuthenticated)
+                        {
+                            <div class="contact-form">
+                                <form method="post" id="frmPayment" style="margin-left:auto;">
+                                    <h3>Thông tin nhận hàng</h3>
+                                    <label>
+                                        <input type="checkbox" id="chkUserLoginInfo" />
+                                        Sử dụng thông tin đăng nhập
+                                    </label>
+                                    <input type="text" class="textbox" id="txtName" name="name" placeholder="Họ tên">
+                                    <input type="text" class="textbox" id="txtAddress" name="address" placeholder="Địa chỉ">
+                                    <input type="text" class="textbox" id="txtPhone" name="phone" placeholder="Điện thoại">
+                                    <textarea value="" id="txtMessage" placeholder="Nhập ghi chú (nếu có)"></textarea>
+                                    <b>Phương thức thanh toán: </b>
+                                    <br />
+                                    @foreach (var item in Model.PaymentMethodVMs)
+                                    {
+                                        <input type="radio" class="txtPayment" data-id="txtPayment_@item.PaymentMethodID" name="payment" value="@item.PaymentMethodID" />
+                                        <label for="txtPayment_@item.PaymentMethodID" style="font-weight: normal;">@item.Name</label>
+                                        <br />
+                                    }
+                                    <br />
+                                    <b>Phương thức vận chuyển: </b>
+                                    <br />
+                                    @foreach (var item in Model.ShippingMethodVMs)
+                                    {
+                                        <input type="radio" class="txtShipping" data-id="txtShipping_@item.ShippingMethodID" data-cost="@item.Cost" name="shipping" value="@item.ShippingMethodID" />
+                                        <label for="txtShipping_@item.ShippingMethodID" style="font-weight: normal;">@item.Name: @item.Cost.ToString("N0") đ</label>
+                                        <br />
+                                    }
+                                    <div class="clearfix"></div>
+                                    <h3>Đơn hàng</h3>
+                                    <b>Tạm tính: <span class="lblTotalOrder"></span> đ</b> <br />
+                                    <b>Phí vận chuyển: <span id="lblShippingCost"></span> đ</b> <br />
+                                    <b>Thành tiền: <span id="lblTotalCost" style="color:orangered"></span> đ</b> <br />
+                                    <input type="button" id="btnCreateOrder" value="Đặt hàng" class="pull-right" style="background-color: orangered; color: white; border: none; border-radius: 3px; padding: 5px 10px; font-weight:bold">
+                                    <div class="clearfix"> </div>
+                                </form>
+                            </div>
+                        }
+                        else
+                        {
+                            <p>Bạn chưa đăng nhập, nhấn <a href="/dang-nhap.html" style="text-decoration: none; color: #1DBAA5;">vào đây</a> để đăng nhập!</p>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</div>
+
+<script id="tplCart" type="x-tmpl-mustache">
+    <tr>
+        <td style="text-align:center;">{{STT}}</td>
+        <td>{{Name}}</td>
+        <td style="text-align:center;"><img src="{{Image}}" height="60px" /></td>
+        <td style="text-align:center;">
+            <b>{{PromotionPriceF}} đ</b>
+            <br />
+            <div style="text-decoration: line-through;">{{PriceF}} đ</div>
+        </td>
+        <td style="text-align:center;"><input type="number" data-id="{{ProductID}}" data-price="{{PromotionPrice}}" value="{{Quantity}}" class="input txtQuantity" style="width: 50px; text-align:center;" min="1"/></td>
+        <td style="text-align:center;" id="total_{{ProductID}}"><b>{{Total}} đ</b></td>
+        <td style="text-align:center;"><a href="#" class="btnDeleteItem" data-id="{{ProductID}}" style="color:red; text-decoration:none;">Xóa</a></td>
+    </tr>
+</script>

@@ -1,0 +1,57 @@
+﻿﻿@model IEnumerable<MINHTHUShop.Web.Models.ProductCategoryVM>
+
+@section footerJS{
+    <script type="text/javascript">
+        $(function () {
+            var menu_ul = $('.menu > li > ul'),
+                menu_a = $('.menu > li > a');
+            menu_ul.hide();
+            menu_a.click(function (e) {
+                e.preventDefault();
+                if (!$(this).hasClass('active')) {
+                    menu_a.removeClass('active');
+                    menu_ul.filter(':visible').slideUp('normal');
+                    $(this).addClass('active').next().stop(true, true).slideDown('normal');
+                } else {
+                    $(this).removeClass('active');
+                    $(this).next().stop(true, true).slideUp('normal');
+                }
+            });
+
+        });
+    </script>
+}
+
+<div class="sub-cate">
+    <div class=" top-nav rsidebar span_1_of_left">
+        <h3 class="cate">DANH MỤC SẢN PHẨM</h3>
+        <ul class="menu">
+            @foreach (var category in Model.Where(x => x.ParentID == null))
+            {
+                var url = "/" + category.MetaTitle + ".pc-" + category.CateID + ".html";
+                var childCategories = Model.Where(x => x.ParentID == category.CateID);
+                <li class="item1">
+                    @if (childCategories.Count() > 0)
+                    {
+                        <a href="#" style="color:gray;">@category.Name</a>
+                        <ul class="cute">
+                            @foreach (var childCategory in childCategories)
+                            {
+                                var childUrl = "/" + childCategory.MetaTitle + ".pc-" + childCategory.CateID + ".html";
+                                <li class="subitem1"><a href="@childUrl" style="padding-left:50px">@childCategory.Name</a></li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <a href="@url">@category.Name</a>
+                    }
+                </li>
+            }
+        </ul>
+    </div>
+    <!--initiate accordion-->
+
+    <a class="view-all all-product" href="/san-pham.html">TẤT CẢ SẢN PHẨM<span> </span></a>
+</div>
+

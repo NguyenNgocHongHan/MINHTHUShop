@@ -11,16 +11,30 @@ namespace MINHTHUShop.Model.Models
         public int FeedbackID { get; set; }
 
         [Required]
-        public int CustomerID { get; set; }
+        [MaxLength(50)]
+        public string Name { get; set; }
+
+        [Required]
+        [MaxLength(10)]
+        [Column(TypeName = "char")]
+        [Phone]
+        public string Phone { get; set; }
+
+        [Required]
+        [MaxLength(250)]
+        [EmailAddress]
+        public string Email { get; set; }
 
         [Required]
         public string Message { get; set; }
 
-        public DateTime? CreateDate { get; set; } = DateTime.Now;
+        public string Note { get; set; }
 
-        public bool? IsRead { get; set; } = false;
+        [Required]
+        public DateTime CreateDate { get; set; } = DateTime.Now;
 
-        [ForeignKey("CustomerID")]
-        public virtual Tb_Customer Tb_Customer { get; set; }
+        [Required]
+        public bool IsRead { get; set; } = false;
+
     }
 }

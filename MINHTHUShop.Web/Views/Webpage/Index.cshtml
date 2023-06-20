@@ -1,0 +1,10 @@
+﻿@model MINHTHUShop.Web.Models.WebpageVM
+@{
+    ViewBag.Title = Model.Name;
+    ViewBag.MetaKeywords = Model.Name;
+    ViewBag.MetaDescriptions = "Trang" + Model.Name + " của website Minh Thư";
+    Layout = "~/Views/Shared/Layouts.cshtml";
+}
+<div class="women-product">
+    @Html.Raw(Model.Description)
+</div>

@@ -1,0 +1,130 @@
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><small>NGƯỜI DÙNG</small></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a ui-sref="home">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a ui-sref="home">Quản lý phân quyền</a></li>
+                    <li class="breadcrumb-item"><a ui-sref="user">Người dùng</a></li>
+                    <li class="breadcrumb-item active">Thêm mới</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div style="width:95%; margin:auto;">
+        <!-- Horizontal Form -->
+        <div class="card card-success">
+            <div class="card-header">
+                <h3 class="card-title">THÊM MỚI NGƯỜI DÙNG</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form class="form-horizontal" novalidate name="frmCreateUser" role="form" ng-submit="CreateUser()">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tên người dùng <span style="color:red"> (*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="name" ng-model="user.Name" ng-maxlength="50" placeholder="Tên người dùng" required>
+                            <div class="has-error" ng-show="frmCreateUser.name.$invalid">
+                                <span ng-show="frmCreateUser.name.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên người dùng!</span>
+                                <span ng-show="frmCreateUser.name.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 50 ký tự!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tên tài khoản <span style="color:red"> (*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="userName" ng-model="user.UserName" placeholder="Tên tài khoản" required>
+                            <div class="has-error" ng-show="frmCreateUser.userName.$invalid">
+                                <span ng-show="frmCreateUser.userName.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên tài khoản!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Email <span style="color:red"> (*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control" name="email" ng-model="user.Email" placeholder="Địa chỉ email" required>
+                            <div class="has-error" ng-show="frmCreateUser.email.$invalid">
+                                <span ng-show="frmCreateUser.email.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập tên tài khoản!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Mật khẩu <span style="color:red"> (*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" name="password" ng-model="user.Password" placeholder="Mật khẩu" required>
+                            <div class="has-error" ng-show="frmCreateUser.password.$invalid">
+                                <span ng-show="frmCreateUser.password.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập mật khẩu!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Điện thoại</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="phone" ng-model="user.Phone" placeholder="Điện thoại">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Địa chỉ <span style="color:red"> (*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="address" ng-model="user.Address" ng-maxlength="250" placeholder="Địa chỉ" required>
+                            <div class="has-error" ng-show="frmCreateUser.address.$invalid">
+                                <span ng-show="frmCreateUser.address.$error.required" class="has-error" style="color: red; font-style: italic; font-size: small;">Bạn chưa nhập địa chỉ!</span>
+                                <span ng-show="frmCreateUser.address.$error.maxlength" class="has-error" style="color: red; font-style: italic; font-size: small;">Chỉ nhập tối đa 250 ký tự!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Ngày sinh</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" name="dateOfBirth" ng-model="user.DateOfBirth" as-date>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Giới tính (Chọn nếu là Nam)</label>
+                        <div class="col-sm-9">
+                            <div class="custom-checkbox">
+                                <label>
+                                    <input type="checkbox" name="gender" ng-model="user.Gender" ng-checked="user.Gender">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Trạng thái tài khoản</label>
+                        <div class="col-sm-9">
+                            <div class="custom-checkbox">
+                                <label>
+                                    <input type="checkbox" name="status" ng-model="user.Status" ng-checked="user.Status">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Nhóm người dùng</label>
+                        <div class="col-sm-9">
+                            <p ng-repeat="group in groups">
+                                <input type="checkbox" checklist-model="user.GroupVMs" checklist-value="group"> {{group.Name}}
+                                <br />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button ui-sref="user" class="btn btn-danger">Hủy</button>
+                    <button type="submit" ng-disabled="frmCreateUser.$invalid" class="btn btn-success float-right">Thêm</button>
+                </div>
+                <!-- /.card-footer -->
+            </form>
+        </div>
+    </div>
+</section>

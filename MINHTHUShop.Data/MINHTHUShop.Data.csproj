@@ -40,9 +40,41 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SendGrid, Version=9.28.1.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\SendGrid.9.28.1\lib\net40\SendGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="StarkbankEcdsa, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b2e6337a5d77bfbc, processorArchitecture=MSIL">
+      <HintPath>..\packages\starkbank-ecdsa.1.3.3\lib\net40\StarkbankEcdsa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,7 +83,180 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\DbFactory.cs" />
+    <Compile Include="Infrastructure\Disposable.cs" />
+    <Compile Include="Infrastructure\IDbFactory.cs" />
+    <Compile Include="Infrastructure\IRepository.cs" />
+    <Compile Include="Infrastructure\IUnitOfWork.cs" />
+    <Compile Include="Infrastructure\RepositoryBase.cs" />
+    <Compile Include="Infrastructure\UnitOfWork.cs" />
+    <Compile Include="Migrations\202305150915374_createDB.cs" />
+    <Compile Include="Migrations\202305150915374_createDB.designer.cs">
+      <DependentUpon>202305150915374_createDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305171159329_addFooterTable.cs" />
+    <Compile Include="Migrations\202305171159329_addFooterTable.designer.cs">
+      <DependentUpon>202305171159329_addFooterTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305171847301_updateBannerTable.cs" />
+    <Compile Include="Migrations\202305171847301_updateBannerTable.designer.cs">
+      <DependentUpon>202305171847301_updateBannerTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305181621392_addCreateAttributeForAboutTable.cs" />
+    <Compile Include="Migrations\202305181621392_addCreateAttributeForAboutTable.designer.cs">
+      <DependentUpon>202305181621392_addCreateAttributeForAboutTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305181803419_deleteSEOForAboutTable.cs" />
+    <Compile Include="Migrations\202305181803419_deleteSEOForAboutTable.designer.cs">
+      <DependentUpon>202305181803419_deleteSEOForAboutTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305191457400_updateRequiredPromotionPrice.cs" />
+    <Compile Include="Migrations\202305191457400_updateRequiredPromotionPrice.designer.cs">
+      <DependentUpon>202305191457400_updateRequiredPromotionPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305201905338_changeValidateListImg.cs" />
+    <Compile Include="Migrations\202305201905338_changeValidateListImg.designer.cs">
+      <DependentUpon>202305201905338_changeValidateListImg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305201936168_changeValidateListImgToString.cs" />
+    <Compile Include="Migrations\202305201936168_changeValidateListImgToString.designer.cs">
+      <DependentUpon>202305201936168_changeValidateListImgToString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305211002161_changFieldForPageTable.cs" />
+    <Compile Include="Migrations\202305211002161_changFieldForPageTable.designer.cs">
+      <DependentUpon>202305211002161_changFieldForPageTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305211220322_changeNameWebpageTable.cs" />
+    <Compile Include="Migrations\202305211220322_changeNameWebpageTable.designer.cs">
+      <DependentUpon>202305211220322_changeNameWebpageTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305211705414_changeFiledsForAboutTable.cs" />
+    <Compile Include="Migrations\202305211705414_changeFiledsForAboutTable.designer.cs">
+      <DependentUpon>202305211705414_changeFiledsForAboutTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305221818452_deletePositionFieldForBannerTable.cs" />
+    <Compile Include="Migrations\202305221818452_deletePositionFieldForBannerTable.designer.cs">
+      <DependentUpon>202305221818452_deletePositionFieldForBannerTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305241730599_testMigration.cs" />
+    <Compile Include="Migrations\202305241730599_testMigration.designer.cs">
+      <DependentUpon>202305241730599_testMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305251536288_updateCustomerTB.cs" />
+    <Compile Include="Migrations\202305251536288_updateCustomerTB.designer.cs">
+      <DependentUpon>202305251536288_updateCustomerTB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305251640484_updateValidationForCustomerTB.cs" />
+    <Compile Include="Migrations\202305251640484_updateValidationForCustomerTB.designer.cs">
+      <DependentUpon>202305251640484_updateValidationForCustomerTB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305251734335_updateValidationForPwdInCustomerTB.cs" />
+    <Compile Include="Migrations\202305251734335_updateValidationForPwdInCustomerTB.designer.cs">
+      <DependentUpon>202305251734335_updateValidationForPwdInCustomerTB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305262108458_changeStaffAndCustomerTB.cs" />
+    <Compile Include="Migrations\202305262108458_changeStaffAndCustomerTB.designer.cs">
+      <DependentUpon>202305262108458_changeStaffAndCustomerTB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305270804489_updateValidatePhoneFieldForAboutTB.cs" />
+    <Compile Include="Migrations\202305270804489_updateValidatePhoneFieldForAboutTB.designer.cs">
+      <DependentUpon>202305270804489_updateValidatePhoneFieldForAboutTB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305270843277_updateValidateFieldsForAboutTB.cs" />
+    <Compile Include="Migrations\202305270843277_updateValidateFieldsForAboutTB.designer.cs">
+      <DependentUpon>202305270843277_updateValidateFieldsForAboutTB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305270902099_updateValidateFieldsForNewsTB.cs" />
+    <Compile Include="Migrations\202305270902099_updateValidateFieldsForNewsTB.designer.cs">
+      <DependentUpon>202305270902099_updateValidateFieldsForNewsTB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305270935574_updateFieldsForFeedbackTB.cs" />
+    <Compile Include="Migrations\202305270935574_updateFieldsForFeedbackTB.designer.cs">
+      <DependentUpon>202305270935574_updateFieldsForFeedbackTB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305271018288_addPhoneFieldsForFeedbackTB.cs" />
+    <Compile Include="Migrations\202305271018288_addPhoneFieldsForFeedbackTB.designer.cs">
+      <DependentUpon>202305271018288_addPhoneFieldsForFeedbackTB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305271054323_addValidatePhoneFieldsForFeedbackTB.cs" />
+    <Compile Include="Migrations\202305271054323_addValidatePhoneFieldsForFeedbackTB.designer.cs">
+      <DependentUpon>202305271054323_addValidatePhoneFieldsForFeedbackTB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305272016036_addNoteFieldsForFeedbackTB.cs" />
+    <Compile Include="Migrations\202305272016036_addNoteFieldsForFeedbackTB.designer.cs">
+      <DependentUpon>202305272016036_addNoteFieldsForFeedbackTB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306022055208_deleteNewsTable.cs" />
+    <Compile Include="Migrations\202306022055208_deleteNewsTable.designer.cs">
+      <DependentUpon>202306022055208_deleteNewsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306022149185_deletePaymentandProductCommentTable.cs" />
+    <Compile Include="Migrations\202306022149185_deletePaymentandProductCommentTable.designer.cs">
+      <DependentUpon>202306022149185_deletePaymentandProductCommentTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306121805138_addFieldsForOrderTable.cs" />
+    <Compile Include="Migrations\202306121805138_addFieldsForOrderTable.designer.cs">
+      <DependentUpon>202306121805138_addFieldsForOrderTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306122127269_updateOrderTable.cs" />
+    <Compile Include="Migrations\202306122127269_updateOrderTable.designer.cs">
+      <DependentUpon>202306122127269_updateOrderTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306130224030_deleteFieldTotalCostForOrderTable.cs" />
+    <Compile Include="Migrations\202306130224030_deleteFieldTotalCostForOrderTable.designer.cs">
+      <DependentUpon>202306130224030_deleteFieldTotalCostForOrderTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306132111185_renameIdentityTables.cs" />
+    <Compile Include="Migrations\202306132111185_renameIdentityTables.designer.cs">
+      <DependentUpon>202306132111185_renameIdentityTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306132152435_deleteUnnecessaryTables.cs" />
+    <Compile Include="Migrations\202306132152435_deleteUnnecessaryTables.designer.cs">
+      <DependentUpon>202306132152435_deleteUnnecessaryTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306132311145_updateAndAddUserGroupTB.cs" />
+    <Compile Include="Migrations\202306132311145_updateAndAddUserGroupTB.designer.cs">
+      <DependentUpon>202306132311145_updateAndAddUserGroupTB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306140237472_updateAuthorizationTableInDatabase.cs" />
+    <Compile Include="Migrations\202306140237472_updateAuthorizationTableInDatabase.designer.cs">
+      <DependentUpon>202306140237472_updateAuthorizationTableInDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306140249459_updateIdentityTable.cs" />
+    <Compile Include="Migrations\202306140249459_updateIdentityTable.designer.cs">
+      <DependentUpon>202306140249459_updateIdentityTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306191236315_RevenueStatistics.cs" />
+    <Compile Include="Migrations\202306191236315_RevenueStatistics.designer.cs">
+      <DependentUpon>202306191236315_RevenueStatistics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Tb_RoleGroupRepository.cs" />
+    <Compile Include="MINHTHUShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Tb_BannerRepository.cs" />
+    <Compile Include="Repositories\Tb_BrandRepository.cs" />
+    <Compile Include="Repositories\Tb_ErrorRepository.cs" />
+    <Compile Include="Repositories\Tb_FAQCategoryRepository.cs" />
+    <Compile Include="Repositories\Tb_FAQRepository.cs" />
+    <Compile Include="Repositories\Tb_FeedbackRepository.cs" />
+    <Compile Include="Repositories\Tb_GroupRepository.cs" />
+    <Compile Include="Repositories\Tb_MenuGroupRepository.cs" />
+    <Compile Include="Repositories\Tb_MenuRepository.cs" />
+    <Compile Include="Repositories\Tb_OrderDetailRepository.cs" />
+    <Compile Include="Repositories\Tb_OrderRepository.cs" />
+    <Compile Include="Repositories\Tb_OrderStatusRepository.cs" />
+    <Compile Include="Repositories\Tb_PaymentMethodRepository.cs" />
+    <Compile Include="Repositories\Tb_RoleRepository.cs" />
+    <Compile Include="Repositories\Tb_TargetRepository.cs" />
+    <Compile Include="Repositories\Tb_UserGroupRepository.cs" />
+    <Compile Include="Repositories\Tb_WebpageRepository.cs" />
+    <Compile Include="Repositories\Tb_ProductCategoryRepository.cs" />
+    <Compile Include="Repositories\Tb_ProductRepository.cs" />
+    <Compile Include="Repositories\Tb_ShippingMethodRepository.cs" />
+    <Compile Include="Repositories\Tb_UserRepository.cs" />
+    <Compile Include="Repositories\Tb_TagProductRepository.cs" />
+    <Compile Include="Repositories\Tb_TagRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -62,6 +267,117 @@
       <Project>{0c46aef6-248f-4648-867c-4fd86d1def3e}</Project>
       <Name>MINHTHUShop.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MINHTHUShop.Model\MINHTHUShop.Model.csproj">
+      <Project>{530bbeac-f2b7-4289-b5f2-ded1f5e068fc}</Project>
+      <Name>MINHTHUShop.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202305150915374_createDB.resx">
+      <DependentUpon>202305150915374_createDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305171159329_addFooterTable.resx">
+      <DependentUpon>202305171159329_addFooterTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305171847301_updateBannerTable.resx">
+      <DependentUpon>202305171847301_updateBannerTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305181621392_addCreateAttributeForAboutTable.resx">
+      <DependentUpon>202305181621392_addCreateAttributeForAboutTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305181803419_deleteSEOForAboutTable.resx">
+      <DependentUpon>202305181803419_deleteSEOForAboutTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305191457400_updateRequiredPromotionPrice.resx">
+      <DependentUpon>202305191457400_updateRequiredPromotionPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305201905338_changeValidateListImg.resx">
+      <DependentUpon>202305201905338_changeValidateListImg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305201936168_changeValidateListImgToString.resx">
+      <DependentUpon>202305201936168_changeValidateListImgToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305211002161_changFieldForPageTable.resx">
+      <DependentUpon>202305211002161_changFieldForPageTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305211220322_changeNameWebpageTable.resx">
+      <DependentUpon>202305211220322_changeNameWebpageTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305211705414_changeFiledsForAboutTable.resx">
+      <DependentUpon>202305211705414_changeFiledsForAboutTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305221818452_deletePositionFieldForBannerTable.resx">
+      <DependentUpon>202305221818452_deletePositionFieldForBannerTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305241730599_testMigration.resx">
+      <DependentUpon>202305241730599_testMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305251536288_updateCustomerTB.resx">
+      <DependentUpon>202305251536288_updateCustomerTB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305251640484_updateValidationForCustomerTB.resx">
+      <DependentUpon>202305251640484_updateValidationForCustomerTB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305251734335_updateValidationForPwdInCustomerTB.resx">
+      <DependentUpon>202305251734335_updateValidationForPwdInCustomerTB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305262108458_changeStaffAndCustomerTB.resx">
+      <DependentUpon>202305262108458_changeStaffAndCustomerTB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305270804489_updateValidatePhoneFieldForAboutTB.resx">
+      <DependentUpon>202305270804489_updateValidatePhoneFieldForAboutTB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305270843277_updateValidateFieldsForAboutTB.resx">
+      <DependentUpon>202305270843277_updateValidateFieldsForAboutTB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305270902099_updateValidateFieldsForNewsTB.resx">
+      <DependentUpon>202305270902099_updateValidateFieldsForNewsTB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305270935574_updateFieldsForFeedbackTB.resx">
+      <DependentUpon>202305270935574_updateFieldsForFeedbackTB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305271018288_addPhoneFieldsForFeedbackTB.resx">
+      <DependentUpon>202305271018288_addPhoneFieldsForFeedbackTB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305271054323_addValidatePhoneFieldsForFeedbackTB.resx">
+      <DependentUpon>202305271054323_addValidatePhoneFieldsForFeedbackTB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305272016036_addNoteFieldsForFeedbackTB.resx">
+      <DependentUpon>202305272016036_addNoteFieldsForFeedbackTB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306022055208_deleteNewsTable.resx">
+      <DependentUpon>202306022055208_deleteNewsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306022149185_deletePaymentandProductCommentTable.resx">
+      <DependentUpon>202306022149185_deletePaymentandProductCommentTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306121805138_addFieldsForOrderTable.resx">
+      <DependentUpon>202306121805138_addFieldsForOrderTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306122127269_updateOrderTable.resx">
+      <DependentUpon>202306122127269_updateOrderTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306130224030_deleteFieldTotalCostForOrderTable.resx">
+      <DependentUpon>202306130224030_deleteFieldTotalCostForOrderTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306132111185_renameIdentityTables.resx">
+      <DependentUpon>202306132111185_renameIdentityTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306132152435_deleteUnnecessaryTables.resx">
+      <DependentUpon>202306132152435_deleteUnnecessaryTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306132311145_updateAndAddUserGroupTB.resx">
+      <DependentUpon>202306132311145_updateAndAddUserGroupTB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306140237472_updateAuthorizationTableInDatabase.resx">
+      <DependentUpon>202306140237472_updateAuthorizationTableInDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306140249459_updateIdentityTable.resx">
+      <DependentUpon>202306140249459_updateIdentityTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306191236315_RevenueStatistics.resx">
+      <DependentUpon>202306191236315_RevenueStatistics.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
