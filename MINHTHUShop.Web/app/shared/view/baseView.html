@@ -29,7 +29,7 @@
                     <a href="javascript:void(0);" class="d-block">{{authentication.userName}}</a>
                 </div>
                 <div class="btn ml-auto">
-                    <a ui-sref="#"><i class='right fas fa-user-edit'></i></a>
+                    <!--<a ui-sref="#"><i class='right fas fa-user-edit'></i></a>-->
                     <a href="#" ng-click="Logout()"><i class='right fas fa-sign-out-alt'></i></a>
                 </div>
             </div>
@@ -112,33 +112,33 @@
                     <li class="nav-header">QUẢN LÝ HÓA ĐƠN</li>
                     <li class="nav-item">
                         <a ui-sref="order" class="nav-link">
-                            <i class="far fa-money-check nav-icon"></i>
+                            <i class="far fa-circle nav-icon"></i>
                             <p>Đơn hàng</p>
                         </a>
                     </li>
                     <li class="nav-header">QUẢN LÝ PHÂN QUYỀN</li>
                     <li class="nav-item">
                         <a ui-sref="group" class="nav-link">
-                            <i class="far fa-users nav-icon"></i>
+                            <i class="far fa-circle nav-icon"></i>
                             <p>Nhóm người dùng</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a ui-sref="role" class="nav-link">
-                            <i class="far fa-users nav-icon"></i>
+                            <i class="far fa-circle nav-icon"></i>
                             <p>Quyền</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a ui-sref="user" class="nav-link">
-                            <i class="far fa-users nav-icon"></i>
+                            <i class="far fa-circle nav-icon"></i>
                             <p>Người dùng</p>
                         </a>
                     </li>
                     <li class="nav-header">THỐNG KÊ</li>
                     <li class="nav-item">
                         <a ui-sref="statistic" class="nav-link">
-                            <i class="far fa-chart-area nav-icon"></i>
+                            <i class="far fa-circle nav-icon"></i>
                             <p>Thống kê doanh thu</p>
                         </a>
                     </li>
@@ -171,3 +171,4 @@
     <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+

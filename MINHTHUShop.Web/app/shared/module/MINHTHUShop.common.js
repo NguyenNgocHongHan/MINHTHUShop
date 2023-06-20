@@ -4,9 +4,9 @@
             'ngBootbox',
             'ngCkeditor',
             'checklist-model',
-            'chart.js'/*,
+            'chart.js',
             'LocalStorageModule',
             'ui.select',
-            'ngSanitize'*/
+            'ngSanitize'
         ]);
 })();

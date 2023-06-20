@@ -463,6 +463,8 @@
     <Content Include="Content\Admin\lib\angular-loading-bar\loading-bar.min.js" />
     <Content Include="Content\Admin\lib\angular-local-storage\angular-local-storage.js" />
     <Content Include="Content\Admin\lib\angular-local-storage\angular-local-storage.min.js" />
+    <Content Include="Content\Admin\lib\angular-sanitize\angular-sanitize.js" />
+    <Content Include="Content\Admin\lib\angular-sanitize\angular-sanitize.min.js" />
     <Content Include="Content\Admin\lib\angular-ui-router\angular-ui-router.js" />
     <Content Include="Content\Admin\lib\angular-ui-router\angular-ui-router.min.js" />
     <Content Include="Content\Admin\lib\angular-ui-router\resolveService.js" />
@@ -471,6 +473,10 @@
     <Content Include="Content\Admin\lib\angular-ui-router\stateEvents.min.js" />
     <Content Include="Content\Admin\lib\angular-ui-router\ui-router-angularjs.js" />
     <Content Include="Content\Admin\lib\angular-ui-router\ui-router-angularjs.min.js" />
+    <Content Include="Content\Admin\lib\angular-ui-select\select.css" />
+    <Content Include="Content\Admin\lib\angular-ui-select\select.js" />
+    <Content Include="Content\Admin\lib\angular-ui-select\select.min.css" />
+    <Content Include="Content\Admin\lib\angular-ui-select\select.min.js" />
     <Content Include="Content\Admin\lib\angular.js\angular-csp.css" />
     <Content Include="Content\Admin\lib\angular.js\angular-csp.min.css" />
     <Content Include="Content\Admin\lib\angular.js\angular.js" />
@@ -8223,6 +8229,8 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Admin\lib\ngBootbox-master\typings\angularjs\" />
+    <Folder Include="Content\Admin\lib\ngBootbox-master\typings\jquery\" />
     <Folder Include="UploadFile\" />
     <Folder Include="Views\OrderAPI\" />
   </ItemGroup>
@@ -8477,6 +8485,9 @@
     <Content Include="Content\Admin\lib\Chart.js\chart.umd.js.map" />
     <Content Include="Content\Admin\lib\Chart.js\helpers.cjs.map" />
     <Content Include="Content\Admin\lib\Chart.js\helpers.js.map" />
+    <Content Include="Content\Admin\lib\angular-ui-select\select.min.css.map" />
+    <Content Include="Content\Admin\lib\angular-ui-select\select.min.js.map" />
+    <Content Include="Content\Admin\lib\angular-sanitize\angular-sanitize.min.js.map" />
     <None Include="NWebsecConfig\HttpHeaderSecurityModuleConfig.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -8530,11 +8541,6 @@
       <Project>{d51e9f0f-862b-4766-9cf9-6aa0ea4e843b}</Project>
       <Name>MINHTHUShop.Service</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Content\Admin\lib\ngBootbox-master\typings\angularjs\angular.d.ts" />
-    <TypeScriptCompile Include="Content\Admin\lib\ngBootbox-master\typings\jquery\jquery.d.ts" />
-    <TypeScriptCompile Include="Content\Admin\lib\ngBootbox-master\typings\tsd.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

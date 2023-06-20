@@ -15,7 +15,7 @@
         }
 
         function LoadParentCategory() {
-            apiService.get('api/ProductCategory/GetAll', null, function (result) {
+            apiService.get('api/ProductCategory/GetAllParentCate', null, function (result) {
                 /*console.log(result);*/
                 $scope.parentCategory = result.data;
                 /*$scope.parentCategory = commonService.getTree(result.data, "CateID", "ParentID");*/

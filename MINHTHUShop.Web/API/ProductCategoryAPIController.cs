@@ -47,6 +47,40 @@ namespace MINHTHUShop.Web.API
             });
         }
 
+        [Route("GetAllChildCate")]
+        [HttpGet]
+        public HttpResponseMessage GetAllChildCate(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                var model = _productCategoryService.GetAllChildCate().OrderBy(x => x.Name);
+                var responseData = Mapper.Map<IEnumerable<Tb_ProductCategory>, IEnumerable<ProductCategoryVM>>(model);
+                //nếu không dùng View Model thì mình có thể dùng câu lệnh bên dưới, nhưng có nhiều dữ liệu không cần thiết cũng được lấy ra theo
+                //vì vậy sử dụng View Model để lấy ra những trường cần thiết
+                //var response = request.CreateResponse(HttpStatusCode.OK, model);
+                var response = request.CreateResponse(HttpStatusCode.OK, responseData);
+
+                return response;
+            });
+        }
+
+        [Route("GetAllParentCate")]
+        [HttpGet]
+        public HttpResponseMessage GetAllParentCate(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                var model = _productCategoryService.GetAllParentCate().OrderBy(x => x.Name);
+                var responseData = Mapper.Map<IEnumerable<Tb_ProductCategory>, IEnumerable<ProductCategoryVM>>(model);
+                //nếu không dùng View Model thì mình có thể dùng câu lệnh bên dưới, nhưng có nhiều dữ liệu không cần thiết cũng được lấy ra theo
+                //vì vậy sử dụng View Model để lấy ra những trường cần thiết
+                //var response = request.CreateResponse(HttpStatusCode.OK, model);
+                var response = request.CreateResponse(HttpStatusCode.OK, responseData);
+
+                return response;
+            });
+        }
+
         [Route("GetById/{id:int}")]
         [HttpGet]
         public HttpResponseMessage GetById(HttpRequestMessage request, int id)

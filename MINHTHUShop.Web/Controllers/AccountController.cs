@@ -147,8 +147,8 @@ namespace MINHTHUShop.Web.Controllers
 
                 //Thêm quyền user
                 var adminUser = await _userManager.FindByEmailAsync(model.Email);
-                if (adminUser != null)
-                    await _userManager.AddToRolesAsync(adminUser.Id, new string[] { "Khách hàng" });
+                /*if (adminUser != null)
+                    await _userManager.AddToRolesAsync(adminUser.Id, new string[] { "Khách hàng" });*/
 
                 //send confirmation email
                 /*string emailSubject = "Xác nhận gửi phản hồi thành công";

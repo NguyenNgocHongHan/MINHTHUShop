@@ -48,6 +48,16 @@ namespace MINHTHUShop.Service
             return _tb_ProductCategoryRepository.GetMulti(x => x.ParentID == parentID);
         }
 
+        public IEnumerable<Tb_ProductCategory> GetAllChildCate()
+        {
+            return _tb_ProductCategoryRepository.GetMulti(x => x.ParentID != null);
+        }
+
+        public IEnumerable<Tb_ProductCategory> GetAllParentCate()
+        {
+            return _tb_ProductCategoryRepository.GetMulti(x => x.ParentID == null);
+        }
+
         public Tb_ProductCategory GetById(int id)
         {
             return _tb_ProductCategoryRepository.GetById(id);
@@ -67,19 +77,14 @@ namespace MINHTHUShop.Service
     public interface ITb_ProductCategoryService
     {
         Tb_ProductCategory Create(Tb_ProductCategory tb_ProductCategory);
-
         void Update(Tb_ProductCategory tb_ProductCategory);
-
         Tb_ProductCategory Delete(int id);
-
         Tb_ProductCategory GetById(int id);
-
         void SaveChanges();
-
         IEnumerable<Tb_ProductCategory> GetAll();
-
+        IEnumerable<Tb_ProductCategory> GetAllChildCate();
+        IEnumerable<Tb_ProductCategory> GetAllParentCate();
         IEnumerable<Tb_ProductCategory> GetAll(string keywork);
-
         IEnumerable<Tb_ProductCategory> GetAllByParentId(int parentID);
     }
 }

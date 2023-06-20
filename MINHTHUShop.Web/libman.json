@@ -82,28 +82,20 @@
       "destination": "Content/Admin/lib/checklist-model/"
     },
     {
-      "library": "Chart.js@4.3.0",
-      "destination": "Content/Admin/lib/Chart.js/",
-      "files": [
-        "chart.min.js"
-      ]
+      "library": "angular-chart.js@1.1.1",
+      "destination": "Content/Admin/Content/angular-chart.js/"
     },
     {
-      "library": "angular-chart.js@1.1.1",
-      "destination": "Content/Admin/lib/angular-chart.js/",
-      "files": [
-        "angular-chart.min.js"
-      ]
+      "library": "Chart.js@4.3.0",
+      "destination": "Content/Admin/lib/Chart.js/"
+    },
+    {
+      "library": "angular-ui-select@0.19.8",
+      "destination": "Content/Admin/lib/angular-ui-select/"
+    },
+    {
+      "library": "angular-sanitize@1.8.3",
+      "destination": "Content/Admin/lib/angular-sanitize/"
     }
-  ,
-{
-  "library": "angular-chart.js@1.1.1",
-  "destination": "Content/Admin/Content/angular-chart.js/"
-}
-,
-{
-  "library": "Chart.js@4.3.0",
-  "destination": "Content/Admin/lib/Chart.js/"
-}
-]
+  ]
 }

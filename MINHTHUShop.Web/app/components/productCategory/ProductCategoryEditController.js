@@ -25,7 +25,7 @@
         }
 
         function LoadParentCategory() {
-            apiService.get('api/ProductCategory/GetAll', null, function (result) {
+            apiService.get('api/ProductCategory/GetAllParentCate', null, function (result) {
                 $scope.parentCategory = result.data;
             }, function () {
                 console.log('Không thể lấy ra danh sách thư mục cha!');

@@ -78,7 +78,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="item in tabledata">
-                                <td style="text-align:center;">{{item.Date | date}}</td>
+                                <td style="text-align:center;">{{item.Date | date:'dd/MM/yyyy'}}</td>
                                 <td style="text-align:center;">{{item.Revenues | number}}</td>
                                 <td style="text-align:center;">{{item.Benefit | number}}</td>
                             </tr>

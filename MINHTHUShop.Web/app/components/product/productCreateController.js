@@ -37,7 +37,7 @@
         }
 
         function LoadCate() {
-            apiService.get('api/ProductCategory/GetAll', null, function (result) {
+            apiService.get('api/ProductCategory/GetAllChildCate', null, function (result) {
                 $scope.productCategory = result.data;
             }, function () {
                 console.log('Tải danh mục sản phẩm thất bại!');

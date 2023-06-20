@@ -31,17 +31,17 @@
             }
 
             this.Logout = function () {
-                authService.removeToken();
+                /*authService.removeToken();
                 authData.authenticationData.IsAuthenticated = false;
-                authData.authenticationData.userName = "";
+                authData.authenticationData.userName = "";*/
 
-                /*apiService.post('/api/Account/Logout', null, function (response) {
+                apiService.post('/api/Account/Logout', null, function (response) {
                     authService.removeToken();
                     authData.authenticationData.IsAuthenticated = false;
                     authData.authenticationData.userName = "";
                     authData.authenticationData.accessToken = "";
 
-                }, null);*/
+                }, null);
             }
         }]);
 })(angular.module('MINHTHUShop.common'));
