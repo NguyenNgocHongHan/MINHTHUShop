@@ -4,13 +4,13 @@
 
 Xây dựng một hệ thống thông báo linh hoạt và mở rộng được sử dụng trong các trường hợp sau:
 
-- Thông báo khi người dùng tải lên minh chứng (evidence)
-- Thông báo khi admin phê duyệt/từ chối minh chứng của người dùng
+- Thông báo khi người dùng tải lên evidence
+- Thông báo khi admin phê duyệt/từ chối evidence của người dùng
 - Thông báo khi người dùng yêu cầu đổi quà (redeem reward)
 - Thông báo khi admin phê duyệt/từ chối yêu cầu đổi quà
 - Thông báo khi người dùng tặng điểm cho người dùng khác
 
-Hệ thống này cần hỗ trợ nhiều kênh gửi thông báo khác nhau (Slack, Email, Teams, SMS, Push Notification) và dễ dàng mở rộng thêm các kênh mới trong
+Hệ thống này cần hỗ trợ nhiều kênh gửi thông báo kênh Teams và dễ dàng mở rộng thêm các kênh mới (Slack, Email, SMS, Push Notification) trong
 tương lai.
 
 ## 2. Entities
@@ -20,9 +20,9 @@ tương lai.
 - `id` (uuid, PK): ID duy nhất của thông báo
 - `business_id` (uuid, FK đến `businesses`, not null): Doanh nghiệp liên quan
 - `event_type` (enum, not null): Loại sự kiện tạo thông báo
-  - `EVIDENCE_UPLOADED`: Người dùng tải lên minh chứng
-  - `EVIDENCE_APPROVED`: Admin phê duyệt minh chứng
-  - `EVIDENCE_REJECTED`: Admin từ chối minh chứng
+  - `EVIDENCE_UPLOADED`: Người dùng tải lên evidence
+  - `EVIDENCE_APPROVED`: Admin phê duyệt evidence
+  - `EVIDENCE_REJECTED`: Admin từ chối evidence
   - `REWARD_REQUESTED`: Người dùng yêu cầu đổi quà
   - `REWARD_APPROVED`: Admin phê duyệt yêu cầu đổi quà
   - `REWARD_REJECTED`: Admin từ chối yêu cầu đổi quà
