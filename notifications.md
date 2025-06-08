@@ -15,43 +15,42 @@
 ### services
 
 - `id` (uuid, PK): ID dịch vụ
-- `business_id` (uuid, FK): Service thuộc business nào
-- `name` (string): Tên dịch vụ
+- `business_id` (uuid, FK, not null): Service thuộc business nào
+- `name` (string, not null): Tên dịch vụ
 - `description` (string): Mô tả dịch vụ
-- `points` (decimal): Số điểm khi thực hiện dịch vụ
+- `points` (decimal, not null): Số điểm khi thực hiện dịch vụ
 - `image_url` (string): Ảnh dịch vụ
-- `is_system` (boolean): true: service hệ thống (admin tạo), false: user tạo
-- `created_by` (uuid): Ai tạo service này (admin/user)
+- `is_system` (boolean, not null): true: service hệ thống (admin tạo), false: user tạo
+- `created_by` (uuid, not null): Ai tạo service này (admin/user)
 - `updated_by` (uuid)
-- `created_at` (timestamp)
+- `created_at` (timestamp, not null)
 - `updated_at` (timestamp)
-- `is_active` (boolean)
+- `is_active` (boolean, not null)
 
 ### user_services
 
 - `id` (uuid, PK): ID
-- `user_id` (uuid): Ai sở hữu/đăng ký service này
-- `service_id` (uuid): FK đến services
-- `status` (enum): pending, active, deactivated, rejected
-- `created_by` (uuid)
+- `user_id` (uuid, not null): Ai sở hữu/đăng ký service này
+- `service_id` (uuid, not null): FK đến services
+- `status` (enum, not null): pending, active, deactivated, rejected
+- `created_by` (uuid, not null)
 - `updated_by` (uuid)
-- `created_at` (timestamp)
+- `created_at` (timestamp, not null)
 - `updated_at` (timestamp)
-- `is_active` (boolean)
+- `is_active` (boolean, not null)
 
 ### service_approvals
 
 - `id` (uuid, PK): ID
-- `user_service_id` (uuid): FK đến user_services
-- `status` (enum): pending, approved, rejected
+- `user_service_id` (uuid, not null): FK đến user_services
+- `status` (enum, not null): pending, approved, rejected
 - `comment` (string): Lý do duyệt/từ chối
-- `action_type` (enum): create, update
-- `payload` (jsonb, nullable): Lưu trữ data khi user yêu cầu update
-- `created_by` (uuid)
+- `payload` (jsonb): Lưu trữ data khi user yêu cầu update
+- `created_by` (uuid, not null)
 - `updated_by` (uuid)
-- `created_at` (timestamp)
+- `created_at` (timestamp, not null)
 - `updated_at` (timestamp)
-- `is_active` (boolean)
+- `is_active` (boolean, not null)
 
 ---
 
@@ -61,11 +60,34 @@
 erDiagram
   businesses {
     uuid id PK
-    ...
+    string name
+    string description
+    string address
+    string phone_number
+    string email
+    boolean is_active
+    timestamp created_at
+    timestamp updated_at
+    uuid created_by
+    uuid updated_by
   }
   users {
     uuid id PK
-    ...
+    uuid business_id FK
+    string first_name
+    string last_name
+    string email
+    string phone_number
+    string address
+    string password
+    timestamp last_login
+    enum role
+    string avatar
+    boolean is_active
+    timestamp created_at
+    timestamp updated_at
+    uuid created_by
+    uuid updated_by
   }
   services {
     uuid id PK
@@ -97,7 +119,6 @@ erDiagram
     uuid user_service_id FK
     enum status
     string comment
-    enum action_type
     jsonb payload
     uuid created_by
     uuid updated_by
@@ -106,6 +127,7 @@ erDiagram
     boolean is_active
   }
   businesses ||--o{ services : "owns"
+  businesses ||--o{ users : "has"
   users ||--o{ user_services : "has"
   services ||--o{ user_services : "has"
   user_services ||--o{ service_approvals : "has"
@@ -126,7 +148,7 @@ GET /api/services?is_system=true&limit=10&offset=0&search=text
 - `is_system` (boolean, required): true để lấy service hệ thống
 - `limit` (integer, optional): số lượng record trả về (default: 10)
 - `offset` (integer, optional): vị trí bắt đầu (default: 0)
-- `search` (string, optional): tìm kiếm theo tên/mô tả service (case-insensitive)
+- `search` (string, optional): tìm kiếm theo tên/mô tả service
 
 **Response:**
 
@@ -171,7 +193,7 @@ sequenceDiagram
 
 - Extract user from request và lấy `business_id` từ auth context (hoặc tạm dùng `business_id` của ABC Rewards site - đối với admin).
 - Query `services` với `business_id`, `is_system=true`, `is_active=true`, `search`, `limit`, `offset`.
-- Nếu có `search`, tìm kiếm case-insensitive trên `name` hoặc `description`.
+- Nếu có `search`, tìm kiếm theo `name` hoặc `description`.
 - Phân trang với `limit` và `offset`.
 - Trả về `data` (danh sách service) và `meta` (tổng số record, limit, offset, search).
 
@@ -228,14 +250,11 @@ sequenceDiagram
     Client->>API: POST /api/services with payload
     Note over API: Extract business_id, user_id, role from auth context
 
-    API->>DB: Validate name không trùng trong business
-    DB-->>API: Validation result
-
     alt Admin Flow (is_system: true)
         Note over API: Check if role is Admin
-        API->>DB: Create services record
+        API->>DB: Create services record (created_by = user_id)
         DB-->>API: Return created service
-        API-->>Client: Return 201 Created (chỉ có service data)
+        API-->>Client: Return 201 Created (gồm service và user_service)
     end
 
     alt User Flow (is_system: false)
@@ -243,7 +262,7 @@ sequenceDiagram
         API->>DB: Begin Transaction
         API->>DB: Create services record (created_by = user_id)
         API->>DB: Create user_services record (user_id, service_id, status='pending')
-        API->>DB: Create service_approvals record (user_service_id, action_type='create', status='pending')
+        API->>DB: Create service_approvals record (user_service_id, status='pending')
         DB-->>API: Return created data
         API->>DB: Commit Transaction
         API-->>Client: Return 201 Created (gồm service và user_service)
@@ -253,7 +272,6 @@ sequenceDiagram
 **Logic:**
 
 - Extract `business_id`, `user_id`, và `role` từ auth context.
-- Validate `name` không được trùng trong cùng `business_id`.
 - **Admin Flow:**
   - Nếu `role` là Admin và `is_system: true` trong payload, chỉ tạo record trong `services`.
   - `created_by` là `admin_id`.
@@ -262,7 +280,7 @@ sequenceDiagram
   - Start transaction.
   - Tạo record trong `services` với `is_system: false`, `created_by = user_id`.
   - Dùng `service_id` vừa tạo, tạo record trong `user_services` với `status: 'pending'`.
-  - Dùng `user_service_id` vừa tạo, tạo record trong `service_approvals` với `action_type: 'create'`, `status: 'pending'`.
+  - Dùng `user_service_id` vừa tạo, tạo record trong `service_approvals` với `status: 'pending'`.
   - Commit transaction.
 - Trả về dữ liệu tương ứng.
 
@@ -318,12 +336,6 @@ sequenceDiagram
   DB-->>API: Return service data
   alt Service Not Found
       API-->>Client: Return 404 Not Found
-  end
-
-  API->>DB: Validate name không trùng trong cùng business (nếu cập nhật name)
-  DB-->>API: Return validation result
-  alt Name Exists
-      API-->>Client: Return 400 Bad Request
   end
 
   API->>DB: Update service record
@@ -395,7 +407,90 @@ sequenceDiagram
 
 ---
 
-### 3.5 User đăng ký service hệ thống
+### 3.5 Lấy danh sách service của User (My Services)
+
+```shell
+GET /api/user-services/me?limit=10&offset=0&status=active
+```
+
+**Params:**
+
+- `status` (string, optional): Lọc theo trạng thái (pending, active, deactivated, rejected).
+- `limit` (integer, optional): default 10
+- `offset` (integer, optional): default 0
+
+**Response:**
+
+```json
+{
+  "data": {
+    "system_services": [
+      {
+        "id": "user_service_id_1",
+        "status": "active",
+        "service": {
+          "id": "service_id_1",
+          "name": "Featherlight Assistance",
+          "description": "Easy support",
+          "points": 1.0,
+          "image_url": "...",
+          "is_system": true
+        }
+      }
+    ],
+    "custom_services": [
+      {
+        "id": "user_service_id_2",
+        "status": "pending",
+        "service": {
+          "id": "service_id_2",
+          "name": "Tư vấn lô đề",
+          "description": "Tư vấn lô đề, áp dụng xác suất thống kê để áp dụng cho dự đoán",
+          "points": 2.0,
+          "image_url": "...",
+          "is_system": false
+        }
+      }
+    ]
+  },
+  "meta": {
+    "count": 2,
+    "limit": 10,
+    "offset": 0
+  }
+}
+```
+
+**Sequence diagram:**
+
+```mermaid
+sequenceDiagram
+  participant Client
+  participant API as API Server
+  participant DB as Database
+
+  Client->>API: GET /api/user-services/me
+  Note over API: Extract user_id from auth context
+
+  API->>DB: Query user_services by user_id, join with services
+  DB-->>API: Return list of user services
+
+  API->>Client: Group and return services
+```
+
+**Logic:**
+
+- Trích xuất `user_id` từ auth context.
+- Truy vấn `user_services` với điều kiện `user_id` khớp và `is_active=true`.
+- Join với bảng `services` để lấy thông tin chi tiết của service.
+- Lọc theo tham số `status` nếu được cung cấp.
+- Phân trang kết quả.
+- Nhóm kết quả thành `system_services` (với `services.is_system = true`) và `custom_services` (với `services.is_system = false`).
+- Trả về dữ liệu có cấu trúc.
+
+---
+
+### 3.6 User đăng ký/kích hoạt service hệ thống
 
 ```shell
 POST /api/user-services
@@ -405,7 +500,7 @@ POST /api/user-services
 
 ```json
 {
-  "service_id": "uuid"
+  "service_id": "uuid_of_system_service"
 }
 ```
 
@@ -417,7 +512,7 @@ POST /api/user-services
     "id": "uuid",
     "user_id": "user_id",
     "service_id": "uuid",
-    "status": "pending",
+    "status": "active",
     "created_at": "2025-05-02T16:14:00.000Z"
   }
 }
@@ -434,19 +529,28 @@ sequenceDiagram
 
   User->>FE: Chọn service hệ thống
   FE->>API: POST /api/user-services
-  API->>DB: Insert user_services (pending), Insert service_approvals (pending, create)
-  DB-->>API: OK
-  API-->>FE: Trả về trạng thái pending
+  API->>DB: Check if service is_system=true and user is not already registered
+  alt Service is a system service
+    API->>DB: Insert user_services (status='active')
+    DB-->>API: OK
+    API-->>FE: Trả về trạng thái active
+  else Service not system or already registered
+     API-->>FE: Return 400 Bad Request
+  end
 ```
 
 **Logic:**
 
-- Extract `business_id` từ service_id (truy vấn bảng services) hoặc từ auth context.
-- Tạo user_services (status=pending), tạo service_approvals (pending, action_type=create).
+- Extract `user_id` và `business_id` từ auth context.
+- Validate `service_id` tồn tại, thuộc `business_id`, và là service hệ thống (`is_system = true`).
+- Kiểm tra user chưa có record `user_services` cho `service_id` này. Nếu đã có, trả về lỗi 409 Conflict.
+- **Không tạo `service_approvals` record.**
+- Tạo `user_services` record với `status = 'active'`.
+- Logic này cho phép user kích hoạt và sử dụng service hệ thống ngay lập tức. Luồng duyệt chỉ áp dụng cho service do user tạo/cập nhật.
 
 ---
 
-### 3.6 User cập nhật service của mình
+### 3.7 User cập nhật service của mình
 
 ```shell
 PUT /api/services/{id}
@@ -470,8 +574,7 @@ PUT /api/services/{id}
   "data": {
     "id": "uuid",
     "user_service_id": "uuid",
-    "status": "pending",
-    "action_type": "update"
+    "status": "pending"
   }
 }
 ```
@@ -500,7 +603,7 @@ sequenceDiagram
     end
 
     API->>DB: Begin Transaction
-    API->>DB: Create service_approvals (user_service_id, action_type='update', status='pending', payload={...})
+    API->>DB: Create service_approvals (user_service_id, status='pending', payload={...})
     API->>DB: Update user_services.status = 'pending'
     DB-->>API: Return approval data
     API->>DB: Commit Transaction
@@ -517,7 +620,6 @@ sequenceDiagram
 - **Không cập nhật bảng `services` ngay.**
 - Tạo một record mới trong `service_approvals` với:
   - `user_service_id` tìm được ở trên.
-  - `action_type: 'update'`.
   - `status: 'pending'`.
   - `payload`: chứa toàn bộ payload của request.
 - Cập nhật `status` của `user_services` thành `pending`.
@@ -526,7 +628,7 @@ sequenceDiagram
 
 ---
 
-### 3.7 User xóa service đã đăng ký
+### 3.8 User xóa service đã đăng ký
 
 ```shell
 DELETE /api/user-services/{id}
@@ -579,7 +681,7 @@ sequenceDiagram
 
 ---
 
-### 3.8 User active/deactive service đã được duyệt
+### 3.9 User active/deactive service đã được duyệt
 
 ```shell
 PATCH /api/user-services/{id}/status
@@ -616,11 +718,55 @@ PATCH /api/user-services/{id}/status
 
 ---
 
-### 3.9 Admin duyệt yêu cầu (approve/reject)
+### 3.10 Admin duyệt yêu cầu (approve/reject)
+
+**Lấy danh sách yêu cầu:**
 
 ```shell
-GET /api/service-approvals?status=pending&limit=10&offset=0
+GET /api/service-approvals?status=pending&limit=10&offset=0&search=text
 ```
+
+**Params:**
+
+- `status` (string, optional): pending, approved, rejected. Default: pending.
+- `search` (string, optional): Tìm kiếm theo tên user hoặc tên service.
+- `limit`, `offset`
+
+**Response:**
+
+```json
+{
+  "data": [
+    {
+      "id": "approval_id",
+      "status": "pending",
+      "comment": null,
+      "created_at": "...",
+      "user_service": {
+        "id": "user_service_id",
+        "user": {
+          "id": "user_id",
+          "name": "Huy Tran"
+        },
+        "service": {
+          "id": "service_id",
+          "name": "Tư vấn lô đề...",
+          "description": "...",
+          "points": 2,
+          "image_url": "..."
+        }
+      },
+      "payload": {
+        "name": "Tên service mới",
+        "points": 5.0
+      }
+    }
+  ],
+  "meta": { "count": 1, "limit": 10, "offset": 0 }
+}
+```
+
+**Phê duyệt/Từ chối yêu cầu:**
 
 ```shell
 PUT /api/service-approvals/{id}
@@ -648,17 +794,19 @@ PUT /api/service-approvals/{id}
 
 **Logic:**
 
-- Extract `business_id` từ user_service.service_id (truy vấn bảng services) hoặc từ auth context.
-- **GET:** Trả về danh sách yêu cầu chờ duyệt (`status: 'pending'`), phân trang.
+- **GET:**
+  - Extract `business_id` từ admin auth context.
+  - Query `service_approvals`, join với `user_services` -> `users` và `user_services` -> `services` để lấy đủ thông tin hiển thị.
+  - Lọc theo `business_id`, `status`, `search`. Phân trang.
 - **PUT:**
   - Tìm `service_approvals` bằng `{id}`. Validate nó thuộc `business_id`.
   - Start transaction.
   - Cập nhật `service_approvals` (status, comment, approver_id).
-  - Dựa vào `action_type` trong `service_approvals`:
-    - **Nếu `action_type: 'create'`:**
+  - Dựa vào `service_approvals.payload`:
+    - **Nếu `payload` là `null` (Yêu cầu tạo mới):**
       - Nếu `status: 'approved'`, cập nhật `user_services.status = 'active'`.
       - Nếu `status: 'rejected'`, cập nhật `user_services.status = 'rejected'`.
-    - **Nếu `action_type: 'update'`:**
+    - **Nếu `payload` có dữ liệu (Yêu cầu cập nhật):**
       - Nếu `status: 'approved'`:
         - Lấy dữ liệu từ `service_approvals.payload`.
         - Cập nhật record trong bảng `services` tương ứng.
@@ -669,7 +817,7 @@ PUT /api/service-approvals/{id}
 
 ---
 
-### 3.10 Lấy chi tiết một service
+### 3.11 Lấy chi tiết một service
 
 ```shell
 GET /api/services/{id}
@@ -700,39 +848,12 @@ GET /api/services/{id}
 
 ---
 
-### 3.11 Lấy chi tiết một user_service
-
-```shell
-GET /api/user-services/{id}
-```
-
-**Response:**
-
-```json
-{
-  "data": {
-    "id": "uuid",
-    "user_id": "uuid",
-    "service_id": "uuid",
-    "status": "active",
-    "created_at": "..."
-  }
-}
-```
-
-**Logic:**
-
-- Extract `business_id` từ user_service.service_id (truy vấn bảng services) hoặc từ auth context.
-- Trả về chi tiết user_service theo business.
-
----
-
 ## 4. Logic tổng quát
 
 - Phân biệt service hệ thống và user tạo: is_system (true/false).
-- Quy trình duyệt: Tất cả yêu cầu tạo/cập nhật đều qua bảng service_approvals, trace được lịch sử duyệt.
+- Quy trình duyệt: Yêu cầu tạo/cập nhật service của user sẽ đi qua bảng `service_approvals`. Service hệ thống không cần duyệt.
 - Trạng thái user_services: pending → active/deactivated → rejected.
-- User chỉ được active/deactive khi đã được duyệt (status=active).
+- User chỉ được active/deactive khi đã được duyệt (status=active hoặc status=deactivated).
 - Admin CRUD service hệ thống (is_system=true).
 - Chuẩn hóa multi-business: luôn extract và filter theo `business_id`.
 
@@ -741,12 +862,13 @@ GET /api/user-services/{id}
 ## 5. UI/UX mapping
 
 - **End user:**
-  - Tab Explore: Xem service hệ thống (is_system=true).
-  - Tab My Services: Quản lý service đã đăng ký (user_services), trạng thái pending/active/deactivated/rejected.
-  - Đăng ký mới, cập nhật, active/deactive, xóa.
+  - Tab Explore: Xem service hệ thống (is_system=true) để đăng ký.
+  - Tab My Services: Quản lý service đã đăng ký (`user_services`), hiển thị service hệ thống và service custom với các trạng thái:
+    pending/active/deactivated/rejected.
+  - Đăng ký mới (cho service hệ thống), tạo mới (service custom), cập nhật, active/deactive, xóa.
 - **Admin portal:**
   - Quản lý service hệ thống (CRUD).
-  - Duyệt các yêu cầu tạo/cập nhật service của user (service_approvals).
+  - Duyệt các yêu cầu tạo/cập nhật service của user (`service_approvals`).
 
 ---
 
