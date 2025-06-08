@@ -1,1125 +1,758 @@
-# 🧩 Module: Thông báo (Notifications) - Low-Level Design (LLD)
+# 🧩 Module: Service Management – Low-Level Design (LLD)
 
 ## 1. Mục tiêu
 
-Xây dựng một hệ thống thông báo linh hoạt và mở rộng được sử dụng trong các trường hợp sau:
+- Cho phép End User đăng ký, kích hoạt/deactive các dịch vụ (service) mặc định của hệ thống hoặc tự tạo.
+- Quản lý quy trình duyệt (approve/reject) service do user tạo hoặc update.
+- Admin có thể CRUD service hệ thống (is_system=true) và duyệt các yêu cầu tạo/cập nhật service của user.
+- Lưu vết lịch sử duyệt, trạng thái từng lần đăng ký/cập nhật service.
+- Hỗ trợ multi-business (business_id).
 
-- Thông báo khi người dùng tải lên evidence
-- Thông báo khi admin phê duyệt/từ chối evidence của người dùng
-- Thông báo khi người dùng yêu cầu đổi quà (redeem reward)
-- Thông báo khi admin phê duyệt/từ chối yêu cầu đổi quà
-- Thông báo khi người dùng tặng điểm cho người dùng khác
-
-Hệ thống này cần hỗ trợ nhiều kênh gửi thông báo kênh Teams và dễ dàng mở rộng thêm các kênh mới (Slack, Email, SMS, Push Notification) trong
-tương lai.
+---
 
 ## 2. Entities
 
-**notifications**
+### services
 
-- `id` (uuid, PK): ID duy nhất của thông báo
-- `business_id` (uuid, FK đến `businesses`, not null): Doanh nghiệp liên quan
-- `event_type` (enum, not null): Loại sự kiện tạo thông báo
-  - `EVIDENCE_UPLOADED`: Người dùng tải lên evidence
-  - `EVIDENCE_APPROVED`: Admin phê duyệt evidence
-  - `EVIDENCE_REJECTED`: Admin từ chối evidence
-  - `REWARD_REQUESTED`: Người dùng yêu cầu đổi quà
-  - `REWARD_APPROVED`: Admin phê duyệt yêu cầu đổi quà
-  - `REWARD_REJECTED`: Admin từ chối yêu cầu đổi quà
-  - `POINTS_TRANSFERRED`: Người dùng tặng điểm cho người dùng khác
-- `user_id` (uuid, FK đến `users`, nullable): Người dùng nhận thông báo (có thể là null nếu gửi cho tất cả người dùng)
-- `admin_id` (uuid, FK đến `users`, nullable): Admin thực hiện hành động (nếu liên quan)
-- `sender_id` (uuid, FK đến `users`, nullable): Người gửi (trong trường hợp chuyển điểm)
-- `recipient_id` (uuid, FK đến `users`, nullable): Người nhận (trong trường hợp chuyển điểm)
-- `reference_id` (uuid, nullable): ID tham chiếu đến entity liên quan (evidence, reward_redemption)
-- `reference_type` (varchar, nullable): Loại entity tham chiếu (engagement_activities, reward_redemptions)
-- `content` (jsonb, not null): Nội dung thông báo dạng JSON, bao gồm:
-  - `title`: Tiêu đề thông báo
-  - `message`: Nội dung thông báo
-  - `image_url`: URL hình ảnh (nếu có)
-  - `action_url`: URL hành động (nếu có)
-  - `metadata`: Thông tin bổ sung
-- `channels` (jsonb, not null): Các kênh đã gửi thông báo, bao gồm:
-  - `slack`: trạng thái gửi qua Slack
-  - `email`: trạng thái gửi qua Email
-  - `teams`: trạng thái gửi qua Teams
-  - `sms`: trạng thái gửi qua SMS
-  - `push`: trạng thái gửi qua Push Notification
-- `status` (enum, not null, default: 'pending'): Trạng thái gửi thông báo
-  - `pending`: Đang chờ gửi
-  - `processing`: Đang xử lý
-  - `sent`: Đã gửi
-  - `failed`: Gửi thất bại
-- `is_read` (boolean, not null, default: false): Đã đọc hay chưa
-- `is_active` (boolean, not null, default: true): Hỗ trợ soft delete
-- `created_at` (timestampz, not null, default: CURRENT_TIMESTAMP): Thời gian tạo
-- `updated_at` (timestampz, nullable): Thời gian cập nhật
-- `created_by` (uuid, nullable): Người tạo thông báo
-- `updated_by` (uuid, nullable): Người cập nhật thông báo
+- `id` (uuid, PK): ID dịch vụ
+- `business_id` (uuid, FK): Service thuộc business nào
+- `name` (string): Tên dịch vụ
+- `description` (string): Mô tả dịch vụ
+- `points` (decimal): Số điểm khi thực hiện dịch vụ
+- `image_url` (string): Ảnh dịch vụ
+- `is_system` (boolean): true: service hệ thống (admin tạo), false: user tạo
+- `created_by` (uuid): Ai tạo service này (admin/user)
+- `updated_by` (uuid)
+- `created_at` (timestamp)
+- `updated_at` (timestamp)
+- `is_active` (boolean)
 
-**notification_templates**
+### user_services
 
-- `id` (uuid, PK): ID duy nhất của template
-- `business_id` (uuid, FK đến `businesses`, not null): Doanh nghiệp liên quan
-- `event_type` (enum, not null): Loại sự kiện sử dụng template
-- `channel` (enum, not null): Kênh gửi thông báo
-  - `slack`: Slack
-  - `email`: Email
-  - `teams`: Microsoft Teams
-  - `sms`: SMS
-  - `push`: Push Notification
-- `template` (jsonb, not null): Nội dung template dạng JSON, bao gồm:
-  - `title_template`: Template cho tiêu đề
-  - `body_template`: Template cho nội dung
-  - `image_template`: Template cho URL hình ảnh (nếu có)
-  - `action_template`: Template cho URL hành động (nếu có)
-  - `metadata`: Thông tin bổ sung
-- `is_active` (boolean, not null, default: true): Trạng thái kích hoạt
-- `created_at` (timestampz, not null, default: CURRENT_TIMESTAMP): Thời gian tạo
-- `updated_at` (timestampz, nullable): Thời gian cập nhật
-- `created_by` (uuid, nullable): Người tạo template
-- `updated_by` (uuid, nullable): Người cập nhật template
+- `id` (uuid, PK): ID
+- `user_id` (uuid): Ai sở hữu/đăng ký service này
+- `service_id` (uuid): FK đến services
+- `status` (enum): pending, active, deactivated, rejected
+- `created_by` (uuid)
+- `updated_by` (uuid)
+- `created_at` (timestamp)
+- `updated_at` (timestamp)
+- `is_active` (boolean)
 
-**notification_configurations**
+### service_approvals
 
-- `id` (uuid, PK): ID duy nhất của cấu hình
-- `business_id` (uuid, FK đến `businesses`, not null): Doanh nghiệp liên quan
-- `event_type` (enum, not null): Loại sự kiện
-- `channels` (jsonb, not null): Các kênh được bật cho sự kiện này
-  - `slack`: boolean
-  - `email`: boolean
-  - `teams`: boolean
-  - `sms`: boolean
-  - `push`: boolean
-- `recipients` (jsonb, not null): Cấu hình người nhận
-  - `all_users`: boolean
-  - `specific_users`: array of user_ids
-  - `admin_users`: boolean
-  - `user_roles`: array of role_ids
-- `metadata` (jsonb, nullable): Cấu hình bổ sung
-- `is_active` (boolean, not null, default: true): Trạng thái kích hoạt
-- `created_at` (timestampz, not null, default: CURRENT_TIMESTAMP): Thời gian tạo
-- `updated_at` (timestampz, nullable): Thời gian cập nhật
-- `created_by` (uuid, nullable): Người tạo cấu hình
-- `updated_by` (uuid, nullable): Người cập nhật cấu hình
+- `id` (uuid, PK): ID
+- `user_service_id` (uuid): FK đến user_services
+- `status` (enum): pending, approved, rejected
+- `comment` (string): Lý do duyệt/từ chối
+- `action_type` (enum): create, update
+- `payload` (jsonb, nullable): Lưu trữ data khi user yêu cầu update
+- `created_by` (uuid)
+- `updated_by` (uuid)
+- `created_at` (timestamp)
+- `updated_at` (timestamp)
+- `is_active` (boolean)
 
-**notification_channel_configs**
+---
 
-- `id` (uuid, PK): ID duy nhất của cấu hình kênh
-- `business_id` (uuid, FK đến `businesses`, not null): Doanh nghiệp liên quan
-- `channel_type` (enum, not null): Loại kênh ('teams', 'slack', 'email', 'sms', 'push')
-- `config` (jsonb, not null): Cấu hình kênh dạng JSON, cho Teams bao gồm:
-  - `webhook_url`: URL webhook của Teams channel
-  - `team_id`: ID của team (optional)
-  - `channel_id`: ID của channel (optional)
-  - `tenant_id`: ID của tenant (optional)
-  - `admin_mention_name`: Tên người dùng nhận mention (@Huy Tran)
-- `is_active` (boolean, not null, default: true): Trạng thái kích hoạt
-- `created_at` (timestampz, not null, default: CURRENT_TIMESTAMP): Thời gian tạo
-- `updated_at` (timestampz, nullable): Thời gian cập nhật
-
-## 2.1 Database Diagram
+## 2.1 Database diagram
 
 ```mermaid
 erDiagram
   businesses {
-      uuid id PK
-      varchar name
-      boolean is_active
-      timestampz created_at
-      timestampz updated_at
+    uuid id PK
+    ...
   }
-
   users {
-      uuid id PK
-      uuid business_id FK
-      varchar first_name
-      varchar last_name
-      boolean is_active
+    uuid id PK
+    ...
   }
-
-  engagement_activities {
-      uuid id PK
-      uuid business_id FK
-      uuid user_id FK
-      uuid rule_id FK
-      varchar evidence_url
-      enum status
-      boolean is_active
+  services {
+    uuid id PK
+    uuid business_id FK
+    string name
+    string description
+    decimal points
+    string image_url
+    boolean is_system
+    uuid created_by
+    uuid updated_by
+    timestamp created_at
+    timestamp updated_at
+    boolean is_active
   }
-
-  reward_redemptions {
-      uuid id PK
-      uuid user_id FK
-      uuid reward_id FK
-      uuid business_id FK
-      enum status
-      boolean is_active
+  user_services {
+    uuid id PK
+    uuid user_id FK
+    uuid service_id FK
+    enum status
+    uuid created_by
+    uuid updated_by
+    timestamp created_at
+    timestamp updated_at
+    boolean is_active
   }
-
-  notifications {
-      uuid id PK
-      uuid business_id FK
-      enum event_type
-      uuid user_id FK
-      uuid admin_id FK
-      uuid sender_id FK
-      uuid recipient_id FK
-      uuid reference_id
-      varchar reference_type
-      jsonb content
-      jsonb channels
-      enum status
-      boolean is_read
-      boolean is_active
-      timestampz created_at
-      timestampz updated_at
+  service_approvals {
+    uuid id PK
+    uuid user_service_id FK
+    enum status
+    string comment
+    enum action_type
+    jsonb payload
+    uuid created_by
+    uuid updated_by
+    timestamp created_at
+    timestamp updated_at
+    boolean is_active
   }
-
-  notification_templates {
-      uuid id PK
-      uuid business_id FK
-      enum event_type
-      enum channel
-      jsonb template
-      boolean is_active
-      timestampz created_at
-      timestampz updated_at
-  }
-
-  notification_configurations {
-      uuid id PK
-      uuid business_id FK
-      enum event_type
-      jsonb channels
-      jsonb recipients
-      jsonb metadata
-      boolean is_active
-      timestampz created_at
-      timestampz updated_at
-  }
-
-  notification_channel_configs {
-      uuid id PK
-      uuid business_id FK
-      enum channel_type
-      jsonb config
-      boolean is_active
-      timestampz created_at
-      timestampz updated_at
-  }
-
-  businesses ||--o{ users : "has"
-  businesses ||--o{ notifications : "owns"
-  businesses ||--o{ notification_templates : "owns"
-  businesses ||--o{ notification_configurations : "owns"
-  businesses ||--o{ notification_channel_configs : "configures"
-  businesses ||--o{ engagement_activities : "owns"
-  businesses ||--o{ reward_redemptions : "owns"
-  users ||--o{ notifications : "receives"
-  engagement_activities ||--o{ notifications : "triggers"
-  reward_redemptions ||--o{ notifications : "triggers"
+  businesses ||--o{ services : "owns"
+  users ||--o{ user_services : "has"
+  services ||--o{ user_services : "has"
+  user_services ||--o{ service_approvals : "has"
 ```
 
-## 3. Thiết kế Pattern
+---
 
-### 3.1 Factory Pattern
+## 3. Use Cases & API Design
 
-Sử dụng Factory Pattern để tạo ra các đối tượng notification sender phù hợp với từng loại kênh thông báo.
+### 3.1 Lấy danh sách service hệ thống (Admin/End User)
 
-```typescript
-// Giao diện chung cho tất cả notification senders
-interface NotificationSender {
-  send(notification: Notification): Promise<boolean>;
-}
+```shell
+GET /api/services?is_system=true&limit=10&offset=0&search=text
+```
 
-// Các implementation cụ thể
-class SlackNotificationSender implements NotificationSender {
-  async send(notification: Notification): Promise<boolean> {
-    // Xử lý gửi thông báo qua Slack
-    return true;
+**Params:**
+
+- `is_system` (boolean, required): true để lấy service hệ thống
+- `limit` (integer, optional): số lượng record trả về (default: 10)
+- `offset` (integer, optional): vị trí bắt đầu (default: 0)
+- `search` (string, optional): tìm kiếm theo tên/mô tả service (case-insensitive)
+
+**Response:**
+
+```json
+{
+  "data": [
+    {
+      "id": "uuid",
+      "business_id": "uuid",
+      "name": "Featherlight Assistance",
+      "description": "Easy support",
+      "points": 1.0,
+      "image_url": "...",
+      "is_system": true,
+      "is_active": true
+    }
+  ],
+  "meta": {
+    "count": 1,
+    "limit": 10,
+    "offset": 0,
+    "search": ""
   }
 }
+```
 
-class EmailNotificationSender implements NotificationSender {
-  async send(notification: Notification): Promise<boolean> {
-    // Xử lý gửi thông báo qua Email
-    return true;
-  }
+**Sequence diagram:**
+
+```mermaid
+sequenceDiagram
+  participant Client
+  participant API as API Server
+  participant DB as Database
+
+  Client->>API: GET /api/services?is_system=true&limit=10&offset=0&search=text
+  API->>DB: Query services (is_system=true, is_active=true, search, limit, offset)
+  DB-->>API: Return filtered services
+  API-->>Client: Return 200 OK with data and meta
+```
+
+**Logic:**
+
+- Extract user from request và lấy `business_id` từ auth context (hoặc tạm dùng `business_id` của ABC Rewards site - đối với admin).
+- Query `services` với `business_id`, `is_system=true`, `is_active=true`, `search`, `limit`, `offset`.
+- Nếu có `search`, tìm kiếm case-insensitive trên `name` hoặc `description`.
+- Phân trang với `limit` và `offset`.
+- Trả về `data` (danh sách service) và `meta` (tổng số record, limit, offset, search).
+
+---
+
+### 3.2 Tạo service (Admin/User)
+
+```shell
+POST /api/services
+```
+
+**Payload:**
+
+```json
+{
+  "name": "Service Name",
+  "description": "Service description",
+  "points": 5.0,
+  "image_url": "...",
+  "is_system": false
 }
+```
 
-class TeamsNotificationSender implements NotificationSender {
-  async send(notification: Notification): Promise<boolean> {
-    // Xử lý gửi thông báo qua Teams
-    return true;
-  }
-}
+**Response (Success):**
 
-class SMSNotificationSender implements NotificationSender {
-  async send(notification: Notification): Promise<boolean> {
-    // Xử lý gửi thông báo qua SMS
-    return true;
-  }
-}
-
-class PushNotificationSender implements NotificationSender {
-  async send(notification: Notification): Promise<boolean> {
-    // Xử lý gửi thông báo qua Push Notification
-    return true;
-  }
-}
-
-// Factory class
-class NotificationSenderFactory {
-  static createSender(channel: string): NotificationSender {
-    switch (channel) {
-      case 'slack':
-        return new SlackNotificationSender();
-      case 'email':
-        return new EmailNotificationSender();
-      case 'teams':
-        return new TeamsNotificationSender();
-      case 'sms':
-        return new SMSNotificationSender();
-      case 'push':
-        return new PushNotificationSender();
-      default:
-        throw new Error(`Không hỗ trợ kênh thông báo: ${channel}`);
+```json
+{
+  "data": {
+    "id": "uuid",
+    "business_id": "uuid",
+    "name": "Service Name",
+    "description": "Service description",
+    "points": 5.0,
+    "image_url": "...",
+    "is_system": false,
+    "is_active": true,
+    "created_at": "...",
+    "user_service": {
+      "id": "uuid",
+      "status": "pending"
     }
   }
 }
 ```
 
-### 3.2 Strategy Pattern
+**Sequence Diagram:**
 
-Ngoài Factory Pattern, Strategy Pattern cũng là một lựa chọn tốt để xử lý việc gửi thông báo qua nhiều kênh khác nhau.
+```mermaid
+sequenceDiagram
+    participant Client
+    participant API as API Server
+    participant DB as Database
 
-```typescript
-// Giao diện chiến lược gửi thông báo
-interface NotificationStrategy {
-  send(notification: Notification): Promise<boolean>;
+    Client->>API: POST /api/services with payload
+    Note over API: Extract business_id, user_id, role from auth context
+
+    API->>DB: Validate name không trùng trong business
+    DB-->>API: Validation result
+
+    alt Admin Flow (is_system: true)
+        Note over API: Check if role is Admin
+        API->>DB: Create services record
+        DB-->>API: Return created service
+        API-->>Client: Return 201 Created (chỉ có service data)
+    end
+
+    alt User Flow (is_system: false)
+        Note over API: Check if role is User
+        API->>DB: Begin Transaction
+        API->>DB: Create services record (created_by = user_id)
+        API->>DB: Create user_services record (user_id, service_id, status='pending')
+        API->>DB: Create service_approvals record (user_service_id, action_type='create', status='pending')
+        DB-->>API: Return created data
+        API->>DB: Commit Transaction
+        API-->>Client: Return 201 Created (gồm service và user_service)
+    end
+```
+
+**Logic:**
+
+- Extract `business_id`, `user_id`, và `role` từ auth context.
+- Validate `name` không được trùng trong cùng `business_id`.
+- **Admin Flow:**
+  - Nếu `role` là Admin và `is_system: true` trong payload, chỉ tạo record trong `services`.
+  - `created_by` là `admin_id`.
+- **User Flow:**
+  - Nếu `role` là User và `is_system: false` trong payload:
+  - Start transaction.
+  - Tạo record trong `services` với `is_system: false`, `created_by = user_id`.
+  - Dùng `service_id` vừa tạo, tạo record trong `user_services` với `status: 'pending'`.
+  - Dùng `user_service_id` vừa tạo, tạo record trong `service_approvals` với `action_type: 'create'`, `status: 'pending'`.
+  - Commit transaction.
+- Trả về dữ liệu tương ứng.
+
+---
+
+### 3.3 Cập nhật service hệ thống (Admin)
+
+```shell
+PUT /api/services/{id}
+```
+
+**Payload:**
+
+```json
+{
+  "name": "Featherlight Assistance Updated",
+  "description": "Updated description",
+  "points": 2.5,
+  "image_url": "...",
+  "is_active": true
 }
+```
 
-// Các chiến lược cụ thể
-class SlackStrategy implements NotificationStrategy {
-  async send(notification: Notification): Promise<boolean> {
-    // Xử lý gửi thông báo qua Slack
-    return true;
-  }
-}
+**Response:**
 
-class EmailStrategy implements NotificationStrategy {
-  async send(notification: Notification): Promise<boolean> {
-    // Xử lý gửi thông báo qua Email
-    return true;
-  }
-}
-
-// Context class sử dụng chiến lược
-class NotificationContext {
-  private strategy: NotificationStrategy;
-
-  constructor(strategy: NotificationStrategy) {
-    this.strategy = strategy;
-  }
-
-  setStrategy(strategy: NotificationStrategy): void {
-    this.strategy = strategy;
-  }
-
-  async sendNotification(notification: Notification): Promise<boolean> {
-    return this.strategy.send(notification);
+```json
+{
+  "data": {
+    "id": "uuid",
+    "name": "Featherlight Assistance Updated",
+    "description": "Updated description",
+    "points": 2.5,
+    "image_url": "...",
+    "is_active": true,
+    "created_at": "2025-05-02T16:14:00.000Z",
+    "updated_at": "2025-05-02T16:15:00.000Z"
   }
 }
 ```
 
-### 3.3 Observer Pattern
+**Sequence diagram:**
 
-Observer Pattern cũng rất phù hợp cho hệ thống thông báo, cho phép các sự kiện khác nhau kích hoạt thông báo mà không phụ thuộc vào logic xử lý.
+```mermaid
+sequenceDiagram
+  participant Client
+  participant API as API Server
+  participant DB as Database
 
-```typescript
-// Observer interface
-interface NotificationObserver {
-  update(event: Event): void;
-}
+  Client->>API: PUT /api/services/{id} with payload
+  Note over API: Extract business_id from admin auth context (hoặc tạm dùng business_id của ABC Rewards site)
 
-// Concrete Observer
-class SlackNotificationObserver implements NotificationObserver {
-  update(event: Event): void {
-    // Gửi thông báo qua Slack
-  }
-}
+  API->>DB: Query service with id, business_id
+  DB-->>API: Return service data
+  alt Service Not Found
+      API-->>Client: Return 404 Not Found
+  end
 
-class EmailNotificationObserver implements NotificationObserver {
-  update(event: Event): void {
-    // Gửi thông báo qua Email
-  }
-}
+  API->>DB: Validate name không trùng trong cùng business (nếu cập nhật name)
+  DB-->>API: Return validation result
+  alt Name Exists
+      API-->>Client: Return 400 Bad Request
+  end
 
-// Subject
-class NotificationSubject {
-  private observers: NotificationObserver[] = [];
+  API->>DB: Update service record
+  DB-->>API: Return updated data
+  API-->>Client: Return 200 OK with data
+```
 
-  registerObserver(observer: NotificationObserver): void {
-    this.observers.push(observer);
-  }
+**Logic:**
 
-  unregisterObserver(observer: NotificationObserver): void {
-    const index = this.observers.indexOf(observer);
-    if (index !== -1) {
-      this.observers.splice(index, 1);
-    }
-  }
+- Extract `business_id` từ auth context (tạm dùng business_id của ABC Rewards site).
+- Kiểm tra service tồn tại với id, business_id.
+- Chỉ admin được phép cập nhật.
+- Update các trường được gửi lên.
+- Trả về toàn bộ object service đã cập nhật.
 
-  notifyObservers(event: Event): void {
-    for (const observer of this.observers) {
-      observer.update(event);
-    }
+---
+
+### 3.4 Xóa service hệ thống (Admin)
+
+```shell
+DELETE /api/services/{id}
+```
+
+**Response:**
+
+```json
+{
+  "data": {
+    "id": "uuid"
   }
 }
 ```
 
-## 4. Use Cases & API Design
+**Sequence diagram:**
 
-### 4.1 Tạo thông báo khi người dùng tải lên minh chứng
+```mermaid
+sequenceDiagram
+  participant Client
+  participant API as API Server
+  participant DB as Database
 
-**Kích hoạt**: Sau khi API tạo Evidence được gọi thành công
+  Client->>API: DELETE /api/services/{id}
+  Note over API: Extract business_id from admin auth context (hoặc tạm dùng business_id của ABC Rewards site)
 
-**Trình tự xử lý**:
+  API->>DB: Query service with id, business_id, is_active=true
+  DB-->>API: Return service data
+  alt Service Not Found
+      API-->>Client: Return 404 Not Found
+  end
 
-1. Hệ thống lấy cấu hình thông báo cho sự kiện EVIDENCE_UPLOADED
-2. Nếu cấu hình cho phép gửi thông báo, tạo mới notification với trạng thái `pending`
-3. Hệ thống lấy template thông báo cho từng kênh
-4. Gửi thông báo qua các kênh được cấu hình (Slack, Email, Teams, SMS, Push)
-5. Cập nhật trạng thái của notification thành `sent` hoặc `failed`
+  API->>DB: Check for active user_services with service_id
+  DB-->>API: Return user_services count
+  alt Active user_services exist
+      API-->>Client: Return 400 Bad Request
+  end
 
-**Sequence diagram**:
+  API->>DB: Soft delete service (is_active=false, updated_by, updated_at)
+  DB-->>API: Confirm deletion
+  API-->>Client: Return 204 No Content
+```
+
+**Logic:**
+
+- Extract `business_id` từ auth context (tạm dùng business_id của ABC Rewards site).
+- Kiểm tra service tồn tại với id, business_id, is_active=true.
+- Kiểm tra không có user_services active liên quan.
+- Soft delete: set is_active=false, updated_by, updated_at cho service.
+- Trả 204 No Content.
+
+---
+
+### 3.5 User đăng ký service hệ thống
+
+```shell
+POST /api/user-services
+```
+
+**Payload:**
+
+```json
+{
+  "service_id": "uuid"
+}
+```
+
+**Response:**
+
+```json
+{
+  "data": {
+    "id": "uuid",
+    "user_id": "user_id",
+    "service_id": "uuid",
+    "status": "pending",
+    "created_at": "2025-05-02T16:14:00.000Z"
+  }
+}
+```
+
+**Sequence diagram:**
 
 ```mermaid
 sequenceDiagram
   participant User
-  participant API
-  participant NotificationService
-  participant Slack
-  participant Email
-  participant Database
+  participant FE
+  participant API as API Server
+  participant DB as Database
 
-  User->>API: POST /engagement-activities
-  API->>Database: Lưu evidence
-  Database-->>API: Trả về evidence_id
-  API->>NotificationService: Tạo thông báo (EVIDENCE_UPLOADED)
-  NotificationService->>Database: Lấy cấu hình thông báo
-  Database-->>NotificationService: Trả về cấu hình
-  NotificationService->>Database: Lấy template thông báo
-  Database-->>NotificationService: Trả về template
-
-  alt Gửi qua Slack
-    NotificationService->>Slack: Gửi thông báo
-    Slack-->>NotificationService: Kết quả gửi
-  end
-
-  alt Gửi qua Email
-    NotificationService->>Email: Gửi thông báo
-    Email-->>NotificationService: Kết quả gửi
-  end
-
-  NotificationService->>Database: Cập nhật trạng thái notification
-  API-->>User: Trả về kết quả tạo evidence
+  User->>FE: Chọn service hệ thống
+  FE->>API: POST /api/user-services
+  API->>DB: Insert user_services (pending), Insert service_approvals (pending, create)
+  DB-->>API: OK
+  API-->>FE: Trả về trạng thái pending
 ```
 
-### 4.2 Tạo thông báo khi admin phê duyệt/từ chối minh chứng
+**Logic:**
 
-**Kích hoạt**: Sau khi API phê duyệt hoặc từ chối evidence được gọi thành công
+- Extract `business_id` từ service_id (truy vấn bảng services) hoặc từ auth context.
+- Tạo user_services (status=pending), tạo service_approvals (pending, action_type=create).
 
-**Trình tự xử lý**:
+---
 
-1. Hệ thống lấy cấu hình thông báo cho sự kiện EVIDENCE_APPROVED hoặc EVIDENCE_REJECTED
-2. Nếu cấu hình cho phép gửi thông báo, tạo mới notification với trạng thái `pending`
-3. Hệ thống lấy template thông báo cho từng kênh
-4. Gửi thông báo qua các kênh được cấu hình
-5. Cập nhật trạng thái của notification thành `sent` hoặc `failed`
+### 3.6 User cập nhật service của mình
 
-### 4.3 Tạo thông báo khi người dùng yêu cầu đổi quà
-
-**Kích hoạt**: Sau khi API tạo Reward Redemption được gọi thành công
-
-**Trình tự xử lý**:
-
-1. Hệ thống lấy cấu hình thông báo cho sự kiện REWARD_REQUESTED
-2. Nếu cấu hình cho phép gửi thông báo, tạo mới notification với trạng thái `pending`
-3. Hệ thống lấy template thông báo cho từng kênh
-4. Gửi thông báo qua các kênh được cấu hình
-5. Cập nhật trạng thái của notification thành `sent` hoặc `failed`
-
-### 4.4 Tạo thông báo khi admin phê duyệt/từ chối yêu cầu đổi quà
-
-**Kích hoạt**: Sau khi API phê duyệt hoặc từ chối reward redemption được gọi thành công
-
-**Trình tự xử lý**:
-
-1. Hệ thống lấy cấu hình thông báo cho sự kiện REWARD_APPROVED hoặc REWARD_REJECTED
-2. Nếu cấu hình cho phép gửi thông báo, tạo mới notification với trạng thái `pending`
-3. Hệ thống lấy template thông báo cho từng kênh
-4. Gửi thông báo qua các kênh được cấu hình
-5. Cập nhật trạng thái của notification thành `sent` hoặc `failed`
-
-### 4.5 Tạo thông báo khi người dùng tặng điểm cho người dùng khác
-
-**Kích hoạt**: Sau khi API transfer points được gọi thành công
-
-**Trình tự xử lý**:
-
-1. Hệ thống lấy cấu hình thông báo cho sự kiện POINTS_TRANSFERRED
-2. Nếu cấu hình cho phép gửi thông báo, tạo mới notification với trạng thái `pending`
-3. Hệ thống lấy template thông báo cho từng kênh
-4. Gửi thông báo qua các kênh được cấu hình
-5. Cập nhật trạng thái của notification thành `sent` hoặc `failed`
-
-## 5. Chi tiết format nội dung thông báo
-
-### 5.1 Khi end user upload evidence
-
-**Tiêu đề**: Có bằng chứng mới
-
-**Nội dung**:
-
-```
-[dd/mm/yyyy hh:mm AM/PM]
-[end-user name] vừa tải lên bằng chứng mới là [rule name]
-@Huy Tran
-<evidence image>
-<button: View>
+```shell
+PUT /api/services/{id}
 ```
 
-**Ví dụ**:
-
-```
-Có bằng chứng mới
-7/5/2025 1:35PM
-Linh Pham vừa tải lên bằng chứng mới là Rửa chén
-<button: View list>
-```
-
-### 5.2 Khi admin phê duyệt evidence
-
-**Tiêu đề**: Phê duyệt bằng chứng ✅
-
-**Nội dung**:
-
-```
-[dd/mm/yyyy hh:mm AM/PM]
-[end-user name] nhận [points] điểm từ [rule name]
-<evidence image>
-```
-
-**Ví dụ**:
-
-```
-Phê duyệt bằng chứng ✅
-7/5/2025 1:35PM
-Linh Pham nhận 2 điểm từ Rửa chén
-```
-
-### 5.3 Khi admin từ chối evidence
-
-**Tiêu đề**: Từ chối bằng chứng
-
-**Nội dung**:
-
-```
-[dd/mm/yyyy hh:mm AM/PM]
-[Admin User] từ chối bằng chứng [rule name] của [end user name] vì [reason]
-<evidence image>
-```
-
-**Ví dụ**:
-
-```
-Từ chối bằng chứng
-7/5/2025 1:35PM
-Admin User từ chối bằng chứng Rửa chén của Linh Pham vì ảnh mờ quá
-```
-
-### 5.4 Khi user yêu cầu đổi quà
-
-**Tiêu đề**: Có yêu cầu đổi quà mới
-
-**Nội dung**:
-
-```
-[dd/mm/yyyy hh:mm AM/PM]
-[end-user name] vừa mới yêu cầu đổi [reward name]
-@Huy Tran
-<reward image>
-<button: View >
-```
-
-**Ví dụ**:
-
-```
-Có yêu cầu đổi quà mới
-7/5/2025 1:35PM
-Linh Pham vừa yêu cầu đổi Milo
-<button: View >
-```
-
-### 5.5 Khi admin phê duyệt yêu cầu đổi quà
-
-**Tiêu đề**: Phê duyệt yêu cầu đổi quà 🎉
-
-**Nội dung**:
-
-```
-[dd/mm/yyyy hh:mm AM/PM]
-[end-user name] sử dụng [points] điểm để đổi [reward name] thành công!🎉
-<reward image>
-```
-
-**Ví dụ**:
-
-```
-Phê duyệt yêu cầu đổi quà 🎉
-7/5/2025 1:35PM
-Linh Pham sử dụng 2 điểm để đổi Milo thành công!🎉
-```
-
-### 5.6 Khi admin từ chối yêu cầu đổi quà
-
-**Tiêu đề**: Từ chối yêu cầu đổi quà
-
-**Nội dung**:
-
-```
-[dd/mm/yyyy hh:mm AM/PM]
-[Admin User] từ chối yêu cầu đổi quà [reward name] của [end user name]
-<reward image>
-```
-
-**Ví dụ**:
-
-```
-Từ chối yêu cầu đổi quà
-7/5/2025 1:35PM
-[Admin User] từ chối yêu cầu đổi quà Milo của Linh Pham
-```
-
-### 5.7 Khi user tặng điểm cho user khác
-
-**Tiêu đề**: Thông báo húp điểm
-
-**Nội dung**:
-
-```
-[dd/mm/yyyy hh:mm AM/PM]
-[giver] vừa tặng [give away points] điểm cho [recipient] với nội dung [description]
-```
-
-**Ví dụ**:
-
-```
-Thông báo húp điểm
-7/5/2025 1:35PM
-Linh Pham vừa tặng 10 điểm cho Thien Lam với nội dung Tặng Thiện 10 điểm nhó
-```
-
-## 6. Đề xuất cải tiến
-
-### 6.1 Ứng dụng Template Method Pattern
-
-Ngoài Factory Pattern, Template Method Pattern cũng có thể được áp dụng để xử lý quy trình gửi thông báo với các bước cụ thể, trong khi vẫn cho phép
-các lớp con tùy chỉnh cách thức gửi thông báo.
-
-```typescript
-// Abstract class định nghĩa template method
-abstract class NotificationSender {
-  // Template method
-  async sendNotification(notification: Notification): Promise<boolean> {
-    // Các bước chung
-    this.prepareContent(notification);
-    const result = await this.send(notification);
-    this.logResult(notification, result);
-    return result;
-  }
-
-  // Các phương thức có thể ghi đè
-  protected prepareContent(notification: Notification): void {
-    // Xử lý chung, có thể ghi đè
-  }
-
-  // Phương thức trừu tượng bắt buộc implement
-  protected abstract send(notification: Notification): Promise<boolean>;
-
-  // Phương thức hook
-  protected logResult(notification: Notification, result: boolean): void {
-    console.log(`Notification ${notification.id} sent: ${result}`);
-  }
-}
-
-// Các class cụ thể
-class SlackNotificationSender extends NotificationSender {
-  protected async send(notification: Notification): Promise<boolean> {
-    // Xử lý gửi qua Slack
-    return true;
-  }
-}
-
-class EmailNotificationSender extends NotificationSender {
-  protected prepareContent(notification: Notification): void {
-    // Xử lý đặc biệt cho email
-    super.prepareContent(notification);
-  }
-
-  protected async send(notification: Notification): Promise<boolean> {
-    // Xử lý gửi qua Email
-    return true;
-  }
-}
-```
-
-### 6.2 Ứng dụng Queue System
-
-Đề xuất sử dụng hệ thống queue cho việc gửi thông báo để tăng hiệu suất và độ tin cậy:
-
-1. Khi một sự kiện xảy ra, thay vì gửi thông báo trực tiếp, hệ thống sẽ đẩy một message vào queue
-2. Các worker process sẽ xử lý các message trong queue và gửi thông báo
-3. Nếu gửi thất bại, message có thể được đưa vào dead-letter queue để xử lý lại sau
-
-Mô hình này giúp:
-
-- Giảm thời gian phản hồi API
-- Xử lý được số lượng lớn thông báo
-- Dễ dàng retry khi gặp lỗi
-- Theo dõi và debug quá trình gửi thông báo
-
-### 6.3 Ứng dụng Decorator Pattern
-
-Decorator Pattern có thể được sử dụng để thêm các tính năng phụ cho việc gửi thông báo như caching, logging, retry logic, throttling:
-
-```typescript
-// Component interface
-interface NotificationSender {
-  send(notification: Notification): Promise<boolean>;
-}
-
-// Concrete Component
-class BasicNotificationSender implements NotificationSender {
-  async send(notification: Notification): Promise<boolean> {
-    // Gửi thông báo cơ bản
-    return true;
-  }
-}
-
-// Base Decorator
-abstract class NotificationSenderDecorator implements NotificationSender {
-  constructor(protected wrappee: NotificationSender) {}
-
-  async send(notification: Notification): Promise<boolean> {
-    return this.wrappee.send(notification);
-  }
-}
-
-// Concrete Decorators
-class LoggingDecorator extends NotificationSenderDecorator {
-  async send(notification: Notification): Promise<boolean> {
-    console.log(`Sending notification: ${notification.id}`);
-    const result = await super.send(notification);
-    console.log(`Notification ${notification.id} sent: ${result}`);
-    return result;
-  }
-}
-
-class RetryDecorator extends NotificationSenderDecorator {
-  constructor(
-    wrappee: NotificationSender,
-    private maxRetries: number = 3,
-  ) {
-    super(wrappee);
-  }
-
-  async send(notification: Notification): Promise<boolean> {
-    let attempts = 0;
-    let result = false;
-
-    while (attempts < this.maxRetries && !result) {
-      attempts++;
-      try {
-        result = await super.send(notification);
-      } catch (error) {
-        if (attempts >= this.maxRetries) {
-          throw error;
-        }
-        // Delay before retry
-        await new Promise(resolve => setTimeout(resolve, 1000 * attempts));
-      }
-    }
-
-    return result;
-  }
-}
-```
-
-## 7. Kết luận
-
-Hệ thống thông báo được thiết kế với các pattern tiên tiến giúp:
-
-1. **Linh hoạt**: Hỗ trợ nhiều kênh thông báo khác nhau
-2. **Mở rộng**: Dễ dàng thêm kênh thông báo mới hoặc loại sự kiện mới
-3. **Bảo trì**: Sử dụng Factory Pattern giúp code dễ bảo trì
-4. **Cấu hình**: Hỗ trợ template và cấu hình tùy chỉnh cho từng loại thông báo
-5. **Hiệu suất**: Có thể tích hợp với hệ thống queue để xử lý số lượng lớn thông báo
-
-Factory Pattern là lựa chọn chính cho hệ thống này, nhưng Strategy Pattern và Observer Pattern cũng là những lựa chọn tốt tùy thuộc vào yêu cầu cụ thể
-và môi trường phát triển.
-
-## 8. Chi tiết triển khai cho Microsoft Teams
-
-### 8.1 Microsoft Teams Webhook Configuration
-
-**notification_channel_configs**
-
-- `id` (uuid, PK): ID duy nhất của cấu hình kênh
-- `business_id` (uuid, FK đến `businesses`, not null): Doanh nghiệp liên quan
-- `channel_type` (enum, not null): Loại kênh ('teams', 'slack', 'email', 'sms', 'push')
-- `config` (jsonb, not null): Cấu hình kênh dạng JSON, cho Teams bao gồm:
-  - `webhook_url`: URL webhook của Teams channel
-  - `team_id`: ID của team (optional)
-  - `channel_id`: ID của channel (optional)
-  - `tenant_id`: ID của tenant (optional)
-  - `admin_mention_name`: Tên người dùng nhận mention (@Huy Tran)
-- `is_active` (boolean, not null, default: true): Trạng thái kích hoạt
-- `created_at` (timestampz, not null, default: CURRENT_TIMESTAMP): Thời gian tạo
-- `updated_at` (timestampz, nullable): Thời gian cập nhật
-
-### 8.2 Teams-specific Message Templates
-
-Microsoft Teams hỗ trợ Adaptive Cards và MessageCard formats, cho phép tạo thông báo với hình ảnh và các tùy chọn tương tác. Dưới đây là ví dụ về cấu
-trúc MessageCard:
+**Payload:**
 
 ```json
 {
-  "@type": "MessageCard",
-  "@context": "http://schema.org/extensions",
-  "themeColor": "0076D7",
-  "summary": "Có bằng chứng mới",
-  "sections": [
-    {
-      "activityTitle": "Có bằng chứng mới",
-      "activitySubtitle": "07/05/2025 1:35PM",
-      "activityImage": "https://evidence-url.jpg",
-      "facts": [
-        {
-          "name": "User:",
-          "value": "Linh Pham"
-        },
-        {
-          "name": "Rule:",
-          "value": "Rửa chén"
-        }
-      ],
-      "markdown": true
-    }
-  ],
-  "potentialAction": [
-    {
-      "@type": "OpenUri",
-      "name": "View",
-      "targets": [
-        {
-          "os": "default",
-          "uri": "https://example.com/evidence/123"
-        }
-      ]
-    }
-  ]
+  "name": "Dạy tiếng Anh nâng cao",
+  "description": "1 buổi dạy nâng cao",
+  "points": 3.5,
+  "image_url": "..."
 }
 ```
 
-### 8.3 Triển khai TeamsNotificationSender
-
-```typescript
-interface TeamsMessageOptions {
-  title: string;
-  subtitle: string;
-  text: string;
-  imageUrl?: string;
-  buttonText?: string;
-  buttonUrl?: string;
-  themeColor?: string;
-  mentions?: Array<{
-    id: string;
-    name: string;
-  }>;
-}
-
-class TeamsNotificationSender implements NotificationSender {
-  private webhookUrl: string;
-
-  constructor(webhookUrl: string) {
-    this.webhookUrl = webhookUrl;
-  }
-
-  async send(notification: Notification): Promise<boolean> {
-    try {
-      const templateData = this.prepareTemplateData(notification);
-      const messageCard = this.buildMessageCard(templateData);
-
-      const response = await fetch(this.webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(messageCard),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Teams API responded with ${response.status}: ${response.statusText}`);
-      }
-
-      return true;
-    } catch (error) {
-      console.error('Failed to send Teams notification:', error);
-      return false;
-    }
-  }
-
-  private prepareTemplateData(notification: Notification): TeamsMessageOptions {
-    const { content, event_type } = notification;
-    let title = content.title;
-    let subtitle = this.formatDateTime(notification.created_at);
-    let text = content.message;
-    let imageUrl = content.image_url;
-    let buttonText = 'View';
-    let buttonUrl = content.action_url;
-    let themeColor = this.getThemeColorByEventType(event_type);
-    let mentions = [];
-
-    // Nếu có cấu hình mention
-    if (notification.event_type === 'EVIDENCE_UPLOADED' || notification.event_type === 'REWARD_REQUESTED') {
-      // Lấy thông tin người dùng cần mention từ cấu hình
-      mentions.push({
-        id: 'admin-id', // Lấy từ cấu hình
-        name: 'Huy Tran', // Lấy từ cấu hình
-      });
-    }
-
-    return {
-      title,
-      subtitle,
-      text,
-      imageUrl,
-      buttonText,
-      buttonUrl,
-      themeColor,
-      mentions,
-    };
-  }
-
-  private buildMessageCard(options: TeamsMessageOptions): any {
-    // Tạo MessageCard với mentions nếu cần
-    const messageCard = {
-      '@type': 'MessageCard',
-      '@context': 'http://schema.org/extensions',
-      themeColor: options.themeColor || '0076D7',
-      summary: options.title,
-      sections: [
-        {
-          activityTitle: options.title,
-          activitySubtitle: options.subtitle,
-          text: options.text,
-          markdown: true,
-        },
-      ],
-    };
-
-    // Thêm hình ảnh nếu có
-    if (options.imageUrl) {
-      messageCard.sections[0].activityImage = options.imageUrl;
-    }
-
-    // Thêm button nếu có
-    if (options.buttonText && options.buttonUrl) {
-      messageCard.potentialAction = [
-        {
-          '@type': 'OpenUri',
-          name: options.buttonText,
-          targets: [
-            {
-              os: 'default',
-              uri: options.buttonUrl,
-            },
-          ],
-        },
-      ];
-    }
-
-    // Thêm mentions nếu có
-    if (options.mentions && options.mentions.length > 0) {
-      messageCard.sections[0].text += this.formatMentions(options.mentions);
-    }
-
-    return messageCard;
-  }
-
-  private formatDateTime(dateTime: Date | string): string {
-    const date = new Date(dateTime);
-    return date.toLocaleString('vi-VN', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true,
-    });
-  }
-
-  private getThemeColorByEventType(eventType: string): string {
-    switch (eventType) {
-      case 'EVIDENCE_UPLOADED':
-        return '0078D7'; // blue
-      case 'EVIDENCE_APPROVED':
-        return '2D7D4B'; // green
-      case 'EVIDENCE_REJECTED':
-        return 'D13438'; // red
-      case 'REWARD_REQUESTED':
-        return 'A866E2'; // purple
-      case 'REWARD_APPROVED':
-        return '2D7D4B'; // green
-      case 'REWARD_REJECTED':
-        return 'D13438'; // red
-      case 'POINTS_TRANSFERRED':
-        return 'F7AD18'; // yellow
-      default:
-        return '0076D7'; // default blue
-    }
-  }
-
-  private formatMentions(mentions: Array<{ id: string; name: string }>): string {
-    let mentionText = '\n\n';
-    mentions.forEach(mention => {
-      mentionText += `<at>${mention.name}</at> `;
-    });
-    return mentionText;
-  }
-}
-```
-
-### 8.4 Hướng dẫn triển khai step-by-step
-
-1. **Tạo Incoming Webhook trong Microsoft Teams**:
-
-   - Mở Microsoft Teams và chọn team/channel sẽ nhận thông báo
-   - Click vào "..." bên cạnh tên channel -> "Connectors"
-   - Tìm "Incoming Webhook" -> "Add" -> "Configure"
-   - Đặt tên "ABC Rewards Notifications", tải lên logo (nếu có) -> "Create"
-   - Copy webhook URL được tạo ra
-
-2. **Lưu trữ cấu hình Webhook**:
-
-   - Tạo bảng `notification_channel_configs` trong database
-   - Thêm record cho Teams webhook với URL đã lấy được
-   - Cập nhật môi trường với biến `TEAMS_WEBHOOK_URL`
-
-3. **Triển khai TeamsNotificationSender**:
-
-   - Tạo file `src/services/notifications/senders/teams-notification-sender.ts`
-   - Triển khai class TeamsNotificationSender theo code mẫu ở trên
-   - Cập nhật NotificationSenderFactory để tạo đối tượng TeamsNotificationSender
-
-4. **Cập nhật template cho Teams**:
-
-   - Tạo template cho từng loại thông báo trong bảng `notification_templates` với `channel` = 'teams'
-   - Đảm bảo template bao gồm các placeholder cho tiêu đề, nội dung, ảnh, URL hành động
-
-5. **Xử lý ảnh trong thông báo**:
-
-   - Khi gửi thông báo, cần đảm bảo URL ảnh (evidence_url, reward_image_url) phải là URL công khai
-   - Nếu hình ảnh được lưu trữ riêng tư, cần tạo signed URL hoặc pre-signed URL (với S3)
-   - Thêm URL ảnh vào thuộc tính `activityImage` của MessageCard
-
-6. **Xử lý mentions trong thông báo**:
-
-   - Microsoft Teams hỗ trợ mentions qua tag `<at>Username</at>` trong phần nội dung
-   - Lưu tên người dùng (admin) cần được mention trong cấu hình
-   - Thêm mentions vào thông báo khi cần (EVIDENCE_UPLOADED, REWARD_REQUESTED)
-
-7. **Xử lý các action button**:
-
-   - Thêm URL action (xem chi tiết) vào `potentialAction` của MessageCard
-   - URL này nên dẫn đến trang chi tiết evidence hoặc reward trong ứng dụng web
-
-8. **Kiểm thử**:
-   - Tạo test case cho từng loại thông báo
-   - Gửi thông báo test đến webhook đã tạo
-   - Kiểm tra xem thông báo có hiển thị đúng trên Teams không (bao gồm ảnh, mentions, buttons)
-
-### 8.5 Điều chỉnh format thông báo cho Teams
-
-Teams MessageCard hỗ trợ nhiều tính năng hiển thị phong phú. Mỗi loại thông báo được format như sau:
-
-#### 8.5.1 Thông báo khi user upload evidence
+**Response (Success):**
 
 ```json
 {
-  "@type": "MessageCard",
-  "@context": "http://schema.org/extensions",
-  "themeColor": "0078D7",
-  "summary": "Có bằng chứng mới",
-  "sections": [
-    {
-      "activityTitle": "Có bằng chứng mới",
-      "activitySubtitle": "07/05/2025 1:35PM",
-      "facts": [
-        {
-          "name": "User:",
-          "value": "Linh Pham"
-        },
-        {
-          "name": "Rule:",
-          "value": "Rửa chén"
-        }
-      ],
-      "images": [
-        {
-          "image": "https://example.com/evidence/123.jpg",
-          "title": "Evidence Image"
-        }
-      ],
-      "text": "<at>Huy Tran</at>",
-      "markdown": true
-    }
-  ],
-  "potentialAction": [
-    {
-      "@type": "OpenUri",
-      "name": "View",
-      "targets": [
-        {
-          "os": "default",
-          "uri": "https://example.com/evidence/123"
-        }
-      ]
-    }
-  ]
+  "data": {
+    "id": "uuid",
+    "user_service_id": "uuid",
+    "status": "pending",
+    "action_type": "update"
+  }
 }
 ```
 
-#### 8.5.2 Xác nhận khả năng của Teams
+**Sequence Diagram:**
 
-1. **Chèn ảnh trong thông báo**: Teams **hỗ trợ đầy đủ** việc hiển thị hình ảnh trong thông báo thông qua thuộc tính `images` trong section hoặc
-   `activityImage`. Ảnh phải được lưu trữ ở URL công khai có thể truy cập được.
+```mermaid
+sequenceDiagram
+    participant Client
+    participant API as API Server
+    participant DB as Database
 
-2. **Tag người dùng (mentions)**: Teams **hỗ trợ mentions** thông qua cú pháp `<at>Username</at>` trong nội dung thông báo. Tuy nhiên, để mention hoạt
-   động đúng với ID người dùng, bạn cần sử dụng Graph API với nhiều quyền hơn. Với webhook đơn giản, tag sẽ hiển thị nhưng không gửi thông báo đến
-   người dùng.
+    Client->>API: PUT /api/services/{id} with payload
+    Note over API: Extract user_id, business_id from auth context
 
-### 8.6 Các lưu ý khi triển khai
+    API->>DB: Query services (id, business_id, created_by=user_id, is_system=false)
+    DB-->>API: Return service data
+    alt Service not found or user is not owner
+        API-->>Client: Return 404/403 Forbidden
+    end
 
-1. **Bảo mật Webhook URL**: URL webhook là bí mật và cho phép gửi thông báo đến channel. Cần lưu trữ an toàn như một secret.
+    API->>DB: Query user_services (service_id, user_id)
+    DB-->>API: Return user_service data
+    alt User service not found or status is not 'active'/'deactivated'
+        API-->>Client: Return 400 Bad Request
+    end
 
-2. **Rate limiting**: Teams có giới hạn tốc độ gửi thông báo (khoảng 50-100 requests/phút). Nên triển khai hệ thống queue để tránh vượt quá giới hạn.
+    API->>DB: Begin Transaction
+    API->>DB: Create service_approvals (user_service_id, action_type='update', status='pending', payload={...})
+    API->>DB: Update user_services.status = 'pending'
+    DB-->>API: Return approval data
+    API->>DB: Commit Transaction
 
-3. **Kích thước thông báo**: Teams có giới hạn kích thước cho mỗi thông báo (≈ 28KB). Tránh gửi nội dung quá lớn.
+    API-->>Client: Return 201 Created with approval data
+```
 
-4. **Xử lý lỗi**: Webhook có thể tạm thời không khả dụng. Nên triển khai logic retry với exponential backoff.
+**Logic:**
 
-5. **Monitoring**: Theo dõi tỉ lệ gửi thành công/thất bại để phát hiện vấn đề với kênh Teams.
+- Extract `user_id`, `business_id` từ auth context.
+- Validate service `{id}` tồn tại, thuộc `business_id`, là service custom (`is_system: false`), và do chính user này tạo (`created_by = user_id`).
+- Tìm `user_services` tương ứng với `service_id` và `user_id`. Service phải đang ở trạng thái `active` hoặc `deactivated` mới được update.
+- Start transaction.
+- **Không cập nhật bảng `services` ngay.**
+- Tạo một record mới trong `service_approvals` với:
+  - `user_service_id` tìm được ở trên.
+  - `action_type: 'update'`.
+  - `status: 'pending'`.
+  - `payload`: chứa toàn bộ payload của request.
+- Cập nhật `status` của `user_services` thành `pending`.
+- Commit transaction.
+- Trả về thông tin của `service_approvals` vừa tạo.
+
+---
+
+### 3.7 User xóa service đã đăng ký
+
+```shell
+DELETE /api/user-services/{id}
+```
+
+**Params:**
+
+- `{id}`: ID của bản ghi user_services (không phải id của services)
+
+**Response:**
+
+```json
+{
+  "data": {
+    "id": "uuid"
+  }
+}
+```
+
+**Sequence diagram:**
+
+```mermaid
+sequenceDiagram
+  participant User
+  participant FE
+  participant API as API Server
+  participant DB as Database
+
+  User->>FE: Click delete on a service in My Services
+  FE->>API: DELETE /api/user-services/{id}
+  Note over API: Extract user_id, business_id from auth context
+
+  API->>DB: Query user_services with id, user_id, business_id, is_active=true
+  DB-->>API: Return user_service data
+  alt Not Found
+      API-->>FE: Return 404 Not Found
+  end
+
+  API->>DB: Soft delete user_services (is_active=false, updated_by, updated_at)
+  DB-->>API: Confirm deletion
+  API-->>FE: Return 204 No Content
+```
+
+**Logic:**
+
+- Extract `user_id`, `business_id` từ auth context.
+- Kiểm tra user_services tồn tại với id, user_id, business_id, is_active=true.
+- Soft delete: set is_active=false, updated_by, updated_at cho user_services.
+- Trả 204 No Content.
+
+---
+
+### 3.8 User active/deactive service đã được duyệt
+
+```shell
+PATCH /api/user-services/{id}/status
+```
+
+**Payload:**
+
+```json
+{
+  "status": "active"
+}
+```
+
+**Response:**
+
+```json
+{
+  "data": {
+    "id": "uuid",
+    "user_id": "uuid",
+    "service_id": "uuid",
+    "status": "active",
+    "created_at": "...",
+    "updated_at": "..."
+  }
+}
+```
+
+**Logic:**
+
+- **Extract `business_id` từ user_service.service_id (truy vấn bảng services) hoặc từ auth context.**
+- Chỉ cho phép khi user_services.status=`active` hoặc `deactivated`.
+- Trả về toàn bộ object user_service đã cập nhật.
+
+---
+
+### 3.9 Admin duyệt yêu cầu (approve/reject)
+
+```shell
+GET /api/service-approvals?status=pending&limit=10&offset=0
+```
+
+```shell
+PUT /api/service-approvals/{id}
+```
+
+**Payload:**
+
+```json
+{
+  "status": "approved",
+  "comment": "OK"
+}
+```
+
+**Response:**
+
+```json
+{
+  "data": {
+    "id": "uuid",
+    "status": "approved"
+  }
+}
+```
+
+**Logic:**
+
+- Extract `business_id` từ user_service.service_id (truy vấn bảng services) hoặc từ auth context.
+- **GET:** Trả về danh sách yêu cầu chờ duyệt (`status: 'pending'`), phân trang.
+- **PUT:**
+  - Tìm `service_approvals` bằng `{id}`. Validate nó thuộc `business_id`.
+  - Start transaction.
+  - Cập nhật `service_approvals` (status, comment, approver_id).
+  - Dựa vào `action_type` trong `service_approvals`:
+    - **Nếu `action_type: 'create'`:**
+      - Nếu `status: 'approved'`, cập nhật `user_services.status = 'active'`.
+      - Nếu `status: 'rejected'`, cập nhật `user_services.status = 'rejected'`.
+    - **Nếu `action_type: 'update'`:**
+      - Nếu `status: 'approved'`:
+        - Lấy dữ liệu từ `service_approvals.payload`.
+        - Cập nhật record trong bảng `services` tương ứng.
+        - Cập nhật `user_services.status = 'active'`.
+      - Nếu `status: 'rejected'`, chỉ cần cập nhật `user_services.status = 'active'` (trả lại trạng thái cũ trước khi yêu cầu update).
+  - Commit transaction.
+  - Trả về `service_approvals` đã cập nhật.
+
+---
+
+### 3.10 Lấy chi tiết một service
+
+```shell
+GET /api/services/{id}
+```
+
+**Response:**
+
+```json
+{
+  "data": {
+    "id": "uuid",
+    "business_id": "uuid",
+    "name": "...",
+    "description": "...",
+    "points": 2.0,
+    "image_url": "...",
+    "is_system": false,
+    "is_active": true
+  }
+}
+```
+
+**Logic:**
+
+- Extract `business_id` từ auth context.
+- Validate service thuộc business_id này.
+- Trả về chi tiết service.
+
+---
+
+### 3.11 Lấy chi tiết một user_service
+
+```shell
+GET /api/user-services/{id}
+```
+
+**Response:**
+
+```json
+{
+  "data": {
+    "id": "uuid",
+    "user_id": "uuid",
+    "service_id": "uuid",
+    "status": "active",
+    "created_at": "..."
+  }
+}
+```
+
+**Logic:**
+
+- Extract `business_id` từ user_service.service_id (truy vấn bảng services) hoặc từ auth context.
+- Trả về chi tiết user_service theo business.
+
+---
+
+## 4. Logic tổng quát
+
+- Phân biệt service hệ thống và user tạo: is_system (true/false).
+- Quy trình duyệt: Tất cả yêu cầu tạo/cập nhật đều qua bảng service_approvals, trace được lịch sử duyệt.
+- Trạng thái user_services: pending → active/deactivated → rejected.
+- User chỉ được active/deactive khi đã được duyệt (status=active).
+- Admin CRUD service hệ thống (is_system=true).
+- Chuẩn hóa multi-business: luôn extract và filter theo `business_id`.
+
+---
+
+## 5. UI/UX mapping
+
+- **End user:**
+  - Tab Explore: Xem service hệ thống (is_system=true).
+  - Tab My Services: Quản lý service đã đăng ký (user_services), trạng thái pending/active/deactivated/rejected.
+  - Đăng ký mới, cập nhật, active/deactive, xóa.
+- **Admin portal:**
+  - Quản lý service hệ thống (CRUD).
+  - Duyệt các yêu cầu tạo/cập nhật service của user (service_approvals).
+
+---
+
+## 6. Notes
+
+- Có thể mở rộng thêm các trường về thời gian hiệu lực, version, metadata nếu cần.
+- Chuẩn hóa với các module khác như reward-management, evidence, user-transactions.
+
+---
